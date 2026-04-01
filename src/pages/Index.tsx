@@ -51,7 +51,7 @@ const Index = () => {
           </div>
         </div>
       </header>
-      
+
 
       <section className="container py-8 md:py-12">
         <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
@@ -107,20 +107,30 @@ const Index = () => {
 
 
       <section className="container py-8 md:py-12">
-        <SectionReveal className="tech-shell rounded-[2rem] p-8 md:p-10">
-          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <SectionReveal className="tech-shell rounded-[2rem] p-6 md:p-8 lg:p-10">
+          <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <p className="text-sm uppercase tracking-[0.3em] text-primary">Newsletter</p>
-              <h2 className="mt-3 text-3xl md:text-4xl">Stay updated with IESF announcements.</h2>
-              <p className="mt-4 max-w-2xl leading-8 text-muted-foreground">
-                Subscribe our monthly newsletter to get updated. Don’t be afraid your mail is secure it no will be shared anywhere or everywhere.
+              <h2 className="mt-3 text-2xl md:text-3xl lg:text-4xl">Stay updated with IESF announcements.</h2>
+              <p className="mt-4 leading-8 text-muted-foreground text-sm md:text-base">
+                Subscribe our monthly newsletter to get updated. Don't be afraid your mail is secure it no will be shared anywhere or everywhere.
               </p>
             </div>
 
-            <form className="grid gap-4 sm:grid-cols-[1fr_auto]">
-              <Input type="email" placeholder="Enter your email address" aria-label="Email newsletter" />
-              <motion.div whileTap={{ scale: 0.96 }}>
-                <Button variant="hero" size="lg" type="submit" className="animate-pulse-soft w-full sm:w-auto">
+            <form className="flex flex-col gap-3 w-full">
+              <Input
+                type="email"
+                placeholder="Enter your email address"
+                aria-label="Email newsletter"
+                className="w-full"
+              />
+              <motion.div whileTap={{ scale: 0.96 }} className="w-full">
+                <Button
+                  variant="hero"
+                  size="lg"
+                  type="submit"
+                  className="animate-pulse-soft w-full"
+                >
                   Submit Now
                 </Button>
               </motion.div>
