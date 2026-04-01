@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Orbitron:wght@500;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,35 +10,47 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 43% 10%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --surface: 217 39% 14%;
+    --surface-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --panel: 220 34% 17%;
+    --panel-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --card: 217 39% 14%;
+    --card-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --popover: 220 34% 17%;
+    --popover-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --primary: 188 96% 54%;
+    --primary-foreground: 220 43% 10%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --secondary: 219 35% 21%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 28% 20%;
+    --muted-foreground: 212 16% 75%;
+
+    --accent: 191 85% 24%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 214 30% 28%;
+    --input: 216 31% 20%;
+    --ring: 188 96% 54%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+
+    --gradient-hero: linear-gradient(135deg, hsl(220 43% 12%) 0%, hsl(217 39% 15%) 55%, hsl(191 85% 24%) 100%);
+    --gradient-mesh: radial-gradient(circle at top left, hsl(188 96% 54% / 0.22), transparent 35%), radial-gradient(circle at bottom right, hsl(191 85% 24% / 0.32), transparent 38%);
+    --gradient-line: linear-gradient(90deg, transparent, hsl(188 96% 54% / 0.55), transparent);
+    --shadow-glow: 0 0 0 1px hsl(var(--border)), 0 18px 70px hsl(188 96% 54% / 0.12);
+    --shadow-panel: 0 18px 40px hsl(220 60% 4% / 0.35);
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,33 +70,6 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -99,7 +86,68 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body antialiased;
+    background-image: var(--gradient-mesh);
+    background-attachment: fixed;
+  }
+
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-[0.08em];
+  }
+}
+
+@layer components {
+  .tech-shell {
+    @apply relative overflow-hidden border border-border/80 bg-surface/80 shadow-panel backdrop-blur-xl;
+  }
+
+  .tech-grid {
+    background-image: linear-gradient(hsl(var(--border) / 0.35) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--border) / 0.35) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .hero-radar {
+    @apply relative overflow-hidden;
+  }
+
+  .hero-radar::before {
+    content: "";
+    @apply absolute inset-y-0 left-0 w-1/2 bg-line opacity-70;
+    animation: scan 7s linear infinite;
+  }
+
+  .hero-radar::after {
+    content: "";
+    @apply absolute -right-20 top-10 h-48 w-48 rounded-full bg-primary/20 blur-3xl;
+    animation: glowShift 8s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-radar::before,
+    .hero-radar::after {
+      animation: none;
+    }
   }
 }
