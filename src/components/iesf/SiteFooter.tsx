@@ -6,7 +6,7 @@ const SiteFooter = () => {
   return (
     <footer className="bg-panel border-t border-border py-16 md:py-20">
       <div className="container">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] grid-cols-1">
           <div className="space-y-5">
             <p className="text-sm uppercase tracking-[0.3em] text-primary">Contact</p>
             <h2 className="text-3xl md:text-4xl">Ready to bring your research to an international audience?</h2>
@@ -27,7 +27,7 @@ const SiteFooter = () => {
             </div>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2">
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-2">
             {footerColumns.map((column) => (
               <div key={column.title}>
                 <h3 className="text-lg text-foreground">{column.title}</h3>
