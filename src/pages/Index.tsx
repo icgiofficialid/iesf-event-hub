@@ -155,7 +155,7 @@ const socialItems = [Globe2, Mail, Newspaper] as const;
 const fadeUp = {
   initial: { opacity: 0, y: 26 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  transition: { duration: 0.7, ease: "easeOut" as const },
 };
 
 const Index = () => {
