@@ -3,8 +3,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import About from "./pages/About.tsx";
+import Contact from "./pages/Contact.tsx";
+import Curation from "./pages/Curation.tsx";
+import Faq from "./pages/Faq.tsx";
+import Galery from "./pages/Galery.tsx";
 import Index from "./pages/Index.tsx";
+import MediaCoverage from "./pages/MediaCoverage.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import Sertifikat from "./pages/Sertifikat.tsx";
 
 const queryClient = new QueryClient();
 
@@ -16,7 +23,13 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/about" element={<About />} />
+          <Route path="/sertifikat" element={<Sertifikat />} />
+          <Route path="/media-coverage" element={<MediaCoverage />} />
+          <Route path="/galery" element={<Galery />} />
+          <Route path="/curation" element={<Curation />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
