@@ -1,13 +1,11 @@
 import { ShieldCheck, Telescope, Users } from "lucide-react";
-
 import { footerColumns, socialItems } from "@/components/yiesf/siteData";
-import SectionReveal from "@/components/yiesf/SectionReveal";
 import { NavLink } from "@/components/NavLink";
 
 const SiteFooter = () => {
   return (
-    <footer className="container py-16 md:py-24">
-      <SectionReveal className="tech-shell rounded-[2rem] p-8 md:p-10">
+    <footer className="bg-panel border-t border-border py-16 md:py-20">
+      <div className="container">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
           <div className="space-y-5">
             <p className="text-sm uppercase tracking-[0.3em] text-primary">Contact</p>
@@ -55,7 +53,7 @@ const SiteFooter = () => {
             <span className="inline-flex items-center gap-2"><Telescope className="h-4 w-4 text-primary" /> Innovation focused</span>
           </div>
         </div>
-      </SectionReveal>
+      </div>
     </footer>
   );
 };

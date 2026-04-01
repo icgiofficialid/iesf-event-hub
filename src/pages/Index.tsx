@@ -22,25 +22,20 @@ const Index = () => {
 
   return (
     <SiteShell>
-      <header id="home" className="relative border-b border-border/70">
-        <div className="container relative py-16 md:py-24">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
-            <motion.div className="space-y-8" initial="initial" animate="animate" variants={{ animate: { transition: { staggerChildren: 0.12 } } }}>
-              <motion.div {...fadeUp} className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/70 px-4 py-2 text-xs uppercase tracking-[0.24em] text-primary shadow-panel">
-                <Atom className="h-4 w-4" />
-                International Engineering & Innovation Platform
-              </motion.div>
-
+      <header id="home" className="relative border-b border-border/70 min-h-screen flex items-center">
+        <div className="container relative py-16 md:py-24 w-full">
+          <div className="flex justify-center">
+            <motion.div className="space-y-8 text-center flex flex-col items-center" initial="initial" animate="animate" variants={{ animate: { transition: { staggerChildren: 0.12 } } }}>
               <motion.div {...fadeUp} className="space-y-4">
-                <h1 className="max-w-4xl text-balance text-4xl leading-tight text-foreground md:text-6xl">
-                  International Engineering Science Fair (YIESF)
+                <h1 className="max-w-4xl text-balance text-4xl leading-tight text-foreground md:text-4xl">
+                  International Engineering Science Fair (IESF)
                 </h1>
-                <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
-                  A responsive, high-performance registration hub for future engineers, researchers, and innovators to present breakthrough ideas with global reach.
+                <p className="max-w-2xl text-lg leading-8 text-muted-foreground mx-auto text-center">
+                  high-performance registration hub for future engineers, researchers, and innovators to present breakthrough ideas with global reach.
                 </p>
               </motion.div>
 
-              <motion.div {...fadeUp} className="flex flex-col gap-4 sm:flex-row">
+              <motion.div {...fadeUp} className="flex flex-col gap-4 sm:flex-row justify-center">
                 <motion.div whileTap={{ scale: 0.96 }}>
                   <Button variant="hero" size="lg" asChild>
                     <a href="#register">Register Now</a>
@@ -52,52 +47,6 @@ const Index = () => {
                   </Button>
                 </motion.div>
               </motion.div>
-
-              <motion.div {...fadeUp} className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                {highlights.map((item) => (
-                  <div key={item.label} className="tech-shell rounded-2xl p-4">
-                    <div className="text-2xl font-extrabold text-primary">{item.value}</div>
-                    <div className="mt-2 text-sm text-muted-foreground">{item.label}</div>
-                  </div>
-                ))}
-              </motion.div>
-            </motion.div>
-
-            <motion.div
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.2 }}
-              className="hero-radar tech-shell rounded-[2rem] p-6 md:p-8"
-            >
-              <div className="absolute inset-0 tech-grid opacity-25" aria-hidden="true" />
-              <div className="relative space-y-6">
-                <div className="flex items-center justify-between rounded-2xl border border-border/80 bg-panel/70 p-4">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">Event Signal</p>
-                    <p className="mt-2 text-xl font-bold text-foreground">Registration Window Active</p>
-                  </div>
-                  <div className="h-3 w-3 rounded-full bg-primary animate-pulse-soft" />
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {categories.slice(0, 2).map((category) => {
-                    const Icon = category.icon;
-                    return (
-                      <div key={category.title} className="rounded-2xl border border-border/80 bg-surface/70 p-5 backdrop-blur-sm">
-                        <Icon className="h-8 w-8 text-primary" />
-                        <h2 className="mt-4 text-lg text-foreground">{category.title}</h2>
-                        <p className="mt-2 text-sm leading-7 text-muted-foreground">{category.description}</p>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <div className="rounded-[1.75rem] border border-primary/20 bg-primary/10 p-5">
-                  <p className="text-xs uppercase tracking-[0.24em] text-primary">Engineering & Tech Focus</p>
-                  <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                    Built for speed, clarity, and credibility—so participants can move from submission to showcase with confidence.
-                  </p>
-                </div>
-              </div>
             </motion.div>
           </div>
         </div>
@@ -106,12 +55,8 @@ const Index = () => {
       <section className="container py-16 md:py-24">
         <SectionReveal className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="space-y-3">
-            <p className="text-sm uppercase tracking-[0.3em] text-primary">Event Categories</p>
-            <h2 className="text-3xl md:text-4xl">Choose the engineering and science path that fits your project.</h2>
+            <h2 className="text-3xl md:text-4xl">Categories</h2>
           </div>
-          <p className="max-w-2xl text-base leading-8 text-muted-foreground">
-            Home sekarang fokus pada overview event, kategori lomba, tujuan, newsletter, partner, dan registrasi utama.
-          </p>
         </SectionReveal>
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -163,7 +108,7 @@ const Index = () => {
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <p className="text-sm uppercase tracking-[0.3em] text-primary">Newsletter</p>
-              <h2 className="mt-3 text-3xl md:text-4xl">Stay updated with YIESF announcements.</h2>
+              <h2 className="mt-3 text-3xl md:text-4xl">Stay updated with IESF announcements.</h2>
               <p className="mt-4 max-w-2xl leading-8 text-muted-foreground">
                 Subscribe our monthly newsletter to get updated. Don’t be afraid your mail is secure it no will be shared anywhere or everywhere.
               </p>
