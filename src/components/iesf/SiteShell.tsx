@@ -4,6 +4,7 @@ import { ArrowUp } from "lucide-react";
 
 import SiteFooter from "@/components/iesf/SiteFooter";
 import SiteNavbar from "@/components/iesf/SiteNavbar";
+import ScrollToTop from "@/components/iesf/ScrollToTop";
 
 type SiteShellProps = {
   children: ReactNode;
@@ -22,6 +23,7 @@ const SiteShell = ({ children, showFooter = true }: SiteShellProps) => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+       <ScrollToTop />
       <div className="absolute inset-0 tech-grid pointer-events-none opacity-30" aria-hidden="true" />
       <SiteNavbar />
       <main className="relative">{children}</main>
