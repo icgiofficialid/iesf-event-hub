@@ -1,7 +1,7 @@
-import { mediaItems, pageMeta } from "@/components/yiesf/siteData";
-import PageHero from "@/components/yiesf/PageHero";
-import SectionReveal from "@/components/yiesf/SectionReveal";
-import SiteShell from "@/components/yiesf/SiteShell";
+import { mediaItems, pageMeta } from "@/components/iesf/siteData";
+import PageHero from "@/components/iesf/PageHero";
+import SectionReveal from "@/components/iesf/SectionReveal";
+import SiteShell from "@/components/iesf/SiteShell";
 
 const MediaCoverage = () => {
   const meta = pageMeta.media;

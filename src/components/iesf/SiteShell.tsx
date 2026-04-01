@@ -2,8 +2,8 @@ import { ReactNode, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 
-import SiteFooter from "@/components/yiesf/SiteFooter";
-import SiteNavbar from "@/components/yiesf/SiteNavbar";
+import SiteFooter from "@/components/iesf/SiteFooter";
+import SiteNavbar from "@/components/iesf/SiteNavbar";
 
 type SiteShellProps = {
   children: ReactNode;

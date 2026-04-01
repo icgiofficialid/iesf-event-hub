@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { NavLink } from "@/components/NavLink";
 import { Button } from "@/components/ui/button";
-import { navItems } from "@/components/yiesf/siteData";
+import { navItems } from "@/components/iesf/siteData";
 import { cn } from "@/lib/utils";
 
 const linkClass = "transition-colors hover:text-primary";

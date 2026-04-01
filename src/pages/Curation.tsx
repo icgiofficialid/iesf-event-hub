@@ -1,26 +1,32 @@
-import { curationSteps, pageMeta } from "@/components/yiesf/siteData";
-import PageHero from "@/components/yiesf/PageHero";
-import SectionReveal from "@/components/yiesf/SectionReveal";
-import SiteShell from "@/components/yiesf/SiteShell";
+import SiteShell from "@/components/iesf/SiteShell";
+import { Button } from "@/components/ui/button";
 
 const Curation = () => {
-  const meta = pageMeta.curation;
-
   return (
     <SiteShell>
-      <PageHero {...meta} />
-      <section className="container pb-16 md:pb-24">
-        <div className="grid gap-4">
-          {curationSteps.map((step, index) => (
-            <SectionReveal key={step} delay={index * 0.08}>
-              <div className="tech-shell flex items-start gap-4 rounded-[1.5rem] p-5">
-                <div className="rounded-full border border-primary/30 bg-primary/10 px-3 py-2 text-sm font-semibold text-primary">{index + 1}</div>
-                <p className="leading-8 text-muted-foreground">{step}</p>
-              </div>
-            </SectionReveal>
-          ))}
+      <div className="relative min-h-screen flex flex-col items-center justify-center text-center">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/curation-bg.jpg')" }}
+        />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40" />
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center gap-6">
+          <img src="/logo.png" alt="Logo" className="h-32 w-auto" />
+          <h1 className="text-4xl font-bold text-white">Curation</h1>
+          <Button
+            variant="hero"
+            size="lg"
+            className="bg-primary/90 text-white font-bold tracking-widest px-8 py-4"
+            asChild
+          >
+            <a href="/curation-guide">CURATION 2025</a>
+          </Button>
         </div>
-      </section>
+      </div>
     </SiteShell>
   );
 };

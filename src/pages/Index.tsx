@@ -5,11 +5,11 @@ import {
   BookOpen,
 } from "lucide-react";
 
-import SectionReveal from "@/components/yiesf/SectionReveal";
-import SiteShell from "@/components/yiesf/SiteShell";
+import SectionReveal from "@/components/iesf/SectionReveal";
+import SiteShell from "@/components/iesf/SiteShell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { categories, goals, highlights, partners } from "@/components/yiesf/siteData";
+import { categories, goals, highlights, partners } from "@/components/iesf/siteData";
 
 const fadeUp = {
   initial: { opacity: 0, y: 26 },
@@ -51,6 +51,36 @@ const Index = () => {
           </div>
         </div>
       </header>
+      
+
+      <section className="container py-8 md:py-12">
+        <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <SectionReveal className="tech-shell rounded-[2rem] p-8 space-y-4">
+            <p className="text-sm uppercase tracking-[0.3em] text-primary">About</p>
+            <h2 className="text-3xl md:text-4xl">A modern science fair platform engineered for global participation.</h2>
+            <p className="text-muted-foreground leading-8">
+              IESF blends academic rigor, innovation storytelling, and clean digital registration to help students and institutions showcase impactful work in science and engineering.
+            </p>
+            <Button variant="hero-outline" size="lg" asChild>
+              <a href="/about">Learn More</a>
+            </Button>
+          </SectionReveal>
+
+          <div className="space-y-4">
+            {goals.map((goal, index) => (
+              <SectionReveal key={goal} delay={index * 0.08} x={-32} y={0}>
+                <div className="tech-shell flex items-start gap-4 rounded-[1.5rem] p-5">
+                  <div className="rounded-full border border-primary/25 bg-primary/10 p-3 text-primary">
+                    <BadgeCheck className="h-5 w-5" />
+                  </div>
+                  <p className="leading-8 text-muted-foreground">{goal}</p>
+                </div>
+              </SectionReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       <section className="container py-16 md:py-24">
         <SectionReveal className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -75,33 +105,6 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="container py-8 md:py-12">
-        <section className="container py-8 md:py-12">
-          <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr]">
-            <SectionReveal className="tech-shell rounded-[2rem] p-8">
-              <p className="text-sm uppercase tracking-[0.3em] text-primary">Purpose</p>
-              <h2 className="mt-3 text-3xl md:text-4xl">This activity aims to</h2>
-              <p className="mt-4 max-w-xl text-muted-foreground leading-8">
-                Create a strong runway for scientific talent to turn ideas into validated, visible, and future-ready engineering solutions.
-              </p>
-            </SectionReveal>
-
-            <div className="space-y-4">
-              {goals.map((goal, index) => (
-                <SectionReveal key={goal} delay={index * 0.08} x={-32} y={0}>
-                  <div className="tech-shell flex items-start gap-4 rounded-[1.5rem] p-5">
-                    <div className="rounded-full border border-primary/25 bg-primary/10 p-3 text-primary">
-                      <BadgeCheck className="h-5 w-5" />
-                    </div>
-                    <p className="leading-8 text-muted-foreground">{goal}</p>
-                  </div>
-                </SectionReveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-      </section>
 
       <section className="container py-8 md:py-12">
         <SectionReveal className="tech-shell rounded-[2rem] p-8 md:p-10">
@@ -127,14 +130,7 @@ const Index = () => {
       </section>
 
       <section className="container py-16 md:py-24">
-          <SectionReveal className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-primary">Organized By</p>
-              <h2 className="mt-3 text-3xl md:text-4xl">Powered by institutions and partners that champion innovation.</h2>
-            </div>
-            <p className="max-w-xl text-muted-foreground leading-8">An infinite, auto-scrolling partner rail keeps the ecosystem visible across every viewport.</p>
-          </SectionReveal>
-
+              <h2 className="mt-2 text-3xl md:text-3xl">Organized By :</h2>
           <div className="mask-fade-x overflow-hidden rounded-[2rem] border border-border/70 bg-surface/65 py-5">
             <div className="flex w-max animate-marquee gap-5 px-5">
               {repeatedPartners.map((partner, index) => (
@@ -144,54 +140,6 @@ const Index = () => {
               ))}
             </div>
           </div>
-      </section>
-
-      <section id="register" className="container py-16 md:py-24">
-        <SectionReveal className="mb-8 space-y-3">
-          <p className="text-sm uppercase tracking-[0.3em] text-primary">Registration Form</p>
-          <h2 className="text-3xl md:text-4xl">Register your team or project with a sleek, focused flow.</h2>
-        </SectionReveal>
-
-        <SectionReveal className="tech-shell rounded-[2rem] p-6 md:p-8">
-          <form className="grid gap-5 md:grid-cols-2">
-            <label className="space-y-3 text-sm font-medium text-foreground">
-              <span>Name</span>
-              <Input placeholder="Your full name" />
-            </label>
-            <label className="space-y-3 text-sm font-medium text-foreground">
-              <span>Email</span>
-              <Input type="email" placeholder="you@example.com" />
-            </label>
-            <label className="space-y-3 text-sm font-medium text-foreground">
-              <span>WhatsApp</span>
-              <Input type="tel" placeholder="+62 812 3456 7890" />
-            </label>
-            <label className="space-y-3 text-sm font-medium text-foreground">
-              <span>Institution</span>
-              <Input placeholder="School / University / Organization" />
-            </label>
-            <label className="space-y-3 text-sm font-medium text-foreground md:col-span-2">
-              <span>Category Selection</span>
-              <select className="flex h-12 w-full rounded-full border border-input bg-surface px-4 text-sm text-foreground outline-none transition-all duration-300 focus:border-primary focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background">
-                <option>Choose a category</option>
-                {categories.map((category) => (
-                  <option key={category.title}>{category.title}</option>
-                ))}
-              </select>
-            </label>
-
-            <div className="md:col-span-2 flex flex-col gap-4 border-t border-border/70 pt-5 sm:flex-row sm:items-center sm:justify-between">
-              <p className="max-w-xl text-sm leading-7 text-muted-foreground">
-                Your submission data is structured for a smooth review, curation, and communication process.
-              </p>
-              <motion.div whileTap={{ scale: 0.96 }}>
-                <Button variant="hero" size="lg" type="submit">
-                  Complete Registration
-                </Button>
-              </motion.div>
-            </div>
-          </form>
-        </SectionReveal>
       </section>
     </SiteShell>
   );

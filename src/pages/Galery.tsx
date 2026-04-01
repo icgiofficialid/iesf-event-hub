@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 
-import { galleryItems, pageMeta } from "@/components/yiesf/siteData";
-import PageHero from "@/components/yiesf/PageHero";
-import SectionReveal from "@/components/yiesf/SectionReveal";
-import SiteShell from "@/components/yiesf/SiteShell";
+import { galleryItems, pageMeta } from "@/components/iesf/siteData";
+import PageHero from "@/components/iesf/PageHero";
+import SectionReveal from "@/components/iesf/SectionReveal";
+import SiteShell from "@/components/iesf/SiteShell";
 
 const Galery = () => {
   const meta = pageMeta.galery;
@@ -18,7 +18,7 @@ const Galery = () => {
               <motion.div whileHover={{ y: -6 }} className="tech-shell group rounded-[1.75rem] p-6">
                 <div className="flex h-52 items-end rounded-[1.25rem] border border-border/70 bg-hero p-5">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.25em] text-primary">YIESF Scene</p>
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary">IESF Scene</p>
                     <h2 className="mt-2 text-xl text-foreground">{item}</h2>
                   </div>
                 </div>

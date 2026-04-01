@@ -1,10 +1,10 @@
 import { ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-import SectionReveal from "@/components/yiesf/SectionReveal";
-import SiteShell from "@/components/yiesf/SiteShell";
-import PageHero from "@/components/yiesf/PageHero";
-import { categories, pageMeta } from "@/components/yiesf/siteData";
+import SectionReveal from "@/components/iesf/SectionReveal";
+import SiteShell from "@/components/iesf/SiteShell";
+import PageHero from "@/components/iesf/PageHero";
+import { categories, pageMeta } from "@/components/iesf/siteData";
 
 const About = () => {
   const meta = pageMeta.about;

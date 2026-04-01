@@ -1,5 +1,5 @@
 import { ShieldCheck, Telescope, Users } from "lucide-react";
-import { footerColumns, socialItems } from "@/components/yiesf/siteData";
+import { footerColumns, socialItems } from "@/components/iesf/siteData";
 import { NavLink } from "@/components/NavLink";
 
 const SiteFooter = () => {
@@ -46,12 +46,7 @@ const SiteFooter = () => {
         </div>
 
         <div className="mt-10 flex flex-col gap-4 border-t border-border/70 pt-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
-          <p>© 2026 International Engineering Science Fair (YIESF). Built for responsive global registration.</p>
-          <div className="flex flex-wrap gap-4">
-            <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-primary" /> Secure registration design</span>
-            <span className="inline-flex items-center gap-2"><Users className="h-4 w-4 text-primary" /> Institution friendly</span>
-            <span className="inline-flex items-center gap-2"><Telescope className="h-4 w-4 text-primary" /> Innovation focused</span>
-          </div>
+          <p className="mx-auto text-center"> © International Engineering Science Fair (IESF) ALL rights reserved.</p>
         </div>
       </div>
     </footer>

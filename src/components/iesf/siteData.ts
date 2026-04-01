@@ -24,23 +24,23 @@ export const navItems = [
 
 export const categories = [
   {
-    title: "Proyek Sains",
-    description: "Eksperimen berbasis riset dengan pendekatan rekayasa dan validasi terukur.",
+    title: "Science Project",
+    description: "Research-based experiments with engineering approach and measurable validation.",
     icon: Microscope,
   },
   {
-    title: "Karya Ilmiah",
-    description: "Paper dan analisis ilmiah untuk peserta yang menonjol dalam metodologi dan presentasi.",
+    title: "Scientific Paper",
+    description: "Academic papers and scientific analysis for participants excelling in methodology and presentation.",
     icon: ScrollText,
   },
   {
-    title: "Invensi",
-    description: "Temuan baru dengan nilai kebaruan tinggi, fokus pada prototyping dan feasibility.",
+    title: "Invention",
+    description: "New findings with high novelty value, focused on prototyping and feasibility.",
     icon: Rocket,
   },
   {
-    title: "Inovasi",
-    description: "Solusi aplikatif untuk tantangan nyata melalui desain produk, sistem, atau model bisnis.",
+    title: "Innovation",
+    description: "Applied solutions for real challenges through product design, systems, or business models.",
     icon: Sparkles,
   },
 ] as const;
@@ -53,10 +53,10 @@ export const highlights = [
 ] as const;
 
 export const goals = [
-  "Mendorong budaya riset dan pemecahan masalah berbasis engineering sejak dini.",
-  "Mempertemukan pelajar, mentor, dan institusi dalam ekosistem inovasi global.",
-  "Mengakselerasi ide menjadi solusi nyata dengan curation dan feedback terstruktur.",
-  "Meningkatkan eksposur karya peserta melalui media, sertifikat, dan showcase profesional.",
+  "Encouraging a culture of research and engineering-based problem solving from an early age.",
+  "Bringing together students, mentors, and institutions in a global innovation ecosystem.",
+  "Accelerating ideas into real solutions through structured curation and feedback.",
+  "Increasing exposure of participants' work through media, certificates, and professional showcases.",
 ] as const;
 
 export const certificates = [
@@ -89,8 +89,8 @@ export const curationSteps = [
 
 export const faqItems = [
   {
-    question: "Who can join YIESF?",
-    answer: "YIESF welcomes students, school teams, and young innovators ready to present engineering and science-based work.",
+    question: "Who can join IESF?",
+    answer: "IESF welcomes students, school teams, and young innovators ready to present engineering and science-based work.",
   },
   {
     question: "Do participants receive certificates?",
@@ -111,7 +111,7 @@ export const partners = ["YISC", "TechVerse", "EduLab", "NanoCore", "RoboNext", 
 export const footerColumns = [
   {
     title: "Event",
-    links: ["About YIESF", "Tracks", "Timeline", "Registration"],
+    links: ["About IESF", "Tracks", "Timeline", "Registration"],
   },
   {
     title: "Resources",
@@ -133,7 +133,7 @@ export const pageMeta = {
   about: {
     eyebrow: "About",
     title: "A modern science fair platform engineered for global participation.",
-    description: "YIESF blends academic rigor, innovation storytelling, and clean digital registration to help students and institutions showcase impactful work in science and engineering.",
+    description: "IESF blends academic rigor, innovation storytelling, and clean digital registration to help students and institutions showcase impactful work in science and engineering.",
     icon: Microscope,
   },
   sertifikat: {
@@ -162,13 +162,13 @@ export const pageMeta = {
   },
   faq: {
     eyebrow: "FAQ",
-    title: "Quick answers before participants take the next step.",
+    title: "Quick answers",
     description: "A focused FAQ page reduces friction and gives schools, mentors, and delegates the essential guidance they need.",
     icon: CircleHelp,
   },
   contact: {
     eyebrow: "Contact",
-    title: "Connect with the YIESF team for registration and collaboration.",
+    title: "Connect with the IESF team for registration and collaboration.",
     description: "Use the contact page for registration questions, institutional support, media coordination, and partnership inquiries.",
     icon: Mail,
   },

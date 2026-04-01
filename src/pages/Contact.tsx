@@ -1,48 +1,121 @@
-import { BriefcaseBusiness, Mail, PhoneCall } from "lucide-react";
-
-import { pageMeta } from "@/components/yiesf/siteData";
-import PageHero from "@/components/yiesf/PageHero";
-import SectionReveal from "@/components/yiesf/SectionReveal";
-import SiteShell from "@/components/yiesf/SiteShell";
-
-const contactCards = [
-  {
-    title: "Registration Support",
-    detail: "help@yiesf.org",
-    icon: Mail,
-  },
-  {
-    title: "Partnership & Institution",
-    detail: "collab@yiesf.org",
-    icon: BriefcaseBusiness,
-  },
-  {
-    title: "WhatsApp Hotline",
-    detail: "+62 812 0000 2026",
-    icon: PhoneCall,
-  },
-] as const;
+import { useState } from "react";
+import { Mail, PhoneCall, MapPin, Facebook, Instagram, Youtube, Linkedin } from "lucide-react";
+import PageHero from "@/components/iesf/PageHero";
+import SiteShell from "@/components/iesf/SiteShell";
+import { pageMeta } from "@/components/iesf/siteData";
 
 const Contact = () => {
   const meta = pageMeta.contact;
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sent, setSent] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSend = () => {
+    if (!form.name || !form.email || !form.message) return;
+    const subject = encodeURIComponent(`Contact from ${form.name} - IESF`);
+    const body = encodeURIComponent(`Nama: ${form.name}\nEmail: ${form.email}\n\nPesan:\n${form.message}`);
+    window.location.href = `mailto:bisf.official@gmail.com?subject=${subject}&body=${body}`;
+    setSent(true);
+    setForm({ name: "", email: "", message: "" });
+    setTimeout(() => setSent(false), 4000);
+  };
 
   return (
     <SiteShell>
       <PageHero {...meta} />
-      <section className="container pb-16 md:pb-24">
-        <div className="grid gap-5 md:grid-cols-3">
-          {contactCards.map((card, index) => {
-            const Icon = card.icon;
-            return (
-              <SectionReveal key={card.title} delay={index * 0.08}>
-                <div className="tech-shell rounded-[1.75rem] p-6">
-                  <Icon className="h-8 w-8 text-primary" />
-                  <h2 className="mt-5 text-xl text-foreground">{card.title}</h2>
-                  <p className="mt-3 text-sm leading-7 text-muted-foreground">{card.detail}</p>
+
+      <section className="container pb-20 md:pb-28">
+        <div className="max-w-4xl mx-auto">
+          <div className="rounded-2xl overflow-hidden shadow-2xl border border-border/50 grid md:grid-cols-[1fr_1.2fr]">
+
+            {/* Left — Info */}
+            <div className="bg-background p-8 md:p-10 flex flex-col gap-6">
+              <div>
+                <h3 className="text-2xl font-bold text-primary mb-2">Let's get in touch</h3>
+                <p className="text-muted-foreground text-sm leading-7">
+                  Feel free to contact us. We are here to assist you with all your needs.
+                </p>
+              </div>
+
+              <div className="space-y-4 text-sm text-muted-foreground">
+                <div className="flex items-start gap-3">
+                  <MapPin className="h-4 w-4 text-primary mt-1 shrink-0" />
+                  <span>Jl. Kemang RT 03 RW 06</span>
                 </div>
-              </SectionReveal>
-            );
-          })}
+                <div className="flex items-start gap-3">
+                  <Mail className="h-4 w-4 text-primary mt-1 shrink-0" />
+                  <span>icgi.official.id@gmail.com</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <PhoneCall className="h-4 w-4 text-primary mt-1 shrink-0" />
+                  <span>+62 882-1324-8890</span>
+                </div>
+              </div>
+
+              <div>
+                <p className="text-sm font-semibold text-foreground mb-3">Connect with us :</p>
+                <div className="flex gap-3">
+                  {[
+                    { icon: Facebook, href: "#" },
+                    { icon: Instagram, href: "#" },
+                    { icon: Youtube, href: "#" },
+                    { icon: Linkedin, href: "#" },
+                  ].map(({ icon: Icon, href }, i) => (
+                    <a
+                      key={i}
+                      href={href}
+                      className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center text-primary-foreground hover:brightness-110 hover:scale-105 transition-all duration-200"
+                    >
+                      <Icon className="h-4 w-4" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right — Form */}
+            <div className="bg-primary p-8 md:p-10 flex flex-col gap-5">
+              <h3 className="text-2xl font-bold text-primary-foreground">Contact us</h3>
+
+              <input
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                placeholder="name"
+                className="w-full rounded-full border border-primary-foreground/40 bg-transparent text-primary-foreground placeholder:text-primary-foreground/50 px-5 py-3 text-sm focus:outline-none focus:border-primary-foreground transition"
+              />
+              <input
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="Email"
+                type="email"
+                className="w-full rounded-full border border-primary-foreground/40 bg-transparent text-primary-foreground placeholder:text-primary-foreground/50 px-5 py-3 text-sm focus:outline-none focus:border-primary-foreground transition"
+              />
+              <textarea
+                name="message"
+                value={form.message}
+                onChange={handleChange}
+                placeholder="Message"
+                rows={5}
+                className="w-full rounded-2xl border border-primary-foreground/40 bg-transparent text-primary-foreground placeholder:text-primary-foreground/50 px-5 py-3 text-sm focus:outline-none focus:border-primary-foreground transition resize-none"
+              />
+
+              <div>
+                <button
+                  onClick={handleSend}
+                  disabled={!form.name || !form.email || !form.message}
+                  className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold px-8 py-2.5 rounded-lg text-sm transition-all duration-200 hover:scale-[1.02]"
+                >
+                  {sent ? "Sent!" : "Send"}
+                </button>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
     </SiteShell>

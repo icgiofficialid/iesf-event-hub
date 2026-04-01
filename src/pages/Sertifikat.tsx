@@ -1,28 +1,32 @@
-import { pageMeta, certificates } from "@/components/yiesf/siteData";
-import PageHero from "@/components/yiesf/PageHero";
-import SectionReveal from "@/components/yiesf/SectionReveal";
-import SiteShell from "@/components/yiesf/SiteShell";
+import SiteShell from "@/components/iesf/SiteShell";
+import { Button } from "@/components/ui/button";
 
 const Sertifikat = () => {
-  const meta = pageMeta.sertifikat;
-
   return (
     <SiteShell>
-      <PageHero {...meta} />
-      <section className="container pb-16 md:pb-24">
-        <div className="grid gap-4">
-          {certificates.map((item, index) => (
-            <SectionReveal key={item} delay={index * 0.08}>
-              <div className="tech-shell rounded-[1.5rem] p-5">
-                <div className="flex items-start gap-4">
-                  <div className="rounded-full border border-border bg-panel px-3 py-2 text-sm text-primary">0{index + 1}</div>
-                  <p className="leading-8 text-muted-foreground">{item}</p>
-                </div>
-              </div>
-            </SectionReveal>
-          ))}
+      <div className="relative min-h-screen flex flex-col items-center justify-center text-center">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/sertifikat-bg.jpg')" }}
+        />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40" />
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center gap-6">
+          <img src="/logo.png" alt="Logo" className="h-32 w-auto" />
+          <h1 className="text-4xl font-bold text-white">Certificate</h1>
+          <Button
+            variant="hero"
+            size="lg"
+            className="bg-primary/90 text-white font-bold tracking-widest px-8 py-4"
+            asChild
+          >
+            <a href="/certificate-guide">CERTIFICATE 2025</a>
+          </Button>
         </div>
-      </section>
+      </div>
     </SiteShell>
   );
 };
