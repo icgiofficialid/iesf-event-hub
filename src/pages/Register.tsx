@@ -248,10 +248,10 @@ const Register = () => {
                   I have read and agree to the <span className="text-primary font-semibold">Terms & Conditions</span>.
                 </label>
               </div>
-              <div className="px-6 py-5 flex justify-between">
-                <Button variant="hero-outline" size="lg" onClick={() => setStep(2)}>← Back</Button>
-                <Button variant="hero" size="lg" disabled={!agreed} onClick={() => setStep(4)}>Accept & Continue →</Button>
-              </div>
+            <div className="px-4 py-5 flex flex-col sm:flex-row gap-3">
+            <Button variant="hero-outline" size="lg" className="w-full sm:w-auto" onClick={() => setStep(2)}>← Back</Button>
+            <Button variant="hero" size="lg" className="w-full sm:w-auto" disabled={!agreed} onClick={() => setStep(4)}>Accept & Continue</Button>
+            </div>
             </div>
           </div>
         )}
