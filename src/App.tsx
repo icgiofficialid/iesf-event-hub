@@ -12,6 +12,9 @@ import Index from "./pages/Index.tsx";
 import MediaCoverage from "./pages/MediaCoverage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Sertifikat from "./pages/Sertifikat.tsx";
+import Terms from "@/pages/Terms";
+import Guide from "@/pages/guide";
+import Register from "@/pages/Register.tsx";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +34,9 @@ const App = () => (
           <Route path="/faq" element={<Faq />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/guide" element={<Guide />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

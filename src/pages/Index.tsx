@@ -38,12 +38,17 @@ const Index = () => {
               <motion.div {...fadeUp} className="flex flex-col gap-4 sm:flex-row justify-center">
                 <motion.div whileTap={{ scale: 0.96 }}>
                   <Button variant="hero" size="lg" asChild>
-                    <a href="#register">Register Now</a>
+                    <a href="/register">Register Now</a>
                   </Button>
                 </motion.div>
                 <motion.div whileTap={{ scale: 0.96 }}>
                   <Button variant="hero-outline" size="lg" asChild>
-                    <a href="/curation">Book Guide</a>
+                    <a href="/guide">Guide Book</a>
+                  </Button>
+                </motion.div>
+                <motion.div whileTap={{ scale: 0.96 }}>
+                <Button variant="hero-outline" size="lg" asChild>
+                    <a href="/terms">Terms and Conditions</a>
                   </Button>
                 </motion.div>
               </motion.div>
