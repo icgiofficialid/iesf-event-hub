@@ -12,7 +12,7 @@ import Index from "./pages/Index.tsx";
 import MediaCoverage from "./pages/MediaCoverage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Sertifikat from "./pages/Sertifikat.tsx";
-import Terms from "@/pages/Terms";
+import Terms from "@/pages/data/Terms.tsx";
 import Guide from "@/pages/guide";
 import Register from "@/pages/Register.tsx";
 
@@ -36,7 +36,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/guide" element={<Guide />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/Register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

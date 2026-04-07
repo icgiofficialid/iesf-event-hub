@@ -46,11 +46,6 @@ const Index = () => {
                     <a href="/guide">Guide Book</a>
                   </Button>
                 </motion.div>
-                <motion.div whileTap={{ scale: 0.96 }}>
-                <Button variant="hero-outline" size="lg" asChild>
-                    <a href="/terms">Terms and Conditions</a>
-                  </Button>
-                </motion.div>
               </motion.div>
             </motion.div>
           </div>
