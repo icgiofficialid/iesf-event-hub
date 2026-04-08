@@ -9,11 +9,13 @@ import IndoOffline      from "./register/IndoOffline";
 import InterOnline      from "./register/InterOnline";
 import InterOffline     from "./register/InterOffline";
 import RegistrationForm from "./register/RegistrationForm";
+import { useNavigate } from "react-router-dom";
 
 type Step = 1 | 2 | 3 | 4;
 const STEP_LABELS = ["Participant", "Competition", "Terms", "Form"];
 
 const Register = () => {
+  const navigate = useNavigate();
   const [step, setStep]               = useState<Step>(1);
   const [participant, setParticipant] = useState<ParticipantType | null>(null);
   const [competition, setCompetition] = useState<CompetitionType | null>(null);
@@ -25,6 +27,16 @@ const Register = () => {
     setSheetTarget(target); // ← TAMBAH
     setStep(4);
   };
+
+  const handleSuccess = () => {
+  setStep(1);
+  setParticipant(null);
+  setCompetition(null);
+  setSheetUrl("");
+  setSheetTarget("");
+  navigate("/");
+};
+
 
   const renderStep3 = () => {
     const props = { onBack: () => setStep(2), onNext: handleTermsNext };
@@ -84,6 +96,7 @@ const Register = () => {
             sheetUrl={sheetUrl}
             sheetTarget={sheetTarget} // ← TAMBAH
             onBack={() => setStep(3)}
+            onSuccess={handleSuccess}
           />
         )}
 

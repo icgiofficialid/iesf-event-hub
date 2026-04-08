@@ -81,6 +81,44 @@ All colors MUST be HSL.
   }
 }
 
+.light {
+  --background: 0 0% 97%;
+  --foreground: 215 30% 15%;
+  --surface: 0 0% 100%;
+  --surface-foreground: 215 30% 15%;
+  --panel: 210 20% 93%;
+  --panel-foreground: 215 30% 15%;
+  --card: 0 0% 100%;
+  --card-foreground: 215 30% 15%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 215 30% 15%;
+
+  /* Warna primary ambil dari biru teal logo */
+  --primary: 199 85% 40%;
+  --primary-foreground: 0 0% 100%;
+
+  /* Warna accent ambil dari kuning-orange logo */
+  --accent: 38 95% 52%;
+  --accent-foreground: 215 30% 15%;
+
+  --secondary: 210 15% 88%;
+  --secondary-foreground: 215 30% 15%;
+  --muted: 210 15% 90%;
+  --muted-foreground: 215 15% 45%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 210 15% 82%;
+  --input: 210 15% 88%;
+  --ring: 199 85% 40%;
+
+   /* Nav & Footer */
+  --panel: 199 85% 95%;        /* biru teal muda */
+  --panel-foreground: 215 30% 15%;
+  --surface: 199 85% 98%;
+  --border: 199 40% 80%
+}
+
+
 @layer base {
   * {
     @apply border-border;

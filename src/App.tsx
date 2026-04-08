@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { LanguageProvider } from "@/components/LanguageProvider";
 import About from "./pages/About.tsx";
 import Contact from "./pages/Contact.tsx";
 import Curation from "./pages/Curation.tsx";
@@ -19,6 +21,8 @@ import Register from "@/pages/Register.tsx";
 const queryClient = new QueryClient();
 
 const App = () => (
+<ThemeProvider>
+  <LanguageProvider>
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -41,6 +45,8 @@ const App = () => (
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
+  </LanguageProvider>
+  </ThemeProvider>
 );
 
 export default App;

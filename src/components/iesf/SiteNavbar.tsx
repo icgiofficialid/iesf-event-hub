@@ -1,13 +1,31 @@
 import { Menu } from "lucide-react";
+import { Sun, Moon } from "lucide-react";
 import { useState } from "react";
-
+import { useTheme } from "@/components/ThemeProvider";
 import { NavLink } from "@/components/NavLink";
 import { Button } from "@/components/ui/button";
 import { navItems } from "@/components/iesf/siteData";
+import { useLang } from "@/components/LanguageProvider";
 import { cn } from "@/lib/utils";
 
 const linkClass = "transition-colors hover:text-primary";
+const ThemeToggle = () => {
+  const { theme, toggle } = useTheme();
+  return (
+    <button onClick={toggle} className="p-2 rounded-lg hover:bg-muted transition-colors">
+      {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+    </button>
+  );
+};
 
+const LangToggle = () => {
+  const { lang, toggle } = useLang();
+  return (
+    <button onClick={toggle} className="p-2 rounded-lg hover:bg-muted transition-colors text-sm font-semibold text-muted-foreground">
+      {lang === "en" ? "🇮🇩 ID" : "🇬🇧 EN"}
+    </button>
+  );
+};
 const SiteNavbar = () => {
   const [open, setOpen] = useState(false);
 
@@ -34,6 +52,7 @@ const SiteNavbar = () => {
             </NavLink>
           ))}
         </div>
+        <ThemeToggle />
 
         <Button variant="hero" size="sm" asChild className="hidden lg:inline-flex">
           <NavLink to="/#register">Register Now</NavLink>
@@ -53,6 +72,7 @@ const SiteNavbar = () => {
               {item.label}
             </NavLink>
           ))}
+          <ThemeToggle />
           <Button variant="hero" size="sm" asChild>
             <NavLink to="/#register" onClick={() => setOpen(false)}>
               Register Now

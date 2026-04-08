@@ -19,9 +19,10 @@ interface Props {
   sheetUrl: string;  
   sheetTarget: string; 
   onBack: () => void;
+  onSuccess: () => void
 }
 
-const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onBack }: Props) => {
+const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onBack, onSuccess }: Props) => {
   const [form, setForm]           = useState<FormData>({});
   const [loading, setLoading]     = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -39,12 +40,18 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
     try {
       await submitToSheet(sheetUrl, participant, competition, form, sheetTarget);
       setSubmitted(true);
+      setTimeout(() => onSuccess(), 3000);
     } catch {
       setError("Failed to submit. Please try again.");
     } finally {
       setLoading(false);
     }
   };
+  const SpinnerOverlay = () => (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+    <div className="w-14 h-14 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
+  </div>
+  );
 
   return (
     <div className="w-full max-w-3xl">
@@ -130,7 +137,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Field label="Grade / Year" required>
                 <SelectInput placeholder="-- Choose Grade --" value={f("GRADE")} onChange={set("GRADE")}
-                  options={["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "Undergraduate", "Postgraduate"]} />
+                  options={["Elementary", "Secondary", "University"]} />
               </Field>
               <Field label="NPSN / Institution Code" note="Format: 20503101 (Leader) / 20503102 (Member1)">
                 <TextInput placeholder="Input NPSN / Institution Code"
@@ -240,7 +247,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
       <div className="mt-4 flex justify-start">
         <Button variant="hero-outline" size="sm" onClick={onBack}>← Back to Terms</Button>
       </div>
-
+      {loading && <SpinnerOverlay />}
       {submitted && <SuccessOverlay />}
     </div>
   );
