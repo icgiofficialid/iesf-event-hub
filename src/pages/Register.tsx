@@ -1,13 +1,3 @@
-// ================================================================
-// Register.tsx — Router utama pendaftaran
-// ================================================================
-// Alur sheetUrl:
-//   IndoOnline/IndoOffline/InterOnline/InterOffline
-//     → TermsBox (onNext(sheetUrl))
-//       → Register.tsx (simpan di state sheetUrl)
-//         → RegistrationForm (prop sheetUrl)
-//           → submitToSheet(sheetUrl, ...)
-
 import { useState } from "react";
 import SiteShell from "@/components/iesf/SiteShell";
 import { type ParticipantType, type CompetitionType } from "./register/registerConfig";
@@ -21,7 +11,6 @@ import InterOffline     from "./register/InterOffline";
 import RegistrationForm from "./register/RegistrationForm";
 
 type Step = 1 | 2 | 3 | 4;
-
 const STEP_LABELS = ["Participant", "Competition", "Terms", "Form"];
 
 const Register = () => {
@@ -29,9 +18,11 @@ const Register = () => {
   const [participant, setParticipant] = useState<ParticipantType | null>(null);
   const [competition, setCompetition] = useState<CompetitionType | null>(null);
   const [sheetUrl, setSheetUrl]       = useState<string>("");
+  const [sheetTarget, setSheetTarget] = useState<string>(""); // ← TAMBAH
 
-  const handleTermsNext = (url: string) => {
+  const handleTermsNext = (url: string, target: string) => { // ← TAMBAH target
     setSheetUrl(url);
+    setSheetTarget(target); // ← TAMBAH
     setStep(4);
   };
 
@@ -73,13 +64,8 @@ const Register = () => {
         </div>
 
         {step === 1 && (
-          <HomeRegist
-            participant={participant}
-            setParticipant={setParticipant}
-            onNext={() => setStep(2)}
-          />
+          <HomeRegist participant={participant} setParticipant={setParticipant} onNext={() => setStep(2)} />
         )}
-
         {step === 2 && participant === "indonesian" && (
           <HomeIndo competition={competition} setCompetition={setCompetition}
             onBack={() => setStep(1)} onNext={() => setStep(3)} />
@@ -96,6 +82,7 @@ const Register = () => {
             participant={participant}
             competition={competition}
             sheetUrl={sheetUrl}
+            sheetTarget={sheetTarget} // ← TAMBAH
             onBack={() => setStep(3)}
           />
         )}

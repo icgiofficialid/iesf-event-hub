@@ -8,7 +8,7 @@
 import TermsBox from "./TermsBox";
 
 
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbxNquOZ5xQhbCPcfUQ0aFnpviYHdDj3YHa9de2Aceajq24zNj9tglnR6dLTLeref_LzXQ/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbwhUh7uwCyROzu_XvK-rT_Hw0Mv_SvTIGUc8fNgPZPZcegSJ7iPnqQuL54V3lPz2t3kkw/exec";
 
 interface Props {
   onBack: () => void;

@@ -66,7 +66,7 @@ const HomeRegist = ({ participant, setParticipant, onNext }: Props) => {
 
       <div className="mt-8 flex justify-end">
         <Button variant="hero" size="lg" disabled={!participant} onClick={onNext}>
-          Continue →
+          Continue
         </Button>
       </div>
     </div>

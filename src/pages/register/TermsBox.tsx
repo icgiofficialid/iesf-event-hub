@@ -1,7 +1,6 @@
 // ================================================================
 // TermsBox.tsx — Komponen Terms & Conditions (reusable)
 // ================================================================
-// FIX: Tambahkan prop sheetUrl dan teruskan ke onNext(sheetUrl)
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -11,12 +10,13 @@ import termsData from "./terms.json";
 interface Props {
   participant: ParticipantType;
   competition: CompetitionType;
-  sheetUrl: string;                    // ← FIX: prop ini sebelumnya tidak ada
+  sheetUrl: string;
+  sheetTarget: string;                                    // ← FIX: tambah prop ini
   onBack: () => void;
-  onNext: (sheetUrl: string) => void;  // ← FIX: harus menerima sheetUrl
+  onNext: (sheetUrl: string, sheetTarget: string) => void; // ← FIX: 2 argumen
 }
 
-const TermsBox = ({ participant, competition, sheetUrl, onBack, onNext }: Props) => {
+const TermsBox = ({ participant, competition, sheetUrl, sheetTarget, onBack, onNext }: Props) => {
   const [agreed, setAgreed] = useState(false);
 
   const terms = competition === "offline" ? termsData.offline : termsData.online;
@@ -79,7 +79,7 @@ const TermsBox = ({ participant, competition, sheetUrl, onBack, onNext }: Props)
             size="lg"
             className="w-full sm:w-auto"
             disabled={!agreed}
-            onClick={() => onNext(sheetUrl)}
+            onClick={() => onNext(sheetUrl, sheetTarget)}  
           >
             Accept & Continue
           </Button>

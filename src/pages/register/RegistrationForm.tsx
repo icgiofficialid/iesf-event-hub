@@ -16,11 +16,12 @@ import {
 interface Props {
   participant: ParticipantType;
   competition: CompetitionType;
-  sheetUrl: string;   // ← URL unik per kombinasi peserta/kompetisi
+  sheetUrl: string;  
+  sheetTarget: string; 
   onBack: () => void;
 }
 
-const RegistrationForm = ({ participant, competition, sheetUrl, onBack }: Props) => {
+const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onBack }: Props) => {
   const [form, setForm]           = useState<FormData>({});
   const [loading, setLoading]     = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -36,7 +37,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, onBack }: Props)
     setLoading(true);
     setError("");
     try {
-      await submitToSheet(sheetUrl, participant, competition, form);
+      await submitToSheet(sheetUrl, participant, competition, form, sheetTarget);
       setSubmitted(true);
     } catch {
       setError("Failed to submit. Please try again.");

@@ -1,21 +1,17 @@
 // ================================================================
 // registerConfig.ts
-// Berisi: tipe data, konstanta, komponen UI reusable, submit handler
 // ================================================================
 
 import { type ReactNode } from "react";
 import { ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
-// ── Konstanta ────────────────────────────────────────────────────
 export const WHATSAPP_ADMIN = "628139905880";
 
-// ── Tipe ─────────────────────────────────────────────────────────
 export type ParticipantType = "international" | "indonesian";
 export type CompetitionType = "online" | "offline";
 export type FormData = Record<string, string>;
 
-// ── Field wajib diisi ─────────────────────────────────────────────
 export const REQUIRED_FIELDS = [
   "NAMA_LENGKAP",
   "LEADER_WHATSAPP",
@@ -31,21 +27,18 @@ export const REQUIRED_FIELDS = [
   "FILE",
 ];
 
-// ── Submit ke Google Sheet + redirect WA ─────────────────────────
-// FIX: Kirim sebagai URLSearchParams (form-encoded) bukan JSON,
-//      supaya Apps Script bisa membaca lewat e.parameter[header].
-//      mode "no-cors" tidak bisa kirim JSON body yang terbaca di doPost.
 export const submitToSheet = async (
   sheetUrl: string,
   participant: ParticipantType,
   competition: CompetitionType,
-  form: FormData
+  form: FormData,
+  sheetTarget: string
 ) => {
   const f = (key: string) => form[key] || "";
 
   const payload: Record<string, string> = {
+    sheetTarget,
     timestamp:                  new Date().toISOString(),
-    URL_FOLDER:                 "",
     CATEGORY_PARTICIPANT:       participant,
     CATEGORY_COMPETITION:       competition,
     NAMA_SEKOLAH:               f("NAMA_SEKOLAH"),
@@ -69,29 +62,58 @@ export const submitToSheet = async (
     PROJECT_TITLE:              f("PROJECT_TITLE"),
   };
 
-  // FIX: kirim sebagai form-encoded agar terbaca oleh e.parameter di Apps Script
-  await fetch(sheetUrl, {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams(payload).toString(),
-  });
+  const queryString = new URLSearchParams(payload).toString();
+  const fullUrl = `${sheetUrl}?${queryString}`;
 
-  // Redirect ke WhatsApp admin setelah submit
-  const msg = encodeURIComponent(
-    `Halo Admin IESF! Saya sudah mendaftar.\n\n` +
-    `*Nama:* ${f("NAMA_LENGKAP")}\n` +
-    `*Email:* ${f("LEADER_EMAIL")}\n` +
-    `*WA:* ${f("LEADER_WHATSAPP")}\n` +
-    `*Kategori:* ${f("CATEGORIES")}\n` +
-    `*Tipe:* ${participant} - ${competition}\n` +
-    `*Bukti Pembayaran:* ${f("FILE")}`
-  );
-  setTimeout(() => {
-    window.location.href = `https://wa.me/${WHATSAPP_ADMIN}?text=${msg}`;
-  }, 1500);
+  // DEBUG — lihat URL lengkap di console
+  console.log("=== SUBMIT DEBUG ===");
+  console.log("sheetTarget:", sheetTarget);
+  console.log("sheetUrl:", sheetUrl);
+  console.log("Full URL:", fullUrl);
+
+  // Coba semua metode sekaligus
+  // Metode 1: fetch
+  try {
+    await fetch(fullUrl, { method: "GET", mode: "no-cors" });
+    console.log("fetch: terkirim");
+  } catch (e) {
+    console.error("fetch gagal:", e);
+  }
+
+  // Metode 2: Image
+  try {
+    await new Promise<void>((resolve) => {
+      const img = new Image();
+      img.onload = () => { console.log("img: onload"); resolve(); };
+      img.onerror = () => { console.log("img: onerror (request tetap terkirim)"); resolve(); };
+      img.src = fullUrl;
+      setTimeout(resolve, 5000);
+    });
+  } catch (e) {
+    console.error("img gagal:", e);
+  }
+
+  // Metode 3: Script tag
+  try {
+    await new Promise<void>((resolve) => {
+      const script = document.createElement("script");
+      script.src = fullUrl;
+      script.onload = () => { console.log("script tag: onload"); resolve(); };
+      script.onerror = () => { console.log("script tag: onerror"); resolve(); };
+      document.head.appendChild(script);
+      setTimeout(resolve, 5000);
+    });
+  } catch (e) {
+    console.error("script tag gagal:", e);
+  }
+
+  console.log("=== SELESAI — cek sheet sekarang ===");
+
+  // WA REDIRECT DINONAKTIFKAN SEMENTARA
+  // setTimeout(() => {
+  //   window.location.href = `https://wa.me/${WHATSAPP_ADMIN}?text=${msg}`;
+  // }, 1500);
 };
-
 // ================================================================
 // Komponen UI Reusable
 // ================================================================
