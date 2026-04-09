@@ -45,7 +45,7 @@ const SiteFooter = () => {
                   key={index}
                   to="/contact"
                   className="rounded-full border border-border bg-panel p-3 text-primary transition-transform hover:-translate-y-1"
-                  aria-label="YIESF social link"
+                  aria-label="IESF social link"
                 >
                   <Icon className="h-5 w-5" />
                 </NavLink>

@@ -67,7 +67,7 @@ const Contact = () => {
                     <a
                       key={i}
                       href={href}
-                      className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center text-primary-foreground hover:brightness-110 hover:scale-105 transition-all duration-200"
+                      className="w-9 h-9 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center text-white/70 hover:bg-white/15 hover:text-white hover:scale-105 transition-all duration-200"
                     >
                       <Icon className="h-4 w-4" />
                     </a>
@@ -77,15 +77,15 @@ const Contact = () => {
             </div>
 
             {/* Right — Form */}
-            <div className="bg-primary p-8 md:p-10 flex flex-col gap-5">
-              <h3 className="text-2xl font-bold text-primary-foreground">Contact us</h3>
+            <div className="bg-[#065777b1] p-8 md:p-10 flex flex-col gap-5">
+              <h3 className="text-2xl font-bold text-white">Contact us</h3>
 
               <input
                 name="name"
                 value={form.name}
                 onChange={handleChange}
-                placeholder="name"
-                className="w-full rounded-full border border-primary-foreground/40 bg-transparent text-primary-foreground placeholder:text-primary-foreground/50 px-5 py-3 text-sm focus:outline-none focus:border-primary-foreground transition"
+                placeholder="Name"
+                className="w-full rounded-full border border-white/15 bg-white/5 text-white placeholder:text-white/30 px-5 py-3 text-sm focus:outline-none focus:border-white/40 transition"
               />
               <input
                 name="email"
@@ -93,7 +93,7 @@ const Contact = () => {
                 onChange={handleChange}
                 placeholder="Email"
                 type="email"
-                className="w-full rounded-full border border-primary-foreground/40 bg-transparent text-primary-foreground placeholder:text-primary-foreground/50 px-5 py-3 text-sm focus:outline-none focus:border-primary-foreground transition"
+                className="w-full rounded-full border border-white/15 bg-white/5 text-white placeholder:text-white/30 px-5 py-3 text-sm focus:outline-none focus:border-white/40 transition"
               />
               <textarea
                 name="message"
@@ -101,14 +101,14 @@ const Contact = () => {
                 onChange={handleChange}
                 placeholder="Message"
                 rows={5}
-                className="w-full rounded-2xl border border-primary-foreground/40 bg-transparent text-primary-foreground placeholder:text-primary-foreground/50 px-5 py-3 text-sm focus:outline-none focus:border-primary-foreground transition resize-none"
+                className="w-full rounded-2xl border border-white/15 bg-white/5 text-white placeholder:text-white/30 px-5 py-3 text-sm focus:outline-none focus:border-white/40 transition resize-none"
               />
 
               <div>
                 <button
                   onClick={handleSend}
                   disabled={!form.name || !form.email || !form.message}
-                  className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold px-8 py-2.5 rounded-lg text-sm transition-all duration-200 hover:scale-[1.02]"
+                  className="bg-white/10 hover:bg-white/15 border border-white/20 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold px-8 py-2.5 rounded-lg text-sm transition-all duration-200 hover:scale-[1.02]"
                 >
                   {sent ? "Sent!" : "Send"}
                 </button>
