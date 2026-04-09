@@ -7,6 +7,7 @@ import SectionReveal from "@/components/iesf/SectionReveal";
 import { events } from "@/components/iesf/eventsData";
 import { categories, pageMeta } from "@/components/iesf/siteData";
 import { useLang } from "@/components/LanguageProvider";
+import { useRef } from "react";
 
 
 // ── EVENT CARD — elevated poster style ────────────────────────────
@@ -89,7 +90,7 @@ const EventPopup = ({ onClose }: { onClose: () => void }) => {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 16, scale: 0.96 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed bottom-6 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-80"
+      className="fixed bottom-6 right-3 z-50 w-64 sm:w-80"
     >
       {/* Glass card */}
       <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_24px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl bg-[#0d1117]/80">
@@ -109,7 +110,7 @@ const EventPopup = ({ onClose }: { onClose: () => void }) => {
           </div>
           <button
             onClick={onClose}
-            className="rounded-full p-1.5 hover:bg-white/10 transition-colors text-white/40 hover:text-white/80"
+            className="rounded-full p-1.5 hover:bg-white/10 transition-colors text-white font-bold"
           >
             <X className="h-3 w-3" />
           </button>
@@ -147,14 +148,14 @@ const EventPopup = ({ onClose }: { onClose: () => void }) => {
             <div className="space-y-0.5">
               <div className="flex items-center gap-1.5">
                 <MapPin className="h-3 w-3 text-white/40 shrink-0" />
-                <p className="text-xs font-semibold text-white">Yogyakarta, Indonesia</p>
+                <p className="text-xs font-semibold text-white drop-shadow-sm">Yogyakarta, Indonesia</p>
               </div>
               <div className="flex items-center gap-1.5">
                 <Bell className="h-3 w-3 text-cyan-400 shrink-0" />
-                <p className="text-[11px] text-cyan-400">Registration open now</p>
+                <p className="text-[11px] text-cyan-300 drop-shadow-sm">Registration open now</p>
               </div>
             </div>
-            <div className="flex items-center gap-1 bg-white/10 border border-white/15 rounded-lg px-3 py-1.5 text-white/80 text-xs font-semibold group-hover:bg-white/15 group-hover:gap-1.5 transition-all">
+            <div className="flex items-center gap-1 bg-white/20 border border-white/40 rounded-lg px-3 py-1.5 text-white text-xs font-bold shadow-sm group-hover:bg-white/30 group-hover:gap-1.5 transition-all">
               View <ArrowRight className="h-3.5 w-3.5" />
             </div>
           </div>
@@ -175,10 +176,25 @@ const Index = () => {
   const { lang } = useLang();
   const meta = pageMeta.about;
 
-  useEffect(() => {
-    const t = setTimeout(() => setShowPopup(true), 2000);
-    return () => clearTimeout(t);
-  }, []);
+const popupSound = useRef<HTMLAudioElement | null>(null);
+
+useEffect(() => {
+  // Gunakan suara notifikasi dari URL publik
+  popupSound.current = new Audio("https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3");
+  popupSound.current.volume = 0.4;
+
+  const show = setTimeout(() => {
+    setShowPopup(true);
+    popupSound.current?.play().catch(() => {}); // catch: browser block autoplay
+  }, 2000);
+
+  const hide = setTimeout(() => setShowPopup(false), 5000);
+
+  return () => {
+    clearTimeout(show);
+    clearTimeout(hide);
+  };
+}, []);
 
   const upcomingEvents = events.filter((e) => e.status === "upcoming");
 
@@ -236,7 +252,14 @@ const Index = () => {
       </section>
 
       {/* ── SECTION 2: ABOUT (from About page) ──────────────────── */}
-      <section className="container min-h-screen flex flex-col justify-center py-16 md:py-24">
+      <section className="min-h-screen flex flex-col justify-center py-16 md:py-24 relative">
+      {/* Background layer */}
+      <div className="absolute inset-0 bg-surface/60 border-y border-border/40" />
+      {/* Subtle tint overlay */}
+      <div className="absolute inset-0 opacity-40"
+        style={{ background: "radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.08) 0%, transparent 60%), radial-gradient(ellipse at 50% 100%, hsl(var(--accent) / 0.06) 0%, transparent 60%)" }}
+      />
+      <div className="container relative z-10">
         <SectionReveal className="mb-10 text-center space-y-2">
           <p className="text-xs uppercase tracking-[0.35em] text-primary font-semibold">
             {meta.eyebrow[lang]}
@@ -275,11 +298,12 @@ const Index = () => {
             );
           })}
         </div>
+        </div>
       </section>
 
 
       {/* ── SECTION 3: UPCOMING EVENTS ──────────────────────────── */}
-      <section className="container pb-20 md:pb-28">
+      <section className="container min-h-screen flex flex-col justify-center pt-32 md:pt-40 pb-20 md:pb-28">
         <SectionReveal className="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div className="space-y-1.5">
             <p className="text-xs uppercase tracking-[0.35em] text-primary font-semibold">What's Coming</p>

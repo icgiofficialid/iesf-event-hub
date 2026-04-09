@@ -7,11 +7,11 @@ const linkMap: Record<string, string> = {
   // Event
   "About IESF": "/about",
   // "Tracks": "/",
-  // "Timeline": "/",
+  "Timeline": "/registration#timeline",
   "Registration": "/#register",
 
   // Resources
-  // "Guidebook": "/guide",
+  "Guidebook": "/guide",
   // "Certificates": "/sertifikat",
   // "Media Kit": "/media-coverage",
   "FAQ": "/faq",
@@ -34,7 +34,7 @@ const SiteFooter = () => {
       <div className="container">
         <div className="grid gap-16 lg:grid-cols-[1.2fr_1fr] grid-cols-1">
           <div className="space-y-3">
-            <h3 className="text-3xl md:text-2xl">IESF</h3>
+            <h1 className="text-2xl md:text-6xl">IESF</h1>
             {/* <p className="max-w-2xl leading-8 text-muted-foreground">
               Connect with the organizing team for registration support, institution collaboration, media requests, or event information.
             </p> */}

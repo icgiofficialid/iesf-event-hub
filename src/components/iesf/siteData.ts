@@ -143,17 +143,17 @@ export const footerColumns = [
     title: { en: "Event",     id: "Acara"       },
     links: [
       { en: "About IESF",  id: "Tentang IESF" },
-      { en: "Tracks",       id: "Jalur"         },
+      // { en: "Tracks",       id: "Jalur"         },
       { en: "Timeline",     id: "Timeline"      },
-      { en: "Registration", id: "Pendaftaran"   },
+      // { en: "Registration", id: "Pendaftaran"   },
     ],
   },
   {
     title: { en: "Resources", id: "Sumber Daya" },
     links: [
       { en: "Guidebook",    id: "Buku Panduan"  },
-      { en: "Certificates", id: "Sertifikat"    },
-      { en: "Media Kit",    id: "Media Kit"     },
+      // { en: "Certificates", id: "Sertifikat"    },
+      // { en: "Media Kit",    id: "Media Kit"     },
       { en: "FAQ",          id: "FAQ"           },
     ],
   },
@@ -161,18 +161,18 @@ export const footerColumns = [
     title: { en: "Support",   id: "Dukungan"    },
     links: [
       { en: "Contact Team",   id: "Tim Kontak"       },
-      { en: "WhatsApp Help",  id: "Bantuan WhatsApp" },
+      // { en: "WhatsApp Help",  id: "Bantuan WhatsApp" },
       { en: "Email Support",  id: "Dukungan Email"   },
-      { en: "Venue Info",     id: "Info Venue"       },
+      // { en: "Venue Info",     id: "Info Venue"       },
     ],
   },
   {
     title: { en: "Social",    id: "Sosial"      },
     links: [
       { en: "Instagram",    id: "Instagram"     },
-      { en: "LinkedIn",     id: "LinkedIn"      },
+      // { en: "LinkedIn",     id: "LinkedIn"      },
       { en: "YouTube",      id: "YouTube"       },
-      { en: "X / Twitter",  id: "X / Twitter"  },
+      // { en: "X / Twitter",  id: "X / Twitter"  },
     ],
   },
 ];

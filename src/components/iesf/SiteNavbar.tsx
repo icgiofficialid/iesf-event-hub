@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 const NAV_ITEMS = [
   { label: { en: "Upcoming Events", id: "Event Mendatang" }, href: "/events" },
   { label: { en: "Past Events",     id: "Event Lalu"      }, href: "/past-events" },
+   { label: { en: "FAQ",             id: "FAQ"             }, href: "/faq" },
   { label: { en: "Contact Us",      id: "Kontak"          }, href: "/contact" },
 ];
 
