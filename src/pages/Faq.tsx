@@ -4,25 +4,27 @@ import PageHero from "@/components/iesf/PageHero";
 import SectionReveal from "@/components/iesf/SectionReveal";
 import SiteShell from "@/components/iesf/SiteShell";
 import { ChevronDown } from "lucide-react";
+import { useLang } from "@/components/LanguageProvider";
 
 const Faq = () => {
   const meta = pageMeta.faq;
+  const { lang } = useLang();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <SiteShell>
-      <PageHero {...meta} />
+      <PageHero eyebrow={meta.eyebrow[lang]} title={meta.title[lang]} description={meta.description[lang]} icon={meta.icon} />
       <section className="container pb-16 md:pb-24">
         <div className="grid gap-4 max-w-3xl mx-auto">
           {faqItems.map((faq, index) => (
-            <SectionReveal key={faq.question} delay={index * 0.05}>
+            <SectionReveal key={faq.question[lang]} delay={index * 0.05}>
               <div
                 className="tech-shell rounded-[1.5rem] overflow-hidden cursor-pointer"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
               >
                 {/* Question */}
                 <div className="flex items-center justify-between gap-4 p-6">
-                  <h2 className="text-lg text-foreground">{faq.question}</h2>
+                  <h2 className="text-lg text-foreground">{faq.question[lang]}</h2>
                   <ChevronDown
                     className={`h-5 w-5 text-primary shrink-0 transition-transform duration-300 ${
                       openIndex === index ? "rotate-180" : ""
@@ -39,7 +41,7 @@ const Faq = () => {
                   } overflow-hidden`}
                 >
                   <p className="px-6 pb-6 leading-8 text-muted-foreground">
-                    {faq.answer}
+                    {faq.answer[lang]}
                   </p>
                 </div>
               </div>

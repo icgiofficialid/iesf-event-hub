@@ -21,13 +21,24 @@ const ThemeToggle = () => {
 const LangToggle = () => {
   const { lang, toggle } = useLang();
   return (
-    <button onClick={toggle} className="p-2 rounded-lg hover:bg-muted transition-colors text-sm font-semibold text-muted-foreground">
-      {lang === "en" ? "🇮🇩 ID" : "🇬🇧 EN"}
+    <button onClick={toggle} className="flex items-center gap-1.5 p-2 rounded-lg hover:bg-muted transition-colors text-sm font-semibold text-muted-foreground">
+      {lang === "en" ? (
+        <>
+          <img src="https://flagcdn.com/w20/gb.png" alt="EN" className="w-5 h-4 rounded-sm object-cover" />
+          <span>EN</span>
+        </>
+      ) : (
+        <>
+          <img src="https://flagcdn.com/w20/id.png" alt="ID" className="w-5 h-4 rounded-sm object-cover" />
+          <span>ID</span>
+        </>
+      )}
     </button>
   );
 };
 const SiteNavbar = () => {
   const [open, setOpen] = useState(false);
+  const { lang } = useLang();
 
   return (
     <nav className="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-xl">
@@ -48,12 +59,12 @@ const SiteNavbar = () => {
         <div className="hidden items-center gap-5 text-sm text-muted-foreground lg:flex">
           {navItems.map((item) => (
             <NavLink key={item.href} to={item.href} className={linkClass} activeClassName="text-primary">
-              {item.label}
+              {item.label[lang]}
             </NavLink>
           ))}
         </div>
         <ThemeToggle />
-
+        <LangToggle />
         <Button variant="hero" size="sm" asChild className="hidden lg:inline-flex">
           <NavLink to="/#register">Register Now</NavLink>
         </Button>
@@ -69,7 +80,7 @@ const SiteNavbar = () => {
               activeClassName="border-border bg-surface text-primary"
               onClick={() => setOpen(false)}
             >
-              {item.label}
+              {item.label[lang]}
             </NavLink>
           ))}
           <ThemeToggle />

@@ -25,7 +25,7 @@ const Contact = () => {
 
   return (
     <SiteShell>
-      <PageHero {...meta} />
+      <PageHero eyebrow={meta.eyebrow.en} title={meta.title.en} description={meta.description.en} icon={meta.icon} />
 
       <section className="container pb-20 md:pb-28">
         <div className="max-w-4xl mx-auto">
