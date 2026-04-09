@@ -87,14 +87,14 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
                 <Input
                   value={participant === "international" ? "International" : "Indonesia"}
                   disabled
-                  className="rounded-lg bg-muted/50 opacity-70"
+                  
                 />
               </Field>
               <Field label="Competition Category">
                 <Input
                   value={competition === "online" ? "Online Competition" : "Offline Competition"}
                   disabled
-                  className="rounded-lg bg-muted/50 opacity-70"
+                 
                 />
               </Field>
             </div>
@@ -223,8 +223,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
         {/* ── PAYMENT PROOF ─────────────────────────────────────── */}
         <div>
           <SectionTitle title="Payment Proof" />
-          <Field label="Upload Payment Proof (Google Drive Link)" required
-            note="Upload to Google Drive, set sharing to 'Anyone with the link can view', then paste the link here.">
+          <Field label="If you received free registration, please attach evidence.">
             <TextInput placeholder="https://drive.google.com/..."
               value={f("FILE")} onChange={set("FILE")} />
           </Field>
