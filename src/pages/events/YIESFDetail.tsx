@@ -37,17 +37,37 @@ const HomeTab = ({ onTabChange }: { onTabChange: (t: Tab) => void }) => (
         <p className="mt-3 text-white/70 text-sm md:text-base max-w-xl leading-7">
           {yiesf.about.welcome}
         </p>
+
         <div className="mt-6 flex flex-wrap gap-3">
-          <Button
+        <Button
             variant="hero"
             onClick={() => onTabChange("Registration")}
             className="gap-2"
-          >
+        >
             Register Now <ChevronRight className="h-4 w-4" />
-          </Button>
-          <Button variant="hero-outline" onClick={() => onTabChange("About")} className="text-white border-white/30 hover:bg-white/10">
+        </Button>
+        <Button
+            variant="hero-outline"
+            onClick={() => onTabChange("About")}
+            className="text-white border-white/30 hover:bg-white/10"
+        >
             Learn More
-          </Button>
+        </Button>
+        <a
+            href="https://drive.google.com/file/d/YOUR_FILE_ID/view"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/20 transition-all duration-200"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+            </svg>
+            Guidebook
+        </a>
         </div>
       </div>
     </div>

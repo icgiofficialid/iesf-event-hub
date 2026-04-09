@@ -6,25 +6,24 @@ import { useLang } from "@/components/LanguageProvider";
 const linkMap: Record<string, string> = {
   // Event
   "About IESF": "/about",
-  "Tracks": "/",
-  "Timeline": "/",
+  // "Tracks": "/",
+  // "Timeline": "/",
   "Registration": "/#register",
 
   // Resources
-  "Guidebook": "/guide",
-  "Certificates": "/sertifikat",
-  "Media Kit": "/media-coverage",
+  // "Guidebook": "/guide",
+  // "Certificates": "/sertifikat",
+  // "Media Kit": "/media-coverage",
   "FAQ": "/faq",
 
   // Support
   "Contact Team": "/contact",
   "WhatsApp Help": "https://wa.me/628139905880",
-  "Email Support": "mailto:icgi.official.id@gmail.com",
-  "Venue Info": "/contact",
+  "Email Support": "mailto:iesfofficial.icgi@gmail.com",
+  "Venue Info": "https://icgi.or.id/",
 
   // Social
   "Instagram": "https://www.instagram.com/icgi.id?igsh=MTl5OW43aHNycjA0bA==",
-  "LinkedIn": "/",
   "YouTube": "/",
 };
 
@@ -35,10 +34,10 @@ const SiteFooter = () => {
       <div className="container">
         <div className="grid gap-16 lg:grid-cols-[1.2fr_1fr] grid-cols-1">
           <div className="space-y-3">
-            <h3 className="text-3xl md:text-2xl">Connect With Us</h3>
-            <p className="max-w-2xl leading-8 text-muted-foreground">
+            <h3 className="text-3xl md:text-2xl">IESF</h3>
+            {/* <p className="max-w-2xl leading-8 text-muted-foreground">
               Connect with the organizing team for registration support, institution collaboration, media requests, or event information.
-            </p>
+            </p> */}
             <div className="flex flex-wrap gap-3">
               {socialItems.map((Icon, index) => (
                 <NavLink

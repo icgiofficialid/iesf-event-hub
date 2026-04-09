@@ -11,7 +11,6 @@ const NAV_ITEMS = [
   { label: { en: "Upcoming Events", id: "Event Mendatang" }, href: "/events" },
   { label: { en: "Past Events",     id: "Event Lalu"      }, href: "/past-events" },
   { label: { en: "Contact Us",      id: "Kontak"          }, href: "/contact" },
-  { label: { en: "sign up",           id: "Daftar"         }, href: "/events" },
 ];
 
 const linkClass = "transition-colors hover:text-primary";
@@ -86,7 +85,7 @@ const SiteNavbar = () => {
           <ThemeToggle />
           <LangToggle />
           <Button variant="hero" size="sm" asChild>
-            <NavLink to="/events"> Register</NavLink>
+            <NavLink to="/events/yiesf"> Register</NavLink>
           </Button>
         </div>
       </div>
@@ -110,7 +109,7 @@ const SiteNavbar = () => {
             <LangToggle />
           </div>
           <Button variant="hero" size="sm" asChild>
-            <NavLink to="/events" onClick={() => setOpen(false)}>
+            <NavLink to="/events/yiesf" onClick={() => setOpen(false)}>
               Sign Up
             </NavLink>
           </Button>
