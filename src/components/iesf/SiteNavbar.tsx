@@ -54,13 +54,14 @@ const SiteNavbar = () => {
   return (
     <nav className="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-xl">
       <div className="container flex items-center justify-between gap-4 py-4">
-        {/* Logo */}
-        <NavLink
-          to="/"
-          className="font-display text-lg tracking-[0.18em] text-foreground transition-colors hover:text-primary"
+
+            {/* Logo */}
+        <a  
+        href="/"
+          className="font-display text-2xl font-black tracking-tighter text-foreground transition-colors hover:text-primary"
         >
           IESF
-        </NavLink>
+        </a>
 
         {/* Mobile menu button */}
         <button

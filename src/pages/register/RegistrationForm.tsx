@@ -7,6 +7,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useLang } from "@/components/LanguageProvider";
+
 import {
   Field, TextInput, TextArea, SelectInput, SectionTitle, SuccessOverlay,
   type FormData, type ParticipantType, type CompetitionType,
@@ -21,6 +23,23 @@ interface Props {
   onBack: () => void;
   onSuccess: () => void
 }
+
+const LABELS = {
+  step:    { en: "Step 4 of 4",          id: "Langkah 4 dari 4" },
+  title:   { en: "Registration Form",    id: "Formulir Pendaftaran" },
+  hello:   { en: "HELLO IESF",           id: "HALO IESF" },
+  info1:   { en: "Please fill in the required data correctly. Data submitted is final and cannot be changed.", id: "Isi data yang diperlukan dengan benar. Data yang dikirim bersifat final." },
+  info2:   { en: "After verifying your data, click the SUBMIT FORM button.", id: "Setelah memverifikasi data, klik tombol KIRIM FORMULIR." },
+  info3:   { en: "The Letter of Acceptance (LoA) will be sent to the team leader's email within 3 working days.", id: "Surat Penerimaan (LoA) akan dikirim ke email ketua tim dalam 3 hari kerja." },
+  back:    { en: "← Back to Terms",      id: "← Kembali ke Syarat" },
+  submit:  { en: "Submit Form",          id: "Kirim Formulir" },
+  submitting: { en: "Submitting...",     id: "Mengirim..." },
+  error:   { en: "Failed to submit. Please try again.", id: "Gagal mengirim. Silakan coba lagi." },
+  intl:    { en: "International",        id: "Internasional" },
+  indo:    { en: "Indonesian",           id: "Indonesia" },
+  online:  { en: "Online",               id: "Online" },
+  offline: { en: "Offline",              id: "Offline" },
+};
 
 const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onBack, onSuccess }: Props) => {
   const [form, setForm]           = useState<FormData>({});
@@ -52,15 +71,16 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
     <div className="w-14 h-14 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
   </div>
   );
+  const { lang } = useLang();
 
   return (
     <div className="w-full max-w-3xl">
       <div className="text-center mb-8">
-        <p className="text-sm uppercase tracking-[0.3em] text-primary mb-2">Step 4 of 4</p>
+        <p className="text-sm uppercase tracking-[0.3em] text-primary mb-2">{LABELS.step[lang]}</p>
         <h2 className="text-2xl md:text-3xl font-bold text-foreground">Registration Form</h2>
         <p className="text-muted-foreground mt-1 text-sm">
-          {participant === "international" ? "International" : "Indonesian"} ·{" "}
-          {competition === "online" ? "Online" : "Offline"}
+          {participant === "international" ? LABELS.intl[lang] : LABELS.indo[lang]} ·{" "}
+          {competition === "online" ? LABELS.online[lang] : LABELS.offline[lang]}
         </p>
       </div>
 
@@ -69,12 +89,12 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
         {/* Info banner */}
         <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 text-sm text-muted-foreground leading-6">
           <p className="font-semibold text-foreground mb-1">
-            HELLO IESF {participant.toUpperCase()} PARTICIPANT
+            {participant === "international" ? LABELS.intl[lang] : LABELS.indo[lang]} PARTICIPANT
           </p>
           <ol className="list-decimal list-inside space-y-1">
-            <li>Please fill in the required data correctly. Data submitted is final and cannot be changed.</li>
-            <li>After verifying your data, click the <strong>SUBMIT FORM</strong> button.</li>
-            <li>The Letter of Acceptance (LoA) will be sent to the team leader's email within 3 working days.</li>
+            <li>{LABELS.info1[lang]}</li>
+            <li>{LABELS.info2[lang]}</li>
+            <li>{LABELS.info3[lang]}</li>
           </ol>
         </div>
 
@@ -85,14 +105,14 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Field label="Categories Participants">
                 <Input
-                  value={participant === "international" ? "International" : "Indonesia"}
+                  value={participant === "international" ? LABELS.intl[lang] : LABELS.indo[lang]}
                   disabled
                   
                 />
               </Field>
               <Field label="Competition Category">
                 <Input
-                  value={competition === "online" ? "Online Competition" : "Offline Competition"}
+                  value={competition === "online" ? LABELS.online[lang] : LABELS.offline[lang]}
                   disabled
                  
                 />
@@ -222,7 +242,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
 
         {/* ── PAYMENT PROOF ─────────────────────────────────────── */}
         <div>
-          <SectionTitle title="Payment Proof" />
+
           <Field label="If you received free registration, please attach evidence.">
             <TextInput placeholder="https://drive.google.com/..."
               value={f("FILE")} onChange={set("FILE")} />

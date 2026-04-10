@@ -86,83 +86,52 @@ const EventPopup = ({ onClose }: { onClose: () => void }) => {
   const navigate = useNavigate();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40, scale: 0.92 }}
+      initial={{ opacity: 0, y: 16, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 16, scale: 0.96 }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed bottom-6 right-3 z-50 w-64 sm:w-80"
+      exit={{ opacity: 0, y: 8, scale: 0.98 }}
+      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      className="fixed bottom-6 right-4 sm:right-6 z-50 w-64 sm:w-72"
     >
-      {/* Glass card */}
-      <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_24px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl bg-[#0d1117]/80">
+      <div className="rounded-2xl bg-panel border border-border shadow-panel overflow-hidden">
+        {/* Top accent line */}
+        <div className="h-[2px] bg-gradient-to-r from-primary/80 via-primary/40 to-transparent" />
 
-        {/* Top gradient bar */}
-        <div className="h-[2px] w-full bg-gradient-to-r from-violet-500 via-indigo-400 to-cyan-400" />
-        <div className="absolute inset-0 rounded-2xl backdrop-blur-xl pointer-events-none" />
-        {/* Header */}
-        <div className="flex items-center justify-between px-4 pt-3.5 pb-0">
-          <div className="flex items-center gap-2">
-            {/* Pulsing dot */}
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400" />
-            </span>
-            <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-[0.2em]">New Event</span>
-          </div>
-          <button
-            onClick={onClose}
-            className="rounded-full p-1.5 hover:bg-white/10 transition-colors text-white font-bold"
-          >
-            <X className="h-3 w-3" />
-          </button>
-        </div>
-
-        {/* Main clickable area */}
         <div
-          className="m-3 mt-2.5 rounded-xl overflow-hidden cursor-pointer group"
+          className="p-4 cursor-pointer group"
           onClick={() => { navigate("/events/yiesf"); onClose(); }}
         >
-          {/* Poster top */}
-          <div className="relative h-28 bg-gradient-to-br from-[#1a0533] via-[#1e1080] to-[#0d2b6e] flex flex-col justify-between p-4 overflow-hidden">
-            {/* Subtle grid lines */}
-            <div className="absolute inset-0 opacity-[0.07]"
-              style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)", backgroundSize: "24px 24px" }}
-            />
-            {/* Glow orb */}
-            <div className="absolute -top-6 -right-6 w-28 h-28 rounded-full bg-indigo-500/30 blur-2xl" />
-            <div className="absolute -bottom-4 -left-4 w-20 h-20 rounded-full bg-violet-500/20 blur-xl" />
-
-            {/* Badge */}
-            <div className="relative self-start flex items-center gap-1.5 rounded-full bg-white/10 border border-white/15 px-2.5 py-0.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-              <span className="text-[9px] font-bold text-white/80 uppercase tracking-widest">Competition · 2026</span>
+          {/* Header row */}
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary" />
+              </span>
+              <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">New Event</span>
             </div>
-
-            {/* Title */}
-            <div className="relative">
-              <p className="text-2xl font-black text-white tracking-tight leading-none">YIESF 2026</p>
-            </div>
+            <button
+              onClick={(e) => { e.stopPropagation(); onClose(); }}
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
           </div>
 
-          {/* Info strip */}
-          <div className="bg-white/[0.04] border border-t-0 border-white/[0.08] px-4 py-3 flex items-center justify-between group-hover:bg-white/[0.07] transition-colors">
-            <div className="space-y-0.5">
-              <div className="flex items-center gap-1.5">
-                <MapPin className="h-3 w-3 text-white/40 shrink-0" />
-                <p className="text-xs font-semibold text-white drop-shadow-sm">Yogyakarta, Indonesia</p>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Bell className="h-3 w-3 text-cyan-400 shrink-0" />
-                <p className="text-[11px] text-cyan-300 drop-shadow-sm">Registration open now</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-1 bg-white/20 border border-white/40 rounded-lg px-3 py-1.5 text-white text-xs font-bold shadow-sm group-hover:bg-white/30 group-hover:gap-1.5 transition-all">
-              View <ArrowRight className="h-3.5 w-3.5" />
-            </div>
+          {/* Event info */}
+          <div className="space-y-1">
+            <p className="text-[10px] text-muted-foreground/70 uppercase tracking-widest">Competition · 2026</p>
+            <p className="text-lg font-bold text-foreground leading-tight">YIESF 2026</p>
+            <p className="text-xs text-muted-foreground">Yogyakarta, Indonesia</p>
+          </div>
+
+          {/* CTA */}
+          <div className="mt-3 pt-3 border-t border-border/50 flex items-center justify-between">
+            <span className="text-[11px] text-primary font-medium">Registration open</span>
+            <span className="flex items-center gap-1 text-[11px] text-muted-foreground group-hover:text-foreground group-hover:gap-1.5 transition-all">
+              View <ArrowRight className="h-3 w-3" />
+            </span>
           </div>
         </div>
-
-        {/* Bottom padding */}
-        <div className="pb-1" />
       </div>
     </motion.div>
   );
