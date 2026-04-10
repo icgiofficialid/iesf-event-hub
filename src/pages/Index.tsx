@@ -93,8 +93,8 @@ const EventPopup = ({ onClose }: { onClose: () => void }) => {
       className="fixed bottom-6 right-4 sm:right-6 z-50 w-64 sm:w-72"
     >
       <div className="rounded-2xl bg-panel border border-border shadow-panel overflow-hidden">
-        {/* Top accent line */}
-        <div className="h-[2px] bg-gradient-to-r from-primary/80 via-primary/40 to-transparent" />
+        {/* Top accent line — kuning ala bintang logo */}
+        <div className="h-[2px] bg-gradient-to-r from-amber-400/80 via-amber-400/40 to-transparent" />
 
         <div
           className="p-4 cursor-pointer group"
@@ -104,8 +104,8 @@ const EventPopup = ({ onClose }: { onClose: () => void }) => {
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-400" />
               </span>
               <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">New Event</span>
             </div>
@@ -126,7 +126,7 @@ const EventPopup = ({ onClose }: { onClose: () => void }) => {
 
           {/* CTA */}
           <div className="mt-3 pt-3 border-t border-border/50 flex items-center justify-between">
-            <span className="text-[11px] text-primary font-medium">Registration open</span>
+            <span className="text-[11px] text-amber-400 font-medium">Registration open</span>
             <span className="flex items-center gap-1 text-[11px] text-muted-foreground group-hover:text-foreground group-hover:gap-1.5 transition-all">
               View <ArrowRight className="h-3 w-3" />
             </span>
@@ -203,6 +203,79 @@ useEffect(() => {
               <div key={i} className="w-1 h-1 rounded-full bg-primary" />
             ))}
           </div>
+
+          {/* ── Ornamen bintang/sparkle kuning ala logo ── */}
+          {/* Sparkle besar — kiri atas */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.9, duration: 0.6 }}
+            className="absolute top-[18%] left-[12%] md:left-[20%]"
+          >
+            <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+              <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#F59E0B" opacity="0.75"/>
+            </svg>
+          </motion.div>
+
+          {/* Sparkle kecil — kanan atas */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.05, duration: 0.6 }}
+            className="absolute top-[22%] right-[14%] md:right-[22%]"
+          >
+            <svg width="16" height="16" viewBox="0 0 40 40" fill="none">
+              <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#F59E0B" opacity="0.55"/>
+            </svg>
+          </motion.div>
+
+          {/* Sparkle sedang — kanan bawah */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.15, duration: 0.6 }}
+            className="absolute bottom-[22%] right-[10%] md:right-[18%]"
+          >
+            <svg width="20" height="20" viewBox="0 0 40 40" fill="none">
+              <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#F59E0B" opacity="0.6"/>
+            </svg>
+          </motion.div>
+
+          {/* Sparkle kecil — kiri bawah */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.25, duration: 0.6 }}
+            className="absolute bottom-[28%] left-[13%] md:left-[21%]"
+          >
+            <svg width="12" height="12" viewBox="0 0 40 40" fill="none">
+              <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#F59E0B" opacity="0.45"/>
+            </svg>
+          </motion.div>
+
+          {/* Sparkle tiny — tengah kiri */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.7, 0.3, 0.7] }}
+            transition={{ delay: 1.4, duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[55%] left-[8%] md:left-[14%]"
+          >
+            <svg width="10" height="10" viewBox="0 0 40 40" fill="none">
+              <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#FBBF24" opacity="0.8"/>
+            </svg>
+          </motion.div>
+
+          {/* Sparkle tiny — tengah kanan, twinkle */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.6, 0.2, 0.6] }}
+            transition={{ delay: 1.8, duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[42%] right-[7%] md:right-[13%]"
+          >
+            <svg width="8" height="8" viewBox="0 0 40 40" fill="none">
+              <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#FBBF24" opacity="0.9"/>
+            </svg>
+          </motion.div>
         </div>
 
         {/* ── Content ── */}
@@ -217,9 +290,12 @@ useEffect(() => {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 backdrop-blur-sm"
+            className="flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 backdrop-blur-sm"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+            {/* Sparkle kuning mini di badge */}
+            <svg width="10" height="10" viewBox="0 0 40 40" fill="none" className="shrink-0">
+              <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#F59E0B"/>
+            </svg>
             <span className="text-[11px] uppercase tracking-[0.35em] text-primary font-semibold">
               International Engineering Science Fair
             </span>
@@ -235,6 +311,30 @@ useEffect(() => {
             {/* Ring dekoratif luar */}
             <div className="absolute w-[340px] h-[340px] md:w-[440px] md:h-[440px] rounded-full border border-primary/8" />
             <div className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px] rounded-full border border-primary/12" />
+
+            {/* Sparkle di pojok ring — kanan atas (mirip posisi di logo) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.7, duration: 0.5, ease: "backOut" }}
+              className="absolute -top-2 right-4 md:right-8"
+            >
+              <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
+                <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#F59E0B"/>
+              </svg>
+            </motion.div>
+
+            {/* Sparkle kecil — kiri bawah ring */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 0.6, scale: 1 }}
+              transition={{ delay: 0.85, duration: 0.5, ease: "backOut" }}
+              className="absolute bottom-2 -left-2 md:left-4"
+            >
+              <svg width="12" height="12" viewBox="0 0 40 40" fill="none">
+                <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#FBBF24"/>
+              </svg>
+            </motion.div>
 
             {/* Logo */}
             <img
@@ -252,11 +352,17 @@ useEffect(() => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="flex items-center gap-4"
+            className="flex items-center gap-3"
           >
-            <div className="w-12 h-px bg-gradient-to-r from-transparent to-border" />
+            <div className="w-10 h-px bg-gradient-to-r from-transparent to-amber-400/40" />
+            <svg width="7" height="7" viewBox="0 0 40 40" fill="none" className="opacity-60">
+              <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#F59E0B"/>
+            </svg>
             <span className="text-xs font-semibold tracking-[0.3em] text-muted-foreground uppercase">BY ICGI</span>
-            <div className="w-12 h-px bg-gradient-to-l from-transparent to-border" />
+            <svg width="7" height="7" viewBox="0 0 40 40" fill="none" className="opacity-60">
+              <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#F59E0B"/>
+            </svg>
+            <div className="w-10 h-px bg-gradient-to-l from-transparent to-amber-400/40" />
           </motion.div>
 
           {/* Tagline */}
@@ -278,15 +384,19 @@ useEffect(() => {
           >
             <button
               onClick={() => navigate("/events/yiesf")}
-              className="flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:brightness-110 transition-all"
+              className="flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all hover:brightness-110"
+              style={{ background: "linear-gradient(135deg, #F59E0B, #FBBF24)", color: "#0d1526" }}
             >
-              Register Now <ArrowRight className="h-4 w-4" />
+              <svg width="13" height="13" viewBox="0 0 40 40" fill="none" className="shrink-0">
+                <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#0d1526"/>
+              </svg>
+              Register Now
             </button>
             <button
               onClick={() => navigate("/events")}
-              className="flex items-center gap-2 rounded-xl border border-border px-5 py-2.5 text-sm font-semibold text-muted-foreground hover:text-foreground hover:border-primary/40 transition-all"
+              className="flex items-center gap-2 rounded-xl border border-border px-5 py-2.5 text-sm font-semibold text-muted-foreground hover:text-foreground hover:border-amber-400/30 transition-all"
             >
-              View Events
+              View Events <ArrowRight className="h-4 w-4" />
             </button>
           </motion.div>
         </motion.div>
@@ -299,7 +409,7 @@ useEffect(() => {
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
           <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground/50">Scroll</span>
-          <div className="w-px h-8 bg-gradient-to-b from-primary/30 to-transparent" />
+          <div className="w-px h-8 bg-gradient-to-b from-amber-400/40 to-transparent" />
         </motion.div>
       </section>
 
@@ -358,7 +468,12 @@ useEffect(() => {
       <section className="container min-h-screen flex flex-col justify-center pt-32 md:pt-40 pb-20 md:pb-28">
         <SectionReveal className="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div className="space-y-1.5">
-            <p className="text-xs uppercase tracking-[0.35em] text-primary font-semibold">What's Coming</p>
+            <div className="flex items-center gap-2">
+              <svg width="10" height="10" viewBox="0 0 40 40" fill="none">
+                <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#F59E0B"/>
+              </svg>
+              <p className="text-xs uppercase tracking-[0.35em] text-amber-400 font-semibold">What's Coming</p>
+            </div>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">Upcoming Events</h2>
           </div>
           <button
