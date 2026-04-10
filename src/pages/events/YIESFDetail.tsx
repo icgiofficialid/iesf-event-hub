@@ -108,9 +108,6 @@ const HomeTab = ({ onTabChange, lang }: { onTabChange: (t: Tab) => void; lang: L
           <Button variant="hero" onClick={() => onTabChange("Registration")} className="gap-2">
             {L.registerNow[lang]} <ChevronRight className="h-4 w-4" />
           </Button>
-          <Button variant="hero-outline" onClick={() => onTabChange("About")} className="text-white border-white/30 hover:bg-white/10">
-            {L.learnMore[lang]}
-          </Button>
           <a
             href="https://drive.google.com/file/d/YOUR_FILE_ID/view"
             target="_blank"
@@ -126,6 +123,9 @@ const HomeTab = ({ onTabChange, lang }: { onTabChange: (t: Tab) => void; lang: L
             </svg>
             {L.guidebook[lang]}
           </a>
+          <Button variant="hero-outline" onClick={() => onTabChange("About")} className="text-white border-white/30 hover:bg-white/10">
+            {L.learnMore[lang]}
+          </Button>
         </div>
       </div>
     </div>

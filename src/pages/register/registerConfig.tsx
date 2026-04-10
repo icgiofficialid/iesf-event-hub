@@ -24,7 +24,6 @@ export const REQUIRED_FIELDS = [
   "PROJECT_TITLE",
   "CATEGORIES",
   "COMPLETE_ADDRESS",
-  "FILE",
 ];
 
 export const submitToSheet = async (
