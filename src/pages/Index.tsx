@@ -171,55 +171,135 @@ useEffect(() => {
     <SiteShell>
 
       {/* ── SECTION 1: BIG LOGO HERO ────────────────────────────── */}
-      <section  className="relative min-h-screen flex flex-col items-center justify-center text-center px-4">
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-primary/4 blur-3xl" />
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
+
+        {/* ── Decorative background layers ── */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Horizontal scan line */}
+          <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+          {/* Vertical accent line kiri */}
+          <div className="absolute top-0 bottom-0 left-[15%] w-px bg-gradient-to-b from-transparent via-primary/10 to-transparent" />
+          {/* Vertical accent line kanan */}
+          <div className="absolute top-0 bottom-0 right-[15%] w-px bg-gradient-to-b from-transparent via-primary/10 to-transparent" />
+
+          {/* Corner brackets — top left */}
+          <div className="absolute top-12 left-8 md:top-20 md:left-16 w-10 h-10 border-t border-l border-primary/25" />
+          {/* Corner brackets — top right */}
+          <div className="absolute top-12 right-8 md:top-20 md:right-16 w-10 h-10 border-t border-r border-primary/25" />
+          {/* Corner brackets — bottom left */}
+          <div className="absolute bottom-12 left-8 md:bottom-20 md:left-16 w-10 h-10 border-b border-l border-primary/25" />
+          {/* Corner brackets — bottom right */}
+          <div className="absolute bottom-12 right-8 md:bottom-20 md:right-16 w-10 h-10 border-b border-r border-primary/25" />
+
+          {/* Floating dot grid — kiri */}
+          <div className="absolute left-6 top-1/2 -translate-y-1/2 grid grid-cols-3 gap-3 opacity-20">
+            {Array.from({ length: 9 }).map((_, i) => (
+              <div key={i} className="w-1 h-1 rounded-full bg-primary" />
+            ))}
+          </div>
+          {/* Floating dot grid — kanan */}
+          <div className="absolute right-6 top-1/2 -translate-y-1/2 grid grid-cols-3 gap-3 opacity-20">
+            {Array.from({ length: 9 }).map((_, i) => (
+              <div key={i} className="w-1 h-1 rounded-full bg-primary" />
+            ))}
+          </div>
         </div>
 
+        {/* ── Content ── */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, ease: "easeOut" }}
-          className="relative space-y-5"
+          className="relative flex flex-col items-center gap-6"
         >
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-xs uppercase tracking-[0.45em] text-primary font-semibold"
-          >
-            International Engineering Science Fair
-          </motion.p>
-
+          {/* Eyebrow badge */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.15, duration: 0.7, ease: "easeOut" }}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 backdrop-blur-sm"
           >
+            <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+            <span className="text-[11px] uppercase tracking-[0.35em] text-primary font-semibold">
+              International Engineering Science Fair
+            </span>
+          </motion.div>
+
+          {/* Logo — dengan ring dekoratif */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="relative flex items-center justify-center"
+          >
+            {/* Ring dekoratif luar */}
+            <div className="absolute w-[340px] h-[340px] md:w-[440px] md:h-[440px] rounded-full border border-primary/8" />
+            <div className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px] rounded-full border border-primary/12" />
+
+            {/* Logo */}
             <img
               src="/logo.png"
               alt="IESF"
-              className="h-40 md:h-56 lg:h-72 w-auto object-contain mx-auto"
+              className="relative h-44 md:h-60 lg:h-72 w-auto object-contain"
+              style={{
+                filter: "brightness(1.12) contrast(1.05) drop-shadow(0 2px 24px hsl(187 100% 42% / 0.18))",
+              }}
             />
           </motion.div>
 
-          <motion.p
+          {/* BY ICGI divider */}
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="text-base md:text-lg text-muted-foreground font-light tracking-[0.2em]"
+            className="flex items-center gap-4"
           >
-            BY ICGI
-          </motion.p>
+            <div className="w-12 h-px bg-gradient-to-r from-transparent to-border" />
+            <span className="text-xs font-semibold tracking-[0.3em] text-muted-foreground uppercase">BY ICGI</span>
+            <div className="w-12 h-px bg-gradient-to-l from-transparent to-border" />
+          </motion.div>
 
+          {/* Tagline */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.65 }}
-            className="text-sm text-muted-foreground leading-7 max-w-md mx-auto"
+            className="text-sm md:text-base text-muted-foreground leading-7 max-w-sm mx-auto"
           >
             A global portal for academic innovation competitions. Discover events, register your team, and compete internationally.
           </motion.p>
+
+          {/* CTA buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+            className="flex items-center gap-3 pt-2"
+          >
+            <button
+              onClick={() => navigate("/events/yiesf")}
+              className="flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:brightness-110 transition-all"
+            >
+              Register Now <ArrowRight className="h-4 w-4" />
+            </button>
+            <button
+              onClick={() => navigate("/events")}
+              className="flex items-center gap-2 rounded-xl border border-border px-5 py-2.5 text-sm font-semibold text-muted-foreground hover:text-foreground hover:border-primary/40 transition-all"
+            >
+              View Events
+            </button>
+          </motion.div>
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        >
+          <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground/50">Scroll</span>
+          <div className="w-px h-8 bg-gradient-to-b from-primary/30 to-transparent" />
         </motion.div>
       </section>
 

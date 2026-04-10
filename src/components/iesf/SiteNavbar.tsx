@@ -59,8 +59,11 @@ const SiteNavbar = () => {
     <a href="/" className="flex items-center">
       <img
         src="/logo.png"
-       
+        alt="IESF"
         className="h-8 w-auto object-contain"
+        style={{
+          filter: "drop-shadow(0 0 10px hsl(187 100% 42% / 0.2)) brightness(1.1)",
+        }}
       />
     </a>
 
