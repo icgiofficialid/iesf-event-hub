@@ -191,14 +191,17 @@ useEffect(() => {
             International Engineering Science Fair
           </motion.p>
 
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.15, duration: 0.7, ease: "easeOut" }}
-            className="text-7xl md:text-9xl lg:text-[11rem] font-black text-foreground leading-none tracking-tighter"
           >
-            IESF
-          </motion.h1>
+            <img
+              src="/logo.png"
+              alt="IESF"
+              className="h-40 md:h-56 lg:h-72 w-auto object-contain mx-auto"
+            />
+          </motion.div>
 
           <motion.p
             initial={{ opacity: 0 }}

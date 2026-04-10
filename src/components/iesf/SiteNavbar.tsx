@@ -56,12 +56,13 @@ const SiteNavbar = () => {
       <div className="container flex items-center justify-between gap-4 py-4">
 
             {/* Logo */}
-        <a  
-        href="/"
-          className="font-display text-2xl font-black tracking-tighter text-foreground transition-colors hover:text-primary"
-        >
-          IESF
-        </a>
+    <a href="/" className="flex items-center">
+      <img
+        src="/logo.png"
+       
+        className="h-8 w-auto object-contain"
+      />
+    </a>
 
         {/* Mobile menu button */}
         <button
