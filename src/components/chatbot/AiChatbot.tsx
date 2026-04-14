@@ -272,8 +272,8 @@ const AiChatbot = ({ config, position = "bottom-right" }: AiChatbotProps) => {
                     <span
                       className="w-1.5 h-1.5 rounded-full"
                       style={{
-                        background: "#22c55e",
-                        boxShadow: "0 0 4px #22c55e",
+                        background: "#106dd2",
+                        boxShadow: "0 0 4px #106dd280",
                         animation: "pulse-dot 2s ease-in-out infinite",
                       }}
                     />
