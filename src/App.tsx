@@ -5,6 +5,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { IESF_CONFIG } from "./components/chatbot/useChatbot.ts";
+import AiChatbot from "./components/chatbot/AiChatbot.tsx";
+
+
 
 // Existing pages
 import About from "./pages/About.tsx";
@@ -60,6 +64,7 @@ const App = () => (
               <Route path="/Register" element={<Register />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <AiChatbot config={IESF_CONFIG} />
           </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>
