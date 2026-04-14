@@ -247,7 +247,7 @@ Bantu pengunjung dengan:
 - Program beasiswa atau kolaborasi budaya
 
 Bersikaplah profesional, ramah, dan informatif. Jawab dalam bahasa yang sama dengan pengguna.`,
-  accentColor: "#1d4ed8",
+  accentColor: "#055bb8",
   accentForeground: "#ffffff",
   apiUrl: "/api/chat",
 };
@@ -259,7 +259,7 @@ export const IESF_CONFIG: ChatbotConfig = {
   botName: "YIESF Assistant",
   welcomeMessage:
     "Hello! I'm the official YIESF Assistant. I can help you with information about the Yogyakarta International Engineering Science Fair — registration, competition categories, judging criteria, event schedule, and more. What would you like to know?",
-  accentColor: "#16a34a",
+  accentColor: "#1d4ed8",
   accentForeground: "#ffffff",
   apiUrl: "/api/chat",
   systemPrompt: `You are the official AI assistant for the Yogyakarta International Engineering Science Fair (YIESF), organized by ICGI in Yogyakarta, Indonesia.
