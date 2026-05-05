@@ -1,5 +1,5 @@
 // ================================================================
-// registerConfig.ts
+// registerConfig.tsx
 // ================================================================
 
 import { type ReactNode } from "react";
@@ -64,55 +64,24 @@ export const submitToSheet = async (
   const queryString = new URLSearchParams(payload).toString();
   const fullUrl = `${sheetUrl}?${queryString}`;
 
-  // DEBUG — lihat URL lengkap di console
   console.log("=== SUBMIT DEBUG ===");
   console.log("sheetTarget:", sheetTarget);
   console.log("sheetUrl:", sheetUrl);
-  console.log("Full URL:", fullUrl);
 
-  // Coba semua metode sekaligus
-  // Metode 1: fetch
-  try {
-    await fetch(fullUrl, { method: "GET", mode: "no-cors" });
-    console.log("fetch: terkirim");
-  } catch (e) {
-    console.error("fetch gagal:", e);
-  }
+  // Fetch tanpa mode: "no-cors" agar bisa baca response dari GAS.
+  // GAS harus sudah di-deploy ulang dengan CORS headers yang benar.
+  const res = await fetch(fullUrl, { method: "GET" });
 
-  // Metode 2: Image
-  // try {
-  //   await new Promise<void>((resolve) => {
-  //     const img = new Image();
-  //     img.onload = () => { console.log("img: onload"); resolve(); };
-  //     img.onerror = () => { console.log("img: onerror (request tetap terkirim)"); resolve(); };
-  //     img.src = fullUrl;
-  //     setTimeout(resolve, 5000);
-  //   });
-  // } catch (e) {
-  //   console.error("img gagal:", e);
-  // }
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-  // Metode 3: Script tag
-  // try {
-  //   await new Promise<void>((resolve) => {
-  //     const script = document.createElement("script");
-  //     script.src = fullUrl;
-  //     script.onload = () => { console.log("script tag: onload"); resolve(); };
-  //     script.onerror = () => { console.log("script tag: onerror"); resolve(); };
-  //     document.head.appendChild(script);
-  //     setTimeout(resolve, 5000);
-  //   });
-  // } catch (e) {
-  //   console.error("script tag gagal:", e);
-  // }
+  const json = await res.json();
+  console.log("GAS response:", json);
 
-  console.log("=== SELESAI — cek sheet sekarang ===");
+  if (json.result === "error") throw new Error(json.error ?? "GAS returned error");
 
-  // WA REDIRECT DINONAKTIFKAN SEMENTARA
-  // setTimeout(() => {
-  //   window.location.href = `https://wa.me/${WHATSAPP_ADMIN}?text=${msg}`;
-  // }, 1500);
+  console.log("=== SUBMIT SUKSES — row:", json.row, "sheet:", json.sheet, "===");
 };
+
 // ================================================================
 // Komponen UI Reusable
 // ================================================================
@@ -193,14 +162,11 @@ export const SectionTitle = ({ title }: { title: string }) => (
 export const SuccessOverlay = () => (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
     <div className="bg-card border border-border rounded-2xl p-10 flex flex-col items-center gap-4 text-center shadow-xl">
-      
-      {/* Icon centang */}
       <div className="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center">
         <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
         </svg>
       </div>
-
       <h2 className="text-xl font-bold text-foreground">Registration Submitted!</h2>
     </div>
   </div>

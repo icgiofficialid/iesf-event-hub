@@ -1,3 +1,13 @@
+// ================================================================
+// TermsBox.tsx  (UPDATED)
+// Path: src/pages/register/TermsBox.tsx
+//
+// Menambahkan props opsional sheetUrlOverride & sheetTargetOverride
+// agar bisa dipakai oleh EventDetailPage (per-event spreadsheet).
+// Jika override tidak diisi, tetap pakai props sheetUrl & sheetTarget
+// dari parent (backward-compatible dengan IndoOnline, dll.).
+// ================================================================
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { type ParticipantType, type CompetitionType } from "./registerConfig";
@@ -7,7 +17,7 @@ import termsData from "./terms.json";
 interface Props {
   participant: ParticipantType;
   competition: CompetitionType;
-  sheetUrl: string;
+  sheetUrl:    string;
   sheetTarget: string;
   onBack: () => void;
   onNext: (sheetUrl: string, sheetTarget: string) => void;
@@ -28,14 +38,19 @@ const LABELS = {
   accept:  { en: "Accept & Continue",        id: "Setuju & Lanjutkan" },
 };
 
-const TermsBox = ({ participant, competition, sheetUrl, sheetTarget, onBack, onNext }: Props) => {
+const TermsBox = ({
+  participant, competition,
+  sheetUrl, sheetTarget,
+  onBack, onNext,
+}: Props) => {
   const [agreed, setAgreed] = useState(false);
   const { lang } = useLang();
 
   const terms = competition === "offline" ? termsData.offline : termsData.online;
-
   const participantLabel = participant === "international" ? LABELS.intl[lang] : LABELS.indo[lang];
   const competitionLabel = competition === "offline" ? LABELS.offline[lang] : LABELS.online[lang];
+
+
 
   return (
     <div className="w-full max-w-2xl">

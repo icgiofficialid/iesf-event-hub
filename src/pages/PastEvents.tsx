@@ -1,11 +1,20 @@
+// ================================================================
+// PastEvents.tsx — Updated: pakai useEvents hook (tidak hardcode)
+// ================================================================
+
 import { Search } from "lucide-react";
 import { useState } from "react";
 import SiteShell from "@/components/iesf/SiteShell";
 import SectionReveal from "@/components/iesf/SectionReveal";
-import { events } from "@/components/iesf/eventsData";
+import { useEvents } from "@/hooks/useEvents";
 
 const PastEvents = () => {
   const [search, setSearch] = useState("");
+
+  // ← Sebelumnya: import { events } dari eventsData (hardcode)
+  // ← Sekarang:   fetch dari GAS Public API via useEvents hook
+  const { events, loading } = useEvents("iesf");
+
   const pastEvents = events.filter(
     (e) =>
       e.status === "past" &&
@@ -41,7 +50,14 @@ const PastEvents = () => {
       </section>
 
       <section className="container pb-20">
-        {pastEvents.length === 0 ? (
+        {loading ? (
+          <SectionReveal className="py-24 text-center">
+            <div className="space-y-3">
+              <div className="mx-auto w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+              <p className="text-sm text-muted-foreground">Loading past events...</p>
+            </div>
+          </SectionReveal>
+        ) : pastEvents.length === 0 ? (
           <SectionReveal className="py-24 text-center">
             <div className="space-y-3">
               <p className="text-5xl">📂</p>

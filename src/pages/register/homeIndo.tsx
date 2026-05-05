@@ -13,7 +13,7 @@ interface Props {
 const LABELS = {
   step:  { en: "Step 2 of 4",                          id: "Langkah 2 dari 4" },
   title: { en: "Choose Competition Category",           id: "Pilih Format Kompetisi" },
-  sub:   { en: "Indonesian Citizen — select format",    id: "Warga Indonesia — pilih format kompetisi" },
+  sub:   { en: "Indonesian Citizen",    id: "Warga Indonesia" },
   back:  { en: "← Back",                               id: "← Kembali" },
   next:  { en: "Continue →",                           id: "Lanjutkan →" },
 };

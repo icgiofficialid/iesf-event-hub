@@ -46,7 +46,7 @@ const EventCard = ({ event, index }: { event: typeof events[0]; index: number })
             {/* Center decorative element */}
             <div className="flex-1 flex items-center justify-center pointer-events-none select-none">
             <p className="text-white/[0.06] text-[7rem] font-black leading-none tracking-tighter">
-              YIESF
+              BIESF
             </p>
             </div>
 
@@ -98,7 +98,7 @@ const EventPopup = ({ onClose }: { onClose: () => void }) => {
 
         <div
           className="p-4 cursor-pointer group"
-          onClick={() => { navigate("/events/yiesf"); onClose(); }}
+          onClick={() => { navigate("/events/biesf-2026"); onClose(); }}
         >
           {/* Header row */}
           <div className="flex items-center justify-between mb-3">
@@ -120,8 +120,8 @@ const EventPopup = ({ onClose }: { onClose: () => void }) => {
           {/* Event info */}
           <div className="space-y-1">
             <p className="text-[10px] text-muted-foreground/70 uppercase tracking-widest">Competition · 2026</p>
-            <p className="text-lg font-bold text-foreground leading-tight">YIESF 2026</p>
-            <p className="text-xs text-muted-foreground">Yogyakarta, Indonesia</p>
+            <p className="text-lg font-bold text-foreground leading-tight">BIESF 2026</p>
+            <p className="text-xs text-muted-foreground">Bali, Indonesia</p>
           </div>
 
           {/* CTA */}
@@ -383,7 +383,7 @@ useEffect(() => {
             className="flex items-center gap-3 pt-2"
           >
             <button
-              onClick={() => navigate("/events/yiesf")}
+              onClick={() => navigate("/events/")}
               className="flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all hover:brightness-110"
               style={{ background: "linear-gradient(135deg, #F59E0B, #FBBF24)", color: "#0d1526" }}
             >
@@ -392,24 +392,7 @@ useEffect(() => {
               </svg>
               Register Now
             </button>
-            <button
-              onClick={() => navigate("/events")}
-              className="flex items-center gap-2 rounded-xl border border-border px-5 py-2.5 text-sm font-semibold text-muted-foreground hover:text-foreground hover:border-amber-400/30 transition-all"
-            >
-              View Events <ArrowRight className="h-4 w-4" />
-            </button>
           </motion.div>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        >
-          <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground/50">Scroll</span>
-          <div className="w-px h-8 bg-gradient-to-b from-amber-400/40 to-transparent" />
         </motion.div>
       </section>
 

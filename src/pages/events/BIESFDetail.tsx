@@ -1,14 +1,15 @@
 // ================================================================
-// YIESFDetail.tsx  (BARU — slim wrapper)
-// Path: src/pages/events/YIESFDetail.tsx
+// BIESFDetail.tsx  (BARU — slim wrapper)
+// Path: src/pages/events/BIESFDetail.tsx
 //
 // Cukup import data & template. Tidak ada logic di sini.
 // Untuk event baru, copy pola ini dan ganti slug + data.
 // ================================================================
 
+import biesf from "@/config/events/biesf";
 import EventDetailPage from "./EventDetailPage";
-import yiesf from "@/config/events/yiesf";
 
-const YIESFDetail = () => <EventDetailPage slug="yiesf-2026" data={yiesf} />;
 
-export default YIESFDetail;
+const BIESFDetail = () => <EventDetailPage slug="biesf-2026" data={biesf} />;
+
+export default BIESFDetail;

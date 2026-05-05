@@ -1,10 +1,15 @@
+// ================================================================
+// UpcomingEvents.tsx — Updated: pakai useEvents hook (tidak hardcode)
+// ================================================================
+
 import { useState } from "react";
 import { Search } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import SiteShell from "@/components/iesf/SiteShell";
 import SectionReveal from "@/components/iesf/SectionReveal";
-import { events, type EventType } from "@/components/iesf/eventsData";
+import  { useEvents }  from "@/hooks/useEvents";
+import type { IESFEvent, EventType } from "@/lib/gasClient";
 import { useLang } from "@/components/LanguageProvider";
 
 const LABELS = {
@@ -16,9 +21,10 @@ const LABELS = {
   all:        { en: "All",               id: "Semua" },
   competition:{ en: "Competition",       id: "Kompetisi" },
   education:  { en: "Education",         id: "Edukasi" },
+  loading:    { en: "Loading events...", id: "Memuat events..." },
 };
 
-const EventCard = ({ event, index }: { event: typeof events[0]; index: number }) => {
+const EventCard = ({ event, index }: { event: IESFEvent; index: number }) => {
   const navigate = useNavigate();
   const { lang } = useLang();
   return (
@@ -70,6 +76,12 @@ const UpcomingEvents = () => {
   const [search, setSearch] = useState("");
   const { lang } = useLang();
 
+  // ← Sebelumnya: import { events } dari eventsData (hardcode)
+  // ← Sekarang:   fetch dari GAS Public API via useEvents hook
+  const { events, loading } = useEvents("iesf");
+  console.log("events:", events);        // ← tambah ini
+  console.log("loading:", loading);      // ← tambah ini
+
   const FILTERS: { label: string; value: "All" | EventType }[] = [
     { label: LABELS.all[lang],         value: "All" },
     { label: LABELS.competition[lang], value: "Competition" },
@@ -79,7 +91,7 @@ const UpcomingEvents = () => {
   const filtered = events
     .filter((e) => e.status === "upcoming")
     .filter((e) => {
-      const matchType = filter === "All" || e.type === filter;
+      const matchType   = filter === "All" || e.type === filter;
       const matchSearch = search === "" ||
         e.title.toLowerCase().includes(search.toLowerCase()) ||
         e.location.toLowerCase().includes(search.toLowerCase());
@@ -131,7 +143,14 @@ const UpcomingEvents = () => {
       </section>
 
       <section className="container pb-20">
-        {filtered.length === 0 ? (
+        {loading ? (
+          <SectionReveal className="py-20 text-center text-muted-foreground">
+            <div className="space-y-3">
+              <div className="mx-auto w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+              <p className="text-sm">{LABELS.loading[lang]}</p>
+            </div>
+          </SectionReveal>
+        ) : filtered.length === 0 ? (
           <SectionReveal className="py-20 text-center text-muted-foreground">
             {LABELS.noEvents[lang]}
           </SectionReveal>

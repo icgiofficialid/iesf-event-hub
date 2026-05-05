@@ -6,6 +6,7 @@ const ALLOWED_ORIGINS = [
   "https://icgi.or.id",
   "https://iccofficial.or.id",
   "https://www.iccofficial.or.id",
+  "https://www.iesfofficial.or.id",
   "http://localhost:5173",
   "http://localhost:3000",
   "http://localhost:4173",

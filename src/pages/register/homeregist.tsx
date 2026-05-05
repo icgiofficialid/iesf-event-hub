@@ -11,8 +11,8 @@ interface Props {
 
 const LABELS = {
   step:    { en: "Step 1 of 4",                        id: "Langkah 1 dari 4" },
-  title:   { en: "Choose Participant Category",         id: "Pilih Kategori Peserta" },
-  sub:     { en: "Select your participant type",        id: "Pilih tipe peserta Anda" },
+  title:   { en: "Choose Participant Citizen",         id: "Pilih Kategori Peserta" },
+  sub:     { en: "Select your participant ",        id: "Pilih tipe peserta Anda" },
   next:    { en: "Continue",                            id: "Lanjutkan" },
 };
 
