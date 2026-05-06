@@ -13,191 +13,239 @@ import {
 } from "./registerConfig";
 
 // ── Kode Negara (dengan bendera) ─────────────────────────────────
+// iso: 2-letter ISO code untuk flag-icons CSS library
 const COUNTRY_CODES = [
-  { code: "+62",  flag: "🇮🇩", name: "Indonesia" },
-  { code: "+1",   flag: "🇺🇸", name: "USA/Canada" },
-  { code: "+44",  flag: "🇬🇧", name: "UK" },
-  { code: "+61",  flag: "🇦🇺", name: "Australia" },
-  { code: "+65",  flag: "🇸🇬", name: "Singapore" },
-  { code: "+60",  flag: "🇲🇾", name: "Malaysia" },
-  { code: "+63",  flag: "🇵🇭", name: "Philippines" },
-  { code: "+66",  flag: "🇹🇭", name: "Thailand" },
-  { code: "+84",  flag: "🇻🇳", name: "Vietnam" },
-  { code: "+95",  flag: "🇲🇲", name: "Myanmar" },
-  { code: "+855", flag: "🇰🇭", name: "Cambodia" },
-  { code: "+856", flag: "🇱🇦", name: "Laos" },
-  { code: "+673", flag: "🇧🇳", name: "Brunei" },
-  { code: "+81",  flag: "🇯🇵", name: "Japan" },
-  { code: "+82",  flag: "🇰🇷", name: "South Korea" },
-  { code: "+86",  flag: "🇨🇳", name: "China" },
-  { code: "+91",  flag: "🇮🇳", name: "India" },
-  { code: "+971", flag: "🇦🇪", name: "UAE" },
-  { code: "+966", flag: "🇸🇦", name: "Saudi Arabia" },
-  { code: "+49",  flag: "🇩🇪", name: "Germany" },
-  { code: "+33",  flag: "🇫🇷", name: "France" },
-  { code: "+31",  flag: "🇳🇱", name: "Netherlands" },
-  { code: "+7",   flag: "🇷🇺", name: "Russia" },
-  { code: "+55",  flag: "🇧🇷", name: "Brazil" },
-  { code: "+52",  flag: "🇲🇽", name: "Mexico" },
-  { code: "+27",  flag: "🇿🇦", name: "South Africa" },
-  { code: "+20",  flag: "🇪🇬", name: "Egypt" },
-  { code: "+92",  flag: "🇵🇰", name: "Pakistan" },
-  { code: "+880", flag: "🇧🇩", name: "Bangladesh" },
-  { code: "+94",  flag: "🇱🇰", name: "Sri Lanka" },
-  { code: "+98",  flag: "🇮🇷", name: "Iran" },
-  { code: "+90",  flag: "🇹🇷", name: "Turkey" },
-  { code: "+39",  flag: "🇮🇹", name: "Italy" },
-  { code: "+34",  flag: "🇪🇸", name: "Spain" },
-  { code: "+351", flag: "🇵🇹", name: "Portugal" },
-  { code: "+48",  flag: "🇵🇱", name: "Poland" },
-  { code: "+380", flag: "🇺🇦", name: "Ukraine" },
-  { code: "+31",  flag: "🇳🇱", name: "Netherlands" },
-  { code: "+46",  flag: "🇸🇪", name: "Sweden" },
-  { code: "+47",  flag: "🇳🇴", name: "Norway" },
-  { code: "+45",  flag: "🇩🇰", name: "Denmark" },
-  { code: "+358", flag: "🇫🇮", name: "Finland" },
-  { code: "other", flag: "🌐", name: "Other / Lainnya" },
+  { code: "+62",  iso: "id", name: "Indonesia" },
+  { code: "+1",   iso: "us", name: "USA/Canada" },
+  { code: "+44",  iso: "gb", name: "UK" },
+  { code: "+61",  iso: "au", name: "Australia" },
+  { code: "+65",  iso: "sg", name: "Singapore" },
+  { code: "+60",  iso: "my", name: "Malaysia" },
+  { code: "+63",  iso: "ph", name: "Philippines" },
+  { code: "+66",  iso: "th", name: "Thailand" },
+  { code: "+84",  iso: "vn", name: "Vietnam" },
+  { code: "+95",  iso: "mm", name: "Myanmar" },
+  { code: "+855", iso: "kh", name: "Cambodia" },
+  { code: "+856", iso: "la", name: "Laos" },
+  { code: "+673", iso: "bn", name: "Brunei" },
+  { code: "+81",  iso: "jp", name: "Japan" },
+  { code: "+82",  iso: "kr", name: "South Korea" },
+  { code: "+86",  iso: "cn", name: "China" },
+  { code: "+91",  iso: "in", name: "India" },
+  { code: "+971", iso: "ae", name: "UAE" },
+  { code: "+966", iso: "sa", name: "Saudi Arabia" },
+  { code: "+49",  iso: "de", name: "Germany" },
+  { code: "+33",  iso: "fr", name: "France" },
+  { code: "+31",  iso: "nl", name: "Netherlands" },
+  { code: "+7",   iso: "ru", name: "Russia" },
+  { code: "+55",  iso: "br", name: "Brazil" },
+  { code: "+52",  iso: "mx", name: "Mexico" },
+  { code: "+27",  iso: "za", name: "South Africa" },
+  { code: "+20",  iso: "eg", name: "Egypt" },
+  { code: "+92",  iso: "pk", name: "Pakistan" },
+  { code: "+880", iso: "bd", name: "Bangladesh" },
+  { code: "+94",  iso: "lk", name: "Sri Lanka" },
+  { code: "+98",  iso: "ir", name: "Iran" },
+  { code: "+90",  iso: "tr", name: "Turkey" },
+  { code: "+39",  iso: "it", name: "Italy" },
+  { code: "+34",  iso: "es", name: "Spain" },
+  { code: "+351", iso: "pt", name: "Portugal" },
+  { code: "+48",  iso: "pl", name: "Poland" },
+  { code: "+380", iso: "ua", name: "Ukraine" },
+  { code: "+46",  iso: "se", name: "Sweden" },
+  { code: "+47",  iso: "no", name: "Norway" },
+  { code: "+45",  iso: "dk", name: "Denmark" },
+  { code: "+358", iso: "fi", name: "Finland" },
+  { code: "other", iso: "",  name: "Other / Lainnya" },
 ];
 
-// ── Daftar Negara dengan Bendera (untuk dropdown COUNTRY) ─────────
+// Helper: render flag via flag-icons CSS library (CDN)
+// Tidak butuh gambar eksternal — pure CSS sprite
+const FlagImg = ({ iso }: { iso: string }) => {
+  // Inject flag-icons CSS sekali saja
+  if (typeof document !== "undefined" && !document.getElementById("flag-icons-css")) {
+    const link = document.createElement("link");
+    link.id   = "flag-icons-css";
+    link.rel  = "stylesheet";
+    link.href = "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css";
+    document.head.appendChild(link);
+  }
+  return iso ? (
+    <span
+      className={`fi fi-${iso}`}
+      style={{ width: 20, height: 15, display: "inline-block", borderRadius: 2, flexShrink: 0 }}
+    />
+  ) : (
+    <span style={{ fontSize: 16 }}>🌐</span>
+  );
+};
+
+// ── Daftar Negara dengan ISO code (untuk dropdown COUNTRY) ─────────
 const COUNTRY_LIST = [
-  { flag: "🇦🇫", name: "Afghanistan" },
-  { flag: "🇦🇱", name: "Albania" },
-  { flag: "🇩🇿", name: "Algeria" },
-  { flag: "🇦🇷", name: "Argentina" },
-  { flag: "🇦🇲", name: "Armenia" },
-  { flag: "🇦🇺", name: "Australia" },
-  { flag: "🇦🇹", name: "Austria" },
-  { flag: "🇦🇿", name: "Azerbaijan" },
-  { flag: "🇧🇭", name: "Bahrain" },
-  { flag: "🇧🇩", name: "Bangladesh" },
-  { flag: "🇧🇾", name: "Belarus" },
-  { flag: "🇧🇪", name: "Belgium" },
-  { flag: "🇧🇹", name: "Bhutan" },
-  { flag: "🇧🇴", name: "Bolivia" },
-  { flag: "🇧🇦", name: "Bosnia and Herzegovina" },
-  { flag: "🇧🇷", name: "Brazil" },
-  { flag: "🇧🇳", name: "Brunei" },
-  { flag: "🇧🇬", name: "Bulgaria" },
-  { flag: "🇰🇭", name: "Cambodia" },
-  { flag: "🇨🇲", name: "Cameroon" },
-  { flag: "🇨🇦", name: "Canada" },
-  { flag: "🇨🇱", name: "Chile" },
-  { flag: "🇨🇳", name: "China" },
-  { flag: "🇨🇴", name: "Colombia" },
-  { flag: "🇭🇷", name: "Croatia" },
-  { flag: "🇨🇺", name: "Cuba" },
-  { flag: "🇨🇾", name: "Cyprus" },
-  { flag: "🇨🇿", name: "Czech Republic" },
-  { flag: "🇩🇰", name: "Denmark" },
-  { flag: "🇪🇨", name: "Ecuador" },
-  { flag: "🇪🇬", name: "Egypt" },
-  { flag: "🇪🇪", name: "Estonia" },
-  { flag: "🇪🇹", name: "Ethiopia" },
-  { flag: "🇫🇯", name: "Fiji" },
-  { flag: "🇫🇮", name: "Finland" },
-  { flag: "🇫🇷", name: "France" },
-  { flag: "🇬🇪", name: "Georgia" },
-  { flag: "🇩🇪", name: "Germany" },
-  { flag: "🇬🇭", name: "Ghana" },
-  { flag: "🇬🇷", name: "Greece" },
-  { flag: "🇬🇹", name: "Guatemala" },
-  { flag: "🇭🇳", name: "Honduras" },
-  { flag: "🇭🇺", name: "Hungary" },
-  { flag: "🇮🇸", name: "Iceland" },
-  { flag: "🇮🇳", name: "India" },
-  { flag: "🇮🇩", name: "Indonesia" },
-  { flag: "🇮🇷", name: "Iran" },
-  { flag: "🇮🇶", name: "Iraq" },
-  { flag: "🇮🇪", name: "Ireland" },
-  { flag: "🇮🇱", name: "Israel" },
-  { flag: "🇮🇹", name: "Italy" },
-  { flag: "🇯🇲", name: "Jamaica" },
-  { flag: "🇯🇵", name: "Japan" },
-  { flag: "🇯🇴", name: "Jordan" },
-  { flag: "🇰🇿", name: "Kazakhstan" },
-  { flag: "🇰🇪", name: "Kenya" },
-  { flag: "🇰🇼", name: "Kuwait" },
-  { flag: "🇰🇬", name: "Kyrgyzstan" },
-  { flag: "🇱🇦", name: "Laos" },
-  { flag: "🇱🇻", name: "Latvia" },
-  { flag: "🇱🇧", name: "Lebanon" },
-  { flag: "🇱🇾", name: "Libya" },
-  { flag: "🇱🇹", name: "Lithuania" },
-  { flag: "🇱🇺", name: "Luxembourg" },
-  { flag: "🇲🇬", name: "Madagascar" },
-  { flag: "🇲🇼", name: "Malawi" },
-  { flag: "🇲🇾", name: "Malaysia" },
-  { flag: "🇲🇻", name: "Maldives" },
-  { flag: "🇲🇱", name: "Mali" },
-  { flag: "🇲🇹", name: "Malta" },
-  { flag: "🇲🇺", name: "Mauritius" },
-  { flag: "🇲🇽", name: "Mexico" },
-  { flag: "🇲🇩", name: "Moldova" },
-  { flag: "🇲🇳", name: "Mongolia" },
-  { flag: "🇲🇦", name: "Morocco" },
-  { flag: "🇲🇿", name: "Mozambique" },
-  { flag: "🇲🇲", name: "Myanmar" },
-  { flag: "🇳🇦", name: "Namibia" },
-  { flag: "🇳🇵", name: "Nepal" },
-  { flag: "🇳🇱", name: "Netherlands" },
-  { flag: "🇳🇿", name: "New Zealand" },
-  { flag: "🇳🇮", name: "Nicaragua" },
-  { flag: "🇳🇬", name: "Nigeria" },
-  { flag: "🇰🇵", name: "North Korea" },
-  { flag: "🇳🇴", name: "Norway" },
-  { flag: "🇴🇲", name: "Oman" },
-  { flag: "🇵🇰", name: "Pakistan" },
-  { flag: "🇵🇸", name: "Palestine" },
-  { flag: "🇵🇦", name: "Panama" },
-  { flag: "🇵🇬", name: "Papua New Guinea" },
-  { flag: "🇵🇾", name: "Paraguay" },
-  { flag: "🇵🇪", name: "Peru" },
-  { flag: "🇵🇭", name: "Philippines" },
-  { flag: "🇵🇱", name: "Poland" },
-  { flag: "🇵🇹", name: "Portugal" },
-  { flag: "🇶🇦", name: "Qatar" },
-  { flag: "🇷🇴", name: "Romania" },
-  { flag: "🇷🇺", name: "Russia" },
-  { flag: "🇷🇼", name: "Rwanda" },
-  { flag: "🇸🇦", name: "Saudi Arabia" },
-  { flag: "🇸🇳", name: "Senegal" },
-  { flag: "🇷🇸", name: "Serbia" },
-  { flag: "🇸🇬", name: "Singapore" },
-  { flag: "🇸🇰", name: "Slovakia" },
-  { flag: "🇸🇮", name: "Slovenia" },
-  { flag: "🇸🇴", name: "Somalia" },
-  { flag: "🇿🇦", name: "South Africa" },
-  { flag: "🇰🇷", name: "South Korea" },
-  { flag: "🇸🇸", name: "South Sudan" },
-  { flag: "🇪🇸", name: "Spain" },
-  { flag: "🇱🇰", name: "Sri Lanka" },
-  { flag: "🇸🇩", name: "Sudan" },
-  { flag: "🇸🇪", name: "Sweden" },
-  { flag: "🇨🇭", name: "Switzerland" },
-  { flag: "🇸🇾", name: "Syria" },
-  { flag: "🇹🇼", name: "Taiwan" },
-  { flag: "🇹🇯", name: "Tajikistan" },
-  { flag: "🇹🇿", name: "Tanzania" },
-  { flag: "🇹🇭", name: "Thailand" },
-  { flag: "🇹🇱", name: "Timor-Leste" },
-  { flag: "🇹🇬", name: "Togo" },
-  { flag: "🇹🇹", name: "Trinidad and Tobago" },
-  { flag: "🇹🇳", name: "Tunisia" },
-  { flag: "🇹🇷", name: "Turkey" },
-  { flag: "🇹🇲", name: "Turkmenistan" },
-  { flag: "🇺🇬", name: "Uganda" },
-  { flag: "🇺🇦", name: "Ukraine" },
-  { flag: "🇦🇪", name: "United Arab Emirates" },
-  { flag: "🇬🇧", name: "United Kingdom" },
-  { flag: "🇺🇸", name: "United States" },
-  { flag: "🇺🇾", name: "Uruguay" },
-  { flag: "🇺🇿", name: "Uzbekistan" },
-  { flag: "🇻🇪", name: "Venezuela" },
-  { flag: "🇻🇳", name: "Vietnam" },
-  { flag: "🇾🇪", name: "Yemen" },
-  { flag: "🇿🇲", name: "Zambia" },
-  { flag: "🇿🇼", name: "Zimbabwe" },
+  { iso: "af", name: "Afghanistan" },
+    { iso: "al", name: "Albania" },
+    { iso: "dz", name: "Algeria" },
+    { iso: "ar", name: "Argentina" },
+    { iso: "am", name: "Armenia" },
+    { iso: "au", name: "Australia" },
+    { iso: "at", name: "Austria" },
+    { iso: "az", name: "Azerbaijan" },
+    { iso: "bh", name: "Bahrain" },
+    { iso: "bd", name: "Bangladesh" },
+    { iso: "by", name: "Belarus" },
+    { iso: "be", name: "Belgium" },
+    { iso: "bt", name: "Bhutan" },
+    { iso: "bo", name: "Bolivia" },
+    { iso: "ba", name: "Bosnia and Herzegovina" },
+    { iso: "br", name: "Brazil" },
+    { iso: "bn", name: "Brunei" },
+    { iso: "bg", name: "Bulgaria" },
+    { iso: "kh", name: "Cambodia" },
+    { iso: "cm", name: "Cameroon" },
+    { iso: "ca", name: "Canada" },
+    { iso: "cl", name: "Chile" },
+    { iso: "cn", name: "China" },
+    { iso: "co", name: "Colombia" },
+    { iso: "hr", name: "Croatia" },
+    { iso: "cu", name: "Cuba" },
+    { iso: "cy", name: "Cyprus" },
+    { iso: "cz", name: "Czech Republic" },
+    { iso: "dk", name: "Denmark" },
+    { iso: "ec", name: "Ecuador" },
+    { iso: "eg", name: "Egypt" },
+    { iso: "ee", name: "Estonia" },
+    { iso: "et", name: "Ethiopia" },
+    { iso: "fj", name: "Fiji" },
+    { iso: "fi", name: "Finland" },
+    { iso: "fr", name: "France" },
+    { iso: "ge", name: "Georgia" },
+    { iso: "de", name: "Germany" },
+    { iso: "gh", name: "Ghana" },
+    { iso: "gr", name: "Greece" },
+    { iso: "gt", name: "Guatemala" },
+    { iso: "hn", name: "Honduras" },
+    { iso: "hu", name: "Hungary" },
+    { iso: "is", name: "Iceland" },
+    { iso: "in", name: "India" },
+    { iso: "id", name: "Indonesia" },
+    { iso: "ir", name: "Iran" },
+    { iso: "iq", name: "Iraq" },
+    { iso: "ie", name: "Ireland" },
+    { iso: "il", name: "Israel" },
+    { iso: "it", name: "Italy" },
+    { iso: "jm", name: "Jamaica" },
+    { iso: "jp", name: "Japan" },
+    { iso: "jo", name: "Jordan" },
+    { iso: "kz", name: "Kazakhstan" },
+    { iso: "ke", name: "Kenya" },
+    { iso: "kw", name: "Kuwait" },
+    { iso: "kg", name: "Kyrgyzstan" },
+    { iso: "la", name: "Laos" },
+    { iso: "lv", name: "Latvia" },
+    { iso: "lb", name: "Lebanon" },
+    { iso: "ly", name: "Libya" },
+    { iso: "lt", name: "Lithuania" },
+    { iso: "lu", name: "Luxembourg" },
+    { iso: "mg", name: "Madagascar" },
+    { iso: "mw", name: "Malawi" },
+    { iso: "my", name: "Malaysia" },
+    { iso: "mv", name: "Maldives" },
+    { iso: "ml", name: "Mali" },
+    { iso: "mt", name: "Malta" },
+    { iso: "mu", name: "Mauritius" },
+    { iso: "mx", name: "Mexico" },
+    { iso: "md", name: "Moldova" },
+    { iso: "mn", name: "Mongolia" },
+    { iso: "ma", name: "Morocco" },
+    { iso: "mz", name: "Mozambique" },
+    { iso: "mm", name: "Myanmar" },
+    { iso: "na", name: "Namibia" },
+    { iso: "np", name: "Nepal" },
+    { iso: "nl", name: "Netherlands" },
+    { iso: "nz", name: "New Zealand" },
+    { iso: "ni", name: "Nicaragua" },
+    { iso: "ng", name: "Nigeria" },
+    { iso: "kp", name: "North Korea" },
+    { iso: "no", name: "Norway" },
+    { iso: "om", name: "Oman" },
+    { iso: "pk", name: "Pakistan" },
+    { iso: "ps", name: "Palestine" },
+    { iso: "pa", name: "Panama" },
+    { iso: "pg", name: "Papua New Guinea" },
+    { iso: "py", name: "Paraguay" },
+    { iso: "pe", name: "Peru" },
+    { iso: "ph", name: "Philippines" },
+    { iso: "pl", name: "Poland" },
+    { iso: "pt", name: "Portugal" },
+    { iso: "qa", name: "Qatar" },
+    { iso: "ro", name: "Romania" },
+    { iso: "ru", name: "Russia" },
+    { iso: "rw", name: "Rwanda" },
+    { iso: "sa", name: "Saudi Arabia" },
+    { iso: "sn", name: "Senegal" },
+    { iso: "rs", name: "Serbia" },
+    { iso: "sg", name: "Singapore" },
+    { iso: "sk", name: "Slovakia" },
+    { iso: "si", name: "Slovenia" },
+    { iso: "so", name: "Somalia" },
+    { iso: "za", name: "South Africa" },
+    { iso: "kr", name: "South Korea" },
+    { iso: "ss", name: "South Sudan" },
+    { iso: "es", name: "Spain" },
+    { iso: "lk", name: "Sri Lanka" },
+    { iso: "sd", name: "Sudan" },
+    { iso: "se", name: "Sweden" },
+    { iso: "ch", name: "Switzerland" },
+    { iso: "sy", name: "Syria" },
+    { iso: "tw", name: "Taiwan" },
+    { iso: "tj", name: "Tajikistan" },
+    { iso: "tz", name: "Tanzania" },
+    { iso: "th", name: "Thailand" },
+    { iso: "tl", name: "Timor-Leste" },
+    { iso: "tg", name: "Togo" },
+    { iso: "tt", name: "Trinidad and Tobago" },
+    { iso: "tn", name: "Tunisia" },
+    { iso: "tr", name: "Turkey" },
+    { iso: "tm", name: "Turkmenistan" },
+    { iso: "ug", name: "Uganda" },
+    { iso: "ua", name: "Ukraine" },
+    { iso: "ae", name: "United Arab Emirates" },
+    { iso: "gb", name: "United Kingdom" },
+    { iso: "us", name: "United States" },
+    { iso: "uy", name: "Uruguay" },
+    { iso: "uz", name: "Uzbekistan" },
+    { iso: "ve", name: "Venezuela" },
+    { iso: "vn", name: "Vietnam" },
+    { iso: "ye", name: "Yemen" },
+    { iso: "zm", name: "Zambia" },
+    { iso: "zw", name: "Zimbabwe" },
+];
+
+// ── Opsi Kategori Kompetisi (berdasarkan participant × competition) ─
+// Sesuai dengan gambar: Online memiliki 3 opsi (Online, + SEA, + non-SEA)
+const COMPETITION_CATEGORY_OPTIONS: Record<string, Record<string, string[]>> = {
+  indonesian: {
+    online:  ["Online Competition"],
+    offline: ["Offline Competition"],
+  },
+  international: {
+    online:  [
+      "Online Competition",
+      "Online Competition + Certificate and Medal (SOUTH EAST ASIA)",
+      "Online Competition + Certificate and Medal (Exclude SOUTH EAST ASIA)",
+    ],
+    offline: ["Offline Competition"],
+  },
+};
+
+// ── Kategori Proyek (sesuai guidebook) ───────────────────────────
+const PROJECT_CATEGORIES = [
+  "Electrical & Electronics Engineering",
+  "Environmental",
+  "Informatics, Robotic and Artificial Intelligence",
+  "Life Science",
+  "Social Science",
+  "Physic, Energy & Engineering",
 ];
 
 // ── Teks Bilingual ────────────────────────────────────────────────
@@ -220,7 +268,7 @@ const T: Record<string, Record<Lang, string>> = {
   catParticipant:    { en: "Participant Category",   id: "Kategori Peserta" },
   catCompetition:    { en: "Competition Category",   id: "Kategori Kompetisi" },
   teamName:          { en: "Name of Leader & Member Team", id: "Nama Ketua & Anggota Tim" },
-  teamNameNote:      { en: "Format: Leader Name / Member1 / Member2 (max 5 members + 1 team leader)", id: "Format: Nama Ketua / Anggota1 / Anggota2 (maks. 5 anggota + 1 ketua tim)" },
+  teamNameNote:      { en: "Noted: Input the name of the team leader and team members with the team leader's name at the beginning, with the following format:\n\nLeader Name\nMember 1 Name\nMember 2 Name\nMember 3 Name\n\nNote: maximum 3 members + 1 team leader", id: "Catatan: Masukkan nama ketua tim dan anggota tim dengan nama ketua tim di awal, dengan format berikut:\n\nNama Ketua\nNama Anggota 1\nNama Anggota 2\n\nCatatan: maksimal 3 anggota + 1 ketua tim" },
   teamNamePh:        { en: "Input Name of Leader & Member Team", id: "Masukkan Nama Ketua & Anggota Tim" },
   leaderWa:          { en: "Leader WhatsApp Number", id: "No. WhatsApp Ketua" },
   leaderWaNote:      { en: "Select country code, then enter number without leading 0.", id: "Pilih kode negara, lalu masukkan nomor tanpa awalan 0." },
@@ -271,6 +319,8 @@ const T: Record<string, Record<Lang, string>> = {
   submitting:        { en: "Submitting...",           id: "Mengirim..." },
   backToTerms:       { en: "← Back to Terms",        id: "← Kembali ke Syarat" },
   errorMsg:          { en: "Failed to submit. Please try again.", id: "Gagal mengirim. Silakan coba lagi." },
+  catComp:           { en: "Competition Category",    id: "Kategori Kompetisi" },
+  catCompPh:         { en: "-- Choose Category Competition --", id: "-- Pilih Kategori Kompetisi --" },
 };
 
 // ── Komponen Input Nomor Telepon — custom dropdown (support emoji) ─
@@ -304,7 +354,7 @@ const PhoneInput = ({
           onClick={() => setOpen(o => !o)}
           className="w-full flex items-center gap-2 rounded-lg border border-input bg-muted/30 px-3 py-3 text-sm focus:border-primary focus:outline-none text-left"
         >
-          <span className="text-base leading-none">{selected.flag}</span>
+          <FlagImg iso={selected.iso} />
           <span className="flex-1 truncate text-foreground">
             {selected.code !== "other" ? selected.code : ""} {selected.name}
           </span>
@@ -325,7 +375,7 @@ const PhoneInput = ({
                   valueCode === c.code ? "bg-primary/10 text-primary font-semibold" : "text-foreground"
                 }`}
               >
-                <span className="text-base w-6 text-center">{c.flag}</span>
+                <FlagImg iso={c.iso} />
                 <span>{c.code !== "other" ? c.code : ""} {c.name}</span>
               </button>
             ))}
@@ -351,26 +401,78 @@ const CountrySelect = ({
   value, onChange, placeholder,
 }: {
   value: string; onChange: (v: string) => void; placeholder: string;
-}) => (
-  <div className="relative">
-    <select
-      value={value}
-      onChange={e => onChange(e.target.value)}
-      className="w-full appearance-none rounded-lg border border-input bg-muted/30 px-4 py-3 text-sm focus:border-primary focus:outline-none text-foreground"
-    >
-      <option value="">{placeholder}</option>
-      {COUNTRY_LIST.map(c => (
-        <option key={c.name} value={c.name}>
-          {c.flag}  {c.name}
-        </option>
-      ))}
-    </select>
-    <svg className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none"
-      fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-    </svg>
-  </div>
-);
+}) => {
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const ref = useRef<HTMLDivElement>(null);
+  const selected = COUNTRY_LIST.find(c => c.name === value);
+  const filtered = COUNTRY_LIST.filter(c =>
+    c.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen(o => !o)}
+        className="w-full flex items-center gap-2 rounded-lg border border-input bg-muted/30 px-3 py-3 text-sm focus:border-primary focus:outline-none text-left"
+      >
+        {selected ? (
+          <>
+            <FlagImg iso={selected.iso} />
+            <span className="flex-1 truncate text-foreground">{selected.name}</span>
+          </>
+        ) : (
+          <span className="flex-1 text-muted-foreground">{placeholder}</span>
+        )}
+        <svg className="w-3 h-3 shrink-0 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="absolute z-50 mt-1 w-full rounded-lg border border-border bg-card shadow-lg">
+          <div className="p-2 border-b border-border">
+            <input
+              autoFocus
+              type="text"
+              placeholder="Search country..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              className="w-full px-3 py-1.5 text-sm bg-muted/30 rounded-md border border-input focus:outline-none focus:border-primary"
+            />
+          </div>
+          <div className="max-h-56 overflow-y-auto">
+            {filtered.map(c => (
+              <button
+                key={c.name}
+                type="button"
+                onClick={() => { onChange(c.name); setOpen(false); setSearch(""); }}
+                className={`w-full flex items-center gap-3 px-3 py-2 text-sm text-left hover:bg-primary/10 transition-colors ${
+                  value === c.name ? "bg-primary/10 text-primary font-semibold" : "text-foreground"
+                }`}
+              >
+                <FlagImg iso={c.iso} />
+                <span>{c.name}</span>
+              </button>
+            ))}
+            {filtered.length === 0 && (
+              <p className="px-3 py-3 text-sm text-muted-foreground">No results</p>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 // ── Tipe ─────────────────────────────────────────────────────────
 export interface SummaryData {
@@ -378,6 +480,7 @@ export interface SummaryData {
   namaLengkap: string; namaSekolah: string;
   categories: string; projectTitle: string;
   grade: string; country?: string;
+  competitionCategory?: string;
 }
 
 interface Props {
@@ -391,11 +494,10 @@ const getRequired = (p: ParticipantType, c: CompetitionType) => [
   "NAMA_SEKOLAH", "GRADE", "NAME_SUPERVISOR",
   "SUPERVISOR_WA_NUM", "EMAIL_TEACHER_SUPERVISOR",
   "PROJECT_TITLE", "CATEGORIES",
+  ...((COMPETITION_CATEGORY_OPTIONS[p]?.[c]?.length ?? 0) > 0 ? ["CATEGORY_COMPETITION"] : []),
   ...(c === "online" ? ["COMPLETE_ADDRESS"] : []),
-  // Internasional wajib isi COUNTRY (menggantikan PROVINCE)
   ...(p === "international" ? ["COUNTRY"] : []),
 ];
-
 // ── Komponen Utama ────────────────────────────────────────────────
 const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onBack, onSuccess }: Props) => {
   const { lang } = useLang();
@@ -426,6 +528,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
       LEADER_WHATSAPP:            `${cL}${f("LEADER_WHATSAPP_NUM")}`,
       WHATSAPP_NUMBER_SUPERVISOR: `${cS}${f("SUPERVISOR_WA_NUM")}`,
       PROVINCE: participant === "international" ? f("COUNTRY") : f("PROVINCE"),
+      CATEGORY_PRICE:             f("CATEGORY_COMPETITION"),
     };
 
     try {
@@ -433,12 +536,13 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
       setSubmitted(true);
       setTimeout(() => onSuccess({
         participant, competition,
-        namaLengkap:  f("NAMA_LENGKAP"),
-        namaSekolah:  f("NAMA_SEKOLAH"),
-        categories:   f("CATEGORIES"),
-        projectTitle: f("PROJECT_TITLE"),
-        grade:        f("GRADE"),
-        country:      participant === "international" ? f("COUNTRY") : undefined,
+        namaLengkap:          f("NAMA_LENGKAP"),
+        namaSekolah:          f("NAMA_SEKOLAH"),
+        categories:           f("CATEGORIES"),
+        projectTitle:         f("PROJECT_TITLE"),
+        grade:                f("GRADE"),
+        country:              participant === "international" ? f("COUNTRY") : undefined,
+        competitionCategory:  f("CATEGORY_COMPETITION") || undefined,
       }), 2000);
     } catch {
       setError(t("errorMsg"));
@@ -489,9 +593,21 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
               <Field label={t("catCompetition")}><Input value={cLabel} disabled /></Field>
             </div>
 
-            <Field label={t("teamName")} required note={t("teamNameNote")}>
+        {(COMPETITION_CATEGORY_OPTIONS[participant]?.[competition]?.length ?? 0) > 0 && (
+          <Field label={t("catComp")} required>
+            <SelectInput
+              placeholder={t("catCompPh")}
+              value={f("CATEGORY_COMPETITION")}
+              onChange={set("CATEGORY_COMPETITION")}
+              options={COMPETITION_CATEGORY_OPTIONS[participant]?.[competition] ?? []}
+            />
+          </Field>
+        )}
+
+            <Field label={t("teamName")} required>
+              <p className="text-xs text-muted-foreground leading-5 whitespace-pre-line mb-2">{t("teamNameNote")}</p>
               <TextArea placeholder={t("teamNamePh")}
-                value={f("NAMA_LENGKAP")} onChange={set("NAMA_LENGKAP")} maxLength={150} />
+                value={f("NAMA_LENGKAP")} onChange={set("NAMA_LENGKAP")} maxLength={400} />
             </Field>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -587,7 +703,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
               <Field label={t("categories")} required>
                 <SelectInput placeholder={t("categoriesPh")} value={f("CATEGORIES")}
                   onChange={set("CATEGORIES")}
-                  options={["Science Project", "Scientific Paper", "Invention", "Innovation"]} />
+                  options={PROJECT_CATEGORIES} />
               </Field>
               <Field label={t("prevComp")}>
                 <SelectInput placeholder={t("prevCompPh")} value={f("YES_NO")}

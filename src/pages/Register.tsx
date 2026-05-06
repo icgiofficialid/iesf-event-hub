@@ -2,7 +2,7 @@
 // Register.tsx — Main flow pendaftaran (5 steps)
 // ================================================================
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SiteShell from "@/components/iesf/SiteShell";
 import { type ParticipantType, type CompetitionType } from "./register/registerConfig";
 import HomeRegist   from "./register/homeregist";
@@ -20,7 +20,6 @@ import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLang } from "@/components/LanguageProvider";
 
-// ── Teks Bilingual ────────────────────────────────────────────────
 type Lang = "en" | "id";
 const T: Record<string, Record<Lang, string>> = {
   stepParticipant: { en: "Participant",  id: "Peserta" },
@@ -37,6 +36,7 @@ const T: Record<string, Record<Lang, string>> = {
   labelSchool:     { en: "School/University",      id: "Sekolah/Universitas" },
   labelGrade:      { en: "Grade",                  id: "Jenjang" },
   labelCategory:   { en: "Project Category",       id: "Kategori Proyek" },
+  labelCompCat: { en: "Competition Package", id: "Paket Kompetisi" },
   labelProject:    { en: "Project Title",          id: "Judul Proyek" },
   intl:            { en: "International",          id: "Internasional" },
   indo:            { en: "Indonesian",             id: "Indonesia" },
@@ -49,23 +49,38 @@ const T: Record<string, Record<Lang, string>> = {
 const SummaryPage = ({ data, onHome }: { data: SummaryData; onHome: () => void }) => {
   const { lang } = useLang();
   const t = (k: string) => T[k]?.[lang as Lang] ?? k;
+  const boxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (boxRef.current) {
+        const top =
+          boxRef.current.getBoundingClientRect().top +
+          window.scrollY -
+          window.innerHeight / 2 +
+          boxRef.current.offsetHeight / 2;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+    }, 150);
+    return () => clearTimeout(timer);
+  }, []);
 
   const pLabel = data.participant === "international" ? t("intl") : t("indo");
   const cLabel = data.competition === "online" ? t("online") : t("offline");
 
   const rows = [
     { label: t("labelParticipant"), value: pLabel },
-    { label: t("labelCompetition"), value: cLabel },
+    ...(data.competitionCategory ? [{ label: t("labelCompCat"), value: data.competitionCategory }] : []),
     ...(data.country ? [{ label: t("labelCountry"), value: data.country }] : []),
-    { label: t("labelTeam"),       value: data.namaLengkap },
-    { label: t("labelSchool"),     value: data.namaSekolah },
-    { label: t("labelGrade"),      value: data.grade },
-    { label: t("labelCategory"),   value: data.categories },
-    { label: t("labelProject"),    value: data.projectTitle },
+    { label: t("labelTeam"),     value: data.namaLengkap },
+    { label: t("labelSchool"),   value: data.namaSekolah },
+    { label: t("labelGrade"),    value: data.grade },
+    { label: t("labelCategory"), value: data.categories },
+    { label: t("labelProject"),  value: data.projectTitle },
   ];
 
   return (
-    <div className="w-full max-w-xl mx-auto text-center px-4">
+    <div ref={boxRef} className="w-full max-w-xl mx-auto text-center px-4">
       <div className="flex flex-col items-center gap-4 mb-8">
         <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center">
           <CheckCircle2 className="w-9 h-9 text-primary-foreground" />
@@ -97,14 +112,12 @@ const SummaryPage = ({ data, onHome }: { data: SummaryData; onHome: () => void }
 type Step = 1 | 2 | 3 | 4 | 5;
 
 const Register = () => {
-  const navigate    = useNavigate();
-  const location    = useLocation();
-  const { lang }    = useLang();
-
-  // Slug event dari navigate state (dikirim oleh EventDetailPage)
-  // Jika tidak ada (akses /Register langsung), eventSlug = null → pakai sheet dari TermsBox lama
-  const eventSlug: string | null = (location.state as { eventSlug?: string })?.eventSlug ?? null;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { lang } = useLang();
   const t = (k: string) => T[k]?.[lang as Lang] ?? k;
+
+  const eventSlug: string | null = (location.state as { eventSlug?: string })?.eventSlug ?? null;
 
   const [step, setStep]               = useState<Step>(1);
   const [participant, setParticipant] = useState<ParticipantType | null>(null);
@@ -130,12 +143,9 @@ const Register = () => {
   const renderStep3 = () => {
     const props = { onBack: () => setStep(2), onNext: handleTermsNext };
 
-    // Jika datang dari EventDetailPage (ada eventSlug), gunakan sheet dari registry
     if (eventSlug && participant && competition) {
       const cfg = getSheetConfig(eventSlug, participant, competition);
       if (cfg) {
-        // Gunakan TermsBox langsung dengan sheet dari registry
-        // Tidak lewat IndoOnline/etc. yang hardcoded
         return (
           <TermsBox
             participant={participant}
@@ -149,7 +159,6 @@ const Register = () => {
       }
     }
 
-    // Fallback: akses /Register langsung (tanpa eventSlug) → pakai wrappers lama
     if (participant === "indonesian"    && competition === "online")  return <IndoOnline   {...props} />;
     if (participant === "indonesian"    && competition === "offline") return <IndoOffline  {...props} />;
     if (participant === "international" && competition === "online")  return <InterOnline  {...props} />;
@@ -159,7 +168,7 @@ const Register = () => {
 
   const STEP_LABELS = [t("stepParticipant"), t("stepCompetition"), t("stepTerms"), t("stepForm")];
 
-  // Step 5 — rangkuman, tanpa stepper
+  // Step 5 — rangkuman tanpa stepper
   if (step === 5 && summaryData) {
     return (
       <SiteShell>
