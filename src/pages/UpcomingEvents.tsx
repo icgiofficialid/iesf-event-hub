@@ -1,5 +1,5 @@
 // ================================================================
-// UpcomingEvents.tsx — Updated: pakai useEvents hook (tidak hardcode)
+// UpcomingEvents.tsx — Filter ongoing+upcoming, ongoing prioritas pertama
 // ================================================================
 
 import { useState } from "react";
@@ -8,9 +8,10 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import SiteShell from "@/components/iesf/SiteShell";
 import SectionReveal from "@/components/iesf/SectionReveal";
-import  { useEvents }  from "@/hooks/useEvents";
+import { useEvents } from "@/hooks/useEvents";
 import type { IESFEvent, EventType } from "@/lib/gasClient";
 import { useLang } from "@/components/LanguageProvider";
+import { getVisibleEvents } from "@/config/eventRegistry";
 
 const LABELS = {
   title:      { en: "Upcoming",          id: "Event" },
@@ -22,11 +23,14 @@ const LABELS = {
   competition:{ en: "Competition",       id: "Kompetisi" },
   education:  { en: "Education",         id: "Edukasi" },
   loading:    { en: "Loading events...", id: "Memuat events..." },
+  ongoing:    { en: "Ongoing Now",       id: "Sedang Berlangsung" },
 };
 
 const EventCard = ({ event, index }: { event: IESFEvent; index: number }) => {
   const navigate = useNavigate();
   const { lang } = useLang();
+  const isOngoing = event.status === "ongoing";
+
   return (
     <SectionReveal delay={index * 0.07} className="h-full">
       <motion.div
@@ -35,9 +39,27 @@ const EventCard = ({ event, index }: { event: IESFEvent; index: number }) => {
         onClick={() => navigate(`/events/${event.slug}`)}
         className="group relative h-full cursor-pointer rounded-2xl overflow-hidden border border-border/70 bg-panel shadow-sm hover:shadow-xl transition-shadow duration-300"
       >
+        {/* Ongoing — highlighted border */}
+        {isOngoing && (
+          <div className="absolute inset-0 rounded-2xl border-2 border-green-400/50 pointer-events-none z-10" />
+        )}
+
         <div className={`relative h-52 bg-gradient-to-br ${event.coverGradient} flex items-end p-0`}>
-          <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 px-3 py-1 text-xs font-semibold text-white">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+          {/* Ongoing strip banner */}
+          {isOngoing && (
+            <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-center gap-2 bg-green-400/90 backdrop-blur-sm py-1.5">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
+              </span>
+              <span className="text-[10px] font-bold text-black uppercase tracking-widest">
+                {LABELS.ongoing[lang]}
+              </span>
+            </div>
+          )}
+
+          <div className={`absolute left-3 flex items-center gap-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 px-3 py-1 text-xs font-semibold text-white ${isOngoing ? "top-10" : "top-3"}`}>
+            <span className={`w-1.5 h-1.5 rounded-full ${isOngoing ? "bg-green-400" : "bg-amber-400"}`} />
             {event.type}
           </div>
           <div className="absolute top-3 right-3 text-white/50 text-[10px] tracking-widest font-bold">IESF</div>
@@ -59,7 +81,7 @@ const EventCard = ({ event, index }: { event: IESFEvent; index: number }) => {
             <span>{LABELS.deadline[lang]} {event.registrationDeadline}</span>
           </div>
           <div className="flex flex-wrap gap-1 pt-1">
-            {event.tags.map((tag) => (
+            {event.tags?.map((tag) => (
               <span key={tag} className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] text-primary font-medium">
                 {tag}
               </span>
@@ -76,11 +98,14 @@ const UpcomingEvents = () => {
   const [search, setSearch] = useState("");
   const { lang } = useLang();
 
-  // ← Sebelumnya: import { events } dari eventsData (hardcode)
-  // ← Sekarang:   fetch dari GAS Public API via useEvents hook
-  const { events, loading } = useEvents("iesf");
-  console.log("events:", events);        // ← tambah ini
-  console.log("loading:", loading);      // ← tambah ini
+  const { events: rawEvents, loading } = useEvents("iesf");
+
+  // Ambil slug yang visible (tidak shutdown) dari registry
+  const visibleSlugs = new Set(
+    getVisibleEvents()
+      .filter(e => e.status === "ongoing" || e.status === "upcoming")
+      .map(e => e.slug)
+  );
 
   const FILTERS: { label: string; value: "All" | EventType }[] = [
     { label: LABELS.all[lang],         value: "All" },
@@ -88,9 +113,13 @@ const UpcomingEvents = () => {
     { label: LABELS.education[lang],   value: "Education" },
   ];
 
-  const filtered = events
-    .filter((e) => e.status === "upcoming")
-    .filter((e) => {
+  const filtered = rawEvents
+    // Hanya tampilkan ongoing + upcoming, skip past dan shutdown
+    .filter(e => (e.status === "ongoing" || e.status === "upcoming") && visibleSlugs.has(e.slug))
+    // Sort: ongoing dulu
+    .sort((a, b) => (a.status === "ongoing" ? -1 : b.status === "ongoing" ? 1 : 0))
+    // Filter type dan search
+    .filter(e => {
       const matchType   = filter === "All" || e.type === filter;
       const matchSearch = search === "" ||
         e.title.toLowerCase().includes(search.toLowerCase()) ||

@@ -1,5 +1,5 @@
 // ================================================================
-// PastEvents.tsx — Updated: pakai useEvents hook (tidak hardcode)
+// PastEvents.tsx — Hanya tampilkan status "past" yang tidak shutdown
 // ================================================================
 
 import { Search } from "lucide-react";
@@ -7,17 +7,24 @@ import { useState } from "react";
 import SiteShell from "@/components/iesf/SiteShell";
 import SectionReveal from "@/components/iesf/SectionReveal";
 import { useEvents } from "@/hooks/useEvents";
+import { getVisibleEvents } from "@/config/eventRegistry";
 
 const PastEvents = () => {
   const [search, setSearch] = useState("");
 
-  // ← Sebelumnya: import { events } dari eventsData (hardcode)
-  // ← Sekarang:   fetch dari GAS Public API via useEvents hook
-  const { events, loading } = useEvents("iesf");
+  const { events: rawEvents, loading } = useEvents("iesf");
 
-  const pastEvents = events.filter(
+  // Ambil slug past yang visible (tidak shutdown) dari registry
+  const visiblePastSlugs = new Set(
+    getVisibleEvents()
+      .filter(e => e.status === "past")
+      .map(e => e.slug)
+  );
+
+  const pastEvents = rawEvents.filter(
     (e) =>
       e.status === "past" &&
+      visiblePastSlugs.has(e.slug) &&
       (search === "" ||
         e.title.toLowerCase().includes(search.toLowerCase()) ||
         e.location.toLowerCase().includes(search.toLowerCase()))

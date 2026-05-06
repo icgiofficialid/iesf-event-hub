@@ -13,10 +13,12 @@ export interface BilingualText {
 }
 
 export interface EventDetailData {
-  slug:    string;
-  email:   string;
-  website: string;
-  venue:   string;
+  slug:         string;
+  email:        string;
+  website:      string;
+  venue:        string;
+  /** URL ke file guidebook (PDF/Drive). Jika kosong, tombol tidak ditampilkan. */
+  guidebookUrl?: string;
 
   labels: {
     eventBadge:     BilingualText;

@@ -8,7 +8,7 @@
 // ================================================================
 
 export type EventType   = "Competition" | "Education" | "Workshop";
-export type EventStatus = "upcoming" | "past";
+export type EventStatus = "upcoming" | "past" | "ongoing";
 
 // Tipe event yang direturn API — sama persis dengan IESFEvent di eventsData.ts
 export interface IESFEvent {

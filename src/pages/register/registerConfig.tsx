@@ -136,16 +136,23 @@ export const submitToSheet = async (
 // ================================================================
 
 export const Field = ({
-  label, note, required, children,
+  label, note, required, children, error, fieldId,
 }: {
-  label: string; note?: string; required?: boolean; children: ReactNode;
+  label: string; note?: string; required?: boolean;
+  children: ReactNode; error?: boolean; fieldId?: string;
 }) => (
-  <div className="flex flex-col gap-1.5">
+  <div className="flex flex-col gap-1.5" id={fieldId}>
     <label className="text-sm font-semibold text-foreground">
       {label} {required && <span className="text-red-400">*</span>}
     </label>
-    {note && <p className="text-xs text-muted-foreground leading-5">{note}</p>}
-    {children}
+    {note && <p className="text-xs text-muted-foreground leading-5 whitespace-pre-line">{note}</p>}
+    <div className={error ? "ring-2 ring-red-400 ring-offset-1 rounded-lg" : ""}>{children}</div>
+    {error && (
+      <p className="text-xs text-red-400 flex items-center gap-1 mt-0.5">
+        <span>⚠</span>
+        <span>This field is required / Wajib diisi</span>
+      </p>
+    )}
   </div>
 );
 

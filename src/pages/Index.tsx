@@ -1,18 +1,22 @@
-import { useState, useEffect } from "react";
+// ================================================================
+// Index.tsx — Main flow dengan dynamic event dari EVENTS_REGISTRY
+// ================================================================
+
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Bell, ArrowRight,  MapPin, Calendar, ChevronRight } from "lucide-react";
+import { X, ArrowRight, MapPin, Calendar, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import SiteShell from "@/components/iesf/SiteShell";
 import SectionReveal from "@/components/iesf/SectionReveal";
-import { events } from "@/components/iesf/eventsData";
 import { categories, pageMeta } from "@/components/iesf/siteData";
 import { useLang } from "@/components/LanguageProvider";
-import { useRef } from "react";
-
+import { getVisibleEvents, type EventMeta } from "@/config/eventRegistry";
 
 // ── EVENT CARD — elevated poster style ────────────────────────────
-const EventCard = ({ event, index }: { event: typeof events[0]; index: number }) => {
+const EventCard = ({ event, index }: { event: EventMeta; index: number }) => {
   const navigate = useNavigate();
+  const isOngoing = event.status === "ongoing";
+
   return (
     <SectionReveal delay={index * 0.07} className="h-full">
       <motion.div
@@ -22,7 +26,17 @@ const EventCard = ({ event, index }: { event: typeof events[0]; index: number })
         className="cursor-pointer group h-full"
       >
         {/* Poster card */}
-        <div className={`relative rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-shadow duration-300 bg-gradient-to-br ${event.coverGradient}`}>
+        <div className={`relative rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-shadow duration-300 bg-gradient-to-br ${(event as any).coverGradient ?? "from-primary/80 to-primary"}`}>
+
+          {/* Foto cover dari Cloudinary */}
+          {event.coverImage && (
+            <img
+              src={event.coverImage}
+              alt=""
+              className="absolute inset-0 w-full h-center h-full object-cover opacity-20"
+            />
+          )}
+
           {/* Noise texture overlay */}
           <div className="absolute inset-0 opacity-[0.06]"
             style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")" }}
@@ -32,27 +46,37 @@ const EventCard = ({ event, index }: { event: typeof events[0]; index: number })
             style={{ backgroundImage: "radial-gradient(ellipse at 85% 15%, rgba(255,255,255,0.22) 0%, transparent 55%), radial-gradient(ellipse at 15% 85%, rgba(255,255,255,0.12) 0%, transparent 45%)" }}
           />
 
+          {/* Ongoing badge strip di atas */}
+          {isOngoing && (
+            <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-center gap-2 bg-amber-400/90 backdrop-blur-sm py-1.5">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
+              </span>
+              <span className="text-[10px] font-bold text-black uppercase tracking-widest">Ongoing Now</span>
+            </div>
+          )}
+
           {/* Aspect ratio wrapper */}
-          <div className="relative aspect-[3/4] flex flex-col justify-between p-5">
+          <div className={`relative aspect-[3/4] flex flex-col justify-between p-5 ${isOngoing ? "pt-9" : ""}`}>
             {/* Top row */}
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 px-3 py-1 text-[10px] font-bold text-white uppercase tracking-widest">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.8)]" />
-                {event.type}
+                <span className={`w-1.5 h-1.5 rounded-full shadow-[0_0_6px_rgba(251,191,36,0.8)] ${isOngoing ? "bg-green-400" : "bg-amber-400"}`} />
+                {(event as any).type ?? "Competition"}
               </div>
               <span className="text-white/30 text-[9px] tracking-[0.3em] font-black">IESF</span>
             </div>
 
             {/* Center decorative element */}
             <div className="flex-1 flex items-center justify-center pointer-events-none select-none">
-            <p className="text-white/[0.06] text-[7rem] font-black leading-none tracking-tighter">
-              BIESF
-            </p>
+              <p className="text-white/[0.06] text-[7rem] font-black leading-none tracking-tighter">
+                {event.subtitle.split(" ")[0]}
+              </p>
             </div>
 
             {/* Bottom info */}
             <div className="space-y-1.5">
-              {/* Thin separator */}
               <div className="w-8 h-px bg-white/30 mb-3" />
               <p className="text-white/50 text-[9px] uppercase tracking-[0.25em] font-semibold">{event.subtitle}</p>
               <h3 className="text-white text-lg font-black leading-tight tracking-tight">{event.title}</h3>
@@ -81,9 +105,11 @@ const EventCard = ({ event, index }: { event: typeof events[0]; index: number })
 };
 
 
-// ── POPUP NOTIFICATION ─────────────────────────────────────────────
-const EventPopup = ({ onClose }: { onClose: () => void }) => {
+// ── POPUP NOTIFICATION — dinamis dari EVENTS_REGISTRY ─────────────
+const EventPopup = ({ event, onClose }: { event: EventMeta; onClose: () => void }) => {
   const navigate = useNavigate();
+  const isOngoing = event.status === "ongoing";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 16, scale: 0.96 }}
@@ -93,21 +119,23 @@ const EventPopup = ({ onClose }: { onClose: () => void }) => {
       className="fixed bottom-6 right-4 sm:right-6 z-50 w-64 sm:w-72"
     >
       <div className="rounded-2xl bg-panel border border-border shadow-panel overflow-hidden">
-        {/* Top accent line — kuning ala bintang logo */}
-        <div className="h-[2px] bg-gradient-to-r from-amber-400/80 via-amber-400/40 to-transparent" />
+        {/* Top accent line */}
+        <div className={`h-[2px] bg-gradient-to-r ${isOngoing ? "from-green-400/80 via-green-400/40" : "from-amber-400/80 via-amber-400/40"} to-transparent`} />
 
         <div
           className="p-4 cursor-pointer group"
-          onClick={() => { navigate("/events/biesf-2026"); onClose(); }}
+          onClick={() => { navigate(`/events/${event.slug}`); onClose(); }}
         >
           {/* Header row */}
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-400" />
+                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${isOngoing ? "bg-green-400" : "bg-amber-400"}`} />
+                <span className={`relative inline-flex rounded-full h-1.5 w-1.5 ${isOngoing ? "bg-green-400" : "bg-amber-400"}`} />
               </span>
-              <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">New Event</span>
+              <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">
+                {isOngoing ? "Now Ongoing" : "New Event"}
+              </span>
             </div>
             <button
               onClick={(e) => { e.stopPropagation(); onClose(); }}
@@ -119,14 +147,22 @@ const EventPopup = ({ onClose }: { onClose: () => void }) => {
 
           {/* Event info */}
           <div className="space-y-1">
-            <p className="text-[10px] text-muted-foreground/70 uppercase tracking-widest">Competition · 2026</p>
-            <p className="text-lg font-bold text-foreground leading-tight">BIESF 2026</p>
-            <p className="text-xs text-muted-foreground">Bali, Indonesia</p>
+            <p className="text-[10px] text-muted-foreground/70 uppercase tracking-widest">
+              Competition · {event.subtitle}
+            </p>
+            <p className="text-lg font-bold text-foreground leading-tight">{event.title}</p>
+            <p className="text-xs text-muted-foreground">{event.location}</p>
           </div>
 
           {/* CTA */}
           <div className="mt-3 pt-3 border-t border-border/50 flex items-center justify-between">
-            <span className="text-[11px] text-amber-400 font-medium">Registration open</span>
+            <span className={`text-[11px] font-medium ${isOngoing ? "text-green-400" : "text-amber-400"}`}>
+              {isOngoing
+                ? "Happening now"
+                : event.registrationOpen
+                  ? "Registration open"
+                  : "Coming soon"}
+            </span>
             <span className="flex items-center gap-1 text-[11px] text-muted-foreground group-hover:text-foreground group-hover:gap-1.5 transition-all">
               View <ArrowRight className="h-3 w-3" />
             </span>
@@ -144,28 +180,40 @@ const Index = () => {
   const [showPopup, setShowPopup] = useState(false);
   const { lang } = useLang();
   const meta = pageMeta.about;
+  const popupSound = useRef<HTMLAudioElement | null>(null);
 
-const popupSound = useRef<HTMLAudioElement | null>(null);
+  // Ambil semua event yang visible (tidak shutdown), sorted: ongoing → upcoming → past
+  const allVisible = getVisibleEvents();
 
-useEffect(() => {
-  // Gunakan suara notifikasi dari URL publik
-  popupSound.current = new Audio("https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3");
-  popupSound.current.volume = 0.4;
+  // Hanya tampilkan ongoing + upcoming di section ini (past tidak muncul di index)
+  const upcomingEvents = allVisible.filter(
+    e => e.status === "ongoing" || e.status === "upcoming"
+  );
 
-  const show = setTimeout(() => {
-    setShowPopup(true);
-    popupSound.current?.play().catch(() => {}); // catch: browser block autoplay
-  }, 2000);
+  // Popup: prioritaskan ongoing, fallback ke upcoming pertama
+  const popupEvent =
+    allVisible.find(e => e.status === "ongoing") ??
+    allVisible.find(e => e.status === "upcoming");
 
-  const hide = setTimeout(() => setShowPopup(false), 5000);
+  useEffect(() => {
+    // Popup hanya muncul kalau ada event yang layak (tidak shutdown)
+    if (!popupEvent) return;
 
-  return () => {
-    clearTimeout(show);
-    clearTimeout(hide);
-  };
-}, []);
+    popupSound.current = new Audio("https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3");
+    popupSound.current.volume = 0.4;
 
-  const upcomingEvents = events.filter((e) => e.status === "upcoming");
+    const show = setTimeout(() => {
+      setShowPopup(true);
+      popupSound.current?.play().catch(() => {});
+    }, 2000);
+
+    const hide = setTimeout(() => setShowPopup(false), 7000);
+
+    return () => {
+      clearTimeout(show);
+      clearTimeout(hide);
+    };
+  }, [popupEvent]);
 
   return (
     <SiteShell>
@@ -204,7 +252,6 @@ useEffect(() => {
             ))}
           </div>
 
-          {/* ── Ornamen bintang/sparkle kuning ala logo ── */}
           {/* Sparkle besar — kiri atas */}
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -253,7 +300,7 @@ useEffect(() => {
             </svg>
           </motion.div>
 
-          {/* Sparkle tiny — tengah kiri */}
+          {/* Sparkle tiny — tengah kiri, twinkle */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: [0, 0.7, 0.3, 0.7] }}
@@ -292,7 +339,6 @@ useEffect(() => {
             transition={{ delay: 0.2 }}
             className="flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 backdrop-blur-sm"
           >
-            {/* Sparkle kuning mini di badge */}
             <svg width="10" height="10" viewBox="0 0 40 40" fill="none" className="shrink-0">
               <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#F59E0B"/>
             </svg>
@@ -312,7 +358,7 @@ useEffect(() => {
             <div className="absolute w-[340px] h-[340px] md:w-[440px] md:h-[440px] rounded-full border border-primary/8" />
             <div className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px] rounded-full border border-primary/12" />
 
-            {/* Sparkle di pojok ring — kanan atas (mirip posisi di logo) */}
+            {/* Sparkle di pojok ring — kanan atas */}
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -396,56 +442,52 @@ useEffect(() => {
         </motion.div>
       </section>
 
-      {/* ── SECTION 2: ABOUT (from About page) ──────────────────── */}
+      {/* ── SECTION 2: ABOUT ────────────────────────────────────── */}
       <section className="min-h-screen flex flex-col justify-center py-16 md:py-24 relative">
-      {/* Background layer */}
-      <div className="absolute inset-0 bg-surface/60 border-y border-border/40" />
-      {/* Subtle tint overlay */}
-      <div className="absolute inset-0 opacity-40"
-        style={{ background: "radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.08) 0%, transparent 60%), radial-gradient(ellipse at 50% 100%, hsl(var(--accent) / 0.06) 0%, transparent 60%)" }}
-      />
-      <div className="container relative z-10">
-        <SectionReveal className="mb-10 text-center space-y-2">
-          <p className="text-xs uppercase tracking-[0.35em] text-primary font-semibold">
-            {meta.eyebrow[lang]}
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">{meta.title[lang]}</h2>
-          <p className="text-muted-foreground text-sm md:text-base max-w-xl mx-auto leading-7">
-            {meta.description[lang]}
-          </p>
-        </SectionReveal>
+        <div className="absolute inset-0 bg-surface/60 border-y border-border/40" />
+        <div className="absolute inset-0 opacity-40"
+          style={{ background: "radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.08) 0%, transparent 60%), radial-gradient(ellipse at 50% 100%, hsl(var(--accent) / 0.06) 0%, transparent 60%)" }}
+        />
+        <div className="container relative z-10">
+          <SectionReveal className="mb-10 text-center space-y-2">
+            <p className="text-xs uppercase tracking-[0.35em] text-primary font-semibold">
+              {meta.eyebrow[lang]}
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">{meta.title[lang]}</h2>
+            <p className="text-muted-foreground text-sm md:text-base max-w-xl mx-auto leading-7">
+              {meta.description[lang]}
+            </p>
+          </SectionReveal>
 
-        {/* Grid fix — 1 col mobile, 2 col tablet, 5 col desktop */}
-        <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
-          {categories.map((category, index) => {
-            const Icon = category.icon;
-            const isLast = index === categories.length - 1;
-            const isOdd = categories.length % 2 !== 0;
-            return (
-              <SectionReveal
-                key={category.title.en}
-                delay={index * 0.08}
-                className={`h-full ${isLast && isOdd ? "sm:col-span-2 lg:col-span-1 flex justify-center" : ""}`}
-              >
-                <motion.article
-                  whileHover={{ y: -8 }}
-                  transition={{ duration: 0.25 }}
-                  className={`tech-shell h-full rounded-[1.75rem] p-6 cursor-pointer group w-full ${isLast && isOdd ? "sm:max-w-sm lg:max-w-none" : ""}`}
+          <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
+            {categories.map((category, index) => {
+              const Icon = category.icon;
+              const isLast = index === categories.length - 1;
+              const isOdd = categories.length % 2 !== 0;
+              return (
+                <SectionReveal
+                  key={category.title.en}
+                  delay={index * 0.08}
+                  className={`h-full ${isLast && isOdd ? "sm:col-span-2 lg:col-span-1 flex justify-center" : ""}`}
                 >
-                  <Icon className="h-9 w-9 text-primary" />
-                  <h2 className="mt-5 text-xl text-foreground font-semibold">{category.title[lang]}</h2>
-                  <p className="mt-3 text-sm leading-7 text-muted-foreground">{category.description[lang]}</p>
-                  <div className="mt-6 flex items-center text-sm text-primary gap-0.5 group-hover:gap-1.5 transition-all">
-                    Explore track <ChevronRight className="h-4 w-4" />
-                  </div>
-                </motion.article>
-              </SectionReveal>
-            );
-          })}
-        </div>
+                  <motion.article
+                    whileHover={{ y: -8 }}
+                    transition={{ duration: 0.25 }}
+                    className={`tech-shell h-full rounded-[1.75rem] p-6 cursor-pointer group w-full ${isLast && isOdd ? "sm:max-w-sm lg:max-w-none" : ""}`}
+                  >
+                    <Icon className="h-9 w-9 text-primary" />
+                    <h2 className="mt-5 text-xl text-foreground font-semibold">{category.title[lang]}</h2>
+                    <p className="mt-3 text-sm leading-7 text-muted-foreground">{category.description[lang]}</p>
+                    <div className="mt-6 flex items-center text-sm text-primary gap-0.5 group-hover:gap-1.5 transition-all">
+                      Explore track <ChevronRight className="h-4 w-4" />
+                    </div>
+                  </motion.article>
+                </SectionReveal>
+              );
+            })}
+          </div>
         </div>
       </section>
-
 
       {/* ── SECTION 3: UPCOMING EVENTS ──────────────────────────── */}
       <section className="container min-h-screen flex flex-col justify-center pt-32 md:pt-40 pb-20 md:pb-28">
@@ -468,20 +510,23 @@ useEffect(() => {
         </SectionReveal>
 
         {upcomingEvents.length === 0 ? (
-          <SectionReveal className="py-20 text-center text-muted-foreground">No events found.</SectionReveal>
+          <SectionReveal className="py-20 text-center text-muted-foreground">
+            No events found.
+          </SectionReveal>
         ) : (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {upcomingEvents.map((event, i) => (
-              <EventCard key={event.id} event={event} index={i} />
+              <EventCard key={event.slug} event={event} index={i} />
             ))}
           </div>
         )}
       </section>
 
-
-      {/* ── POPUP ─────────────────────────────────────────────────── */}
+      {/* ── POPUP — hanya muncul jika ada event visible ───────────── */}
       <AnimatePresence>
-        {showPopup && <EventPopup onClose={() => setShowPopup(false)} />}
+        {showPopup && popupEvent && (
+          <EventPopup event={popupEvent} onClose={() => setShowPopup(false)} />
+        )}
       </AnimatePresence>
 
     </SiteShell>

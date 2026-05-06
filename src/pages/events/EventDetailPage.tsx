@@ -40,7 +40,7 @@ const SECTION_LABELS: Record<SectionId, Record<Lang, string>> = {
 const L: Record<string, Record<Lang, string>> = {
   backToEvents:       { en: "Back to Upcoming Events",           id: "Kembali ke Event Mendatang" },
   registerNow:        { en: "Register Now",                      id: "Daftar Sekarang" },
-  learnMore:          { en: "Learn More",                        id: "Pelajari Lebih" },
+  guidebook:          { en: "Guidebook",                         id: "Panduan" },
   venue:              { en: "Venue",                             id: "Lokasi" },
   contact:            { en: "Contact",                           id: "Kontak" },
   website:            { en: "Website",                           id: "Website" },
@@ -151,47 +151,49 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
         {/* ── Content ──────────────────────────────────────────── */}
         <div className="max-w-5xl mx-auto px-4 pb-24">
 
-          {/* ══════ HOME ══════ */}
-          <Sec id="home">
-            {/* Hero */}
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 p-8 md:p-14 text-white mb-10">
-              <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
-              <div className="relative z-10 max-w-2xl">
-                <span className="inline-block text-xs font-bold tracking-[0.3em] uppercase bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-6">
-                  {b(data.labels.heroBadge)}
-                </span>
-                <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-4">
-                  {data.slug.toUpperCase()}
-                </h1>
-                <p className="text-lg md:text-xl text-white/80 mb-8">{meta?.dateRange ?? "TBA"}</p>
-                <div className="flex flex-wrap gap-3">
-                  {meta?.registrationOpen ? (
-                    <Button variant="hero" size="lg" onClick={() => scrollTo("registration")}>
-                      {l("registerNow")}
-                    </Button>
-                  ) : (
-                    <Button variant="hero" size="lg" disabled>{l("registrationClosed")}</Button>
-                  )}
+        {/* ══════ HOME ══════ */}
+        <Sec id="home">
+          {/* Hero */}
+          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 p-8 md:p-14 text-white mb-10">
+            
+            {/* Foto cover dari Cloudinary — opacity diturunkan */}
+            {meta?.coverImage && (
+              <img
+                src={meta.coverImage}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover opacity-20"
+              />
+            )}
+
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
+            <div className="relative z-10 max-w-2xl">
+              <span className="inline-block text-xs font-bold tracking-[0.3em] uppercase bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-6">
+                {b(data.labels.heroBadge)}
+              </span>
+              <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-4">
+                {data.slug.toUpperCase()}
+              </h1>
+              <p className="text-lg md:text-xl text-white/80 mb-8">{meta?.dateRange ?? "TBA"}</p>
+              <div className="flex flex-wrap gap-3">
+                {meta?.registrationOpen ? (
+                  <Button variant="hero" size="lg" onClick={() => scrollTo("registration")}>
+                    {l("registerNow")}
+                  </Button>
+                ) : (
+                  <Button variant="hero" size="lg" disabled>{l("registrationClosed")}</Button>
+                )}
+                {data.guidebookUrl && (
                   <Button
                     variant="outline" size="lg"
                     className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-                    onClick={() => scrollTo("about")}
+                    onClick={() => window.open(data.guidebookUrl, "_blank")}
                   >
-                    {l("learnMore")}
+                    {l("guidebook")}
                   </Button>
-                </div>
+                )}
               </div>
             </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-              {data.stats.map((s, i) => (
-                <div key={i} className="tech-shell rounded-2xl p-5 text-center">
-                  <p className="text-3xl font-bold text-primary">{s.value}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{b(s.label)}</p>
-                </div>
-              ))}
-            </div>
+          </div>
 
             {/* Info */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

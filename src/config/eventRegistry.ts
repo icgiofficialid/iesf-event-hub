@@ -49,6 +49,12 @@ export interface EventMeta {
   status: "upcoming" | "past" | "ongoing";
   /** Apakah pendaftaran dibuka? */
   registrationOpen: boolean;
+    /** Set true untuk menyembunyikan event dari semua halaman web */
+  shutdown: boolean;
+  /** Opsional: pesan alasan shutdown (hanya untuk catatan internal) */
+  shutdownNote?: string;
+    /** URL gambar cover dari Cloudinary (opsional, jika tidak ada pakai gradient) */
+  coverImage?: string;
 }
 
 // ================================================================
@@ -65,6 +71,9 @@ export const EVENTS_REGISTRY: EventMeta[] = [
       status:               "upcoming",
       registrationOpen:     true,
       route:                "/events/biesf-2026",
+      shutdown:             false,
+      coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1778052403/Banner-BIESF.jpg",
+
       sheet: {
         sheetUrl: "https://script.google.com/macros/s/AKfycbwanIpFgNGAqc7S0q6ccFCnXK1ruYWneAFPSBIdAjdvi8xImTkqwwaDXrBHGG2HYTvr/exec",
         targets: {
@@ -76,7 +85,7 @@ export const EVENTS_REGISTRY: EventMeta[] = [
       },
     },
 
-    
+    //-----------------------------------------------
   {
     slug:                 "yiesf-2026",
     title:                "Yogyakarta International Engineering Science Fair",
@@ -87,6 +96,8 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     status:               "upcoming",
     registrationOpen:     false,
     route:                "/events/yiesf-2026",
+    shutdown:             true,
+    shutdownNote:         "Event ini telah ditutup untuk pendaftaran.",
     sheet: {
       // Ganti dengan URL GAS deployment milik YIESF
       sheetUrl: "https://script.google.com/macros/s/AKfycbylqhWttZ6pjomknohOmLNlBUC-JAu1KxdElZUBiFZrSZ_uQQqwKKrD3Q1eVgdY_0no/exec",
@@ -107,7 +118,16 @@ export const EVENTS_REGISTRY: EventMeta[] = [
 
 // ── Helper — cari event by slug ───────────────────────────────────
 export const getEventMeta = (slug: string): EventMeta | undefined =>
-  EVENTS_REGISTRY.find(e => e.slug === slug);
+  EVENTS_REGISTRY.find(e => e.slug === slug && !e.shutdown);
+
+// Tambah helper baru untuk listing (filter shutdown + sort ongoing dulu)
+export const getVisibleEvents = (): EventMeta[] =>
+  EVENTS_REGISTRY
+    .filter(e => !e.shutdown)
+    .sort((a, b) => {
+      const order = { ongoing: 0, upcoming: 1, past: 2 };
+      return order[a.status] - order[b.status];
+    });
 
 // ── Helper — ambil sheet config ───────────────────────────────────
 export const getSheetConfig = (

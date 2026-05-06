@@ -240,12 +240,14 @@ const COMPETITION_CATEGORY_OPTIONS: Record<string, Record<string, string[]>> = {
 
 // ── Kategori Proyek (sesuai guidebook) ───────────────────────────
 const PROJECT_CATEGORIES = [
-  "Electrical & Electronics Engineering",
+  "Mathematics, Science & Technology",
   "Environmental",
-  "Informatics, Robotic and Artificial Intelligence",
+  "IoT & Robotic",
+  "Informatics & Artificial Intelligence",
   "Life Science",
-  "Social Science",
+  "Social Science & Humanities",
   "Physic, Energy & Engineering",
+  "Health & Medicine",
 ];
 
 // ── Teks Bilingual ────────────────────────────────────────────────
@@ -257,10 +259,22 @@ const T: Record<string, Record<Lang, string>> = {
   indo:              { en: "Indonesian",         id: "Indonesia" },
   online:            { en: "Online",             id: "Online" },
   offline:           { en: "Offline",            id: "Offline" },
-  info1:             { en: "Fill in the required data correctly. Submitted data is final and cannot be changed.", id: "Isi data yang diperlukan dengan benar. Data yang dikirim bersifat final dan tidak dapat diubah." },
-  info2:             { en: "After verifying your data, click the SUBMIT FORM button.", id: "Setelah memverifikasi data, klik tombol KIRIM FORMULIR." },
-  info3:             { en: "The Letter of Acceptance (LoA) will be sent to the team leader's email within 3 working days.", id: "Surat Penerimaan (LoA) akan dikirim ke email ketua tim dalam 3 hari kerja." },
-  secBiodata:        { en: "Biodata",            id: "Biodata" },
+  infoBanner: { 
+    en: "HELLO BIESF 2026 PARTICIPANTS, Please consider the following information before filling out the registration form:", 
+    id: "HALO PESERTA BIESF 2026, Mohon perhatikan informasi berikut sebelum mengisi formulir pendaftaran:" 
+  },
+  info1: { 
+    en: "Please fill in the required data correctly and ensure there are no writing errors. Also make sure that the data submitted is final and has not changed.", 
+    id: "Harap isi data yang diperlukan dengan benar dan pastikan tidak ada kesalahan penulisan. Pastikan juga bahwa data yang dikirimkan sudah final dan tidak berubah." 
+  },
+  info2: { 
+    en: "After making sure the data is correct, you can click \"SUBMIT FORM\" button once. If the data has been successfully submitted, you will be moved to another page.", 
+    id: "Setelah memastikan data sudah benar, klik tombol \"KIRIM FORMULIR\" sekali saja. Jika data berhasil dikirim, Anda akan dipindahkan ke halaman lain." 
+  },
+  info3: { 
+    en: "There will be an information email that the registration has been received sent to the team leader's email address, and the file will be validated by our team. Please be patient and wait for a maximum of 3 days after the registration time, the Letter of Acceptance (LOA) will be sent to the team leader's email address.", 
+    id: "Akan ada email informasi bahwa pendaftaran telah diterima yang dikirim ke alamat email ketua tim, dan file akan divalidasi oleh tim kami. Harap bersabar dan tunggu maksimal 3 hari setelah waktu pendaftaran, Letter of Acceptance (LOA) akan dikirimkan ke alamat email ketua tim." 
+  },
   secSchool:         { en: "School Data",        id: "Data Sekolah" },
   secSupervisor:     { en: "Supervisor Data",    id: "Data Pembimbing" },
   secProject:        { en: "Detail Project",     id: "Detail Proyek" },
@@ -276,13 +290,14 @@ const T: Record<string, Record<Lang, string>> = {
   leaderEmailNote:   { en: "LoA will be sent to this email.", id: "LoA akan dikirim ke email ini." },
   leaderEmailPh:     { en: "email@school.com",       id: "email@sekolah.com" },
   nisn:              { en: "NIM / NISN of Leader & Team Member", id: "NIM / NISN Ketua & Anggota Tim" },
-  nisnNote:          { en: "Format: 201700 (Leader) / 187500 (Member1) / 207500 (Member2)", id: "Format: 201700 (Ketua) / 187500 (Anggota1) / 207500 (Anggota2)" },
+  nisnNote: {
+  en: "Notes: Enter the NIM/NISN if you are still in school with the following the order of the names of the team leader and members, with the format as follows as follows:\n\n1201301\n1302402\n1020100", id: "Catatan: Masukkan NIM/NISN jika masih sekolah dengan urutan nama ketua tim dan anggota, dengan format sebagai berikut:\n\n1201301\n1302402\n1020100",},
   nisnPh:            { en: "Input NIM / NISN of Leader & Team Member", id: "Masukkan NIM / NISN Ketua & Anggota Tim" },
   socialMedia:       { en: "Social Media Link",      id: "Link Media Sosial" },
   socialMediaNote:   { en: "Instagram, LinkedIn, or other social media (optional).", id: "Instagram, LinkedIn, atau media sosial lainnya (opsional)." },
   socialMediaPh:     { en: "https://instagram.com/username", id: "https://instagram.com/username" },
   schoolName:        { en: "Name of School/University", id: "Nama Sekolah/Universitas" },
-  schoolNameNote:    { en: "Write each member's school in order of their name in biodata, one per line.\nExample:\nSMA Negeri 1 Jakarta (Leader)\nSMK Telkom Bandung (Member1)", id: "Tulis nama sekolah tiap anggota sesuai urutan nama di biodata, satu baris per sekolah.\nContoh:\nSMA Negeri 1 Jakarta (Ketua)\nSMK Telkom Bandung (Anggota1)" },
+  schoolNameNote:    { en: "Write each member's school in order of their name in biodata, one per line.\nExample:\n\nSMA Negeri 1 Jakarta (Leader)\nSMK Telkom Bandung (Member1)", id: "Tulis nama sekolah tiap anggota sesuai urutan nama di biodata, satu baris per sekolah.\nContoh:\n\nSMA Negeri 1 Jakarta (Ketua)\nSMK Telkom Bandung (Anggota1)" },
   schoolNamePh:      { en: "SMA Negeri 1 Jakarta (Leader)\nSMK Telkom Bandung (Member1)", id: "SMA Negeri 1 Jakarta (Ketua)\nSMK Telkom Bandung (Anggota1)" },
   grade:             { en: "Grade / Year",           id: "Jenjang / Tahun" },
   gradePh:           { en: "-- Choose Grade --",     id: "-- Pilih Jenjang --" },
@@ -323,7 +338,7 @@ const T: Record<string, Record<Lang, string>> = {
   catCompPh:         { en: "-- Choose Category Competition --", id: "-- Pilih Kategori Kompetisi --" },
 };
 
-// ── Komponen Input Nomor Telepon — custom dropdown (support emoji) ─
+// ── Komponen Input Nomor Telepon — dengan search ──────────────────
 const PhoneInput = ({
   placeholder, valueCode, valueNumber, onChangeCode, onChangeNumber,
 }: {
@@ -331,15 +346,21 @@ const PhoneInput = ({
   onChangeCode: (v: string) => void; onChangeNumber: (v: string) => void;
 }) => {
   const [open, setOpen]             = useState(false);
+  const [search, setSearch]         = useState("");
   const [customCode, setCustomCode] = useState("");
   const ref                         = useRef<HTMLDivElement>(null);
   const isOther  = valueCode === "other";
   const selected = COUNTRY_CODES.find(c => c.code === valueCode) ?? COUNTRY_CODES[0];
+  const filtered = COUNTRY_CODES.filter(c =>
+    c.name.toLowerCase().includes(search.toLowerCase()) ||
+    c.code.includes(search)
+  );
 
-  // Tutup dropdown kalau klik di luar
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false); setSearch("");
+      }
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -348,7 +369,7 @@ const PhoneInput = ({
   return (
     <div className="flex gap-2 flex-wrap sm:flex-nowrap">
       {/* Trigger button */}
-      <div ref={ref} className="relative shrink-0 w-[160px]">
+      <div ref={ref} className="relative shrink-0 w-[180px]">
         <button
           type="button"
           onClick={() => setOpen(o => !o)}
@@ -363,22 +384,41 @@ const PhoneInput = ({
           </svg>
         </button>
 
-        {/* Dropdown list */}
+        {/* Dropdown dengan search */}
         {open && (
-          <div className="absolute z-50 mt-1 w-64 max-h-60 overflow-y-auto rounded-lg border border-border bg-card shadow-lg">
-            {COUNTRY_CODES.map((c, i) => (
-              <button
-                key={`${c.code}-${i}`}
-                type="button"
-                onClick={() => { onChangeCode(c.code); setOpen(false); if (c.code !== "other") setCustomCode(""); }}
-                className={`w-full flex items-center gap-3 px-3 py-2 text-sm text-left hover:bg-primary/10 transition-colors ${
-                  valueCode === c.code ? "bg-primary/10 text-primary font-semibold" : "text-foreground"
-                }`}
-              >
-                <FlagImg iso={c.iso} />
-                <span>{c.code !== "other" ? c.code : ""} {c.name}</span>
-              </button>
-            ))}
+          <div className="absolute z-50 mt-1 w-72 rounded-lg border border-border bg-card shadow-lg">
+            <div className="p-2 border-b border-border">
+              <input
+                autoFocus
+                type="text"
+                placeholder="Search country or code..."
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                className="w-full px-3 py-1.5 text-sm bg-muted/30 rounded-md border border-input focus:outline-none focus:border-primary"
+              />
+            </div>
+            <div className="max-h-56 overflow-y-auto">
+              {filtered.map((c, i) => (
+                <button
+                  key={`${c.code}-${i}`}
+                  type="button"
+                  onClick={() => {
+                    onChangeCode(c.code); setOpen(false);
+                    setSearch("");
+                    if (c.code !== "other") setCustomCode("");
+                  }}
+                  className={`w-full flex items-center gap-3 px-3 py-2 text-sm text-left hover:bg-primary/10 transition-colors ${
+                    valueCode === c.code ? "bg-primary/10 text-primary font-semibold" : "text-foreground"
+                  }`}
+                >
+                  <FlagImg iso={c.iso} />
+                  <span>{c.code !== "other" ? c.code : ""} {c.name}</span>
+                </button>
+              ))}
+              {filtered.length === 0 && (
+                <p className="px-3 py-3 text-sm text-muted-foreground">No results</p>
+              )}
+            </div>
           </div>
         )}
       </div>
@@ -494,8 +534,8 @@ const getRequired = (p: ParticipantType, c: CompetitionType) => [
   "NAMA_SEKOLAH", "GRADE", "NAME_SUPERVISOR",
   "SUPERVISOR_WA_NUM", "EMAIL_TEACHER_SUPERVISOR",
   "PROJECT_TITLE", "CATEGORIES",
+  "COMPLETE_ADDRESS",
   ...((COMPETITION_CATEGORY_OPTIONS[p]?.[c]?.length ?? 0) > 0 ? ["CATEGORY_COMPETITION"] : []),
-  ...(c === "online" ? ["COMPLETE_ADDRESS"] : []),
   ...(p === "international" ? ["COUNTRY"] : []),
 ];
 // ── Komponen Utama ────────────────────────────────────────────────
@@ -507,17 +547,38 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
   const [loading, setLoading]     = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError]         = useState("");
+  const [errors, setErrors]       = useState<Record<string, boolean>>({});
   const [leaderCode, setLeaderCode]         = useState("+62");
   const [supervisorCode, setSupervisorCode] = useState("+62");
 
-  const set = (key: string) => (v: string) => setForm(p => ({ ...p, [key]: v }));
-  const f   = (key: string) => form[key] || "";
+  const set = (key: string) => (v: string) => {
+    setForm(p => ({ ...p, [key]: v }));
+    if (v) setErrors(p => ({ ...p, [key]: false }));
+  };
+  const f = (key: string) => form[key] || "";
 
   const required    = getRequired(participant, competition);
   const isFormValid = required.every(k => !!f(k));
 
   const handleSubmit = async () => {
-    if (!isFormValid) return;
+    // Validasi semua field required — tampilkan error & scroll ke yang pertama
+    const newErrors: Record<string, boolean> = {};
+    required.forEach(k => { if (!f(k)) newErrors[k] = true; });
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      const firstEmpty = required.find(k => !f(k));
+      if (firstEmpty) {
+        const el = document.getElementById(`field-${firstEmpty}`);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY - 120;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      }
+      return;
+    }
+
+    setErrors({});
     setLoading(true); setError("");
     const cL = leaderCode === "other" ? "" : leaderCode;
     const cS = supervisorCode === "other" ? "" : supervisorCode;
@@ -577,12 +638,14 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
       <div className="bg-card border border-border rounded-2xl p-5 md:p-10 space-y-10">
 
         {/* Banner info */}
-        <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 text-sm text-muted-foreground leading-6">
-          <p className="font-semibold text-foreground mb-2">{pLabel.toUpperCase()} PARTICIPANT</p>
-          <ol className="list-decimal list-inside space-y-1">
-            <li>{t("info1")}</li><li>{t("info2")}</li><li>{t("info3")}</li>
-          </ol>
-        </div>
+      <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 text-sm text-muted-foreground leading-6">
+        <p className="font-semibold text-foreground mb-3">{t("infoBanner")}</p>
+        <ol className="list-decimal list-inside space-y-3">
+          <li>{t("info1")}</li>
+          <li>{t("info2")}</li>
+          <li>{t("info3")}</li>
+        </ol>
+      </div>
 
         {/* ── BIODATA ─────────────────────────────────────────── */}
         <section>
@@ -594,7 +657,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
             </div>
 
         {(COMPETITION_CATEGORY_OPTIONS[participant]?.[competition]?.length ?? 0) > 0 && (
-          <Field label={t("catComp")} required>
+          <Field label={t("catComp")} required fieldId="field-CATEGORY_COMPETITION" error={errors["CATEGORY_COMPETITION"]}>
             <SelectInput
               placeholder={t("catCompPh")}
               value={f("CATEGORY_COMPETITION")}
@@ -604,19 +667,19 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
           </Field>
         )}
 
-            <Field label={t("teamName")} required>
+            <Field label={t("teamName")} required fieldId="field-NAMA_LENGKAP" error={errors["NAMA_LENGKAP"]}>
               <p className="text-xs text-muted-foreground leading-5 whitespace-pre-line mb-2">{t("teamNameNote")}</p>
               <TextArea placeholder={t("teamNamePh")}
                 value={f("NAMA_LENGKAP")} onChange={set("NAMA_LENGKAP")} maxLength={400} />
             </Field>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Field label={t("leaderWa")} required note={t("leaderWaNote")}>
+              <Field label={t("leaderWa")} required note={t("leaderWaNote")} fieldId="field-LEADER_WHATSAPP_NUM" error={errors["LEADER_WHATSAPP_NUM"]}>
                 <PhoneInput placeholder="8xxxxxxxx"
                   valueCode={leaderCode} valueNumber={f("LEADER_WHATSAPP_NUM")}
                   onChangeCode={setLeaderCode} onChangeNumber={set("LEADER_WHATSAPP_NUM")} />
               </Field>
-              <Field label={t("leaderEmail")} required note={t("leaderEmailNote")}>
+              <Field label={t("leaderEmail")} required note={t("leaderEmailNote")} fieldId="field-LEADER_EMAIL" error={errors["LEADER_EMAIL"]}>
                 <TextInput placeholder={t("leaderEmailPh")}
                   value={f("LEADER_EMAIL")} onChange={set("LEADER_EMAIL")} type="email" />
               </Field>
@@ -640,12 +703,12 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
         <section>
           <SectionTitle title={t("secSchool")} />
           <div className="grid gap-5">
-            <Field label={t("schoolName")} required note={t("schoolNameNote")}>
+            <Field label={t("schoolName")} required note={t("schoolNameNote")} fieldId="field-NAMA_SEKOLAH" error={errors["NAMA_SEKOLAH"]}>
               <TextArea placeholder={t("schoolNamePh")}
                 value={f("NAMA_SEKOLAH")} onChange={set("NAMA_SEKOLAH")} maxLength={500} />
             </Field>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Field label={t("grade")} required>
+              <Field label={t("grade")} required fieldId="field-GRADE" error={errors["GRADE"]}>
                 <SelectInput placeholder={t("gradePh")} value={f("GRADE")} onChange={set("GRADE")}
                   options={["Elementary", "Secondary", "University"]} />
               </Field>
@@ -657,7 +720,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
                     value={f("PROVINCE")} onChange={set("PROVINCE")} />
                 </Field>
               ) : (
-                <Field label={t("country")} required>
+                <Field label={t("country")} required fieldId="field-COUNTRY" error={errors["COUNTRY"]}>
                   <CountrySelect
                     value={f("COUNTRY")}
                     onChange={set("COUNTRY")}
@@ -673,17 +736,17 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
         <section>
           <SectionTitle title={t("secSupervisor")} />
           <div className="grid gap-5">
-            <Field label={t("supervisorName")} required>
+            <Field label={t("supervisorName")} required fieldId="field-NAME_SUPERVISOR" error={errors["NAME_SUPERVISOR"]}>
               <TextArea placeholder={t("supervisorNamePh")}
                 value={f("NAME_SUPERVISOR")} onChange={set("NAME_SUPERVISOR")} />
             </Field>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Field label={t("supervisorWa")} required note={t("supervisorWaNote")}>
+              <Field label={t("supervisorWa")} required note={t("supervisorWaNote")} fieldId="field-SUPERVISOR_WA_NUM" error={errors["SUPERVISOR_WA_NUM"]}>
                 <PhoneInput placeholder="8xxxxxxxx"
                   valueCode={supervisorCode} valueNumber={f("SUPERVISOR_WA_NUM")}
                   onChangeCode={setSupervisorCode} onChangeNumber={set("SUPERVISOR_WA_NUM")} />
               </Field>
-              <Field label={t("supervisorEmail")} required>
+              <Field label={t("supervisorEmail")} required fieldId="field-EMAIL_TEACHER_SUPERVISOR" error={errors["EMAIL_TEACHER_SUPERVISOR"]}>
                 <TextInput placeholder={t("supervisorEmailPh")}
                   value={f("EMAIL_TEACHER_SUPERVISOR")} onChange={set("EMAIL_TEACHER_SUPERVISOR")} type="email" />
               </Field>
@@ -695,12 +758,12 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
         <section>
           <SectionTitle title={t("secProject")} />
           <div className="grid gap-5">
-            <Field label={t("projectTitle")} required note={t("projectTitleNote")}>
+            <Field label={t("projectTitle")} required note={t("projectTitleNote")} fieldId="field-PROJECT_TITLE" error={errors["PROJECT_TITLE"]}>
               <TextArea placeholder={t("projectTitlePh")}
                 value={f("PROJECT_TITLE")} onChange={set("PROJECT_TITLE")} maxLength={160} />
             </Field>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Field label={t("categories")} required>
+              <Field label={t("categories")} required fieldId="field-CATEGORIES" error={errors["CATEGORIES"]}>
                 <SelectInput placeholder={t("categoriesPh")} value={f("CATEGORIES")}
                   onChange={set("CATEGORIES")}
                   options={PROJECT_CATEGORIES} />
@@ -723,12 +786,12 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
         <section>
           <SectionTitle title={t("secGeneral")} />
           <div className="grid gap-5">
-            {competition === "online" && (
-              <Field label={t("address")} required note={t("addressNote")}>
+            
+              <Field label={t("address")} required note={t("addressNote")} fieldId="field-COMPLETE_ADDRESS" error={errors["COMPLETE_ADDRESS"]}>
                 <TextArea placeholder={t("addressPh")}
                   value={f("COMPLETE_ADDRESS")} onChange={set("COMPLETE_ADDRESS")} />
               </Field>
-            )}
+            
             <Field label={t("infoSource")}>
               <SelectInput placeholder={t("infoSourcePh")} value={f("INFORMATION_RESOURCES")}
                 onChange={set("INFORMATION_RESOURCES")} options={infoSources} />
@@ -748,7 +811,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
         <div className="pt-2">
           <Button variant="hero" size="lg"
             className="w-full text-base py-4 font-bold tracking-widest uppercase"
-            disabled={!isFormValid || loading} onClick={handleSubmit}>
+            disabled={loading} onClick={handleSubmit}>
             {loading ? t("submitting") : t("submitBtn")}
           </Button>
         </div>
