@@ -50,7 +50,6 @@ const L: Record<string, Record<Lang, string>> = {
   judgingCriteria:    { en: "Judging Criteria",                  id: "Kriteria Penilaian" },
   categoryLabel:      { en: "Category",                          id: "Kategori" },
   dayLabel:           { en: "Day",                               id: "Hari" },
-  howToRegister:      { en: "How to Register",                   id: "Cara Mendaftar" },
   registrationOpen:   { en: "Registration is open!",             id: "Pendaftaran dibuka!" },
   registrationClosed: { en: "Registration is currently closed.", id: "Pendaftaran saat ini ditutup." },
 };
@@ -350,23 +349,6 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
               </div>
             ) : (
               <div className="space-y-6">
-                <div className="tech-shell rounded-2xl p-8">
-                  <div className="flex items-center gap-3 mb-6">
-                    <ClipboardList className="w-6 h-6 text-primary" />
-                    <h3 className="text-base font-bold text-primary">{l("howToRegister")}</h3>
-                  </div>
-                  <ol className="space-y-4">
-                    {(lang === "id" ? data.regSteps.id : data.regSteps.en).map((step, i) => (
-                      <li key={i} className="flex gap-3">
-                        <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
-                          {i + 1}
-                        </span>
-                        <span className="text-muted-foreground text-sm leading-6">{step}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-
                 <div className="tech-shell rounded-2xl p-8 flex flex-col items-center gap-4 text-center">
                   <p className="text-sm text-muted-foreground">{l("registrationOpen")}</p>
                   <Button

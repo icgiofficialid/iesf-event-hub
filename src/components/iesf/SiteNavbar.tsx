@@ -96,17 +96,6 @@ const SiteNavbar = () => {
         <div className="hidden items-center gap-2 lg:flex">
           <ThemeToggle />
           <LangToggle />
-          {/* Register button — amber/kuning sesuai bintang logo */}
-          <NavLink
-            to="/events/yiesf"
-            className="flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-semibold transition-all hover:brightness-110"
-            style={{ background: "linear-gradient(135deg, #F59E0B, #FBBF24)", color: "#0d1526" }}
-          >
-            <svg width="10" height="10" viewBox="0 0 40 40" fill="none" className="shrink-0">
-              <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#0d1526"/>
-            </svg>
-            Register
-          </NavLink>
         </div>
       </div>
 
@@ -128,18 +117,6 @@ const SiteNavbar = () => {
             <ThemeToggle />
             <LangToggle />
           </div>
-          {/* Mobile register button — amber juga */}
-          <NavLink
-            to="/events/yiesf"
-            onClick={() => setOpen(false)}
-            className="flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all hover:brightness-110"
-            style={{ background: "linear-gradient(135deg, #F59E0B, #FBBF24)", color: "#0d1526" }}
-          >
-            <svg width="10" height="10" viewBox="0 0 40 40" fill="none">
-              <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#0d1526"/>
-            </svg>
-            Sign Up
-          </NavLink>
         </div>
       </div>
     </nav>
