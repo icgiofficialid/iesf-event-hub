@@ -245,7 +245,7 @@ const PROJECT_CATEGORIES = [
   "IoT & Robotic",
   "Informatics & Artificial Intelligence",
   "Life Sciences",
-  "Social Science & Humanities",
+  "Social Sciences & Humanities",
   "Physic, Energy & Engineering",
   "Health & Medicine",
 ];
