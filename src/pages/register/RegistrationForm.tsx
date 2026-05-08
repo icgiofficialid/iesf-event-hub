@@ -537,7 +537,7 @@ const getRequired = (p: ParticipantType, c: CompetitionType) => [
   "SUPERVISOR_WA_NUM", "EMAIL_TEACHER_SUPERVISOR",
   "PROJECT_TITLE", "CATEGORIES",
   "COMPLETE_ADDRESS",
-  ...((COMPETITION_CATEGORY_OPTIONS[p]?.[c]?.length ?? 0) > 0 ? ["CATEGORY_COMPETITION"] : []),
+  ...(p === "international" && c === "online" ? ["CATEGORY_COMPETITION"] : []),
   ...(p === "international" ? ["COUNTRY"] : []),
 ];
 // ── Komponen Utama ────────────────────────────────────────────────
@@ -592,6 +592,9 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
       WHATSAPP_NUMBER_SUPERVISOR: `${cS}${f("SUPERVISOR_WA_NUM")}`,
       PROVINCE: participant === "international" ? f("COUNTRY") : f("PROVINCE"),
       CATEGORY_PRICE: CATEGORY_PRICE_MAP[f("CATEGORY_COMPETITION")] ?? "",
+      CATEGORY_COMPETITION: f("CATEGORY_COMPETITION") || 
+  (participant === "indonesian" && competition === "online" ? "Online Competition" :
+   participant === "indonesian" && competition === "offline" ? "Offline Competition" : ""),
     };
 
     try {
