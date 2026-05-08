@@ -159,7 +159,7 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
             <img
               src={meta.coverImageLandscape ?? meta.coverImage}
               alt=""
-              className="absolute inset-0 w-full h-full object-cover opacity-20"
+              className="absolute inset-0 w-full h-full object-cover opacity-35"
             />
           )}
 
