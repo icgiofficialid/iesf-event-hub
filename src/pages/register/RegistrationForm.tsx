@@ -10,6 +10,7 @@ import {
   Field, TextInput, TextArea, SelectInput, SectionTitle, SuccessOverlay,
   type FormData, type ParticipantType, type CompetitionType,
   submitToSheet,
+  CATEGORY_PRICE_MAP, // ← tambah ini
 } from "./registerConfig";
 
 // ── Kode Negara (dengan bendera) ─────────────────────────────────
@@ -228,14 +229,15 @@ const COMPETITION_CATEGORY_OPTIONS: Record<string, Record<string, string[]>> = {
     online:  ["Online Competition"],
     offline: ["Offline Competition"],
   },
-  international: {
-    online:  [
-      "Online Competition",
-      "Online Competition + Certificate and Medal (SOUTH EAST ASIA)",
-      "Online Competition + Certificate and Medal (Exclude SOUTH EAST ASIA)",
-    ],
-    offline: ["Offline Competition"],
-  },
+    international: {
+      online: [
+        "Online Competition (E-Certificate Only)",
+        "International Online",
+        "Online Competition + one medal/team and Certificate for each member + shipping fee (SOUTH EAST ASIA)",
+        "Online Competition + one medal/team and Certificate for each member + shipping fee (Exclude SOUTH EAST ASIA)",
+      ],
+      offline: ["Offline Competition (International)"],
+    },
 };
 
 // ── Kategori Proyek (sesuai guidebook) ───────────────────────────
@@ -589,7 +591,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
       LEADER_WHATSAPP:            `${cL}${f("LEADER_WHATSAPP_NUM")}`,
       WHATSAPP_NUMBER_SUPERVISOR: `${cS}${f("SUPERVISOR_WA_NUM")}`,
       PROVINCE: participant === "international" ? f("COUNTRY") : f("PROVINCE"),
-      CATEGORY_PRICE:             f("CATEGORY_COMPETITION"),
+      CATEGORY_PRICE: CATEGORY_PRICE_MAP[f("CATEGORY_COMPETITION")] ?? "",
     };
 
     try {
@@ -656,7 +658,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
               <Field label={t("catCompetition")}><Input value={cLabel} disabled /></Field>
             </div>
 
-        {(COMPETITION_CATEGORY_OPTIONS[participant]?.[competition]?.length ?? 0) > 0 && (
+        {participant === "international" && competition === "online" && (
           <Field label={t("catComp")} required fieldId="field-CATEGORY_COMPETITION" error={errors["CATEGORY_COMPETITION"]}>
             <SelectInput
               placeholder={t("catCompPh")}

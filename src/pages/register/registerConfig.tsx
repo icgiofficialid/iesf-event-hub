@@ -16,12 +16,12 @@ export type FormData = Record<string, string>;
 // CATEGORY PRICE — ubah harga di sini jika berubah
 // ================================================================
 export const CATEGORY_PRICE_MAP: Record<string, string> = {
-  // Indonesian
-  "Online Competition":   "IDR 975.000",       // ← ubah harga di sini
-  "Offline Competition":  "IDR 3.750.000",       // ← ubah harga di sini
-  // International Online
-  "Online Competition + one medal/team and Certificate for each member + shipping fee (SOUTH EAST ASIA)":        "USD 225",  // ← ubah
-  "Online Competition + one medal/team and Certificate for each member + shipping fee (Exclude SOUTH EAST ASIA)":"USD 275",  // ← ubah
+  "Online Competition":                                                             "IDR 975.000",
+  "Offline Competition":                                                            "IDR 3.750.000",
+  "Online Competition (E-Certificate Only)":                                        "USD 80",
+  "Online Competition + Medal & Certificate + Shipping (South East Asia)":          "USD 225",
+  "Online Competition + Medal & Certificate + Shipping (Exclude South East Asia)":  "USD 275",
+  "Offline Competition (International)":                                            "USD 400",
 };
 
 export const REQUIRED_FIELDS = [
