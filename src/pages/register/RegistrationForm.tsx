@@ -244,7 +244,7 @@ const PROJECT_CATEGORIES = [
   "Environmental",
   "IoT & Robotic",
   "Informatics & Artificial Intelligence",
-  "Life Science",
+  "Life Sciences",
   "Social Science & Humanities",
   "Physic, Energy & Engineering",
   "Health & Medicine",

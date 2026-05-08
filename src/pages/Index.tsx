@@ -33,7 +33,7 @@ const EventCard = ({ event, index }: { event: EventMeta; index: number }) => {
             <img
               src={event.coverImage}
               alt=""
-              className="absolute inset-0 w-full h-center h-full object-cover opacity-20"
+              className="absolute inset-0 w-full h-center h-full object-contain opacity-20"
             />
           )}
 

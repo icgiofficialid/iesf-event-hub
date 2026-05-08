@@ -26,7 +26,10 @@ const LABELS = {
   ongoing:    { en: "Ongoing Now",       id: "Sedang Berlangsung" },
 };
 
-const EventCard = ({ event, index }: { event: IESFEvent; index: number }) => {
+// IESFEvent + coverImage yang di-inject dari registry
+type EnrichedEvent = IESFEvent & { coverImage?: string };
+
+const EventCard = ({ event, index }: { event: EnrichedEvent; index: number }) => {
   const navigate = useNavigate();
   const { lang } = useLang();
   const isOngoing = event.status === "ongoing";
@@ -45,6 +48,16 @@ const EventCard = ({ event, index }: { event: IESFEvent; index: number }) => {
         )}
 
         <div className={`relative h-52 bg-gradient-to-br ${event.coverGradient} flex items-end p-0`}>
+
+          {/* Foto cover dari registry */}
+          {event.coverImage && (
+            <img
+              src={event.coverImage}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover opacity-20"
+            />
+          )}
+
           {/* Ongoing strip banner */}
           {isOngoing && (
             <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-center gap-2 bg-green-400/90 backdrop-blur-sm py-1.5">
@@ -67,6 +80,7 @@ const EventCard = ({ event, index }: { event: IESFEvent; index: number }) => {
             <p className="text-white/60 text-[10px] uppercase tracking-[0.2em] mb-1">{event.subtitle}</p>
             <h3 className="text-white text-sm font-bold leading-tight line-clamp-2">{event.title}</h3>
           </div>
+
         </div>
 
         <div className="p-4 space-y-2">
@@ -88,6 +102,7 @@ const EventCard = ({ event, index }: { event: IESFEvent; index: number }) => {
             ))}
           </div>
         </div>
+
       </motion.div>
     </SectionReveal>
   );
@@ -100,7 +115,12 @@ const UpcomingEvents = () => {
 
   const { events: rawEvents, loading } = useEvents("iesf");
 
-  // Ambil slug yang visible (tidak shutdown) dari registry
+  // Map slug → data registry (untuk inject coverImage)
+  const registryMap = new Map(
+    getVisibleEvents().map(e => [e.slug, e])
+  );
+
+  // Slug yang boleh tampil (tidak shutdown, hanya ongoing+upcoming)
   const visibleSlugs = new Set(
     getVisibleEvents()
       .filter(e => e.status === "ongoing" || e.status === "upcoming")
@@ -113,11 +133,13 @@ const UpcomingEvents = () => {
     { label: LABELS.education[lang],   value: "Education" },
   ];
 
-  const filtered = rawEvents
-    // Hanya tampilkan ongoing + upcoming, skip past dan shutdown
+  const filtered: EnrichedEvent[] = rawEvents
+    // Hanya ongoing + upcoming, skip past dan shutdown
     .filter(e => (e.status === "ongoing" || e.status === "upcoming") && visibleSlugs.has(e.slug))
     // Sort: ongoing dulu
     .sort((a, b) => (a.status === "ongoing" ? -1 : b.status === "ongoing" ? 1 : 0))
+    // Inject coverImage dari registry
+    .map(e => ({ ...e, coverImage: registryMap.get(e.slug)?.coverImageLandscape ?? registryMap.get(e.slug)?.coverImage }))
     // Filter type dan search
     .filter(e => {
       const matchType   = filter === "All" || e.type === filter;

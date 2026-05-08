@@ -155,14 +155,13 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
           {/* Hero */}
           <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 p-8 md:p-14 text-white mb-10">
             
-            {/* Foto cover dari Cloudinary — opacity diturunkan */}
-            {meta?.coverImage && (
-              <img
-                src={meta.coverImage}
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover opacity-20"
-              />
-            )}
+          {(meta?.coverImageLandscape ?? meta?.coverImage) && (
+            <img
+              src={meta.coverImageLandscape ?? meta.coverImage}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover opacity-20"
+            />
+          )}
 
             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
             <div className="relative z-10 max-w-2xl">

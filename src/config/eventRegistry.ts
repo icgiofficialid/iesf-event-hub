@@ -55,6 +55,7 @@ export interface EventMeta {
   shutdownNote?: string;
     /** URL gambar cover dari Cloudinary (opsional, jika tidak ada pakai gradient) */
   coverImage?: string;
+  coverImageLandscape?: string;
 }
 
 // ================================================================
@@ -72,7 +73,8 @@ export const EVENTS_REGISTRY: EventMeta[] = [
       registrationOpen:     true,
       route:                "/events/biesf-2026",
       shutdown:             false,
-      coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1778052403/Banner-BIESF.jpg",
+      coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/c_fill,w_600,h_800/v1778068125/WhatsApp_Image_2026-05-06_at_18.48.01_bckpbf.jpg",
+      coverImageLandscape: "https://res.cloudinary.com/dwhobhexj/image/upload/c_fill,w_1200,h_450,g_auto/v1778052403/Banner-BIESF.jpg",
 
       sheet: {
         sheetUrl: "https://script.google.com/macros/s/AKfycbwanIpFgNGAqc7S0q6ccFCnXK1ruYWneAFPSBIdAjdvi8xImTkqwwaDXrBHGG2HYTvr/exec",

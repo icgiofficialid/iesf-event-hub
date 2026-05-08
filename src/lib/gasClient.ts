@@ -32,6 +32,7 @@ export interface IESFEvent {
   guidebookUrl:         string;
   registrationUrl:      string;
   spreadsheetId:        string;
+  coverImage?:          string;
 }
 
 // ── ENV ──────────────────────────────────────────────────────────
