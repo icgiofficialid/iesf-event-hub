@@ -8,7 +8,7 @@ import type { EventDetailData } from "@/config/eventDetailTypes";
 
 const biesf: EventDetailData = {
   slug: "biesf",
-  guidebookUrl: "https://drive.google.com/file/d/1wsKr2UDMjLN2Q8RrmJw532MAu-TD15Gk/view?usp=drive_link",
+  guidebookUrl: "https://drive.google.com/file/d/1fRGtFeaW6Yo0WeVcIXEzgTRTfvmJnEBC/view?usp=sharing",
 
   email:   "iesfofficial.icgi@gmail.com",
   website: "iesfofficial.or.id",
