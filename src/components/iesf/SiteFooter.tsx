@@ -11,7 +11,7 @@ const linkMap: Record<string, string> = {
   "Registration": "/#register",
 
   // Resources
-  "Guidebook": "/guide",
+  // "Guidebook": "/guide",
   // "Certificates": "/sertifikat",
   // "Media Kit": "/media-coverage",
   "FAQ": "/faq",
@@ -20,10 +20,10 @@ const linkMap: Record<string, string> = {
   "Contact Team": "/contact",
   "WhatsApp Help": "https://wa.me/628139905880",
   "Email Support": "mailto:iesfofficial.icgi@gmail.com",
-  "Venue Info": "https://icgi.or.id/",
+  // "Venue Info": "https://icgi.or.id/",
 
   // Social
-  "Instagram": "https://www.instagram.com/icgi.id?igsh=MTl5OW43aHNycjA0bA==",
+  "Instagram": "https://www.instagram.com/iesfofficial.icgi?igsh=MWdnM3I3cGk5cTBlNg==",
   "YouTube": "/",
 };
 

@@ -232,7 +232,6 @@ const COMPETITION_CATEGORY_OPTIONS: Record<string, Record<string, string[]>> = {
     international: {
       online: [
         "Online Competition (E-Certificate Only)",
-        "International Online",
         "Online Competition + one medal/team and Certificate for each member + shipping fee (SOUTH EAST ASIA)",
         "Online Competition + one medal/team and Certificate for each member + shipping fee (Exclude SOUTH EAST ASIA)",
       ],
@@ -586,15 +585,20 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
     const cS = supervisorCode === "other" ? "" : supervisorCode;
 
     // Untuk internasional: PROVINCE diisi nilai COUNTRY, agar kolom spreadsheet tetap konsisten
+
+    const resolvedCatComp =
+      f("CATEGORY_COMPETITION") ||
+      (participant === "indonesian"    && competition === "online"  ? "Online Competition" :
+      participant === "indonesian"    && competition === "offline" ? "Offline Competition" :
+      participant === "international" && competition === "offline" ? "Offline Competition (International)" : "");
+
     const finalForm: FormData = {
       ...form,
       LEADER_WHATSAPP:            `${cL}${f("LEADER_WHATSAPP_NUM")}`,
       WHATSAPP_NUMBER_SUPERVISOR: `${cS}${f("SUPERVISOR_WA_NUM")}`,
       PROVINCE: participant === "international" ? f("COUNTRY") : f("PROVINCE"),
-      CATEGORY_PRICE: CATEGORY_PRICE_MAP[f("CATEGORY_COMPETITION")] ?? "",
-      CATEGORY_COMPETITION: f("CATEGORY_COMPETITION") || 
-  (participant === "indonesian" && competition === "online" ? "Online Competition" :
-   participant === "indonesian" && competition === "offline" ? "Offline Competition" : ""),
+      CATEGORY_COMPETITION: resolvedCatComp,
+      CATEGORY_PRICE: CATEGORY_PRICE_MAP[resolvedCatComp] ?? "",
     };
 
     try {
@@ -608,7 +612,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
         projectTitle:         f("PROJECT_TITLE"),
         grade:                f("GRADE"),
         country:              participant === "international" ? f("COUNTRY") : undefined,
-        competitionCategory:  f("CATEGORY_COMPETITION") || undefined,
+        competitionCategory: resolvedCatComp || undefined,
       }), 2000);
     } catch {
       setError(t("errorMsg"));

@@ -15,13 +15,14 @@ export type FormData = Record<string, string>;
 // ================================================================
 // CATEGORY PRICE — ubah harga di sini jika berubah
 // ================================================================
+
 export const CATEGORY_PRICE_MAP: Record<string, string> = {
-  "Online Competition":                                                             "IDR 975.000",
-  "Offline Competition":                                                            "IDR 3.750.000",
-  "Online Competition (E-Certificate Only)":                                        "USD 80",
-  "Online Competition + Medal & Certificate + Shipping (South East Asia)":          "USD 225",
-  "Online Competition + Medal & Certificate + Shipping (Exclude South East Asia)":  "USD 275",
-  "Offline Competition (International)":                                            "USD 400",
+  "Online Competition":                                                                                                       "IDR 975.000",
+  "Offline Competition":                                                                                                      "IDR 3.750.000",
+  "Online Competition (E-Certificate Only)":                                                                                  "USD 80",
+  "Online Competition + one medal/team and Certificate for each member + shipping fee (SOUTH EAST ASIA)":                     "USD 225",
+  "Online Competition + one medal/team and Certificate for each member + shipping fee (Exclude SOUTH EAST ASIA)":             "USD 275",
+  "Offline Competition (International)":                                                                                      "USD 400",
 };
 
 export const REQUIRED_FIELDS = [
@@ -47,12 +48,16 @@ export const submitToSheet = async (
 ) => {
   const f = (key: string) => form[key] || "";
 
+  console.log("CATEGORY_COMPETITION value:", f("CATEGORY_COMPETITION"));
+console.log("CATEGORY_PRICE result:", CATEGORY_PRICE_MAP[f("CATEGORY_COMPETITION")]);
+console.log("CATEGORY_PRICE_MAP keys:", Object.keys(CATEGORY_PRICE_MAP));
+
   // Field dasar — sama untuk semua sheet
   const base: Record<string, string> = {
     sheetTarget,
     timestamp:                  new Date().toISOString(),
     CATEGORY_PARTICIPANT:       participant,
-    CATEGORY_COMPETITION:       competition,
+    CATEGORY_COMPETITION:       f("CATEGORY_COMPETITION") || competition,
     NAMA_SEKOLAH:               f("NAMA_SEKOLAH"),
     NAMA_LENGKAP:               f("NAMA_LENGKAP"),
     GRADE:                      f("GRADE"),
