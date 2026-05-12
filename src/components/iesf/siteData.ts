@@ -109,31 +109,38 @@ export const curationSteps: BilingualText[] = [
 // ── FAQ ───────────────────────────────────────────────────────────
 export const faqItems = [
   {
-    question: { en: "Who can join IESF?",                  id: "Siapa yang bisa mengikuti IESF?" },
-    answer:   { en: "IESF is open to primary, junior high, and senior high school students, as well as university students, independent researchers, STEM clubs, and young innovators. International teams are also welcome.", id: "IESF terbuka untuk siswa SD, SMP, SMA, serta mahasiswa, peneliti independen, klub STEM, dan inovator muda. Tim internasional juga disambut." },
+    question: { en: "Who can participate?", id: "Siapa yang bisa berpartisipasi?" },
+    answer:   { en: "Participants are students from Elementary, Secondary (Junior/Senior High), and University levels. Both Indonesian and international teams are welcome.", id: "Peserta adalah siswa dari jenjang SD, SMP/SMA, dan Universitas. Tim Indonesia maupun internasional sama-sama disambut." },
   },
   {
-    question: { en: "What is the team composition?",        id: "Bagaimana komposisi tim?" },
-    answer:   { en: "Recommended team size is 1–3 students per team. Each team may be accompanied by 1 mentor/teacher/advisor. One participant may only represent one main project entry.", id: "Ukuran tim yang disarankan adalah 1–3 siswa per tim. Setiap tim dapat didampingi 1 mentor/guru/pembimbing. Satu peserta hanya boleh mewakili satu entri proyek utama." },
+    question: { en: "What is the team composition?", id: "Bagaimana komposisi tim?" },
+    answer:   { en: "Each team consists of a maximum of 4 persons (1 leader & 3 members). Each team must have 1 supervisor/mentor.", id: "Setiap tim terdiri dari maksimal 4 orang (1 ketua & 3 anggota). Setiap tim harus memiliki 1 pembimbing/supervisor." },
+  },
+  {
+    question: { en: "What competition formats are available?", id: "Format kompetisi apa saja yang tersedia?" },
+    answer:   { en: "Competitions are held in hybrid format — Offline (on-site) and Online (via Zoom). Participants may choose the format that suits them during registration.", id: "Kompetisi diselenggarakan secara hybrid — Offline (tatap muka) dan Online (via Zoom). Peserta dapat memilih format yang sesuai saat pendaftaran." },
   },
   {
     question: { en: "What are the competition categories?", id: "Apa saja kategori kompetisi?" },
-    answer:   { en: "There are 5 categories: Engineering & Technology, Environmental Science & Sustainability, Health, Life Science & Biotechnology, Applied Science & Experimental Research, and Social Innovation & Educational Technology.", id: "Ada 5 kategori: Teknik & Teknologi, Ilmu Lingkungan & Keberlanjutan, Kesehatan & Bioteknologi, Sains Terapan & Penelitian Eksperimental, dan Inovasi Sosial & Teknologi Pendidikan." },
+    answer:   { en: "There are 8 categories: Mathematics Science & Technology, Environmental, IoT & Robotics, Informatics & Artificial Intelligence, Life Sciences, Social Sciences & Humanities, Physics Energy & Engineering, and Health & Medicine.", id: "Ada 8 kategori: Matematika Sains & Teknologi, Lingkungan, IoT & Robotika, Informatika & Kecerdasan Buatan, Ilmu Hayati, Ilmu Sosial & Humaniora, Fisika Energi & Rekayasa, dan Kesehatan & Kedokteran." },
   },
   {
-    question: { en: "What awards are available?",           id: "Penghargaan apa saja yang tersedia?" },
-    answer:   { en: "Awards include Gold, Silver, Bronze Medal + Certificate, Honorable Mention, and Finalist recognition. Additional prizes such as cash, scholarships, gadgets, and trip packages are under discussion.", id: "Penghargaan meliputi Medali Emas, Perak, Perunggu + Sertifikat, Honorable Mention, dan pengakuan Finalis. Hadiah tambahan seperti uang tunai, beasiswa, gadget, dan paket perjalanan sedang dalam pembahasan." },
+    question: { en: "What documents are required for submission?", id: "Dokumen apa yang diperlukan?" },
+    answer:   { en: "A full paper is required with chapters: Introduction, Literature Review, Research Methods, Results & Discussion, Conclusion, and References. Maximum 12 pages (excluding references), written in English, Arial font size 12, A4, PDF and Word format.", id: "Full paper diperlukan dengan bab: Pendahuluan, Tinjauan Pustaka, Metode Penelitian, Hasil & Pembahasan, Kesimpulan, dan Referensi. Maksimal 12 halaman (tidak termasuk referensi), dalam bahasa Inggris, font Arial 12, A4, format PDF dan Word." },
   },
   {
-    question: { en: "What is the submission deadline?",     id: "Apa batas waktu pengiriman?" },
-    answer:   { en: "All required registration data and project documents must be submitted no later than H-14 (14 days before the event). Late or incomplete submissions may affect eligibility.", id: "Semua data pendaftaran dan dokumen proyek harus dikirimkan selambat-lambatnya H-14 (14 hari sebelum acara). Pengiriman terlambat atau tidak lengkap dapat memengaruhi kelayakan." },
+    question: { en: "What are the judging criteria?", id: "Apa saja kriteria penilaian?" },
+    answer:   { en: "Projects are assessed across 5 aspects: Originality & Innovation (30%), Methodology (25%), Impact (20%), Presentation (15%), and Booth & Poster (10%). Criteria are subject to final committee confirmation.", id: "Proyek dinilai dari 5 aspek: Orisinalitas & Inovasi (30%), Metodologi (25%), Dampak (20%), Presentasi (15%), dan Booth & Poster (10%). Kriteria masih dapat berubah sesuai konfirmasi panitia." },
   },
   {
-    question: { en: "What language should be used?",        id: "Bahasa apa yang digunakan?" },
-    answer:   { en: "Project titles and abstracts are recommended in English. Oral presentation may be conducted in English or bilingual format. Teams should prepare basic English explanation for international judging.", id: "Judul proyek dan abstrak disarankan dalam bahasa Inggris. Presentasi lisan dapat dilakukan dalam bahasa Inggris atau format dwibahasa. Tim harus menyiapkan penjelasan dasar bahasa Inggris untuk penjurian internasional." },
+    question: { en: "What awards are available?", id: "Penghargaan apa saja yang tersedia?" },
+    answer:   { en: "All placing teams receive a Certificate & Medal. Special awards include ICGI Platinum Award, ICGI Premium Cash Award, ICGI Achievement Award, ICGI Educational Grant, and partner special awards.", id: "Semua tim juara mendapat Sertifikat & Medali (juara 1–4). Penghargaan khusus meliputi ICGI Platinum Award (paket 3 hari ke Kuala Lumpur), IYSA Grand Award (tunai 7,5 juta), ICGI Premium Cash Award (5 juta), ICGI Achievement Award (laptop), ICGI Educational Grant (3 juta), dan penghargaan khusus mitra." },
+  },
+  {
+    question: { en: "What language should be used for presentations?", id: "Bahasa apa yang digunakan untuk presentasi?" },
+    answer:   { en: "All participants must present their project in English. Full paper and presentation materials (PowerPoint) must also be in English.", id: "Semua peserta harus mempresentasikan proyek dalam bahasa Inggris. Full paper dan materi presentasi (PowerPoint) juga harus dalam bahasa Inggris." },
   },
 ];
-
 // ── PARTNERS ──────────────────────────────────────────────────────
 export const partners = ["IESF", "ICGI", "Yogyakarta", "STEM", "EduLab", "InnovaHub", "TechVerse", "RoboNext"] as const;
 
@@ -144,14 +151,14 @@ export const footerColumns = [
     links: [
       { en: "About IESF",  id: "Tentang IESF" },
       // { en: "Tracks",       id: "Jalur"         },
-      { en: "Timeline",     id: "Timeline"      },
+      // { en: "Timeline",     id: "Timeline"      },
       // { en: "Registration", id: "Pendaftaran"   },
     ],
   },
   {
     title: { en: "Resources", id: "Sumber Daya" },
     links: [
-      { en: "Guidebook",    id: "Buku Panduan"  },
+      // { en: "Guidebook",    id: "Buku Panduan"  },
       // { en: "Certificates", id: "Sertifikat"    },
       // { en: "Media Kit",    id: "Media Kit"     },
       { en: "FAQ",          id: "FAQ"           },

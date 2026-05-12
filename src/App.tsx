@@ -18,7 +18,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { IESF_CONFIG } from "./components/chatbot/useChatbot.ts";
-import AiChatbot from "./components/chatbot/AiChatbot.tsx";
+// import AiChatbot from "./components/chatbot/AiChatbot.tsx";
 
 // Pages
 import About        from "./pages/About.tsx";
@@ -36,6 +36,8 @@ import Register     from "@/pages/Register.tsx";
 import UpcomingEvents from "./pages/UpcomingEvents";
 import PastEvents   from "./pages/PastEvents";
 import ScrollToTop  from "./components/iesf/ScrollToTop.tsx";
+import News from "@/pages/News";
+import NewsDetailPage from "@/pages/NewsDetailPage";
 
 // ── Event detail pages ──────────────────────────────────────────
 // ✏️  Tambahkan import event baru di sini
@@ -80,8 +82,11 @@ const App = () => (
               <Route path="/guide"         element={<Guide />} />
               <Route path="/Register"      element={<Register />} />
               <Route path="*"             element={<NotFound />} />
+              <Route path="/news"         element= {<News />} />
+              <Route path="/news/:slug"         element= {<NewsDetailPage />} />
+              
             </Routes>
-            <AiChatbot config={IESF_CONFIG} />
+            {/* <AiChatbot config={IESF_CONFIG} /> */}
           </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>

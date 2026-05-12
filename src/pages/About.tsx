@@ -1,4 +1,4 @@
-import { ChevronRight } from "lucide-react";
+
 import { motion } from "framer-motion";
 
 import SectionReveal from "@/components/iesf/SectionReveal";
@@ -14,25 +14,30 @@ const About = () => {
   return (
     <SiteShell>
       <PageHero eyebrow={meta.eyebrow[lang]} title={meta.title[lang]} description={meta.description[lang]} icon={meta.icon} />
-
       <section className="container pb-16 md:pb-24">
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {categories.map((category, index) => {
-            const Icon = category.icon;
-            return (
-              <SectionReveal key={category.title.en} delay={index * 0.08} className="h-full">
-                <motion.article whileHover={{ y: -8 }} transition={{ duration: 0.25 }} className="tech-shell h-full rounded-[1.75rem] p-6">
-                  <Icon className="h-9 w-9 text-primary" />
-                  <h2 className="mt-5 text-xl text-foreground">{category.title[lang]}</h2>
-                  <p className="mt-3 text-sm leading-7 text-muted-foreground">{category.description[lang]}</p>
-                  <div className="mt-6 flex items-center text-sm text-primary">
-                    Explore track <ChevronRight className="h-4 w-4" />
-                  </div>
-                </motion.article>
-              </SectionReveal>
-            );
-          })}
-        </div>
+        <SectionReveal>
+          <motion.article
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.25 }}
+            className="tech-shell rounded-[1.75rem] p-7 md:p-10 max-w-3xl mx-auto"
+          >
+            <p className="text-sm md:text-base leading-7 md:leading-8 text-muted-foreground">
+              The advancement of science, technology, and engineering has become a vital foundation for the future of global
+              society. In today's rapidly changing world, young innovators are increasingly expected to move beyond theoretical
+              understanding and apply their knowledge through research, invention, and practical solutions to real-world challenges.
+            </p>
+            <p className="mt-5 text-sm md:text-base leading-7 md:leading-8 text-muted-foreground">
+              <span className="font-bold text-foreground">IESF</span> is established as an international academic innovation
+              platform that emphasizes scientific exploration, engineering creativity, and interdisciplinary thinking. It serves
+              as a premier venue where participants can showcase their projects, demonstrate analytical skills, and receive
+              professional evaluations from experts with distinguished academic backgrounds. Beyond competition, the event aims
+              to support a broader innovation ecosystem by integrating academic exhibitions, specialized workshops, and
+              networking opportunities. <span className="font-bold text-foreground">IESF</span> is positioned not merely as a
+              contest, but as a youth innovation festival that celebrates the synergy of education, cultural exchange, and global
+              progress.
+            </p>
+          </motion.article>
+        </SectionReveal>
       </section>
     </SiteShell>
   );

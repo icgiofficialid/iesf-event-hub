@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, PhoneCall, MapPin, Facebook, Instagram, Youtube, Linkedin } from "lucide-react";
+import { Mail, PhoneCall, MapPin, Facebook, Instagram, Youtube, Linkedin, Globe2 } from "lucide-react";
 import PageHero from "@/components/iesf/PageHero";
 import SiteShell from "@/components/iesf/SiteShell";
 import { pageMeta } from "@/components/iesf/siteData";
@@ -8,6 +8,8 @@ const Contact = () => {
   const meta = pageMeta.contact;
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const subject = encodeURIComponent(`Contact from ${form.name}`);
+  const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -51,23 +53,26 @@ const Contact = () => {
                 </div>
                 <div className="flex items-start gap-3">
                   <PhoneCall className="h-4 w-4 text-primary mt-1 shrink-0" />
-                  <span>+62 882-1324-8890</span>
+                  <span>+62 813-9905-880</span>
+                </div>
+                  <div className="flex items-start gap-3">
+                  <Globe2 className="h-4 w-4 text-primary mt-1 shrink-0" />
+                  <span>www.icgi.or.id</span>
                 </div>
               </div>
 
               <div>
                 <p className="text-sm font-semibold text-foreground mb-3">Connect with us :</p>
-                <div className="flex gap-3">
+                <div className="flex gap-3 ">
                   {[
-                    { icon: Facebook, href: "#" },
-                    { icon: Instagram, href: "#" },
-                    { icon: Youtube, href: "#" },
-                    { icon: Linkedin, href: "#" },
+
+                    { icon: Instagram, href: "https://www.instagram.com/icgi.id?igsh=MXZwMTl1ODc1OTRpcg==" },
+                    { icon: Youtube, href: "https://www.youtube.com/@icgiofficial" },
                   ].map(({ icon: Icon, href }, i) => (
                     <a
                       key={i}
                       href={href}
-                      className="w-9 h-9 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center text-white/70 hover:bg-white/15 hover:text-white hover:scale-105 transition-all duration-200"
+                      className="w-9 h-9 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center text-black/70 hover:bg-white/15 hover:text-white hover:scale-105 transition-all duration-200"
                     >
                       <Icon className="h-4 w-4" />
                     </a>
@@ -105,13 +110,17 @@ const Contact = () => {
               />
 
               <div>
-                <button
-                  onClick={handleSend}
-                  disabled={!form.name || !form.email || !form.message}
-                  className="bg-white/10 hover:bg-white/15 border border-white/20 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold px-8 py-2.5 rounded-lg text-sm transition-all duration-200 hover:scale-[1.02]"
-                >
-                  {sent ? "Sent!" : "Send"}
-                </button>
+              <button
+                onClick={() => {
+                  if (!form.name || !form.email || !form.message) return;
+                  window.location.href = `mailto:icgi.official.id@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                  handleSend();
+                }}
+                disabled={!form.name || !form.email || !form.message}
+                className="bg-white/10 hover:bg-white/15 border border-white/20 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold px-8 py-2.5 rounded-lg text-sm transition-all duration-200 hover:scale-[1.02]"
+              >
+                {sent ? "Sent!" : "Send"}
+              </button>
               </div>
             </div>
 

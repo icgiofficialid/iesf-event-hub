@@ -174,7 +174,7 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
               <p className="text-lg md:text-xl text-white/80 mb-8">{meta?.dateRange ?? "TBA"}</p>
               <div className="flex flex-wrap gap-3">
                 {meta?.registrationOpen ? (
-                  <Button variant="hero" size="lg" onClick={() => scrollTo("registration")}>
+                  <Button variant="hero" size="lg" onClick={() => navigate("/register")}>
                     {l("registerNow")}
                   </Button>
                 ) : (
@@ -193,6 +193,28 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
             </div>
           </div>
 
+          {/* Organized By */}
+            {data.organizers && data.organizers.length > 0 && (
+              <div className="mb-4">
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-[0.25em] mb-3 px-1">
+                  Organized by
+                </p>
+                <div className="grid grid-cols-3 gap-3">
+                  {data.organizers.map((org) => (
+                    <div
+                      key={org.name}
+                      className="tech-shell rounded-2xl p-4 flex items-center justify-center"
+                    >
+                      <img
+                        src={org.logo}
+                        alt={org.name}
+                        className="h-8 sm:h-10 w-auto max-w-full object-contain opacity-90 hover:opacity-100 transition-opacity"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             {/* Info */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
@@ -307,36 +329,95 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
             </div>
           </Sec>
 
-          {/* ══════ SCHEDULE ══════ */}
-          <Sec id="schedule">
-            <SecTitle id="schedule" />
-            <div className="space-y-6">
-              <p className="text-muted-foreground text-sm leading-7">{b(data.labels.scheduleDesc)}</p>
-              <div className="space-y-4">
-                {data.schedule.map((day) => (
-                  <div key={day.day} className="tech-shell rounded-2xl p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold shrink-0">
-                        {day.day}
-                      </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground">{l("dayLabel")} {day.day}</p>
-                        <h4 className="font-bold text-foreground">{b(day.title)}</h4>
-                      </div>
-                    </div>
-                    <ul className="space-y-1.5 ml-13">
-                      {(lang === "id" ? day.items.id : day.items.en).map((item, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <ChevronRight className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
+{/* ── Offline Schedule ── */}
+              {data.scheduleOffline && data.scheduleOffline.length > 0 && (
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="flex-1 h-px bg-border/50" />
+                    <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary border border-primary/30 rounded-full px-4 py-1.5">
+                      Offline Competition
+                    </span>
+                    <div className="flex-1 h-px bg-border/50" />
                   </div>
-                ))}
-              </div>
-            </div>
-          </Sec>
+
+                  <div className="space-y-3">
+                    {data.scheduleOffline.map((day) => (
+                      <div key={day.day} className="tech-shell rounded-2xl p-5">
+                        {/* Day header */}
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold shrink-0">
+                            {day.day}
+                          </div>
+                          <div>
+                            <p className="text-xs text-muted-foreground">{b(day.date)}</p>
+                            <h4 className="font-bold text-foreground text-sm">{b(day.title)}</h4>
+                          </div>
+                        </div>
+
+                        {/* Items */}
+                        <div className="space-y-2 ml-12">
+                          {day.items.map((item, i) => (
+                            <div key={i} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 bg-primary/5 rounded-xl px-4 py-3">
+                              <span className="text-xs font-semibold text-primary whitespace-nowrap shrink-0">
+                                {item.time}
+                              </span>
+                              <span className="flex-1 text-sm text-foreground">{b(item.description)}</span>
+                              <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">
+                                 {b(item.location)}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* ── Online Schedule ── */}
+              {data.scheduleOnline && data.scheduleOnline.length > 0 && (
+                <div className="mt-10 pt-6 border-t border-border/40">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="flex-1 h-px bg-border/50" />
+                    <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary border border-primary/30 rounded-full px-4 py-1.5">
+                      Online Competition
+                    </span>
+                    <div className="flex-1 h-px bg-border/50" />
+                  </div>
+
+                  <div className="space-y-3">
+                    {data.scheduleOnline.map((day) => (
+                      <div key={day.day} className="tech-shell rounded-2xl p-5">
+                        {/* Day header */}
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold shrink-0">
+                            {day.day}
+                          </div>
+                          <div>
+                            <p className="text-xs text-muted-foreground">{b(day.date)}</p>
+                            <h4 className="font-bold text-foreground text-sm">{b(day.title)}</h4>
+                          </div>
+                        </div>
+
+                        {/* Items */}
+                        <div className="space-y-2 ml-12">
+                          {day.items.map((item, i) => (
+                            <div key={i} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 bg-primary/5 rounded-xl px-4 py-3">
+                              <span className="text-xs font-semibold text-primary whitespace-nowrap shrink-0">
+                                {item.time}
+                              </span>
+                              <span className="flex-1 text-sm text-foreground">{b(item.description)}</span>
+                              <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">
+                                 {b(item.location)}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
           {/* ══════ REGISTRATION ══════ */}
           <Sec id="registration">

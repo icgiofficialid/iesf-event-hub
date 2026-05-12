@@ -8,14 +8,19 @@ import type { EventDetailData } from "@/config/eventDetailTypes";
 
 const biesf: EventDetailData = {
   slug: "biesf",
+  organizers: [
+    { name: "ICGI", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/Logo_ICGI_Bg_Transparant_1_rdvff1.png" },
+    { name: "IYSA", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/logo_IYSA_bagus_e6uai3.png" },
+    { name: "IPB",  logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/Logo_IPB_1_bqies4.png" },
+  ],
   guidebookUrl: "https://drive.google.com/file/d/1fRGtFeaW6Yo0WeVcIXEzgTRTfvmJnEBC/view?usp=sharing",
 
   email:   "iesfofficial.icgi@gmail.com",
   website: "iesfofficial.or.id",
-  venue:   "Denpasar, Bali, Indonesia",
+  venue:   "Bali, Indonesia",
 
   labels: {
-    eventBadge:    { en: "IESF · Competition 2026",             id: "IESF · Kompetisi 2026" },
+    eventBadge:    { en: "IESF · BIESF Competition 2026",             id: "IESF · Kompetisi 2026" },
     heroBadge:     { en: "Competition · Denpasar, Bali",        id: "Kompetisi · Denpasar, Bali" },
     categoriesDesc: {
       en: "Participants may register their projects under the following 8 competition categories.",
@@ -51,28 +56,28 @@ const biesf: EventDetailData = {
     ],
   },
 
-  about: {
-    welcome: {
-      en: "Welcome to the Bali International Engineering Science Fair (BIESF), an international science competition held for the first time in Bali as a platform for students to showcase their innovations, research, and projects in the fields of science, technology, and engineering, while fostering global collaboration and the development of critical and creative thinking skills.",
-      id: "Selamat datang di Bali International Engineering Science Fair (BIESF), kompetisi sains internasional yang pertama kali diselenggarakan di Bali sebagai platform bagi pelajar untuk memamerkan inovasi, penelitian, dan proyek di bidang sains, teknologi, dan rekayasa, sekaligus mendorong kolaborasi global.",
-    },
-    background: {
-      en: "The advancement of science, technology, and engineering has become a vital foundation for the future of global society. IESF is established as an international academic innovation platform that emphasizes scientific exploration, engineering creativity, and interdisciplinary thinking. It serves as a premier venue where participants can showcase their projects, demonstrate analytical skills, and receive professional evaluations from experts. ICGI initiated BIESF to develop innovative, creative, cultured, and character-driven students who can contribute to creating a more prosperous and dignified world.",
-      id: "Kemajuan sains, teknologi, dan rekayasa telah menjadi fondasi vital bagi masa depan masyarakat global. IESF hadir sebagai platform inovasi akademik internasional yang menekankan eksplorasi ilmiah, kreativitas rekayasa, dan pemikiran interdisipliner. ICGI menginisiasi BIESF untuk mengembangkan siswa yang inovatif, kreatif, berbudaya, dan berkarakter.",
-    },
-    objectives: {
-      en: [
-        "To provide a prestigious international stage for students to present original research, inventions, and engineering designs.",
-        "To encourage critical thinking, creativity, and professional problem-solving through expert jury evaluations.",
-        "To facilitate academic networking and cross-border knowledge exchange between young innovators and global experts.",
-      ],
-      id: [
-        "Menyediakan panggung internasional bergengsi bagi pelajar untuk mempresentasikan penelitian orisinal, invensi, dan desain rekayasa.",
-        "Mendorong pemikiran kritis, kreativitas, dan pemecahan masalah profesional melalui evaluasi juri ahli.",
-        "Memfasilitasi jaringan akademik dan pertukaran pengetahuan lintas batas antara inovator muda dan pakar global.",
-      ],
-    },
+about: {
+  welcome: {
+    en: "Bali International Engineering Science Fair (BIESF) is an international science competition will be held for the first time in Bali as a platform for students to showcase their innovations, research, and projects in the fields of science, technology, and engineering, while fostering global collaboration and the development of critical and creative thinking skills. The event will take place from November 16–20, 2026, with a series of activities including the Opening Ceremony & Judging Session Day 1 (November 16, 2026), Judging Session Day 2 (November 17, 2026), Private Judging Session (Selective) and Afternoon Tea & Cultural Exchange (November 18, 2026), Awarding Ceremony (November 19, 2026), and FunEdu Trip (November 20, 2026).",
+    id: "Bali International Engineering Science Fair (BIESF) adalah kompetisi sains internasional yang akan diselenggarakan untuk pertama kalinya di Bali sebagai platform bagi pelajar untuk memamerkan inovasi, penelitian, dan proyek di bidang sains, teknologi, dan rekayasa, sekaligus mendorong kolaborasi global dan pengembangan keterampilan berpikir kritis dan kreatif. Acara ini akan berlangsung dari 16–20 November 2026, dengan serangkaian kegiatan termasuk Upacara Pembukaan & Sesi Penjurian Hari 1 (16 November 2026), Sesi Penjurian Hari 2 (17 November 2026), Sesi Penjurian Privat (Selektif) dan Afternoon Tea & Pertukaran Budaya (18 November 2026), Upacara Penghargaan (19 November 2026), dan FunEdu Trip (20 November 2026).",
   },
+  background: {
+    en: "The competition categories in BIESF include: Mathematics, Science & Technology, Environmental, IoT & Robotics, Informatics & Artificial Intelligence, Life Sciences, Social Sciences & Humanities, Physics, Energy & Engineering, and Health & Medicine.",
+    id: "Kategori kompetisi dalam BIESF meliputi: Matematika, Sains & Teknologi, Lingkungan, IoT & Robotika, Informatika & Kecerdasan Buatan, Ilmu Hayati, Ilmu Sosial & Humaniora, Fisika, Energi & Rekayasa, dan Kesehatan & Kedokteran.",
+  },
+  objectives: {
+    en: [
+      "To provide a prestigious international stage for students to present original research, inventions, and engineering designs.",
+      "To encourage critical thinking, creativity, and professional problem-solving through expert jury evaluations.",
+      "To facilitate academic networking and cross-border knowledge exchange between young innovators and global experts.",
+    ],
+    id: [
+      "Menyediakan panggung internasional bergengsi bagi pelajar untuk mempresentasikan penelitian orisinal, invensi, dan desain rekayasa.",
+      "Mendorong pemikiran kritis, kreativitas, dan pemecahan masalah profesional melalui evaluasi juri ahli.",
+      "Memfasilitasi jaringan akademik dan pertukaran pengetahuan lintas batas antara inovator muda dan pakar global.",
+    ],
+  },
+},
 
   divisions: [
     { level: { en: "Elementary School",  id: "Sekolah Dasar" },   age: { en: "Elementary level", id: "Jenjang SD" } },
@@ -132,12 +137,11 @@ const biesf: EventDetailData = {
   ],
 
   judgingCriteria: [
-    { aspect: { en: "Originality & Innovation",          id: "Orisinalitas & Inovasi" },          weight: "25%" },
-    { aspect: { en: "Scientific / Technical Quality",    id: "Kualitas Ilmiah / Teknis" },         weight: "25%" },
-    { aspect: { en: "Methodology / Engineering Process", id: "Metodologi / Proses Rekayasa" },     weight: "20%" },
-    { aspect: { en: "Practical Application / Impact",    id: "Aplikasi Praktis / Dampak" },        weight: "15%" },
-    { aspect: { en: "Presentation & Communication",      id: "Presentasi & Komunikasi" },           weight: "10%" },
-    { aspect: { en: "Booth / Poster / Visual Display",   id: "Booth / Poster / Tampilan Visual" }, weight: "5%"  },
+    { aspect: { en: "Originality & Innovation",          id: "Orisinalitas & Inovasi" },          weight: "30%" },
+    { aspect: { en: "Methodology / Engineering Process", id: "Metodologi / Proses Rekayasa" },     weight: "25%" },
+    { aspect: { en: "Practical Application / Impact",    id: "Aplikasi Praktis / Dampak" },        weight: "20%" },
+    { aspect: { en: "Presentation & Communication",      id: "Presentasi & Komunikasi" },           weight: "15%" },
+    { aspect: { en: "Booth / Poster / Visual Display",   id: "Booth / Poster / Tampilan Visual" }, weight: "10%"  },
   ],
 
   awards: [
@@ -147,104 +151,79 @@ const biesf: EventDetailData = {
     { place: { en: "4th Place",                id: "Juara 4" },              medal: { en: "Certificate & Medal",         id: "Sertifikat & Medali" },        extra: { en: "Score: ≤54",     id: "Nilai: ≤54" } },
   ],
 
-  schedule: [
-    {
-      day: 1,
-      title: { en: "Opening Ceremony & Judging Session Day 1", id: "Upacara Pembukaan & Sesi Penilaian Hari 1" },
-      items: {
-        en: [
-          "November 16, 2026",
-          "Opening Ceremony",
-          "General Judging Session Day 1 — booth observation by jury panel",
-          "Participants: 7 min presentation + 8 min Q&A",
-          "Language: English (International) / Indonesian (National)",
-        ],
-        id: [
-          "16 November 2026",
-          "Upacara Pembukaan",
-          "Sesi Penilaian Umum Hari 1 — observasi booth oleh panel juri",
-          "Peserta: 7 menit presentasi + 8 menit tanya jawab",
-          "Bahasa: Inggris (Internasional) / Indonesia (Nasional)",
+  scheduleOffline: [
+      {
+        day: 1,
+        date: { en: "November 16th, 2026", id: "16 November 2026" },
+        title: { en: "Opening Ceremony & Judging Session Day 1", id: "Upacara Pembukaan & Sesi Penilaian Hari 1" },
+        items: [
+          { time: "08:00 AM – 09:00 AM", description: { en: "Opening Ceremony for Offline Participants",  id: "Upacara Pembukaan untuk Peserta Offline" }, location: { en: "Denpasar, Bali", id: "Denpasar, Bali" } },
+          { time: "10:00 AM – 04:00 PM", description: { en: "Offline Judging Session Day 1",              id: "Sesi Penilaian Offline Hari 1" },            location: { en: "Denpasar, Bali", id: "Denpasar, Bali" } },
         ],
       },
-    },
-    {
-      day: 2,
-      title: { en: "Judging Session Day 2 (Tentative)", id: "Sesi Penilaian Hari 2 (Tentatif)" },
-      items: {
-        en: [
-          "November 17, 2026",
-          "Continuation of General Judging",
-          "Participants with highest scores advance to Private Judging",
-        ],
-        id: [
-          "17 November 2026",
-          "Kelanjutan Penilaian Umum",
-          "Peserta dengan nilai tertinggi maju ke Private Judging",
+      {
+        day: 2,
+        date: { en: "November 17th, 2026", id: "17 November 2026" },
+        title: { en: "Judging Session Day 2 (Tentative)", id: "Sesi Penilaian Hari 2 (Tentatif)" },
+        items: [
+          { time: "10:00 AM – 04:00 PM", description: { en: "Offline Judging Session Day 2 (Tentative)", id: "Sesi Penilaian Offline Hari 2 (Tentatif)" }, location: { en: "Denpasar, Bali", id: "Denpasar, Bali" } },
         ],
       },
-    },
-    {
-      day: 3,
-      title: { en: "Private Judging Session & Cultural Exchange", id: "Private Judging & Pertukaran Budaya" },
-      items: {
-        en: [
-          "November 18, 2026",
-          "Private Judging Session (Selective) — PowerPoint presentation before judges",
-          "5 min presentation + 5 min Q&A per team",
-          "Afternoon Tea & Cultural Exchange",
-        ],
-        id: [
-          "18 November 2026",
-          "Sesi Private Judging (Selektif) — presentasi PowerPoint di hadapan juri",
-          "5 menit presentasi + 5 menit tanya jawab per tim",
-          "Afternoon Tea & Pertukaran Budaya",
+      {
+        day: 3,
+        date: { en: "November 18th, 2026", id: "18 November 2026" },
+        title: { en: "Private Judging & Cultural Exchange", id: "Private Judging & Pertukaran Budaya" },
+        items: [
+          { time: "08:00 AM – 11:00 AM", description: { en: "Private Judging Session for Offline Participants", id: "Sesi Private Judging untuk Peserta Offline" }, location: { en: "Denpasar, Bali", id: "Denpasar, Bali" } },
+          { time: "03:00 PM – 06:00 PM", description: { en: "Afternoon Tea & Cultural Exchange",               id: "Afternoon Tea & Pertukaran Budaya" },          location: { en: "Denpasar, Bali", id: "Denpasar, Bali" } },
         ],
       },
-    },
-    {
-      day: 4,
-      title: { en: "Awarding Ceremony & Closing", id: "Upacara Penghargaan & Penutupan" },
-      items: {
-        en: [
-          "November 19, 2026",
-          "Academic Awards Session — announcement of medal recipients",
-          "Presentation of ICGI Platinum Award, Achievement Award, and other special awards",
-          "Closing Ceremony & official photo session",
-        ],
-        id: [
-          "19 November 2026",
-          "Sesi Penghargaan Akademik — pengumuman penerima medali",
-          "Penyerahan ICGI Platinum Award, Achievement Award, dan penghargaan khusus lainnya",
-          "Upacara Penutupan & sesi foto resmi",
+      {
+        day: 4,
+        date: { en: "November 19th, 2026", id: "19 November 2026" },
+        title: { en: "Awarding Ceremony & Closing", id: "Upacara Penghargaan & Penutupan" },
+        items: [
+          { time: "10:00 AM – Finish", description: { en: "Awarding Ceremony for Offline Participants", id: "Upacara Penghargaan untuk Peserta Offline" }, location: { en: "Denpasar, Bali", id: "Denpasar, Bali" } },
         ],
       },
-    },
-    {
-      day: 5,
-      title: { en: "Excursion (Optional)", id: "Eksursi (Opsional)" },
-      items: {
-        en: [
-          "November 20, 2026",
-          "Tanjung Benoa Water Sport",
-          "GWK (Garuda Wisnu Kencana)",
-          "Pantai Melasti — Kecak Traditional Dance",
-          "Pura Titra Empul",
-          "Tanah Lot",
-          "Dinner at Jimbaran Beach",
-        ],
-        id: [
-          "20 November 2026",
-          "Tanjung Benoa Water Sport",
-          "GWK (Garuda Wisnu Kencana)",
-          "Pantai Melasti — Tari Kecak",
-          "Pura Titra Empul",
-          "Tanah Lot",
-          "Makan Malam di Pantai Jimbaran",
+      {
+        day: 5,
+        date: { en: "November 20th, 2026", id: "20 November 2026" },
+        title: { en: "FunEdu Trip (Optional)", id: "FunEdu Trip (Opsional)" },
+        items: [
+          { time: "07:00 AM – Finish", description: { en: "FunEdu Trip for Offline Participants", id: "FunEdu Trip untuk Peserta Offline" }, location: { en: "Bali", id: "Bali" } },
         ],
       },
-    },
-  ],
+    ],
+
+    scheduleOnline: [
+      {
+        day: 1,
+        date: { en: "November 25th, 2026", id: "25 November 2026" },
+        title: { en: "Opening Ceremony & Judging Session Day 1", id: "Upacara Pembukaan & Sesi Penilaian Hari 1" },
+        items: [
+          { time: "08:30 AM – Finish", description: { en: "Opening Ceremony & Online Judging Session Day 1", id: "Upacara Pembukaan & Sesi Penilaian Online Hari 1" }, location: { en: "ZOOM", id: "ZOOM" } },
+        ],
+      },
+      {
+        day: 2,
+        date: { en: "November 26th, 2026", id: "26 November 2026" },
+        title: { en: "Online Judging Session Day 2 (Tentative)", id: "Sesi Penilaian Online Hari 2 (Tentatif)" },
+        items: [
+          { time: "10:00 AM – Finish", description: { en: "Online Judging Session Day 2 (Tentative)", id: "Sesi Penilaian Online Hari 2 (Tentatif)" }, location: { en: "ZOOM", id: "ZOOM" } },
+        ],
+      },
+      {
+        day: 3,
+        date: { en: "November 27th, 2026", id: "27 November 2026" },
+        title: { en: "Awarding Ceremony", id: "Upacara Penghargaan" },
+        items: [
+          { time: "02:00 PM – Finish", description: { en: "Awarding Ceremony for Online Participants", id: "Upacara Penghargaan untuk Peserta Online" }, location: { en: "ZOOM", id: "ZOOM" } },
+        ],
+      },
+    ],
+
+    schedule: [], // kept for type compatibility
 };
 
 export default biesf;

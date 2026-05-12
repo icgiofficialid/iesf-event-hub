@@ -150,15 +150,9 @@ const LanguageContext = createContext<{
 });
 
 export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
-  const [lang, setLang] = useState<Language>(
-    () => (localStorage.getItem("lang") as Language) || "en"
-  );
+  const lang: Language = "en";
 
-  const toggle = () => {
-    const next = lang === "en" ? "id" : "en";
-    setLang(next);
-    localStorage.setItem("lang", next);
-  };
+  const toggle = () => {}; // disabled
 
   const tr = (key: TranslationKey): string => translations[key]?.[lang] ?? key;
 

@@ -19,6 +19,7 @@ export interface EventDetailData {
   venue:        string;
   /** URL ke file guidebook (PDF/Drive). Jika kosong, tombol tidak ditampilkan. */
   guidebookUrl?: string;
+  organizers?: { name: string; logo: string }[];
 
   labels: {
     eventBadge:     BilingualText;
@@ -72,4 +73,26 @@ export interface EventDetailData {
     title: BilingualText;
     items: { en: string[]; id: string[] };
   }>;
+
+  scheduleOffline?: {
+  day: number;
+  date: { en: string; id: string };
+  title: { en: string; id: string };
+  items: {
+    time: string;
+    description: { en: string; id: string };
+    location: { en: string; id: string };
+  }[];
+}[];
+
+scheduleOnline?: {
+  day: number;
+  date: { en: string; id: string };
+  title: { en: string; id: string };
+  items: {
+    time: string;
+    description: { en: string; id: string };
+    location: { en: string; id: string };
+  }[];
+}[];
 }

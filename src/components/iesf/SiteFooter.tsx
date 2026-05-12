@@ -24,7 +24,7 @@ const linkMap: Record<string, string> = {
 
   // Social
   "Instagram": "https://www.instagram.com/iesfofficial.icgi?igsh=MWdnM3I3cGk5cTBlNg==",
-  "YouTube": "/",
+  "YouTube": "https://www.youtube.com/@icgiofficial",
 };
 
 const SiteFooter = () => {

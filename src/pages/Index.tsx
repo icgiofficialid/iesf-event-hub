@@ -4,13 +4,14 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowRight, MapPin, Calendar, ChevronRight } from "lucide-react";
+import { X, ArrowRight, MapPin, Calendar, } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import SiteShell from "@/components/iesf/SiteShell";
 import SectionReveal from "@/components/iesf/SectionReveal";
-import { categories, pageMeta } from "@/components/iesf/siteData";
+import {pageMeta } from "@/components/iesf/siteData";
 import { useLang } from "@/components/LanguageProvider";
 import { getVisibleEvents, type EventMeta } from "@/config/eventRegistry";
+import { newsItems } from "@/config/newsData";
 
 // ── EVENT CARD — elevated poster style ────────────────────────────
 const EventCard = ({ event, index }: { event: EventMeta; index: number }) => {
@@ -458,33 +459,67 @@ const Index = () => {
               {meta.description[lang]}
             </p>
           </SectionReveal>
+<div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
 
-          <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
-            {categories.map((category, index) => {
-              const Icon = category.icon;
-              const isLast = index === categories.length - 1;
-              const isOdd = categories.length % 2 !== 0;
-              return (
-                <SectionReveal
-                  key={category.title.en}
-                  delay={index * 0.08}
-                  className={`h-full ${isLast && isOdd ? "sm:col-span-2 lg:col-span-1 flex justify-center" : ""}`}
-                >
-                  <motion.article
-                    whileHover={{ y: -8 }}
-                    transition={{ duration: 0.25 }}
-                    className={`tech-shell h-full rounded-[1.75rem] p-6 cursor-pointer group w-full ${isLast && isOdd ? "sm:max-w-sm lg:max-w-none" : ""}`}
-                  >
-                    <Icon className="h-9 w-9 text-primary" />
-                    <h2 className="mt-5 text-xl text-foreground font-semibold">{category.title[lang]}</h2>
-                    <p className="mt-3 text-sm leading-7 text-muted-foreground">{category.description[lang]}</p>
-                    <div className="mt-6 flex items-center text-sm text-primary gap-0.5 group-hover:gap-1.5 transition-all">
-                      Explore track <ChevronRight className="h-4 w-4" />
-                    </div>
-                  </motion.article>
-                </SectionReveal>
-              );
-            })}
+            <SectionReveal delay={0} className="h-full">
+              <motion.article whileHover={{ y: -6 }} transition={{ duration: 0.25 }} className="tech-shell rounded-2xl p-6 h-full">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" /></svg>
+                </div>
+                <h3 className="font-bold text-foreground mb-3">Global Foundation</h3>
+                <p className="text-sm leading-7 text-muted-foreground">
+                  The advancement of science, technology, and engineering has become a vital foundation for the future of global society.
+                </p>
+              </motion.article>
+            </SectionReveal>
+
+            <SectionReveal delay={0.08} className="h-full">
+              <motion.article whileHover={{ y: -6 }} transition={{ duration: 0.25 }} className="tech-shell rounded-2xl p-6 h-full">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                </div>
+                <h3 className="font-bold text-foreground mb-3">Innovation Platform</h3>
+                <p className="text-sm leading-7 text-muted-foreground">
+                  IESF is an international academic innovation platform emphasizing scientific exploration, engineering creativity, and interdisciplinary thinking.
+                </p>
+              </motion.article>
+            </SectionReveal>
+
+            <SectionReveal delay={0.16} className="h-full">
+              <motion.article whileHover={{ y: -6 }} transition={{ duration: 0.25 }} className="tech-shell rounded-2xl p-6 h-full">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                </div>
+                <h3 className="font-bold text-foreground mb-3">Premier Showcase</h3>
+                <p className="text-sm leading-7 text-muted-foreground">
+                  A premier venue where participants showcase projects, demonstrate analytical skills, and receive evaluations from distinguished academic experts.
+                </p>
+              </motion.article>
+            </SectionReveal>
+
+            <SectionReveal delay={0.24} className="h-full">
+              <motion.article whileHover={{ y: -6 }} transition={{ duration: 0.25 }} className="tech-shell rounded-2xl p-6 h-full">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                </div>
+                <h3 className="font-bold text-foreground mb-3">Innovation Ecosystem</h3>
+                <p className="text-sm leading-7 text-muted-foreground">
+                  Beyond competition, IESF supports a broader ecosystem integrating academic exhibitions, specialized workshops, and networking opportunities.
+                </p>
+              </motion.article>
+            </SectionReveal>
+
+            <SectionReveal delay={0.32} className="h-full sm:col-span-2 lg:col-span-2">
+              <motion.article whileHover={{ y: -6 }} transition={{ duration: 0.25 }} className="tech-shell rounded-2xl p-6 h-full">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
+                </div>
+                <h3 className="font-bold text-foreground mb-3">Youth Innovation Festival</h3>
+                <p className="text-sm leading-7 text-muted-foreground">
+                  IESF is positioned not merely as a contest, but as a youth innovation festival that celebrates the synergy of education, cultural exchange, and global progress — inspiring the next generation of scientists and engineers.
+                </p>
+              </motion.article>
+            </SectionReveal>
           </div>
         </div>
       </section>
@@ -528,6 +563,65 @@ const Index = () => {
           <EventPopup event={popupEvent} onClose={() => setShowPopup(false)} />
         )}
       </AnimatePresence>
+
+
+    {/* ── SECTION 4: LATEST NEWS ──────────────────────────────── */}
+      <section className="container pb-20 md:pb-28">
+        <SectionReveal className="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2">
+              <svg width="10" height="10" viewBox="0 0 40 40" fill="none">
+                <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#F59E0B"/>
+              </svg>
+              <p className="text-xs uppercase tracking-[0.35em] text-amber-400 font-semibold">Latest Updates</p>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">News & Announcements</h2>
+          </div>
+          <button
+            onClick={() => navigate("/news")}
+            className="self-start sm:self-auto flex items-center gap-2 rounded-xl border border-border px-4 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground hover:border-primary/40 transition-all"
+          >
+            All news <ArrowRight className="h-4 w-4" />
+          </button>
+        </SectionReveal>
+
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {newsItems.slice(0, 3).map((item, i) => (
+            <SectionReveal key={item.slug} delay={i * 0.08} className="h-full">
+              <motion.article
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.25 }}
+                onClick={() => navigate(`/news/${item.slug}`)}
+                className="tech-shell rounded-2xl overflow-hidden cursor-pointer group h-full flex flex-col"
+              >
+                <div className="h-36 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center overflow-hidden">
+                  {item.coverImage ? (
+                    <img src={item.coverImage} alt={item.title} className="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-500" />
+                  ) : (
+                    <svg className="w-8 h-8 text-primary/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                    </svg>
+                  )}
+                </div>
+                <div className="p-5 flex flex-col flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary border border-primary/30 rounded-full px-2.5 py-0.5">
+                      {item.category}
+                    </span>
+                    <span className="text-[11px] text-muted-foreground">{item.date}</span>
+                  </div>
+                  <h3 className="font-bold text-foreground text-sm leading-snug mb-2 group-hover:text-primary transition-colors flex-1">
+                    {item.title}
+                  </h3>
+                  <div className="flex items-center gap-1 text-xs text-primary font-semibold mt-2">
+                    Read more <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </motion.article>
+            </SectionReveal>
+          ))}
+        </div>
+      </section>
 
     </SiteShell>
   );

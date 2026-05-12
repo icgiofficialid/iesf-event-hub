@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { label: { en: "Past Events",     id: "Event Lalu"      }, href: "/past-events" },
    { label: { en: "FAQ",             id: "FAQ"             }, href: "/faq" },
   { label: { en: "Contact Us",      id: "Kontak"          }, href: "/contact" },
+  { label: { en: "News", id: "Berita" }, href: "/news" },
 ];
 
 const linkClass = "transition-colors hover:text-primary";
@@ -25,27 +26,27 @@ const ThemeToggle = () => {
   );
 };
 
-const LangToggle = () => {
-  const { lang, toggle } = useLang();
-  return (
-    <button
-      onClick={toggle}
-      className="flex items-center gap-1.5 p-2 rounded-lg hover:bg-muted transition-colors text-sm font-semibold text-muted-foreground"
-    >
-      {lang === "en" ? (
-        <>
-          <img src="https://flagcdn.com/w20/gb.png" alt="EN" className="w-5 h-4 rounded-sm object-cover" />
-          <span>EN</span>
-        </>
-      ) : (
-        <>
-          <img src="https://flagcdn.com/w20/id.png" alt="ID" className="w-5 h-4 rounded-sm object-cover" />
-          <span>ID</span>
-        </>
-      )}
-    </button>
-  );
-};
+// const LangToggle = () => {
+//   const { lang, toggle } = useLang();
+//   return (
+//     <button
+//       onClick={toggle}
+//       className="flex items-center gap-1.5 p-2 rounded-lg hover:bg-muted transition-colors text-sm font-semibold text-muted-foreground"
+//     >
+//       {lang === "en" ? (
+//         <>
+//           <img src="https://flagcdn.com/w20/gb.png" alt="EN" className="w-5 h-4 rounded-sm object-cover" />
+//           <span>EN</span>
+//         </>
+//       ) : (
+//         <>
+//           <img src="https://flagcdn.com/w20/id.png" alt="ID" className="w-5 h-4 rounded-sm object-cover" />
+//           <span>ID</span>
+//         </>
+//       )}
+//     </button>
+//   );
+// };
 
 const SiteNavbar = () => {
   const [open, setOpen] = useState(false);
@@ -95,7 +96,6 @@ const SiteNavbar = () => {
         {/* Right controls */}
         <div className="hidden items-center gap-2 lg:flex">
           <ThemeToggle />
-          <LangToggle />
         </div>
       </div>
 
@@ -115,7 +115,6 @@ const SiteNavbar = () => {
           ))}
           <div className="flex items-center gap-2 pt-1">
             <ThemeToggle />
-            <LangToggle />
           </div>
         </div>
       </div>
