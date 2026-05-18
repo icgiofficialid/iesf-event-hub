@@ -8,13 +8,9 @@ import { type ParticipantType, type CompetitionType } from "./register/registerC
 import HomeRegist   from "./register/homeregist";
 import HomeIndo     from "./register/homeIndo";
 import HomeInter    from "./register/homeInter";
-import IndoOnline   from "./register/IndoOnline";
-import IndoOffline  from "./register/IndoOffline";
-import InterOnline  from "./register/InterOnline";
-import InterOffline from "./register/InterOffline";
 import TermsBox     from "./register/TermsBox";
 import RegistrationForm, { type SummaryData } from "./register/RegistrationForm";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getSheetConfig } from "@/config/eventRegistry";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -36,13 +32,14 @@ const T: Record<string, Record<Lang, string>> = {
   labelSchool:     { en: "School/University",      id: "Sekolah/Universitas" },
   labelGrade:      { en: "Grade",                  id: "Jenjang" },
   labelCategory:   { en: "Project Category",       id: "Kategori Proyek" },
-  labelCompCat: { en: "Competition Package", id: "Paket Kompetisi" },
+  labelCompCat:    { en: "Competition Package",    id: "Paket Kompetisi" },
   labelProject:    { en: "Project Title",          id: "Judul Proyek" },
   intl:            { en: "International",          id: "Internasional" },
   indo:            { en: "Indonesian",             id: "Indonesia" },
   online:          { en: "Online",                 id: "Online" },
   offline:         { en: "Offline",                id: "Offline" },
   backHome:        { en: "Back to Home",           id: "Kembali ke Beranda" },
+  noEvent:         { en: "No event selected. Please register through an event page.", id: "Tidak ada event dipilih. Silakan daftar melalui halaman event." },
 };
 
 // ── Halaman Rangkuman (Step 5) ────────────────────────────────────
@@ -66,7 +63,6 @@ const SummaryPage = ({ data, onHome }: { data: SummaryData; onHome: () => void }
   }, []);
 
   const pLabel = data.participant === "international" ? t("intl") : t("indo");
-  const cLabel = data.competition === "online" ? t("online") : t("offline");
 
   const rows = [
     { label: t("labelParticipant"), value: pLabel },
@@ -113,11 +109,11 @@ type Step = 1 | 2 | 3 | 4 | 5;
 
 const Register = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const { lang } = useLang();
   const t = (k: string) => T[k]?.[lang as Lang] ?? k;
 
-  const eventSlug: string | null = (location.state as { eventSlug?: string })?.eventSlug ?? null;
+  // Baca eventSlug dari sessionStorage — disimpan EventDetailPage sebelum navigate
+  const eventSlug: string | null = sessionStorage.getItem("eventSlug");
 
   const [step, setStep]               = useState<Step>(1);
   const [participant, setParticipant] = useState<ParticipantType | null>(null);
@@ -135,40 +131,34 @@ const Register = () => {
   };
 
   const handleHome = () => {
+    sessionStorage.removeItem("eventSlug");
     setStep(1); setParticipant(null); setCompetition(null);
     setSheetUrl(""); setSheetTarget(""); setSummaryData(null);
     navigate("/");
   };
 
   const renderStep3 = () => {
-    const props = { onBack: () => setStep(2), onNext: handleTermsNext };
-
-    if (eventSlug && participant && competition) {
-      const cfg = getSheetConfig(eventSlug, participant, competition);
-      if (cfg) {
-        return (
-          <TermsBox
-            participant={participant}
-            competition={competition}
-            sheetUrl={cfg.sheetUrl}
-            sheetTarget={cfg.sheetTarget}
-            onBack={() => setStep(2)}
-            onNext={handleTermsNext}
-          />
-        );
-      }
+    if (!eventSlug || !participant || !competition) {
+      return <p className="text-muted-foreground text-sm text-center">{t("noEvent")}</p>;
     }
-
-    if (participant === "indonesian"    && competition === "online")  return <IndoOnline   {...props} />;
-    if (participant === "indonesian"    && competition === "offline") return <IndoOffline  {...props} />;
-    if (participant === "international" && competition === "online")  return <InterOnline  {...props} />;
-    if (participant === "international" && competition === "offline") return <InterOffline {...props} />;
-    return null;
+    const cfg = getSheetConfig(eventSlug, participant, competition);
+    if (!cfg) {
+      return <p className="text-muted-foreground text-sm text-center">{t("noEvent")}</p>;
+    }
+    return (
+      <TermsBox
+        participant={participant}
+        competition={competition}
+        sheetUrl={cfg.sheetUrl}
+        sheetTarget={cfg.sheetTarget}
+        onBack={() => setStep(2)}
+        onNext={handleTermsNext}
+      />
+    );
   };
 
   const STEP_LABELS = [t("stepParticipant"), t("stepCompetition"), t("stepTerms"), t("stepForm")];
 
-  // Step 5 — rangkuman tanpa stepper
   if (step === 5 && summaryData) {
     return (
       <SiteShell>
@@ -183,7 +173,6 @@ const Register = () => {
     <SiteShell>
       <section className="w-full min-h-screen py-24 md:py-32 px-4 flex flex-col items-center">
 
-        {/* Stepper */}
         <div className="flex items-center gap-2 mb-10">
           {STEP_LABELS.map((label, i) => (
             <div key={label} className="flex items-center gap-2">

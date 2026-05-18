@@ -48,10 +48,6 @@ export const submitToSheet = async (
 ) => {
   const f = (key: string) => form[key] || "";
 
-  console.log("CATEGORY_COMPETITION value:", f("CATEGORY_COMPETITION"));
-console.log("CATEGORY_PRICE result:", CATEGORY_PRICE_MAP[f("CATEGORY_COMPETITION")]);
-console.log("CATEGORY_PRICE_MAP keys:", Object.keys(CATEGORY_PRICE_MAP));
-
   // Field dasar — sama untuk semua sheet
   const base: Record<string, string> = {
     sheetTarget,
@@ -72,7 +68,7 @@ console.log("CATEGORY_PRICE_MAP keys:", Object.keys(CATEGORY_PRICE_MAP));
     FILE:                       f("FILE"),
     YES_NO:                     f("YES_NO"),
     JUDUL_PERNAH_BERPATISIPASI: f("JUDUL_PERNAH_BERPATISIPASI"),
-    CATEGORY_PRICE: CATEGORY_PRICE_MAP[f("CATEGORY_COMPETITION")] ?? "",
+    CATEGORY_PRICE:             CATEGORY_PRICE_MAP[f("CATEGORY_COMPETITION")] ?? "",
     CATEGORIES:                 f("CATEGORIES"),
     PROJECT_TITLE:              f("PROJECT_TITLE"),
   };
@@ -83,59 +79,19 @@ console.log("CATEGORY_PRICE_MAP keys:", Object.keys(CATEGORY_PRICE_MAP));
     : { COUNTRY:  f("COUNTRY") };
 
   const payload = { ...base, ...extra };
-
   const queryString = new URLSearchParams(payload).toString();
   const fullUrl = `${sheetUrl}?${queryString}`;
 
-  // DEBUG — lihat URL lengkap di console
-  console.log("=== SUBMIT DEBUG ===");
-  console.log("sheetTarget:", sheetTarget);
-  console.log("sheetUrl:", sheetUrl);
-  console.log("Full URL:", fullUrl);
-
-  // Coba semua metode sekaligus
-  // Metode 1: fetch
-  try {
-    await fetch(fullUrl, { method: "GET", mode: "no-cors" });
-    console.log("fetch: terkirim");
-  } catch (e) {
-    console.error("fetch gagal:", e);
-  }
-
-  // Metode 2: Image
-  // try {
-  //   await new Promise<void>((resolve) => {
-  //     const img = new Image();
-  //     img.onload = () => { console.log("img: onload"); resolve(); };
-  //     img.onerror = () => { console.log("img: onerror (request tetap terkirim)"); resolve(); };
-  //     img.src = fullUrl;
-  //     setTimeout(resolve, 5000);
-  //   });
-  // } catch (e) {
-  //   console.error("img gagal:", e);
-  // }
-
-  // Metode 3: Script tag
-  // try {
-  //   await new Promise<void>((resolve) => {
-  //     const script = document.createElement("script");
-  //     script.src = fullUrl;
-  //     script.onload = () => { console.log("script tag: onload"); resolve(); };
-  //     script.onerror = () => { console.log("script tag: onerror"); resolve(); };
-  //     document.head.appendChild(script);
-  //     setTimeout(resolve, 5000);
-  //   });
-  // } catch (e) {
-  //   console.error("script tag gagal:", e);
-  // }
-
-  console.log("=== SELESAI — cek sheet sekarang ===");
-
-  // WA REDIRECT DINONAKTIFKAN SEMENTARA
-  // setTimeout(() => {
-  //   window.location.href = `https://wa.me/${WHATSAPP_ADMIN}?text=${msg}`;
-  // }, 1500);
+  // Image trick — bypass CORS, request tetap sampai ke GAS meski browser error
+  await new Promise<void>((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve();
+    img.onerror = () => resolve(); // onerror tetap resolve — request sudah terkirim ke GAS
+    img.src = fullUrl;
+    setTimeout(resolve, 8000); // fallback timeout 8 detik
+  });
 };
+
 // ================================================================
 // Komponen UI Reusable
 // ================================================================
@@ -223,14 +179,11 @@ export const SectionTitle = ({ title }: { title: string }) => (
 export const SuccessOverlay = () => (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
     <div className="bg-card border border-border rounded-2xl p-10 flex flex-col items-center gap-4 text-center shadow-xl">
-      
-      {/* Icon centang */}
       <div className="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center">
         <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
         </svg>
       </div>
-
       <h2 className="text-xl font-bold text-foreground">Registration Submitted!</h2>
     </div>
   </div>

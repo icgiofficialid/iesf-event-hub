@@ -174,7 +174,10 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
               <p className="text-lg md:text-xl text-white/80 mb-8">{meta?.dateRange ?? "TBA"}</p>
               <div className="flex flex-wrap gap-3">
                 {meta?.registrationOpen ? (
-                  <Button variant="hero" size="lg" onClick={() => navigate("/register")}>
+                  <Button variant="hero" size="lg" onClick={() => {
+                    sessionStorage.setItem("eventSlug", slug);
+                    navigate("/register");
+                  }}>
                     {l("registerNow")}
                   </Button>
                 ) : (
@@ -433,8 +436,10 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
                   <p className="text-sm text-muted-foreground">{l("registrationOpen")}</p>
                   <Button
                     variant="hero" size="lg"
-                    onClick={() => navigate("/Register", { state: { eventSlug: slug } })}
-                  >
+                    onClick={() => {
+                        sessionStorage.setItem("eventSlug", slug);
+                        navigate("/register");
+                      }}                  >
                     {l("registerNow")}
                   </Button>
                 </div>
