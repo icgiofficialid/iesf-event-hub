@@ -658,7 +658,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
 
         {/* ── BIODATA ─────────────────────────────────────────── */}
         <section>
-          <SectionTitle title={t("secBiodata")} />
+          <SectionTitle title={t("Biodata")} />
           <div className="grid gap-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Field label={t("catParticipant")}><Input value={pLabel} disabled /></Field>
