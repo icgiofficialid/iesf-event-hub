@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import SiteShell  from "@/components/iesf/SiteShell";
 import { Button } from "@/components/ui/button";
-import { useLang } from "@/components/LanguageProvider";
 import { getEventMeta } from "@/config/eventRegistry";
 import type { EventDetailData } from "@/config/eventDetailTypes";
 
@@ -24,34 +23,32 @@ const iconMap: Record<string, React.ElementType> = {
   Cpu, Leaf, HeartPulse, FlaskConical, Users,
 };
 
-type Lang = "en" | "id";
-
 const SECTION_IDS = ["home", "about", "categories", "schedule", "registration"] as const;
 type SectionId = typeof SECTION_IDS[number];
 
-const SECTION_LABELS: Record<SectionId, Record<Lang, string>> = {
-  home:         { en: "Home",         id: "Beranda" },
-  about:        { en: "About",        id: "Tentang" },
-  categories:   { en: "Categories",   id: "Kategori" },
-  schedule:     { en: "Schedule",     id: "Jadwal" },
-  registration: { en: "Registration", id: "Pendaftaran" },
+const SECTION_LABELS: Record<SectionId, string> = {
+  home:         "Home",
+  about:        "About",
+  categories:   "Categories",
+  schedule:     "Schedule",
+  registration: "Registration",
 };
 
-const L: Record<string, Record<Lang, string>> = {
-  backToEvents:       { en: "Back to Upcoming Events",           id: "Kembali ke Event Mendatang" },
-  registerNow:        { en: "Register Now",                      id: "Daftar Sekarang" },
-  guidebook:          { en: "Guidebook",                         id: "Panduan" },
-  venue:              { en: "Venue",                             id: "Lokasi" },
-  contact:            { en: "Contact",                           id: "Kontak" },
-  website:            { en: "Website",                           id: "Website" },
-  welcomeNote:        { en: "Welcome Note",                      id: "Sambutan" },
-  objectives:         { en: "Objectives",                        id: "Tujuan" },
-  divisions:          { en: "Participant Divisions",             id: "Divisi Peserta" },
-  judgingCriteria:    { en: "Judging Criteria",                  id: "Kriteria Penilaian" },
-  categoryLabel:      { en: "Category",                          id: "Kategori" },
-  dayLabel:           { en: "Day",                               id: "Hari" },
-  registrationOpen:   { en: "Registration is open!",             id: "Pendaftaran dibuka!" },
-  registrationClosed: { en: "Registration is currently closed.", id: "Pendaftaran saat ini ditutup." },
+const L: Record<string, string> = {
+  backToEvents:       "Back to Upcoming Events",
+  registerNow:        "Register Now",
+  guidebook:          "Guidebook",
+  venue:              "Venue",
+  contact:            "Contact",
+  website:            "Website",
+  welcomeNote:        "Welcome Note",
+  objectives:         "Objectives",
+  divisions:          "Participant Divisions",
+  judgingCriteria:    "Judging Criteria",
+  categoryLabel:      "Category",
+  dayLabel:           "Day",
+  registrationOpen:   "Registration is open!",
+  registrationClosed: "Registration is currently closed.",
 };
 
 interface EventDetailPageProps {
@@ -61,10 +58,6 @@ interface EventDetailPageProps {
 
 const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
   const navigate = useNavigate();
-  const { lang } = useLang();
-  const l = (k: string) => L[k]?.[lang as Lang] ?? k;
-  const b = (t: { en: string; id: string }) => t[lang as Lang] ?? t.en;
-
   const meta = getEventMeta(slug);
   const [activeSection, setActiveSection] = useState<SectionId>("home");
 
@@ -107,7 +100,7 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
 
   const SecTitle = ({ id }: { id: SectionId }) => (
     <h2 className="text-xl font-bold text-primary uppercase tracking-wide mb-8 pb-2 border-b border-primary/20">
-      {SECTION_LABELS[id][lang as Lang]}
+      {SECTION_LABELS[id]}
     </h2>
   );
 
@@ -122,10 +115,10 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
               onClick={() => navigate("/events")}
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              <ArrowLeft className="w-4 h-4" /> {l("backToEvents")}
+              <ArrowLeft className="w-4 h-4" /> {L.backToEvents}
             </button>
             <span className="text-xs font-bold tracking-[0.2em] uppercase text-primary border border-primary/30 rounded-full px-3 py-1 hidden sm:block">
-              {b(data.labels.eventBadge)}
+              {data.labels.eventBadge}
             </span>
           </div>
 
@@ -141,7 +134,7 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
                     : "border-transparent text-muted-foreground hover:text-foreground"
                 }`}
               >
-                {SECTION_LABELS[id][lang as Lang]}
+                {SECTION_LABELS[id]}
               </button>
             ))}
           </div>
@@ -166,7 +159,7 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
             <div className="relative z-10 max-w-2xl">
               <span className="inline-block text-xs font-bold tracking-[0.3em] uppercase bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-6">
-                {b(data.labels.heroBadge)}
+                {data.labels.heroBadge}
               </span>
               <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-4">
                 {data.slug.toUpperCase()}
@@ -178,10 +171,10 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
                     sessionStorage.setItem("eventSlug", slug);
                     navigate("/register");
                   }}>
-                    {l("registerNow")}
+                    {L.registerNow}
                   </Button>
                 ) : (
-                  <Button variant="hero" size="lg" disabled>{l("registrationClosed")}</Button>
+                  <Button variant="hero" size="lg" disabled>{L.registrationClosed}</Button>
                 )}
                 {data.guidebookUrl && (
                   <Button
@@ -189,7 +182,7 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
                     className="bg-white/10 border-white/20 text-white hover:bg-white/20"
                     onClick={() => window.open(data.guidebookUrl, "_blank")}
                   >
-                    {l("guidebook")}
+                    {L.guidebook}
                   </Button>
                 )}
               </div>
@@ -221,9 +214,9 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
             {/* Info */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
-                { icon: MapPin, label: l("venue"),   value: data.venue },
-                { icon: Mail,   label: l("contact"), value: data.email },
-                { icon: Globe,  label: l("website"), value: data.website },
+                { icon: MapPin, label: L.venue,   value: data.venue },
+                { icon: Mail,   label: L.contact, value: data.email },
+                { icon: Globe,  label: L.website, value: data.website },
               ].map(({ icon: Icon, label, value }) => (
                 <div key={label} className="tech-shell rounded-2xl p-5 flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
@@ -243,15 +236,15 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
             <SecTitle id="about" />
             <div className="space-y-6">
               <div className="tech-shell rounded-2xl p-8">
-                <h3 className="text-base font-bold text-primary mb-4">{l("welcomeNote")}</h3>
-                <p className="text-muted-foreground leading-8">{b(data.about.welcome)}</p>
-                <p className="text-muted-foreground leading-8 mt-4">{b(data.about.background)}</p>
+                <h3 className="text-base font-bold text-primary mb-4">{L.welcomeNote}</h3>
+                <p className="text-muted-foreground leading-8">{data.about.welcome}</p>
+                <p className="text-muted-foreground leading-8 mt-4">{data.about.background}</p>
               </div>
 
               <div className="tech-shell rounded-2xl p-8">
-                <h3 className="text-base font-bold text-primary mb-6">{l("objectives")}</h3>
+                <h3 className="text-base font-bold text-primary mb-6">{L.objectives}</h3>
                 <ol className="space-y-3">
-                  {(lang === "id" ? data.about.objectives.id : data.about.objectives.en).map((obj, i) => (
+                  {data.about.objectives.map((obj, i) => (
                     <li key={i} className="flex gap-3">
                       <span className="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
                       <span className="text-muted-foreground text-sm leading-6">{obj}</span>
@@ -261,23 +254,23 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
               </div>
 
               <div className="tech-shell rounded-2xl p-8">
-                <h3 className="text-base font-bold text-primary mb-6">{l("divisions")}</h3>
+                <h3 className="text-base font-bold text-primary mb-6">{L.divisions}</h3>
                 <div className="space-y-2">
                   {data.divisions.map((d, i) => (
                     <div key={i} className="flex justify-between items-center py-2 border-b border-border/40 last:border-0">
-                      <span className="text-sm font-semibold text-foreground">{b(d.level)}</span>
-                      <span className="text-xs text-muted-foreground">{b(d.age)}</span>
+                      <span className="text-sm font-semibold text-foreground">{d.level}</span>
+                      <span className="text-xs text-muted-foreground">{d.age}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               <div className="tech-shell rounded-2xl p-8">
-                <h3 className="text-base font-bold text-primary mb-6">{l("judgingCriteria")}</h3>
+                <h3 className="text-base font-bold text-primary mb-6">{L.judgingCriteria}</h3>
                 <div className="space-y-2">
                   {data.judgingCriteria.map((c, i) => (
                     <div key={i} className="flex justify-between items-center py-2 border-b border-border/40 last:border-0">
-                      <span className="text-sm text-foreground">{b(c.aspect)}</span>
+                      <span className="text-sm text-foreground">{c.aspect}</span>
                       <span className="text-sm font-bold text-primary">{c.weight}</span>
                     </div>
                   ))}
@@ -290,7 +283,7 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
           <Sec id="categories">
             <SecTitle id="categories" />
             <div className="space-y-6">
-              <p className="text-muted-foreground text-sm leading-7">{b(data.labels.categoriesDesc)}</p>
+              <p className="text-muted-foreground text-sm leading-7">{data.labels.categoriesDesc}</p>
 
               <div className="grid gap-4">
                 {data.categories.map((cat) => {
@@ -302,10 +295,10 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
                       </div>
                       <div>
                         <p className="text-xs text-primary font-bold uppercase tracking-wide mb-1">
-                          {l("categoryLabel")} {cat.letter}
+                          {L.categoryLabel} {cat.letter}
                         </p>
-                        <h4 className="font-bold text-foreground mb-2">{b(cat.title)}</h4>
-                        <p className="text-muted-foreground text-sm leading-6">{b(cat.description)}</p>
+                        <h4 className="font-bold text-foreground mb-2">{cat.title}</h4>
+                        <p className="text-muted-foreground text-sm leading-6">{cat.description}</p>
                       </div>
                     </div>
                   );
@@ -320,10 +313,10 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
                 <div className="grid gap-2">
                   {data.awards.map((a, i) => (
                     <div key={i} className="flex items-center justify-between py-2 border-b border-border/40 last:border-0">
-                      <span className="text-sm font-semibold text-foreground">{b(a.place)}</span>
+                      <span className="text-sm font-semibold text-foreground">{a.place}</span>
                       <div className="text-right">
-                        <span className="text-sm font-bold text-primary">{b(a.medal)}</span>
-                        <span className="text-xs text-muted-foreground ml-2">{b(a.extra)}</span>
+                        <span className="text-sm font-bold text-primary">{a.medal}</span>
+                        <span className="text-xs text-muted-foreground ml-2">{a.extra}</span>
                       </div>
                     </div>
                   ))}
@@ -352,8 +345,8 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
                             {day.day}
                           </div>
                           <div>
-                            <p className="text-xs text-muted-foreground">{b(day.date)}</p>
-                            <h4 className="font-bold text-foreground text-sm">{b(day.title)}</h4>
+                            <p className="text-xs text-muted-foreground">{day.date}</p>
+                            <h4 className="font-bold text-foreground text-sm">{day.title}</h4>
                           </div>
                         </div>
 
@@ -364,9 +357,9 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
                               <span className="text-xs font-semibold text-primary whitespace-nowrap shrink-0">
                                 {item.time}
                               </span>
-                              <span className="flex-1 text-sm text-foreground">{b(item.description)}</span>
+                              <span className="flex-1 text-sm text-foreground">{item.description}</span>
                               <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">
-                                 {b(item.location)}
+                                 {item.location}
                               </span>
                             </div>
                           ))}
@@ -397,8 +390,8 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
                             {day.day}
                           </div>
                           <div>
-                            <p className="text-xs text-muted-foreground">{b(day.date)}</p>
-                            <h4 className="font-bold text-foreground text-sm">{b(day.title)}</h4>
+                            <p className="text-xs text-muted-foreground">{day.date}</p>
+                            <h4 className="font-bold text-foreground text-sm">{day.title}</h4>
                           </div>
                         </div>
 
@@ -409,9 +402,9 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
                               <span className="text-xs font-semibold text-primary whitespace-nowrap shrink-0">
                                 {item.time}
                               </span>
-                              <span className="flex-1 text-sm text-foreground">{b(item.description)}</span>
+                              <span className="flex-1 text-sm text-foreground">{item.description}</span>
                               <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">
-                                 {b(item.location)}
+                                 {item.location}
                               </span>
                             </div>
                           ))}
@@ -428,19 +421,19 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
             {!meta?.registrationOpen ? (
               <div className="flex flex-col items-center gap-4 py-16 text-center">
                 <AlertCircle className="w-12 h-12 text-muted-foreground" />
-                <p className="text-muted-foreground">{l("registrationClosed")}</p>
+                <p className="text-muted-foreground">{L.registrationClosed}</p>
               </div>
             ) : (
               <div className="space-y-6">
                 <div className="tech-shell rounded-2xl p-8 flex flex-col items-center gap-4 text-center">
-                  <p className="text-sm text-muted-foreground">{l("registrationOpen")}</p>
+                  <p className="text-sm text-muted-foreground">{L.registrationOpen}</p>
                   <Button
                     variant="hero" size="lg"
                     onClick={() => {
                         sessionStorage.setItem("eventSlug", slug);
                         navigate("/register");
                       }}                  >
-                    {l("registerNow")}
+                    {L.registerNow}
                   </Button>
                 </div>
               </div>

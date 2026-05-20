@@ -7,11 +7,6 @@
 // dan di EventDetailPage.tsx.
 // ================================================================
 
-export interface BilingualText {
-  en: string;
-  id: string;
-}
-
 export interface EventDetailData {
   slug:         string;
   email:        string;
@@ -22,77 +17,74 @@ export interface EventDetailData {
   organizers?: { name: string; logo: string }[];
 
   labels: {
-    eventBadge:     BilingualText;
-    heroBadge:      BilingualText;
-    categoriesDesc: BilingualText;
-    scheduleDesc:   BilingualText;
+    eventBadge:     string;
+    heroBadge:      string;
+    categoriesDesc: string;
+    scheduleDesc:   string;
   };
 
   stats: Array<{
     value: string;
-    label: BilingualText;
+    label: string;
   }>;
 
-  regSteps: {
-    en: string[];
-    id: string[];
-  };
+  regSteps: string[];
 
   about: {
-    welcome:    BilingualText;
-    background: BilingualText;
-    objectives: { en: string[]; id: string[] };
+    welcome:    string;
+    background: string;
+    objectives: string[];
   };
 
   divisions: Array<{
-    level: BilingualText;
-    age:   BilingualText;
+    level: string;
+    age:   string;
   }>;
 
   categories: Array<{
     letter:      string;
-    title:       BilingualText;
-    description: BilingualText;
+    title:       string;
+    description: string;
     /** Nama ikon dari lucide-react */
     icon:        string;
   }>;
 
   judgingCriteria: Array<{
-    aspect: BilingualText;
+    aspect: string;
     weight: string;
   }>;
 
   awards: Array<{
-    place: BilingualText;
-    medal: BilingualText;
-    extra: BilingualText;
+    place: string;
+    medal: string;
+    extra: string;
   }>;
 
   schedule: Array<{
     day:   number;
-    title: BilingualText;
-    items: { en: string[]; id: string[] };
+    title: string;
+    items: string[];
   }>;
 
-  scheduleOffline?: {
-  day: number;
-  date: { en: string; id: string };
-  title: { en: string; id: string };
-  items: {
-    time: string;
-    description: { en: string; id: string };
-    location: { en: string; id: string };
-  }[];
-}[];
+  scheduleOffline?: Array<{
+    day:   number;
+    date:  string;
+    title: string;
+    items: {
+      time:        string;
+      description: string;
+      location:    string;
+    }[];
+  }>;
 
-scheduleOnline?: {
-  day: number;
-  date: { en: string; id: string };
-  title: { en: string; id: string };
-  items: {
-    time: string;
-    description: { en: string; id: string };
-    location: { en: string; id: string };
-  }[];
-}[];
+  scheduleOnline?: Array<{
+    day:   number;
+    date:  string;
+    title: string;
+    items: {
+      time:        string;
+      description: string;
+      location:    string;
+    }[];
+  }>;
 }

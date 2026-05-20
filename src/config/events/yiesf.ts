@@ -1,197 +1,201 @@
 // ================================================================
-// yiesf.ts
-// Path: src/config/events/yiesf.ts
-//
-// Konten editorial YIESF — about, categories, awards, schedule.
-// File ini HANYA berisi data konten. Konfigurasi spreadsheet ada
-// di src/config/eventRegistry.ts (field `sheet`).
-//
-// Untuk event baru: buat file baru src/config/events/<slug>.ts
-// dengan struktur EventDetailData yang sama.
+// YIESF.ts
+// Path: src/config/events/YIESF.ts
+// Disesuaikan dengan Guidebook YIESF 2026
 // ================================================================
 
 import type { EventDetailData } from "@/config/eventDetailTypes";
 
-const yiesf: EventDetailData = {
+const YIESF: EventDetailData = {
   slug: "yiesf",
+  organizers: [
+    { name: "ICGI", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/Logo_ICGI_Bg_Transparant_1_rdvff1.png" },
+    { name: "IYSA", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/logo_IYSA_bagus_e6uai3.png" },
+    { name: "PROSPERA", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1779251590/prosepera.png" },
+  ],
+  guidebookUrl: "https://drive.google.com/file/d/1fRGtFeaW6Yo0WeVcIXEzgTRTfvmJnEBC/view?usp=sharing",
 
-  // ── Info umum ─────────────────────────────────────────────────
-  email:   "icgi.official.id@gmail.com",
-  website: "www.icgi.or.id",
-  venue:   "TBA — Yogyakarta, Indonesia",
+  email:   "iesfofficial.icgi@gmail.com",
+  website: "iesfofficial.or.id",
+  venue:   "Yogyakarta, Indonesia",
 
-  // ── Teks hero / label ─────────────────────────────────────────
   labels: {
-    eventBadge:    { en: "IESF · Competition 2026",              id: "IESF · Kompetisi 2026" },
-    heroBadge:     { en: "Competition · Yogyakarta, Indonesia",  id: "Kompetisi · Yogyakarta, Indonesia" },
-    categoriesDesc: {
-      en: "YIESF is designed as an academic fair-style competition across five core categories.",
-      id: "YIESF dirancang sebagai kompetisi bergaya pameran akademik dalam lima kategori utama.",
-    },
-    scheduleDesc: {
-      en: "The YIESF event spans 5 days including registration, main competition, workshops, networking, and the awarding ceremony.",
-      id: "Acara YIESF berlangsung selama 5 hari mencakup registrasi, kompetisi utama, workshop, networking, dan upacara penghargaan.",
-    },
+    eventBadge:    "IESF · YIESF Competition 2026",
+    heroBadge:     "Competition · Yogyakarta, Indonesia",
+    categoriesDesc: "Participants may register their projects under the following 8 competition categories.",
+    scheduleDesc:   "YIESF 2026 takes place from September 16–20, 2026 across 5 days of competition, judging, cultural exchange, and awarding ceremony.",
   },
 
-  // ── Statistik hero ────────────────────────────────────────────
   stats: [
-    { value: "500+", label: { en: "Teams Expected",         id: "Tim Peserta" } },
-    { value: "5",    label: { en: "Competition Categories", id: "Kategori Kompetisi" } },
-    { value: "1000+",label: { en: "Participants Overall",   id: "Total Peserta" } },
-    { value: "5",    label: { en: "of Innovation",          id: "Hari Inovasi" } },
+    { value: "500+",  label: "Teams Expected" },
+    { value: "8",     label: "Competition Categories" },
+    { value: "1000+", label: "Participants Overall" },
+    { value: "5",     label: "Days of Innovation" },
   ],
 
-  // ── Langkah pendaftaran (tab Registration) ────────────────────
-  regSteps: {
-    en: [
-      "Choose your participant category (Indonesian or International) and competition format (Online or Offline).",
-      "Review and agree to the Terms & Conditions for your chosen format.",
-      "Fill in the Registration Form with your team's biodata, school data, supervisor info, and project details.",
-      "Upload your payment proof via Google Drive and submit the form.",
-      "Your Letter of Acceptance (LoA) will be sent to the team leader's email within 3 working days.",
-    ],
-    id: [
-      "Pilih kategori peserta (Indonesia atau Internasional) dan format kompetisi (Online atau Offline).",
-      "Baca dan setujui Syarat & Ketentuan untuk format yang dipilih.",
-      "Isi Formulir Pendaftaran dengan biodata tim, data sekolah, info pembimbing, dan detail proyek.",
-      "Unggah bukti pembayaran melalui Google Drive dan kirimkan formulir.",
-      "Surat Penerimaan (LoA) akan dikirim ke email ketua tim dalam 3 hari kerja.",
-    ],
-  },
+  regSteps: [
+    "Choose your participant category (Indonesian or International) and competition format (Online or Offline).",
+    "Review and agree to the Terms & Conditions for your chosen format.",
+    "Fill in the Registration Form with your team's biodata, school data, supervisor info, and project details.",
+    "Upload your payment proof via Google Drive and submit the form. Transfer news: IESF2026_Leader Name_Name of Institution.",
+    "Your Letter of Acceptance (LoA) will be sent to the team leader's email within 3 working days.",
+  ],
 
-  // ── About ─────────────────────────────────────────────────────
   about: {
-    welcome: {
-      en: "Welcome to the Yogyakarta International Engineering Science Fair (YIESF), an international academic competition designed to provide a prestigious platform for students and young innovators to present research, invention, engineering design, and scientific innovation on a global stage.",
-      id: "Selamat datang di Yogyakarta International Engineering Science Fair (YIESF), kompetisi akademik internasional yang dirancang untuk memberikan platform bergengsi bagi pelajar dan inovator muda.",
-    },
-    background: {
-      en: "YIESF is established as a collaborative international event that combines academic competition, innovation exhibition, educational exchange, and youth inspiration. Held in Yogyakarta — widely recognized as a center of education, culture, and tourism in Indonesia.",
-      id: "YIESF hadir sebagai ajang kolaborasi internasional yang menggabungkan kompetisi akademik, pameran inovasi, pertukaran pendidikan, dan inspirasi pemuda. Diselenggarakan di Yogyakarta.",
-    },
-    objectives: {
-      en: [
-        "Provide an international competition platform for engineering, science, research, and innovation projects.",
-        "Encourage students and young innovators to develop critical thinking, creativity, and problem-solving skills.",
-        "Promote research culture and innovation mindset among school and university participants.",
-        "Facilitate cross-border academic exchange between participants, mentors, institutions, and judges.",
-        "Strengthen the image of Yogyakarta as an international destination for education and innovation.",
-      ],
-      id: [
-        "Menyediakan platform kompetisi internasional untuk proyek rekayasa, sains, penelitian, dan inovasi.",
-        "Mendorong pelajar dan inovator muda untuk mengembangkan pemikiran kritis, kreativitas, dan kemampuan pemecahan masalah.",
-        "Membudayakan riset dan mindset inovasi di kalangan peserta sekolah dan universitas.",
-        "Memfasilitasi pertukaran akademik lintas batas antara peserta, mentor, institusi, dan juri.",
-        "Memperkuat citra Yogyakarta sebagai destinasi internasional untuk pendidikan dan inovasi.",
-      ],
-    },
+    welcome: "Yogyakarta International Engineering Science Fair (YIESF) is an international science competition will be held for the first time in Yogyakarta as a platform for students to showcase their innovations, research, and projects in the fields of science, technology, and engineering, while fostering global collaboration and the development of critical and creative thinking skills. The event will take place from September 16–20, 2026, with a series of activities including the Opening Ceremony & Judging Session Day 1 (September 16, 2026), Judging Session Day 2 (September 17, 2026), Private Judging Session (Selective) and Afternoon Tea & Cultural Exchange (September 18, 2026), Awarding Ceremony (September 19, 2026), and FunEdu Trip (September 20, 2026).",
+    background: "The competition categories in YIESF include: Mathematics, Science & Technology, Environmental, IoT & Robotics, Informatics & Artificial Intelligence, Life Sciences, Social Sciences & Humanities, Physics, Energy & Engineering, and Health & Medicine.",
+    objectives: [
+      "To provide a prestigious international stage for students to present original research, inventions, and engineering designs.",
+      "To encourage critical thinking, creativity, and professional problem-solving through expert jury evaluations.",
+      "To facilitate academic networking and cross-border knowledge exchange between young innovators and global experts.",
+    ],
   },
 
-  // ── Divisi peserta ────────────────────────────────────────────
   divisions: [
-    { level: { en: "Elementary", id: "SD / Sekolah Dasar" },                          age: { en: "7–12 years old",  id: "7–12 tahun" } },
-    { level: { en: "Secondary",           id: "" },                  age: { en: "13–18 years old", id: "13–18 tahun" } },
-    { level: { en: "University", id: "Universitas" }, age: { en: "No age limit", id: "Tidak ada batasan usia" } },
+    { level: "Elementary School", age: "Elementary level" },
+    { level: "Secondary School",  age: "Secondary level" },
+    { level: "University",        age: "University level" },
   ],
 
-  // ── Kategori kompetisi ────────────────────────────────────────
   categories: [
     {
-      letter: "A",
-      title:       { en: "Engineering & Technology",                   id: "Teknik & Teknologi" },
-      description: { en: "Projects focused on engineering design, machinery, electronics, robotics, renewable systems, applied technology, smart devices, or technical innovation.", id: "Proyek yang berfokus pada desain teknik, mesin, elektronik, robotik, sistem energi terbarukan, teknologi terapan, perangkat pintar, atau inovasi teknis." },
+      letter: "1",
+      title:       "Mathematics, Science & Technology",
+      description: "Focuses on developing innovations based on mathematical, scientific, and technological concepts to effectively and practically solve various problems.",
       icon: "Cpu",
     },
     {
-      letter: "B",
-      title:       { en: "Environmental Science & Sustainability",     id: "Ilmu Lingkungan & Keberlanjutan" },
-      description: { en: "Projects related to environmental protection, waste management, water treatment, renewable energy, green innovation, biodiversity, or climate solutions.", id: "Proyek terkait perlindungan lingkungan, pengelolaan sampah, pengolahan air, energi terbarukan, inovasi hijau, keanekaragaman hayati, atau solusi iklim." },
+      letter: "2",
+      title:       "Environmental",
+      description: "Covers projects offering solutions to environmental issues such as climate change, waste management, conservation, and sustainability.",
       icon: "Leaf",
     },
     {
-      letter: "C",
-      title:       { en: "Health, Life Science & Biotechnology",       id: "Kesehatan, Ilmu Hayati & Bioteknologi" },
-      description: { en: "Projects related to biology, public health, nutrition, microbiology, biomedical innovation, biotechnology, or life-science applications.", id: "Proyek terkait biologi, kesehatan masyarakat, gizi, mikrobiologi, inovasi biomedis, bioteknologi, atau aplikasi ilmu hayati." },
+      letter: "3",
+      title:       "IoT & Robotics",
+      description: "Features the development of Internet of Things (IoT)-based devices and robotics aimed at improving efficiency and automation across various fields.",
+      icon: "Cpu",
+    },
+    {
+      letter: "4",
+      title:       "Informatics & Artificial Intelligence",
+      description: "Focuses on the development of software, information systems, and the application of artificial intelligence to solve problems innovatively.",
+      icon: "Cpu",
+    },
+    {
+      letter: "5",
+      title:       "Life Sciences",
+      description: "Covers research in biology and life sciences, including health, genetics, microbiology, and biotechnology.",
       icon: "HeartPulse",
     },
     {
-      letter: "D",
-      title:       { en: "Applied Science & Experimental Research",    id: "Sains Terapan & Penelitian Eksperimental" },
-      description: { en: "Projects emphasizing scientific experiments, chemistry, physics, mathematics applications, materials testing, or interdisciplinary scientific analysis.", id: "Proyek yang menekankan eksperimen ilmiah, kimia, fisika, aplikasi matematika, pengujian material, atau analisis ilmiah antardisiplin." },
+      letter: "6",
+      title:       "Social Sciences & Humanities",
+      description: "Examines social, cultural, and humanities phenomena to provide solutions to societal problems through a scientific approach.",
+      icon: "Users",
+    },
+    {
+      letter: "7",
+      title:       "Physics, Energy & Engineering",
+      description: "Focuses on the application of concepts in physics, energy, and engineering to create efficient and sustainable technological innovations.",
       icon: "FlaskConical",
     },
     {
-      letter: "E",
-      title:       { en: "Social Innovation & Educational Technology", id: "Inovasi Sosial & Teknologi Pendidikan" },
-      description: { en: "Projects combining STEM thinking with social impact, digital learning tools, community-based innovation, accessibility, or educational problem solving.", id: "Proyek yang menggabungkan pemikiran STEM dengan dampak sosial, alat pembelajaran digital, inovasi berbasis komunitas, aksesibilitas, atau pemecahan masalah pendidikan." },
-      icon: "Users",
+      letter: "8",
+      title:       "Health & Medicine",
+      description: "Covers innovations and research in the fields of health and medicine aimed at improving quality of life and healthcare services.",
+      icon: "HeartPulse",
     },
   ],
 
-  // ── Kriteria penilaian ────────────────────────────────────────
   judgingCriteria: [
-    { aspect: { en: "Originality & Innovation",          id: "Orisinalitas & Inovasi" },          weight: "25%" },
-    { aspect: { en: "Scientific / Technical Quality",    id: "Kualitas Ilmiah / Teknis" },         weight: "25%" },
-    { aspect: { en: "Methodology / Engineering Process", id: "Metodologi / Proses Rekayasa" },     weight: "20%" },
-    { aspect: { en: "Practical Application / Impact",    id: "Aplikasi Praktis / Dampak" },        weight: "15%" },
-    { aspect: { en: "Presentation & Communication",      id: "Presentasi & Komunikasi" },           weight: "10%" },
-    { aspect: { en: "Booth / Poster / Visual Display",   id: "Booth / Poster / Tampilan Visual" }, weight: "5%"  },
+    { aspect: "Originality & Innovation",          weight: "30%" },
+    { aspect: "Methodology / Engineering Process", weight: "25%" },
+    { aspect: "Practical Application / Impact",    weight: "20%" },
+    { aspect: "Presentation & Communication",      weight: "15%" },
+    { aspect: "Booth / Poster / Visual Display",   weight: "10%" },
   ],
 
-  // ── Penghargaan ───────────────────────────────────────────────
   awards: [
-    { place: { en: "1st Place",         id: "Juara 1" },            medal: { en: "Gold Medal",   id: "Medali Emas" },     extra: { en: "+ Certificate", id: "+ Sertifikat" } },
-    { place: { en: "2nd Place",         id: "Juara 2" },            medal: { en: "Silver Medal", id: "Medali Perak" },    extra: { en: "+ Certificate", id: "+ Sertifikat" } },
-    { place: { en: "3rd Place",         id: "Juara 3" },            medal: { en: "Bronze Medal", id: "Medali Perunggu" }, extra: { en: "+ Certificate", id: "+ Sertifikat" } },
-    { place: { en: "4th Place",         id: "Juara 4" },            medal: { en: "Medal",        id: "Medali" },          extra: { en: "+ Certificate", id: "+ Sertifikat" } },
-    { place: { en: "Honorable Mention", id: "Penghargaan Khusus" }, medal: { en: "Certificate",  id: "Sertifikat" },      extra: { en: "only",         id: "saja" } },
-    { place: { en: "Finalist",          id: "Finalis" },            medal: { en: "Recognition",  id: "Pengakuan" },       extra: { en: "Certificate",  id: "Sertifikat" } },
+    { place: "1st Place", medal: "Certificate & Medal", extra: "Score: 86–100" },
+    { place: "2nd Place", medal: "Certificate & Medal", extra: "Score: 71–85"  },
+    { place: "3rd Place", medal: "Certificate & Medal", extra: "Score: 55–70"  },
+    { place: "4th Place", medal: "Certificate & Medal", extra: "Score: ≤54"    },
   ],
 
-  // ── Jadwal ────────────────────────────────────────────────────
-  schedule: [
+  scheduleOffline: [
     {
       day: 1,
-      title: { en: "Registration & Opening",        id: "Registrasi & Pembukaan" },
-      items: {
-        en: ["Participant registration", "Booth setup / preparation for academic innovation teams", "Opening Ceremony & Welcome Speech", "Delegation introduction", "Welcoming Party (evening)"],
-        id: ["Registrasi peserta", "Persiapan booth / pameran tim inovasi akademik", "Upacara Pembukaan & Sambutan", "Perkenalan delegasi", "Welcoming Party (malam hari)"],
-      },
+      date:  "September 16th, 2026",
+      title: "Opening Ceremony & Judging Session Day 1",
+      items: [
+        { time: "08:00 AM – 09:00 AM", description: "Opening Ceremony for Offline Participants",  location: "Denpasar, Yogyakarta" },
+        { time: "10:00 AM – 04:00 PM", description: "Offline Judging Session Day 1",              location: "Denpasar, Yogyakarta" },
+      ],
     },
     {
       day: 2,
-      title: { en: "Main Competition Day",          id: "Hari Kompetisi Utama" },
-      items: {
-        en: ["Innovation project presentation", "Poster / booth presentation", "Jury evaluation & short interview", "Booth-based project observation"],
-        id: ["Presentasi proyek inovasi", "Presentasi poster / booth", "Penilaian juri & wawancara singkat", "Observasi proyek berbasis booth"],
-      },
+      date:  "September 17th, 2026",
+      title: "Judging Session Day 2 (Tentative)",
+      items: [
+        { time: "10:00 AM – 04:00 PM", description: "Offline Judging Session Day 2 (Tentative)", location: "Denpasar, Yogyakarta" },
+      ],
     },
     {
       day: 3,
-      title: { en: "Workshop & Seminar (Optional)", id: "Workshop & Seminar (Opsional)" },
-      items: {
-        en: ["Innovation & Research Method", "Creative Thinking & Innovation", "Youth Entrepreneurship", "STEM Project Development", "Scientific Communication"],
-        id: ["Metode Inovasi & Penelitian", "Berpikir Kreatif & Inovasi", "Kewirausahaan Pemuda", "Pengembangan Proyek STEM", "Komunikasi Ilmiah"],
-      },
+      date:  "September 18th, 2026",
+      title: "Private Judging & Cultural Exchange",
+      items: [
+        { time: "08:00 AM – 11:00 AM", description: "Private Judging Session for Offline Participants", location: "Denpasar, Yogyakarta" },
+        { time: "03:00 PM – 06:00 PM", description: "Afternoon Tea & Cultural Exchange",               location: "Denpasar, Yogyakarta" },
+      ],
     },
     {
       day: 4,
-      title: { en: "Gala & Networking",             id: "Gala & Networking" },
-      items: {
-        en: ["Delegation networking", "Project appreciation session", "Innovation exchange", "Gala dinner", "Cultural or institutional showcase"],
-        id: ["Networking delegasi", "Sesi apresiasi proyek", "Pertukaran inovasi", "Gala dinner", "Pameran budaya atau institusi"],
-      },
+      date:  "September 19th, 2026",
+      title: "Awarding Ceremony & Closing",
+      items: [
+        { time: "10:00 AM – Finish", description: "Awarding Ceremony for Offline Participants", location: "Denpasar, Yogyakarta" },
+      ],
     },
     {
       day: 5,
-      title: { en: "Awarding Ceremony",             id: "Upacara Penghargaan" },
-      items: {
-        en: ["Academic Awards Session", "Official announcement of medal recipients", "Closing Ceremony", "Official photo session"],
-        id: ["Sesi Penghargaan Akademik", "Pengumuman resmi penerima medali", "Upacara Penutupan", "Sesi foto resmi"],
-      },
+      date:  "September 20th, 2026",
+      title: "FunEdu Trip (Optional)",
+      items: [
+        { time: "07:00 AM – Finish", description: "FunEdu Trip for Offline Participants", location: "Yogyakarta" },
+      ],
     },
   ],
+
+  scheduleOnline: [
+    {
+      day: 1,
+      date:  "September 25th, 2026",
+      title: "Opening Ceremony & Judging Session Day 1",
+      items: [
+        { time: "08:30 AM – Finish", description: "Opening Ceremony & Online Judging Session Day 1", location: "ZOOM" },
+      ],
+    },
+    {
+      day: 2,
+      date:  "September 26th, 2026",
+      title: "Online Judging Session Day 2 (Tentative)",
+      items: [
+        { time: "10:00 AM – Finish", description: "Online Judging Session Day 2 (Tentative)", location: "ZOOM" },
+      ],
+    },
+    {
+      day: 3,
+      date:  "September 27th, 2026",
+      title: "Awarding Ceremony",
+      items: [
+        { time: "02:00 PM – Finish", description: "Awarding Ceremony for Online Participants", location: "ZOOM" },
+      ],
+    },
+  ],
+
+  schedule: [], // kept for type compatibility
 };
 
-export default yiesf;
+export default YIESF;

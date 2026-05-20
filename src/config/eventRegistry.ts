@@ -68,7 +68,7 @@ export const EVENTS_REGISTRY: EventMeta[] = [
       subtitle:             "BIESF 2026",
       location:             "Bali, Indonesia",
       dateRange:            "November 16–27, 2026",
-      registrationDeadline: "July 30, 2026",
+      registrationDeadline: "October 16, 2026",
       status:               "upcoming",
       registrationOpen:     true,
       route:                "/events/biesf-2026",
@@ -98,11 +98,11 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     status:               "upcoming",
     registrationOpen:     false,
     route:                "/events/yiesf-2026",
-    shutdown:             true,
+    shutdown:             false,
     shutdownNote:         "Event ini telah ditutup untuk pendaftaran.",
     sheet: {
       // Ganti dengan URL GAS deployment milik YIESF
-      sheetUrl: "https://script.google.com/macros/s/AKfycbylqhWttZ6pjomknohOmLNlBUC-JAu1KxdElZUBiFZrSZ_uQQqwKKrD3Q1eVgdY_0no/exec",
+      sheetUrl: "https://script.google.com/macros/s/AKfycbxfoz-AoQdSet82o8FeJliRekcg1vPHYj1s-6F1jRCmLWcOmjJ9xtY5rrLDBHOOD9AamA/exec",
       targets: {
         "indo-online":   "indo-online",
         "indo-offline":  "indo-offline",
