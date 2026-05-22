@@ -25,7 +25,7 @@ const ORGANIZER_LOGOS: { name: string; url: string; width?: number }[] = [
     width: 100,
   },
   {
-    name: "Department of Food Science and Technology, IPB University",
+    name: "Faculty of Engineering and Technology, IPB University",
     url: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/Logo_IPB_1_bqies4.png",
     width: 100,
   },
@@ -122,6 +122,8 @@ const EventCard = ({ event, index }: { event: EventMeta; index: number }) => {
     </SectionReveal>
   );
 };
+
+//========== 0RGENIZED BY CAROUSEL — klik untuk lightbox ==========
 
 const OrganizerCarousel = ({ lang }: { lang: "en" | "id" }) => {
   const [selected, setSelected] = useState<typeof ORGANIZER_LOGOS[0] | null>(null);
