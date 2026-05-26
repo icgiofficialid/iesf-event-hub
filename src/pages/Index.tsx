@@ -3,7 +3,7 @@
 // ================================================================
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { X, ArrowRight, MapPin, Calendar, } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import SiteShell from "@/components/iesf/SiteShell";
@@ -389,7 +389,155 @@ const Index = () => {
 
       {/* ── SECTION 1: BIG LOGO HERO ────────────────────────────── */}
       <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
+      {/* ── Animated orbit rings ── */}
+{/* ── STEM Floating Elements — lebih visible & dynamic ── */}
+<div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
 
+  {/* Atom — kiri atas, berputar + melayang */}
+  <motion.div
+    className="absolute top-[16%] left-[7%] md:left-[11%] text-primary/50"
+    animate={{ y: [0, -20, 0], rotate: [0, 360] }}
+    transition={{ y: { duration: 4, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 12, repeat: Infinity, ease: "linear" } }}
+  >
+    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+      <circle cx="12" cy="12" r="2.5" fill="currentColor" fillOpacity="0.4"/>
+      <ellipse cx="12" cy="12" rx="10" ry="4"/>
+      <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/>
+      <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>
+    </svg>
+  </motion.div>
+
+  {/* DNA — kanan atas */}
+  <motion.div
+    className="absolute top-[13%] right-[8%] md:right-[12%] text-amber-400/55"
+    animate={{ y: [0, 22, 0], x: [0, -6, 0] }}
+    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+  >
+    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+      <path d="M5 3c0 0 4 3 4 9s-4 9-4 9"/>
+      <path d="M19 3c0 0-4 3-4 9s4 9 4 9"/>
+      <path d="M5 9h14M5 15h14"/>
+      <circle cx="5" cy="9" r="1" fill="currentColor"/>
+      <circle cx="19" cy="9" r="1" fill="currentColor"/>
+      <circle cx="5" cy="15" r="1" fill="currentColor"/>
+      <circle cx="19" cy="15" r="1" fill="currentColor"/>
+    </svg>
+  </motion.div>
+
+  {/* Gear besar — kiri tengah, rotasi terus */}
+  <motion.div
+    className="absolute top-[42%] left-[3%] md:left-[6%] text-primary/35"
+    animate={{ rotate: 360 }}
+    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+  >
+    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.9">
+      <circle cx="12" cy="12" r="3" fill="currentColor" fillOpacity="0.15"/>
+      <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+    </svg>
+  </motion.div>
+
+  {/* Flask — kanan tengah, goyang */}
+  <motion.div
+    className="absolute top-[48%] right-[4%] md:right-[8%] text-cyan-500/50"
+    animate={{ y: [0, -16, 0], rotate: [-8, 8, -8] }}
+    transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+  >
+    <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
+      <path d="M9 3h6M9 3v7l-5 9a1 1 0 00.9 1.5h14.2a1 1 0 00.9-1.5L15 10V3"/>
+      <line x1="6.5" y1="14" x2="17.5" y2="14"/>
+      <circle cx="10" cy="17" r="0.8" fill="currentColor" fillOpacity="0.5"/>
+      <circle cx="13" cy="18.5" r="0.6" fill="currentColor" fillOpacity="0.5"/>
+    </svg>
+  </motion.div>
+
+  {/* Sigma — kiri bawah, pulse */}
+  <motion.div
+    className="absolute bottom-[26%] left-[8%] md:left-[13%] text-primary/55 font-thin"
+    animate={{ y: [0, -14, 0], scale: [1, 1.2, 1], opacity: [0.55, 0.9, 0.55] }}
+    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+    style={{ fontFamily: "serif", fontSize: 38, lineHeight: 1 }}
+  >
+    Σ
+  </motion.div>
+
+  {/* Pi — kanan bawah, bounce */}
+  <motion.div
+    className="absolute bottom-[28%] right-[9%] md:right-[14%] text-amber-400/60 font-thin"
+    animate={{ y: [0, -18, 0], scale: [1, 1.15, 1], opacity: [0.6, 1, 0.6] }}
+    transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+    style={{ fontFamily: "serif", fontSize: 36, lineHeight: 1 }}
+  >
+    π
+  </motion.div>
+
+  {/* Binary — kiri bawah, flicker */}
+  <motion.div
+    className="absolute bottom-[18%] left-[5%] md:left-[9%] text-primary/40 font-mono text-sm leading-relaxed"
+    animate={{ opacity: [0.4, 0.85, 0.4] }}
+    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+  >
+    1 0 1<br/>0 1 0<br/>1 1 0
+  </motion.div>
+
+  {/* Molekul — kiri atas mid, pulse + melayang */}
+  <motion.div
+    className="absolute top-[33%] left-[3%] md:left-[6%]"
+    animate={{ y: [0, -12, 0], scale: [1, 1.18, 1] }}
+    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+  >
+    <svg width="52" height="52" viewBox="0 0 60 60" fill="none">
+      <circle cx="30" cy="10" r="7" fill="#3B82F6" fillOpacity="0.45"/>
+      <circle cx="10" cy="46" r="7" fill="#F59E0B" fillOpacity="0.45"/>
+      <circle cx="50" cy="46" r="7" fill="#06B6D4" fillOpacity="0.45"/>
+      <line x1="30" y1="10" x2="10" y2="46" stroke="#94A3B8" strokeOpacity="0.45" strokeWidth="2.5"/>
+      <line x1="30" y1="10" x2="50" y2="46" stroke="#94A3B8" strokeOpacity="0.45" strokeWidth="2.5"/>
+      <line x1="10" y1="46" x2="50" y2="46" stroke="#94A3B8" strokeOpacity="0.45" strokeWidth="2.5"/>
+    </svg>
+  </motion.div>
+
+  {/* Circuit chip — kanan atas mid, blink */}
+  <motion.div
+    className="absolute top-[35%] right-[3%] md:right-[6%] text-primary/45"
+    animate={{ opacity: [0.45, 0.9, 0.45], scale: [1, 1.1, 1] }}
+    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+  >
+    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1">
+      <rect x="2" y="7" width="4" height="10" rx="1" fill="currentColor" fillOpacity="0.15"/>
+      <rect x="18" y="7" width="4" height="10" rx="1" fill="currentColor" fillOpacity="0.15"/>
+      <line x1="6" y1="10" x2="9" y2="10"/>
+      <line x1="6" y1="12" x2="9" y2="12"/>
+      <line x1="6" y1="14" x2="9" y2="14"/>
+      <line x1="15" y1="10" x2="18" y2="10"/>
+      <line x1="15" y1="12" x2="18" y2="12"/>
+      <line x1="15" y1="14" x2="18" y2="14"/>
+      <rect x="9" y="8" width="6" height="8" rx="1" fill="currentColor" fillOpacity="0.1"/>
+      <circle cx="12" cy="12" r="1.5" fill="currentColor" fillOpacity="0.4"/>
+    </svg>
+  </motion.div>
+
+  {/* E=mc² — kanan bawah, melayang */}
+  <motion.div
+    className="absolute bottom-[20%] right-[6%] md:right-[11%] text-primary/50 font-mono font-bold text-base"
+    animate={{ y: [0, -14, 0], opacity: [0.5, 0.9, 0.5] }}
+    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+  >
+    E=mc²
+  </motion.div>
+
+  {/* Rocket kecil — atas tengah kiri, terbang naik */}
+  <motion.div
+    className="absolute top-[60%] left-[13%] md:left-[18%] text-amber-400/50"
+    animate={{ y: [0, -25, 0], x: [0, 6, 0], rotate: [-15, -10, -15] }}
+    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+  >
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+      <path d="M12 2C12 2 7 6 7 13h10c0-7-5-11-5-11z" fill="currentColor" fillOpacity="0.2"/>
+      <path d="M7 13l-2 4h14l-2-4"/>
+      <line x1="12" y1="13" x2="12" y2="19"/>
+    </svg>
+  </motion.div>
+
+</div>
         {/* ── Decorative background layers ── */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Horizontal scan line */}
@@ -705,7 +853,15 @@ const Index = () => {
               </svg>
               <p className="text-xs uppercase tracking-[0.35em] text-amber-400 font-semibold">What's Coming</p>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Upcoming Events</h2>
+            <motion.h2
+              className="text-3xl md:text-4xl font-bold text-foreground"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              Upcoming Events
+            </motion.h2>
           </div>
           <button
             onClick={() => navigate("/events")}
@@ -744,7 +900,13 @@ const Index = () => {
               <svg width="10" height="10" viewBox="0 0 40 40" fill="none">
                 <path d="M20 0 L22.5 17.5 L40 20 L22.5 22.5 L20 40 L17.5 22.5 L0 20 L17.5 17.5 Z" fill="#F59E0B"/>
               </svg>
-              <p className="text-xs uppercase tracking-[0.35em] text-amber-400 font-semibold">Latest Updates</p>
+              <motion.p
+              className="text-xs uppercase tracking-[0.35em] text-amber-400 font-semibold"
+              animate={{ opacity: [0.6, 1, 0.6] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              Latest Updates
+            </motion.p>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">News & Announcements</h2>
           </div>
