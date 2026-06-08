@@ -93,16 +93,18 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     title:                "Yogyakarta International Engineering Science Fair",
     subtitle:             "YIESF 2026",
     location:             "Yogyakarta, Indonesia",
-    dateRange:            "TBA, 2026",
+    dateRange:            "12 - 01 October, 2026",
     registrationDeadline: "TBA",
     status:               "upcoming",
-    registrationOpen:     false,
+    registrationOpen:     false, // Set false dulu karena belum siap, meskipun statusnya "upcoming"
     route:                "/events/yiesf-2026",
     shutdown:             false,
+    coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1780909147/POTRET_YIESF_2026_iset4w.jpg",
+    coverImageLandscape: "https://res.cloudinary.com/dwhobhexj/image/upload/v1780909147/LANDSCAPE_YIESF_2026_uvw4vh.jpg",
     shutdownNote:         "Event ini telah ditutup untuk pendaftaran.",
     sheet: {
       // Ganti dengan URL GAS deployment milik YIESF
-      sheetUrl: "https://script.google.com/macros/s/AKfycbxfoz-AoQdSet82o8FeJliRekcg1vPHYj1s-6F1jRCmLWcOmjJ9xtY5rrLDBHOOD9AamA/exec",
+      sheetUrl: "https://script.google.com/macros/s/AKfycbxTMWsvKhn0N6JImkJWIPJkJzaXAZHOEG5SqZ7MZmPog7B956RQvtQNr1s8zFnUHeTbBQ/exec",
       targets: {
         "indo-online":   "indo-online",
         "indo-offline":  "indo-offline",
