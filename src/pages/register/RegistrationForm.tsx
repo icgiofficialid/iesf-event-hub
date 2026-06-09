@@ -549,9 +549,9 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
   const [submitted, setSubmitted] = useState(false);
   const [error, setError]         = useState("");
   const [errors, setErrors]       = useState<Record<string, boolean>>({});
-  const [leaderCode, setLeaderCode]         = useState("+62");
-  const [supervisorCode, setSupervisorCode] = useState("+62");
-
+  const defaultCode = participant === "international" ? "other" : "+62";
+  const [leaderCode, setLeaderCode]         = useState(defaultCode);
+  const [supervisorCode, setSupervisorCode] = useState(defaultCode);
   const set = (key: string) => (v: string) => {
     setForm(p => ({ ...p, [key]: v }));
     if (v) setErrors(p => ({ ...p, [key]: false }));
@@ -594,8 +594,8 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
 
     const finalForm: FormData = {
       ...form,
-      LEADER_WHATSAPP:            `${cL}${f("LEADER_WHATSAPP_NUM")}`,
-      WHATSAPP_NUMBER_SUPERVISOR: `${cS}${f("SUPERVISOR_WA_NUM")}`,
+      LEADER_WHATSAPP:            cL ? `${cL}${f("LEADER_WHATSAPP_NUM").replace(/^\+?0*/, "")}` : f("LEADER_WHATSAPP_NUM"),
+      WHATSAPP_NUMBER_SUPERVISOR: cS ? `${cS}${f("SUPERVISOR_WA_NUM").replace(/^\+?0*/, "")}` : f("SUPERVISOR_WA_NUM"),
       PROVINCE: participant === "international" ? f("COUNTRY") : f("PROVINCE"),
       CATEGORY_COMPETITION: resolvedCatComp,
       CATEGORY_PRICE: CATEGORY_PRICE_MAP[resolvedCatComp] ?? "",
