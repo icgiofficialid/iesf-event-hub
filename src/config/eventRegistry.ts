@@ -56,6 +56,7 @@ export interface EventMeta {
     /** URL gambar cover dari Cloudinary (opsional, jika tidak ada pakai gradient) */
   coverImage?: string;
   coverImageLandscape?: string;
+  heroGradient?: string;
 }
 
 // ================================================================
@@ -75,6 +76,7 @@ export const EVENTS_REGISTRY: EventMeta[] = [
       shutdown:             false,
       coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1778213775/WhatsApp_Image_2026-05-08_at_11.12.59_nf00ax.jpg",
       coverImageLandscape: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778214438/WhatsApp_Image_2026-05-08_at_11.26.51_jnzlti.jpg",
+      heroGradient:  "from-purple-900 via-violet-800 to-indigo-900", // <-- tambah ini
 
       sheet: {
         sheetUrl: "https://script.google.com/macros/s/AKfycbwanIpFgNGAqc7S0q6ccFCnXK1ruYWneAFPSBIdAjdvi8xImTkqwwaDXrBHGG2HYTvr/exec",
@@ -102,6 +104,7 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1780909147/POTRET_YIESF_2026_iset4w.jpg",
     coverImageLandscape: "https://res.cloudinary.com/dwhobhexj/image/upload/v1780909147/LANDSCAPE_YIESF_2026_uvw4vh.jpg",
     shutdownNote:         "Event ini telah ditutup untuk pendaftaran.",
+    heroGradient:  "from-cyan-900 via-teal-800 to-blue-900", 
     sheet: {
       // Ganti dengan URL GAS deployment milik YIESF
       sheetUrl: "https://script.google.com/macros/s/AKfycbxTMWsvKhn0N6JImkJWIPJkJzaXAZHOEG5SqZ7MZmPog7B956RQvtQNr1s8zFnUHeTbBQ/exec",

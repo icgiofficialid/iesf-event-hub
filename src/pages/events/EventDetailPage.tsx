@@ -146,7 +146,7 @@ const EventDetailPage = ({ slug, data }: EventDetailPageProps) => {
         {/* ══════ HOME ══════ */}
         <Sec id="home">
           {/* Hero */}
-          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 p-8 md:p-14 text-white mb-10">
+          <div className={`relative rounded-3xl overflow-hidden bg-gradient-to-br ${meta?.heroGradient ?? "from-blue-900 via-indigo-800 to-purple-900"} p-8 md:p-14 text-white mb-10`}>
             
           {(meta?.coverImageLandscape ?? meta?.coverImage) && (
             <img

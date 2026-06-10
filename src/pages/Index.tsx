@@ -45,7 +45,7 @@ const EventCard = ({ event, index }: { event: EventMeta; index: number }) => {
         className="cursor-pointer group h-full"
       >
         {/* Poster card */}
-        <div className={`relative rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-shadow duration-300 bg-gradient-to-br ${(event as any).coverGradient ?? "from-primary/80 to-primary"}`}>
+        <div className={`relative rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-shadow duration-300 bg-gradient-to-br ${event.heroGradient ?? "from-primary/80 to-primary"}`}>
 
           {/* Foto cover dari Cloudinary */}
           {event.coverImage && (

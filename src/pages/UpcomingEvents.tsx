@@ -47,7 +47,7 @@ const EventCard = ({ event, index }: { event: EnrichedEvent; index: number }) =>
           <div className="absolute inset-0 rounded-2xl border-2 border-green-400/50 pointer-events-none z-10" />
         )}
 
-        <div className={`relative h-52 bg-gradient-to-br ${event.coverGradient} flex items-end p-0`}>
+        <div className={`relative h-52 bg-gradient-to-br ${(event as EnrichedEvent & { heroGradient?: string }).heroGradient ?? event.coverGradient ?? "from-primary/80 to-primary"} flex items-end p-0`}>
 
           {/* Foto cover dari registry */}
           {event.coverImage && (
