@@ -539,6 +539,18 @@ const getRequired = (p: ParticipantType, c: CompetitionType) => [
   ...(p === "international" && c === "online" ? ["CATEGORY_COMPETITION"] : []),
   ...(p === "international" ? ["COUNTRY"] : []),
 ];
+
+const normalizePhone = (code: string, rawNum: string): string => {
+  const codeDigits = code.replace(/\D/g, "");
+  let digits = rawNum.replace(/\D/g, "");
+  if (digits.startsWith("00")) digits = digits.slice(2);
+  if (codeDigits && digits.startsWith(codeDigits)) {
+    digits = digits.slice(codeDigits.length);
+  }
+  digits = digits.replace(/^0+/, "");
+  return `+${codeDigits}${digits}`;
+};
+
 // ── Komponen Utama ────────────────────────────────────────────────
 const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onBack, onSuccess }: Props) => {
   const { lang } = useLang();
@@ -594,8 +606,8 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
 
     const finalForm: FormData = {
       ...form,
-      LEADER_WHATSAPP:            cL ? `${cL}${f("LEADER_WHATSAPP_NUM").replace(/^\+?0*/, "")}` : f("LEADER_WHATSAPP_NUM"),
-      WHATSAPP_NUMBER_SUPERVISOR: cS ? `${cS}${f("SUPERVISOR_WA_NUM").replace(/^\+?0*/, "")}` : f("SUPERVISOR_WA_NUM"),
+      LEADER_WHATSAPP:            cL ? normalizePhone(cL, f("LEADER_WHATSAPP_NUM")) : f("LEADER_WHATSAPP_NUM"),
+      WHATSAPP_NUMBER_SUPERVISOR: cS ? normalizePhone(cS, f("SUPERVISOR_WA_NUM")) : f("SUPERVISOR_WA_NUM"),
       PHONE_CODE:                 cL,
       PROVINCE: participant === "international" ? f("COUNTRY") : f("PROVINCE"),
       CATEGORY_COMPETITION: resolvedCatComp,
