@@ -596,6 +596,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
       ...form,
       LEADER_WHATSAPP:            cL ? `${cL}${f("LEADER_WHATSAPP_NUM").replace(/^\+?0*/, "")}` : f("LEADER_WHATSAPP_NUM"),
       WHATSAPP_NUMBER_SUPERVISOR: cS ? `${cS}${f("SUPERVISOR_WA_NUM").replace(/^\+?0*/, "")}` : f("SUPERVISOR_WA_NUM"),
+      PHONE_CODE:                 cL,
       PROVINCE: participant === "international" ? f("COUNTRY") : f("PROVINCE"),
       CATEGORY_COMPETITION: resolvedCatComp,
       CATEGORY_PRICE: CATEGORY_PRICE_MAP[resolvedCatComp] ?? "",
