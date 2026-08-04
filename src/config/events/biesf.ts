@@ -13,7 +13,7 @@ const biesf: EventDetailData = {
     { name: "IYSA", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/logo_IYSA_bagus_e6uai3.png" },
     { name: "IPB",  logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/Logo_IPB_1_bqies4.png" },
   ],
-  guidebookUrl: "https://drive.google.com/file/d/1fRGtFeaW6Yo0WeVcIXEzgTRTfvmJnEBC/view?usp=sharing",
+  guidebookUrl: "https://drive.google.com/file/d/1pKaMSpTAwZ_gXSxBv9GDhPt2l9uk7khy/view?usp=drive_link",
 
   email:   "iesfofficial.icgi@gmail.com",
   website: "iesfofficial.or.id",
