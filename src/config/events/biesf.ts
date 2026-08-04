@@ -42,7 +42,7 @@ const biesf: EventDetailData = {
   ],
 
   about: {
-    welcome:    "Bali International Engineering Science Fair (BIESF) is an international science competition will be held for the first time in Bali as a platform for students to showcase their innovations, research, and projects in the fields of science, technology, and engineering, while fostering global collaboration and the development of critical and creative thinking skills. The event will take place from November 16–20, 2026, with a series of activities including the Opening Ceremony & Judging Session Day 1 (November 16, 2026), Judging Session Day 2 (November 17, 2026), Private Judging Session (Selective) and Afternoon Tea & Cultural Exchange (November 18, 2026), Awarding Ceremony (November 19, 2026), and FunEdu Trip (November 20, 2026).",
+    welcome:    "Bali International Engineering Science Fair (BIESF) is an international science competition will be held for the first time in Bali as a platform for students to showcase their innovations, research, and projects in the fields of science, technology, and engineering, while fostering global collaboration and the development of critical and creative thinking skills. The event will take place from November 16–20, 2026, with a series of activities including the Opening Ceremony & Judging Session Day 1 (November 16, 2026), Judging Session Day 2 (November 17, 2026), Private Judging Session (Selective) & Cultural Exchange (November 18, 2026), Awarding Ceremony (November 19, 2026), and FunEdu Trip (November 20, 2026).",
     background: "The competition categories in BIESF include: Mathematics, Science & Technology, Environmental, IoT & Robotics, Informatics & Artificial Intelligence, Life Sciences, Social Sciences & Humanities, Physics, Energy & Engineering, and Health & Medicine.",
     objectives: [
       "To provide a prestigious international stage for students to present original research, inventions, and engineering designs.",
@@ -147,7 +147,7 @@ const biesf: EventDetailData = {
       title: "Private Judging & Cultural Exchange",
       items: [
         { time: "08:00 AM – 11:00 AM", description: "Private Judging Session for Offline Participants", location: "Denpasar, Bali" },
-        { time: "03:00 PM – 06:00 PM", description: "Afternoon Tea & Cultural Exchange",               location: "Denpasar, Bali" },
+        { time: "03:00 PM – 06:00 PM", description: "Cultural Exchange",               location: "Denpasar, Bali" },
       ],
     },
     {
