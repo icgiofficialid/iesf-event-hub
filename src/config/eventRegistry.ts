@@ -100,7 +100,7 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     status:               "upcoming",
     registrationOpen:     false, // Set false dulu karena belum siap, meskipun statusnya "upcoming"
     route:                "/events/yiesf-2026",
-    shutdown:             false,
+    shutdown:             true,
     coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1780909147/POTRET_YIESF_2026_iset4w.jpg",
     coverImageLandscape: "https://res.cloudinary.com/dwhobhexj/image/upload/v1780909147/LANDSCAPE_YIESF_2026_uvw4vh.jpg",
     shutdownNote:         "Event ini telah ditutup untuk pendaftaran.",
