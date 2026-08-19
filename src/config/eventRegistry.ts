@@ -130,13 +130,43 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     route:                "/events/siesf-2026",
     shutdown:             false,
     // TODO: isi dengan URL Cloudinary cover image SIESF (portrait & landscape)
-    coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1787034713/siesf_nabjxl.png",
-    coverImageLandscape: "https://res.cloudinary.com/dwhobhexj/image/upload/v1787034713/siesf_nabjxl.png",
-    heroGradient:  "from-orange-900 via-amber-800 to-red-900",
+    coverImage:          "",
+    coverImageLandscape: "",
+    heroGradient:  "from-violet-900 via-purple-900 to-emerald-900", // muted, senada dengan gaya BIESF/YIESF; ciri khas ungu-hijau ala guidebook SIESF
 
     sheet: {
       // TODO: ganti dengan URL GAS deployment milik SIESF
-      sheetUrl: "https://script.google.com/macros/s/AKfycbx3F2QLruPlAxrN-Eg4gDiv_V4xR3xZbzDmdbK-vtYXi8tnQaTyclBA07-JfNoCusA/exec",
+      sheetUrl: "https://script.google.com/macros/s/REPLACE_WITH_SIESF_GAS_DEPLOYMENT_ID/exec",
+      targets: {
+        "indo-online":   "indo-online",
+        "indo-offline":  "indo-offline",
+        "inter-online":  "inter-online",
+        "inter-offline": "inter-offline",
+      },
+    },
+  },
+
+  //-----------------------------------------------
+  {
+    slug:                 "borneo-iesf-2026",
+    title:                "Borneo International Engineering Science Fair",
+    subtitle:             "Borneo-IESF 2026",
+    location:             "Palangka Raya, Kalimantan Tengah, Indonesia",
+    dateRange:            "27–30 November 2026",
+    registrationDeadline: "27 October 2026",
+    status:               "upcoming",
+    registrationOpen:     false, // Set true setelah sheetUrl & cover image final
+    route:                "/events/borneo-iesf-2026",
+    shutdown:             false,
+    // TODO: isi dengan URL Cloudinary cover image Borneo-IESF (portrait & landscape)
+    coverImage:          "",
+    coverImageLandscape: "",
+    // Muted, senada dengan gaya BIESF/YIESF/SIESF; ciri khas navy-emas ala guidebook Borneo-IESF, tanpa ujung terang
+    heroGradient:  "from-slate-900 via-amber-950 to-orange-900",
+
+    sheet: {
+      // TODO: ganti dengan URL GAS deployment milik Borneo-IESF
+      sheetUrl: "https://script.google.com/macros/s/REPLACE_WITH_BORNEOIESF_GAS_DEPLOYMENT_ID/exec",
       targets: {
         "indo-online":   "indo-online",
         "indo-offline":  "indo-offline",

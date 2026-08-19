@@ -24,6 +24,7 @@ export interface IESFEvent {
   year:                 number;
   registrationDeadline: string;
   coverGradient:        string;
+  heroGradient?:        string; // ← sumber warna asli dari EVENTS_REGISTRY, dipakai konsisten di semua halaman
   accentColor:          string;
   description:          string;
   tags:                 string[];

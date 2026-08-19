@@ -13,13 +13,15 @@ import { EVENTS_REGISTRY, type EventMeta } from "@/config/eventRegistry";
 // ── Build IESFEvent dari EventMeta (static fallback) ──────────────
 // Mapping ini memastikan setiap event di EVENTS_REGISTRY otomatis
 // muncul di card tanpa perlu GAS API atau eventsData hardcode.
-const GRADIENT_POOL = [
-  "from-violet-600 via-purple-600 to-indigo-700",
-  "from-blue-600 via-cyan-600 to-teal-700",
-  "from-rose-600 via-pink-600 to-fuchsia-700",
-  "from-amber-500 via-orange-600 to-red-700",
-  "from-emerald-500 via-green-600 to-teal-700",
-];
+//
+// ⚠️ FIX: sebelumnya coverGradient diambil dari GRADIENT_POOL acak
+// (berputar berdasarkan index), TIDAK terhubung ke heroGradient asli
+// di EVENTS_REGISTRY — itu sebabnya warna di halaman Upcoming Events
+// berbeda dari Homepage & Event Detail. Sekarang heroGradient asli
+// diteruskan langsung, dan dipakai juga sebagai coverGradient supaya
+// SEMUA halaman (Homepage, Upcoming Events, Event Detail) menampilkan
+// warna yang sama persis untuk setiap event.
+const FALLBACK_GRADIENT = "from-slate-800 via-slate-700 to-slate-900";
 
 function registryToIESFEvent(meta: EventMeta, index: number): IESFEvent {
   return {
@@ -34,7 +36,8 @@ function registryToIESFEvent(meta: EventMeta, index: number): IESFEvent {
     dateRange:            meta.dateRange,
     year:                 new Date().getFullYear(),
     registrationDeadline: meta.registrationDeadline,
-    coverGradient:        GRADIENT_POOL[index % GRADIENT_POOL.length],
+    coverGradient:        meta.heroGradient ?? FALLBACK_GRADIENT,
+    heroGradient:         meta.heroGradient ?? FALLBACK_GRADIENT,
     accentColor:          "#6366f1",
     description:          meta.title,
     tags:                 ["Engineering", "Science", "Innovation", "International"],
