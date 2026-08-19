@@ -117,10 +117,35 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     },
   },
 
+  //-----------------------------------------------
+  {
+    slug:                 "siesf-2026",
+    title:                "Semarang International Engineering Science Fair",
+    subtitle:             "SIESF 2026",
+    location:             "Semarang, Indonesia",
+    dateRange:            "TBA, 2026",
+    registrationDeadline: "TBA",
+    status:               "upcoming",
+    registrationOpen:     false, // Set true setelah tanggal & sheetUrl final
+    route:                "/events/siesf-2026",
+    shutdown:             false,
+    // TODO: isi dengan URL Cloudinary cover image SIESF (portrait & landscape)
+    coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1787034713/siesf_nabjxl.png",
+    coverImageLandscape: "https://res.cloudinary.com/dwhobhexj/image/upload/v1787034713/siesf_nabjxl.png",
+    heroGradient:  "from-orange-900 via-amber-800 to-red-900",
 
-  
+    sheet: {
+      // TODO: ganti dengan URL GAS deployment milik SIESF
+      sheetUrl: "https://script.google.com/macros/s/AKfycbx3F2QLruPlAxrN-Eg4gDiv_V4xR3xZbzDmdbK-vtYXi8tnQaTyclBA07-JfNoCusA/exec",
+      targets: {
+        "indo-online":   "indo-online",
+        "indo-offline":  "indo-offline",
+        "inter-online":  "inter-online",
+        "inter-offline": "inter-offline",
+      },
+    },
+  },
 
-  
 ];
 
 // ── Helper — cari event by slug ───────────────────────────────────

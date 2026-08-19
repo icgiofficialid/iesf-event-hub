@@ -260,10 +260,6 @@ const T: Record<string, Record<Lang, string>> = {
   indo:              { en: "Indonesian",         id: "Indonesia" },
   online:            { en: "Online",             id: "Online" },
   offline:           { en: "Offline",            id: "Offline" },
-  infoBanner: { 
-    en: "HELLO BIESF 2026 PARTICIPANTS, Please consider the following information before filling out the registration form:", 
-    id: "HALO PESERTA BIESF 2026, Mohon perhatikan informasi berikut sebelum mengisi formulir pendaftaran:" 
-  },
   info1: { 
     en: "Please fill in the required data correctly and ensure there are no writing errors. Also make sure that the data submitted is final and has not changed.", 
     id: "Harap isi data yang diperlukan dengan benar dan pastikan tidak ada kesalahan penulisan. Pastikan juga bahwa data yang dikirimkan sudah final dan tidak berubah." 
@@ -294,6 +290,9 @@ const T: Record<string, Record<Lang, string>> = {
   nisnNote: {
   en: "Notes: Enter the NIM/NISN if you are still in school with the following the order of the names of the team leader and members, with the format as follows as follows:\n\n1201301\n1302402\n1020100", id: "Catatan: Masukkan NIM/NISN jika masih sekolah dengan urutan nama ketua tim dan anggota, dengan format sebagai berikut:\n\n1201301\n1302402\n1020100",},
   nisnPh:            { en: "Input NIM / NISN of Leader & Team Member", id: "Masukkan NIM / NISN Ketua & Anggota Tim" },
+  npsn:              { en: "NPSN (School ID Number)", id: "NPSN (Nomor Pokok Sekolah Nasional)" },
+  npsnNote:          { en: "8-digit National School ID Number. Check at https://sekolah.data.kemdikbud.go.id if you don't know it.", id: "Nomor Pokok Sekolah Nasional (8 digit). Cek di https://sekolah.data.kemdikbud.go.id jika belum tahu." },
+  npsnPh:            { en: "e.g. 20106589",         id: "Contoh: 20106589" },
   socialMedia:       { en: "Social Media Link",      id: "Link Media Sosial" },
   socialMediaNote:   { en: "Instagram, LinkedIn, or other social media (optional).", id: "Instagram, LinkedIn, atau media sosial lainnya (opsional)." },
   socialMediaPh:     { en: "https://instagram.com/username", id: "https://instagram.com/username" },
@@ -527,6 +526,7 @@ export interface SummaryData {
 interface Props {
   participant: ParticipantType; competition: CompetitionType;
   sheetUrl: string; sheetTarget: string;
+  eventTitle?: string; // ← nama event untuk banner info (mis. "BIESF 2026")
   onBack: () => void; onSuccess: (data: SummaryData) => void;
 }
 
@@ -535,9 +535,13 @@ const getRequired = (p: ParticipantType, c: CompetitionType) => [
   "NAMA_SEKOLAH", "GRADE", "NAME_SUPERVISOR",
   "SUPERVISOR_WA_NUM", "EMAIL_TEACHER_SUPERVISOR",
   "PROJECT_TITLE", "CATEGORIES",
-  "COMPLETE_ADDRESS",
+  "COMPLETE_ADDRESS", "INFORMATION_RESOURCES",
   ...(p === "international" && c === "online" ? ["CATEGORY_COMPETITION"] : []),
   ...(p === "international" ? ["COUNTRY"] : []),
+  // Khusus peserta Indonesia: NISN, NPSN & Provinsi wajib diisi
+  ...(p === "indonesian" ? ["NISN_NIM", "NPSN", "PROVINCE"] : []),
+  // Sengaja TIDAK wajib: YES_NO (prevComp), JUDUL_PERNAH_BERPATISIPASI (prevCompName),
+  // SOCIAL_MEDIA, FILE (bukti registrasi gratis)
 ];
 
 const normalizePhone = (code: string, rawNum: string): string => {
@@ -552,9 +556,10 @@ const normalizePhone = (code: string, rawNum: string): string => {
 };
 
 // ── Komponen Utama ────────────────────────────────────────────────
-const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onBack, onSuccess }: Props) => {
+const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, eventTitle, onBack, onSuccess }: Props) => {
   const { lang } = useLang();
   const t = (key: string) => T[key]?.[lang as Lang] ?? key;
+  const eventName = eventTitle || "IESF 2026";
 
   const [form, setForm]           = useState<FormData>({});
   const [loading, setLoading]     = useState(false);
@@ -661,7 +666,11 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
 
         {/* Banner info */}
       <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 text-sm text-muted-foreground leading-6">
-        <p className="font-semibold text-foreground mb-3">{t("infoBanner")}</p>
+        <p className="font-semibold text-foreground mb-3">
+          {lang === "id"
+            ? `HALO PESERTA ${eventName.toUpperCase()}, Mohon perhatikan informasi berikut sebelum mengisi formulir pendaftaran:`
+            : `HELLO ${eventName.toUpperCase()} PARTICIPANTS, Please consider the following information before filling out the registration form:`}
+        </p>
         <ol className="list-decimal list-inside space-y-3">
           <li>{t("info1")}</li>
           <li>{t("info2")}</li>
@@ -708,7 +717,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
             </div>
 
             {participant === "indonesian" && (
-              <Field label={t("nisn")} note={t("nisnNote")}>
+              <Field label={t("nisn")} required note={t("nisnNote")} fieldId="field-NISN_NIM" error={errors["NISN_NIM"]}>
                 <TextArea placeholder={t("nisnPh")}
                   value={f("NISN_NIM")} onChange={set("NISN_NIM")} />
               </Field>
@@ -729,6 +738,14 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
               <TextArea placeholder={t("schoolNamePh")}
                 value={f("NAMA_SEKOLAH")} onChange={set("NAMA_SEKOLAH")} maxLength={500} />
             </Field>
+
+            {participant === "indonesian" && (
+              <Field label={t("npsn")} required note={t("npsnNote")} fieldId="field-NPSN" error={errors["NPSN"]}>
+                <TextInput placeholder={t("npsnPh")}
+                  value={f("NPSN")} onChange={set("NPSN")} />
+              </Field>
+            )}
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Field label={t("grade")} required fieldId="field-GRADE" error={errors["GRADE"]}>
                 <SelectInput placeholder={t("gradePh")} value={f("GRADE")} onChange={set("GRADE")}
@@ -737,7 +754,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
 
               {/* Indonesia → Province, Internasional → Country (dengan bendera) */}
               {participant === "indonesian" ? (
-                <Field label={t("province")}>
+                <Field label={t("province")} required fieldId="field-PROVINCE" error={errors["PROVINCE"]}>
                   <TextInput placeholder={t("provincePh")}
                     value={f("PROVINCE")} onChange={set("PROVINCE")} />
                 </Field>
@@ -814,7 +831,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, onB
                   value={f("COMPLETE_ADDRESS")} onChange={set("COMPLETE_ADDRESS")} />
               </Field>
             
-            <Field label={t("infoSource")}>
+            <Field label={t("infoSource")} required fieldId="field-INFORMATION_RESOURCES" error={errors["INFORMATION_RESOURCES"]}>
               <SelectInput placeholder={t("infoSourcePh")} value={f("INFORMATION_RESOURCES")}
                 onChange={set("INFORMATION_RESOURCES")} options={infoSources} />
             </Field>

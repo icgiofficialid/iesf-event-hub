@@ -43,6 +43,7 @@ import NewsDetailPage from "@/pages/NewsDetailPage";
 // ✏️  Tambahkan import event baru di sini
 import YIESFDetail  from "./pages/events/YIESFDetail";
 import BIESFDetail  from "./pages/events/BIESFDetail";
+import SIESFDetail  from "./pages/events/SIESFDetail";
 // import ICSEDetail from "./pages/events/ICSEDetail";  // ← contoh event baru
 
 const queryClient = new QueryClient();
@@ -68,6 +69,7 @@ const App = () => (
               {/* ✏️  Tambahkan route event baru di sini             */}
               <Route path="/events/yiesf-2026" element={<YIESFDetail />} />
               <Route path="/events/biesf-2026" element={<BIESFDetail />} />
+              <Route path="/events/siesf-2026" element={<SIESFDetail />} />
               {/* <Route path="/events/icse-2026" element={<ICSEDetail />} /> */}
 
               {/* Existing pages */}

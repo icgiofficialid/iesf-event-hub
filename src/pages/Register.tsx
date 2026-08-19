@@ -11,7 +11,7 @@ import HomeInter    from "./register/homeInter";
 import TermsBox     from "./register/TermsBox";
 import RegistrationForm, { type SummaryData } from "./register/RegistrationForm";
 import { useNavigate } from "react-router-dom";
-import { getSheetConfig } from "@/config/eventRegistry";
+import { getSheetConfig, getEventMeta } from "@/config/eventRegistry";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLang } from "@/components/LanguageProvider";
@@ -114,6 +114,9 @@ const Register = () => {
 
   // Baca eventSlug dari sessionStorage — disimpan EventDetailPage sebelum navigate
   const eventSlug: string | null = sessionStorage.getItem("eventSlug");
+  // Nama event (mis. "BIESF 2026", "SIESF 2026") — dipakai di banner form
+  const eventMeta = eventSlug ? getEventMeta(eventSlug) : undefined;
+  const eventTitle = eventMeta?.subtitle || eventMeta?.title;
 
   const [step, setStep]               = useState<Step>(1);
   const [participant, setParticipant] = useState<ParticipantType | null>(null);
@@ -213,6 +216,7 @@ const Register = () => {
           <RegistrationForm
             participant={participant} competition={competition}
             sheetUrl={sheetUrl} sheetTarget={sheetTarget}
+            eventTitle={eventTitle}
             onBack={() => setStep(3)} onSuccess={handleSuccess}
           />
         )}

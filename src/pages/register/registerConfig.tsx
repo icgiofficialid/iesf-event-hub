@@ -25,6 +25,10 @@ export const CATEGORY_PRICE_MAP: Record<string, string> = {
   "Offline Competition (International)":                                                                                      "USD 400",
 };
 
+// Catatan: konstanta ini tidak dipakai langsung oleh kode (validasi asli ada di
+// getRequired() dalam RegistrationForm.tsx), disimpan sebagai dokumentasi field wajib.
+// Field kondisional per tipe peserta: NISN_NIM, PROVINCE, NPSN (Indonesia only),
+// COUNTRY (International only).
 export const REQUIRED_FIELDS = [
   "NAMA_LENGKAP",
   "LEADER_WHATSAPP",
@@ -37,6 +41,7 @@ export const REQUIRED_FIELDS = [
   "PROJECT_TITLE",
   "CATEGORIES",
   "COMPLETE_ADDRESS",
+  "INFORMATION_RESOURCES",
 ];
 
 export const submitToSheet = async (
@@ -74,9 +79,9 @@ export const submitToSheet = async (
     PROJECT_TITLE:              f("PROJECT_TITLE"),
   };
 
-  // Indo → NISN_NIM + PROVINCE | Inter → COUNTRY
+  // Indo → NISN_NIM + PROVINCE + NPSN | Inter → COUNTRY
   const extra: Record<string, string> = participant === "indonesian"
-    ? { NISN_NIM: f("NISN_NIM"), PROVINCE: f("PROVINCE") }
+    ? { NISN_NIM: f("NISN_NIM"), PROVINCE: f("PROVINCE"), NPSN: f("NPSN") }
     : { COUNTRY:  f("COUNTRY") };
 
   const payload = { ...base, ...extra };
