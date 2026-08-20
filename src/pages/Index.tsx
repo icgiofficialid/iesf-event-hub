@@ -44,8 +44,10 @@ const EventCard = ({ event, index }: { event: EventMeta; index: number }) => {
         onClick={() => navigate(`/events/${event.slug}`)}
         className="cursor-pointer group h-full"
       >
-        {/* Poster card */}
-        <div className={`relative rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-shadow duration-300 bg-gradient-to-br ${event.heroGradient ?? "from-primary/80 to-primary"}`}>
+        {/* Poster card — aspect-ratio dipasang langsung di container terluar
+            supaya tinggi kartu SELALU konsisten berdasarkan lebar kolom,
+            tidak lagi bergantung pada tinggi konten di dalamnya. */}
+        <div className={`relative aspect-[3/4] rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-shadow duration-300 bg-gradient-to-br ${event.heroGradient ?? "from-primary/80 to-primary"}`}>
 
           {/* Foto cover dari Cloudinary */}
           {event.coverImage && (
@@ -76,8 +78,8 @@ const EventCard = ({ event, index }: { event: EventMeta; index: number }) => {
             </div>
           )}
 
-          {/* Aspect ratio wrapper */}
-          <div className={`relative aspect-[3/4] flex flex-col justify-between p-5 ${isOngoing ? "pt-9" : ""}`}>
+          {/* Konten — mengisi penuh kotak aspect-ratio, flex-col justify-between */}
+          <div className={`relative h-full flex flex-col justify-between p-5 ${isOngoing ? "pt-9" : ""}`}>
             {/* Top row */}
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 px-3 py-1 text-[10px] font-bold text-white uppercase tracking-widest">
@@ -98,7 +100,7 @@ const EventCard = ({ event, index }: { event: EventMeta; index: number }) => {
             <div className="space-y-1.5">
               <div className="w-8 h-px bg-white/30 mb-3" />
               <p className="text-white/50 text-[9px] uppercase tracking-[0.25em] font-semibold">{event.subtitle}</p>
-              <h3 className="text-white text-lg font-black leading-tight tracking-tight">{event.title}</h3>
+              <h3 className="text-white text-lg font-black leading-tight tracking-tight line-clamp-3">{event.title}</h3>
               <div className="pt-1 space-y-1">
                 <div className="flex items-center gap-1.5">
                   <MapPin className="h-2.5 w-2.5 text-white/50 shrink-0" />
