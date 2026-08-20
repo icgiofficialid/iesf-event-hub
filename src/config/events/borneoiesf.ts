@@ -1,15 +1,5 @@
 // ================================================================
 // borneoiesf.ts
-// Path: src/config/events/borneoiesf.ts
-// Disesuaikan dengan Guidebook Borneo International Engineering
-// Science Fair (Borneo-IESF) 2026.
-//
-// ⚠️ CATATAN:
-// Header halaman "About" di guidebook sumber masih tertulis
-// "About BIESF" (sisa template dari event BIESF/Bali), tapi isi
-// paragrafnya jelas menyebut "Borneo-IESF" dan lokasi Palangka Raya
-// — event ini BEDA dari biesf-2026 (Bali) yang sudah ada di
-// registry, karena itu dipakai slug baru "borneo-iesf-2026".
 // ================================================================
 
 import type { EventDetailData } from "@/config/eventDetailTypes";

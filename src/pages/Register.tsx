@@ -217,6 +217,7 @@ const Register = () => {
             participant={participant} competition={competition}
             sheetUrl={sheetUrl} sheetTarget={sheetTarget}
             eventTitle={eventTitle}
+            pricing={eventMeta?.pricing}
             onBack={() => setStep(3)} onSuccess={handleSuccess}
           />
         )}

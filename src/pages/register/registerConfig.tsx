@@ -13,10 +13,14 @@ export type CompetitionType = "online" | "offline";
 export type FormData = Record<string, string>;
 
 // ================================================================
-// CATEGORY PRICE — ubah harga di sini jika berubah
+// CATEGORY PRICE — FALLBACK DEFAULT saja.
+// Harga sesungguhnya sekarang per-event, disimpan di `pricing` pada
+// tiap entry EVENTS_REGISTRY (src/config/eventRegistry.ts). Map di
+// bawah ini HANYA dipakai kalau event yang aktif tidak mengisi field
+// `pricing` sama sekali.
 // ================================================================
 
-export const CATEGORY_PRICE_MAP: Record<string, string> = {
+export const DEFAULT_CATEGORY_PRICE_MAP: Record<string, string> = {
   "Online Competition":                                                                                                       "IDR 975.000",
   "Offline Competition":                                                                                                      "IDR 3.750.000",
   "Online Competition (E-Certificate Only)":                                                                                  "USD 80",
@@ -74,7 +78,7 @@ export const submitToSheet = async (
     FILE:                       f("FILE"),
     YES_NO:                     f("YES_NO"),
     JUDUL_PERNAH_BERPATISIPASI: f("JUDUL_PERNAH_BERPATISIPASI"),
-    CATEGORY_PRICE:             CATEGORY_PRICE_MAP[f("CATEGORY_COMPETITION")] ?? "",
+    CATEGORY_PRICE:             f("CATEGORY_PRICE") || DEFAULT_CATEGORY_PRICE_MAP[f("CATEGORY_COMPETITION")] || "",
     CATEGORIES:                 f("CATEGORIES"),
     PROJECT_TITLE:              f("PROJECT_TITLE"),
   };

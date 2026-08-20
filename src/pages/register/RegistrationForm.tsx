@@ -10,7 +10,7 @@ import {
   Field, TextInput, TextArea, SelectInput, SectionTitle, SuccessOverlay,
   type FormData, type ParticipantType, type CompetitionType,
   submitToSheet,
-  CATEGORY_PRICE_MAP, // ← tambah ini
+  DEFAULT_CATEGORY_PRICE_MAP, // ← fallback kalau event tidak punya pricing sendiri
 } from "./registerConfig";
 
 // ── Kode Negara (dengan bendera) ─────────────────────────────────
@@ -527,6 +527,7 @@ interface Props {
   participant: ParticipantType; competition: CompetitionType;
   sheetUrl: string; sheetTarget: string;
   eventTitle?: string; // ← nama event untuk banner info (mis. "BIESF 2026")
+  pricing?: Record<string, string>; // ← harga khusus event ini (dari eventRegistry); fallback DEFAULT_CATEGORY_PRICE_MAP kalau tidak diisi
   onBack: () => void; onSuccess: (data: SummaryData) => void;
 }
 
@@ -556,10 +557,12 @@ const normalizePhone = (code: string, rawNum: string): string => {
 };
 
 // ── Komponen Utama ────────────────────────────────────────────────
-const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, eventTitle, onBack, onSuccess }: Props) => {
+const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, eventTitle, pricing, onBack, onSuccess }: Props) => {
   const { lang } = useLang();
   const t = (key: string) => T[key]?.[lang as Lang] ?? key;
   const eventName = eventTitle || "IESF 2026";
+  // Harga event ini (kalau ada key yang tidak diisi di pricing, jatuh ke default)
+  const priceMap = { ...DEFAULT_CATEGORY_PRICE_MAP, ...(pricing ?? {}) };
 
   const [form, setForm]           = useState<FormData>({});
   const [loading, setLoading]     = useState(false);
@@ -616,7 +619,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, eve
       PHONE_CODE:                 cL,
       PROVINCE: participant === "international" ? f("COUNTRY") : f("PROVINCE"),
       CATEGORY_COMPETITION: resolvedCatComp,
-      CATEGORY_PRICE: CATEGORY_PRICE_MAP[resolvedCatComp] ?? "",
+      CATEGORY_PRICE: priceMap[resolvedCatComp] ?? "",
     };
 
     try {

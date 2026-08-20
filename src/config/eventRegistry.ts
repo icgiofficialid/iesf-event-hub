@@ -57,6 +57,14 @@ export interface EventMeta {
   coverImage?: string;
   coverImageLandscape?: string;
   heroGradient?: string;
+  /**
+   * Harga registrasi per kombinasi kategori — KEY harus persis sama dengan
+   * label yang muncul di dropdown "Category Competition" pada form
+   * (lihat COMPETITION_CATEGORY_OPTIONS di RegistrationForm.tsx).
+   * Kalau event tidak mengisi ini (undefined / dihapus), form otomatis
+   * pakai DEFAULT_CATEGORY_PRICE_MAP di registerConfig.tsx sebagai fallback.
+   */
+  pricing?: Record<string, string>;
 }
 
 // ================================================================
@@ -77,6 +85,16 @@ export const EVENTS_REGISTRY: EventMeta[] = [
       coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1778213775/WhatsApp_Image_2026-05-08_at_11.12.59_nf00ax.jpg",
       coverImageLandscape: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778214438/WhatsApp_Image_2026-05-08_at_11.26.51_jnzlti.jpg",
       heroGradient:  "from-purple-900 via-violet-800 to-indigo-900", // <-- tambah ini
+
+      // Harga khusus BIESF — ubah di sini kalau harga BIESF berbeda dari event lain
+      pricing: {
+        "Online Competition":                                                                                                       "IDR 975.000",
+        "Offline Competition":                                                                                                      "IDR 3.750.000",
+        "Online Competition (E-Certificate Only)":                                                                                  "USD 80",
+        "Online Competition + one medal/team and Certificate for each member + shipping fee (SOUTH EAST ASIA)":                     "USD 225",
+        "Online Competition + one medal/team and Certificate for each member + shipping fee (Exclude SOUTH EAST ASIA)":             "USD 275",
+        "Offline Competition (International)":                                                                                      "USD 400",
+      },
 
       sheet: {
         sheetUrl: "https://script.google.com/macros/s/AKfycbwanIpFgNGAqc7S0q6ccFCnXK1ruYWneAFPSBIdAjdvi8xImTkqwwaDXrBHGG2HYTvr/exec",
@@ -104,7 +122,18 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1780909147/POTRET_YIESF_2026_iset4w.jpg",
     coverImageLandscape: "https://res.cloudinary.com/dwhobhexj/image/upload/v1780909147/LANDSCAPE_YIESF_2026_uvw4vh.jpg",
     shutdownNote:         "Event ini telah ditutup untuk pendaftaran.",
-    heroGradient:  "from-cyan-900 via-teal-800 to-blue-900", 
+    heroGradient:  "from-cyan-900 via-teal-800 to-blue-900",
+
+    // Harga khusus YIESF — ubah di sini kalau harga YIESF berbeda dari event lain
+    pricing: {
+      "Online Competition":                                                                                                       "IDR 975.000",
+      "Offline Competition":                                                                                                      "IDR 3.750.000",
+      "Online Competition (E-Certificate Only)":                                                                                  "USD 80",
+      "Online Competition + one medal/team and Certificate for each member + shipping fee (SOUTH EAST ASIA)":                     "USD 225",
+      "Online Competition + one medal/team and Certificate for each member + shipping fee (Exclude SOUTH EAST ASIA)":             "USD 275",
+      "Offline Competition (International)":                                                                                      "USD 400",
+    },
+
     sheet: {
       // Ganti dengan URL GAS deployment milik YIESF
       sheetUrl: "https://script.google.com/macros/s/AKfycbxTMWsvKhn0N6JImkJWIPJkJzaXAZHOEG5SqZ7MZmPog7B956RQvtQNr1s8zFnUHeTbBQ/exec",
@@ -134,6 +163,16 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     coverImageLandscape: "",
     heroGradient:  "from-violet-900 via-purple-900 to-emerald-900", // muted, senada dengan gaya BIESF/YIESF; ciri khas ungu-hijau ala guidebook SIESF
 
+    // Harga khusus SIESF — sesuai guidebook (ubah bebas di sini kalau ada perubahan)
+    pricing: {
+      "Online Competition":                                                                                                       "IDR 975.000",
+      "Offline Competition":                                                                                                      "IDR 3.750.000",
+      "Online Competition (E-Certificate Only)":                                                                                  "USD 80",
+      "Online Competition + one medal/team and Certificate for each member + shipping fee (SOUTH EAST ASIA)":                     "USD 225",
+      "Online Competition + one medal/team and Certificate for each member + shipping fee (Exclude SOUTH EAST ASIA)":             "USD 275",
+      "Offline Competition (International)":                                                                                      "USD 400",
+    },
+
     sheet: {
       // TODO: ganti dengan URL GAS deployment milik SIESF
       sheetUrl: "https://script.google.com/macros/s/REPLACE_WITH_SIESF_GAS_DEPLOYMENT_ID/exec",
@@ -161,6 +200,16 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     coverImage:          "",
     coverImageLandscape: "",
     heroGradient:  "from-slate-900 via-amber-950 to-orange-900",
+
+    // Harga khusus Borneo-IESF — sesuai guidebook (ubah bebas di sini kalau ada perubahan)
+    pricing: {
+      "Online Competition":                                                                                                       "IDR 750.000",
+      "Offline Competition":                                                                                                      "IDR 3.000.000",
+      "Online Competition (E-Certificate Only)":                                                                                  "USD 50",
+      "Online Competition + one medal/team and Certificate for each member + shipping fee (SOUTH EAST ASIA)":                     "USD 225",
+      "Online Competition + one medal/team and Certificate for each member + shipping fee (Exclude SOUTH EAST ASIA)":             "USD 275",
+      "Offline Competition (International)":                                                                                      "USD 400",
+    },
 
     sheet: {
       sheetUrl: "https://script.google.com/macros/s/AKfycbz8eV9sq5EcM3QZQRVV1vz3eIVidERe4_pDG_KyGaVt8HcuaoC8ZbhcVp5Xv-CD7sIt/exec",
