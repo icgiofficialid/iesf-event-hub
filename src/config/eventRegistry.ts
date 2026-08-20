@@ -155,18 +155,15 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     dateRange:            "27–30 November 2026",
     registrationDeadline: "27 October 2026",
     status:               "upcoming",
-    registrationOpen:     false, // Set true setelah sheetUrl & cover image final
+    registrationOpen:     true, // Set true setelah sheetUrl & cover image final
     route:                "/events/borneo-iesf-2026",
     shutdown:             false,
-    // TODO: isi dengan URL Cloudinary cover image Borneo-IESF (portrait & landscape)
     coverImage:          "",
     coverImageLandscape: "",
-    // Muted, senada dengan gaya BIESF/YIESF/SIESF; ciri khas navy-emas ala guidebook Borneo-IESF, tanpa ujung terang
     heroGradient:  "from-slate-900 via-amber-950 to-orange-900",
 
     sheet: {
-      // TODO: ganti dengan URL GAS deployment milik Borneo-IESF
-      sheetUrl: "https://script.google.com/macros/s/REPLACE_WITH_BORNEOIESF_GAS_DEPLOYMENT_ID/exec",
+      sheetUrl: "https://script.google.com/macros/s/AKfycbz8eV9sq5EcM3QZQRVV1vz3eIVidERe4_pDG_KyGaVt8HcuaoC8ZbhcVp5Xv-CD7sIt/exec",
       targets: {
         "indo-online":   "indo-online",
         "indo-offline":  "indo-offline",

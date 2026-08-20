@@ -26,11 +26,11 @@ const borneoiesf: EventDetailData = {
   ],
 
   // TODO: upload guidebook PDF ini ke Google Drive lalu isi link share-nya di sini.
-  guidebookUrl: "",
+  guidebookUrl: "https://drive.google.com/file/d/1i9YK5AzOtUU7cfO1UNHuOtE0vvEjowL_/view?usp=drive_link",
 
   email:   "iesfofficial.icgi@gmail.com",
   website: "iesfofficial.or.id",
-  venue:   "Gedung Pusat Pengembangan Iptek dan Inovasi Gambut, Universitas Palangka Raya — Palangka Raya, Kalimantan Tengah, Indonesia",
+  venue:   "Gedung Pusat Pengembangan Iptek dan Inovasi Gambut, Universitas Palangka Raya",
 
   labels: {
     eventBadge:     "IESF · Borneo-IESF Competition 2026",
@@ -40,9 +40,7 @@ const borneoiesf: EventDetailData = {
   },
 
   stats: [
-    { value: "500+",  label: "Teams Expected" },
     { value: "8",     label: "Competition Categories" },
-    { value: "1000+", label: "Participants Overall" },
     { value: "4",     label: "Days of Innovation" },
   ],
 
@@ -137,19 +135,6 @@ const borneoiesf: EventDetailData = {
     { place: "2nd Place", medal: "Certificate & Medal", extra: "Score: 71–85"  },
     { place: "3rd Place", medal: "Certificate & Medal", extra: "Score: 55–70"  },
     { place: "4th Place", medal: "Certificate & Medal", extra: "Score: ≤54"    },
-
-    // ── Highest Award Recognition (Offline Competition Only) ────
-    { place: "ICGI Special Mention Award", medal: "Certificate & Medal", extra: "Offline only" },
-    { place: "IYSA Special Award",         medal: "Certificate & Medal", extra: "Offline only" },
-    { place: "Partner Special Award",      medal: "Certificate & Medal", extra: "Offline only" },
-    { place: "IYSA Semi Grand Award",      medal: "Free Offline Registration — GYIIF 2027, IPB University, Bogor", extra: "Offline only" },
-    { place: "ICGI Educational Grant Award", medal: "IDR 3,000,000 total (IDR 500,000/month for 6 months)", extra: "Offline only" },
-    { place: "ICGI Achievement Award",     medal: "1 Unit Mid-Range Laptop", extra: "Offline only" },
-    { place: "ICGI Premium Cash Award",    medal: "Cash IDR 5,000,000", extra: "Offline only" },
-    { place: "IYSA Grand Award",           medal: "Cash IDR 7,500,000", extra: "Offline only" },
-    // Guidebook hanya menyebut 3 fasilitas untuk Platinum Award (halaman terpotong,
-    // tidak menyebut FunEdu Trip seperti versi BIESF/SIESF) — cek ulang ke panitia.
-    { place: "ICGI Platinum Award",        medal: "3-Day Trip to Kuala Lumpur, Malaysia (round-trip flight for 2, accommodation, meals)", extra: "Offline only" },
   ],
 
   scheduleOffline: [
