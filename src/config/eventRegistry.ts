@@ -157,7 +157,7 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     status:               "upcoming",
     registrationOpen:     false, // Set true setelah tanggal & sheetUrl final
     route:                "/events/siesf-2026",
-    shutdown:             false,
+    shutdown:             true,
     // TODO: isi dengan URL Cloudinary cover image SIESF (portrait & landscape)
     coverImage:          "",
     coverImageLandscape: "",
@@ -197,8 +197,8 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     registrationOpen:     true, // Set true setelah sheetUrl & cover image final
     route:                "/events/borneo-iesf-2026",
     shutdown:             false,
-    coverImage:          "",
-    coverImageLandscape: "",
+    coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1787220065/BorneoIESF-potret_szzqxe.png",
+    coverImageLandscape: "https://res.cloudinary.com/dwhobhexj/image/upload/v1787220261/borneoIESF-landscape_kxv9ev.png",
     heroGradient:  "from-slate-900 via-amber-950 to-orange-900",
 
     // Harga khusus Borneo-IESF — sesuai guidebook (ubah bebas di sini kalau ada perubahan)
