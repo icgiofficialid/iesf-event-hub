@@ -26,11 +26,14 @@ const siesf: EventDetailData = {
   // belum tersedia asetnya di project ini, tambahkan jika perlu.
   organizers: [
     { name: "ICGI", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/Logo_ICGI_Bg_Transparant_1_rdvff1.png" },
+    { name: "SIESF", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1787294993/1_orrx0h.png" },
     { name: "IYSA", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/logo_IYSA_bagus_e6uai3.png" },
+    { name: "SEKOLAH MENENGAH KEJURUAN - YAYASAN PHARMASI SEMARANG", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1787287616/SMK-YPS_zkmuvg.png" },
+    { name: "SEKOLAH TINGGI ILMU FARMASI - YAYASAN PHARMASI SEMARANG", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1787287615/ST-YPS_uj4rbk.png" },
   ],
 
   // TODO: upload guidebook PDF ini ke Google Drive lalu isi link share-nya di sini.
-  guidebookUrl: "",
+  guidebookUrl: "https://drive.google.com/file/d/1pNyiW4Cbtj7w9DqoDBho47oKqT5wReVd/view?usp=drive_link",
 
   email:   "iesfofficial.icgi@gmail.com",
   website: "iesfofficial.or.id",
@@ -44,9 +47,7 @@ const siesf: EventDetailData = {
   },
 
   stats: [
-    { value: "500+",  label: "Teams Expected" },
     { value: "8",     label: "Competition Categories" },
-    { value: "1000+", label: "Participants Overall" },
     { value: "5",     label: "Days of Innovation" },
   ],
 
@@ -141,17 +142,6 @@ const siesf: EventDetailData = {
     { place: "2nd Place", medal: "Certificate & Medal", extra: "Score: 71–85"  },
     { place: "3rd Place", medal: "Certificate & Medal", extra: "Score: 55–70"  },
     { place: "4th Place", medal: "Certificate & Medal", extra: "Score: ≤54"    },
-
-    // ── Highest Award Recognition (Offline Competition Only) ────
-    { place: "ICGI Special Mention Award", medal: "Certificate & Medal", extra: "Offline only" },
-    { place: "IYSA Special Award",         medal: "Certificate & Medal", extra: "Offline only" },
-    { place: "Partner Special Award",      medal: "Certificate & Medal", extra: "Offline only" },
-    { place: "IYSA Semi Grand Award",      medal: "Free Offline Registration — GYIIF 2027, IPB University, Bogor", extra: "Offline only" },
-    { place: "ICGI Educational Grant Award", medal: "IDR 3,000,000 total (IDR 500,000/month for 6 months)", extra: "Offline only" },
-    { place: "ICGI Achievement Award",     medal: "1 Unit Mid-Range Laptop", extra: "Offline only" },
-    { place: "ICGI Premium Cash Award",    medal: "Cash IDR 5,000,000", extra: "Offline only" },
-    { place: "IYSA Grand Award",           medal: "Cash IDR 7,500,000", extra: "Offline only" },
-    { place: "ICGI Platinum Award",        medal: "3-Day Trip to Kuala Lumpur, Malaysia (2 flight tickets, accommodation, meals, FunEdu Trip)", extra: "Offline only" },
   ],
 
   // ── Jadwal — semua tanggal & jam masih TBA di guidebook sumber ──

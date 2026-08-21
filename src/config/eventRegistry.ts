@@ -84,7 +84,7 @@ export const EVENTS_REGISTRY: EventMeta[] = [
       shutdown:             false,
       coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1778213775/WhatsApp_Image_2026-05-08_at_11.12.59_nf00ax.jpg",
       coverImageLandscape: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778214438/WhatsApp_Image_2026-05-08_at_11.26.51_jnzlti.jpg",
-      heroGradient:  "from-purple-900 via-violet-800 to-indigo-900", // <-- tambah ini
+      heroGradient:  "from-teal-800 via-cyan-800 to-emerald-900", // <-- tambah ini
 
       // Harga khusus BIESF — ubah di sini kalau harga BIESF berbeda dari event lain
       pricing: {
@@ -155,19 +155,19 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     dateRange:            "TBA, 2026",
     registrationDeadline: "TBA",
     status:               "upcoming",
-    registrationOpen:     false, // Set true setelah tanggal & sheetUrl final
+    registrationOpen:     true, // Set true setelah tanggal & sheetUrl final
     route:                "/events/siesf-2026",
-    shutdown:             true,
+    shutdown:             false,
     // TODO: isi dengan URL Cloudinary cover image SIESF (portrait & landscape)
-    coverImage:          "",
-    coverImageLandscape: "",
-    heroGradient:  "from-violet-900 via-purple-900 to-emerald-900", // muted, senada dengan gaya BIESF/YIESF; ciri khas ungu-hijau ala guidebook SIESF
+    coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1787295508/siesf-potret_rc7f6n.jpg",
+    coverImageLandscape: "https://res.cloudinary.com/dwhobhexj/image/upload/v1787295507/siesf-landscape_cmm8uz.jpg",
+    heroGradient:  "from-slate-800 via-orange-800 to-emerald-700", // muted, senada dengan gaya BIESF/YIESF; ciri khas ungu-hijau ala guidebook SIESF
 
     // Harga khusus SIESF — sesuai guidebook (ubah bebas di sini kalau ada perubahan)
     pricing: {
-      "Online Competition":                                                                                                       "IDR 975.000",
-      "Offline Competition":                                                                                                      "IDR 3.750.000",
-      "Online Competition (E-Certificate Only)":                                                                                  "USD 80",
+      "Online Competition":                                                                                                       "IDR 750.000",
+      "Offline Competition":                                                                                                      "IDR 3.000.000",
+      "Online Competition (E-Certificate Only)":                                                                                  "USD 50",
       "Online Competition + one medal/team and Certificate for each member + shipping fee (SOUTH EAST ASIA)":                     "USD 225",
       "Online Competition + one medal/team and Certificate for each member + shipping fee (Exclude SOUTH EAST ASIA)":             "USD 275",
       "Offline Competition (International)":                                                                                      "USD 400",
@@ -175,7 +175,7 @@ export const EVENTS_REGISTRY: EventMeta[] = [
 
     sheet: {
       // TODO: ganti dengan URL GAS deployment milik SIESF
-      sheetUrl: "https://script.google.com/macros/s/REPLACE_WITH_SIESF_GAS_DEPLOYMENT_ID/exec",
+      sheetUrl: "https://script.google.com/macros/s/AKfycbx3F2QLruPlAxrN-Eg4gDiv_V4xR3xZbzDmdbK-vtYXi8tnQaTyclBA07-JfNoCusA/exec",
       targets: {
         "indo-online":   "indo-online",
         "indo-offline":  "indo-offline",
@@ -199,7 +199,8 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     shutdown:             false,
     coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1787220065/BorneoIESF-potret_szzqxe.png",
     coverImageLandscape: "https://res.cloudinary.com/dwhobhexj/image/upload/v1787220261/borneoIESF-landscape_kxv9ev.png",
-    heroGradient:  "from-slate-900 via-amber-950 to-orange-900",
+    heroGradient:         "from-[#0B2B1E] via-[#133326] to-[#2F6B4F]",
+    
 
     // Harga khusus Borneo-IESF — sesuai guidebook (ubah bebas di sini kalau ada perubahan)
     pricing: {

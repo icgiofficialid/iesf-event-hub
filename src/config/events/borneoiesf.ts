@@ -12,7 +12,10 @@ const borneoiesf: EventDetailData = {
   // internasional — banyak yang asetnya belum ada di project ini).
   organizers: [
     { name: "ICGI", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/Logo_ICGI_Bg_Transparant_1_rdvff1.png" },
+    { name: "Borneo-IESF", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1787294997/2_wyntdq.png" },
     { name: "IYSA", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/logo_IYSA_bagus_e6uai3.png" },
+    { name: "CBSO", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1787287795/cbso_cbywxn.png" },
+    { name: "FMIPA-UPR", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1787295792/fmipa-upr_icjami.png" },
   ],
 
   // TODO: upload guidebook PDF ini ke Google Drive lalu isi link share-nya di sini.
