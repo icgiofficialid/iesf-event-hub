@@ -25,6 +25,7 @@ const T: Record<string, Record<Lang, string>> = {
   summaryTitle:    { en: "Registration Submitted!", id: "Pendaftaran Berhasil!" },
   summarySubtitle: { en: "LoA will be sent to the team leader's email within 3 working days.", id: "LoA akan dikirimkan ke email ketua tim dalam 3 hari kerja." },
   summaryHeading:  { en: "Registration Summary",   id: "Ringkasan Pendaftaran" },
+  labelEvent:      { en: "Event",                  id: "Event" }, 
   labelParticipant:{ en: "Participant Category",   id: "Kategori Peserta" },
   labelCompetition:{ en: "Competition Category",   id: "Kategori Kompetisi" },
   labelCountry:    { en: "Country",                id: "Negara" },
@@ -43,7 +44,7 @@ const T: Record<string, Record<Lang, string>> = {
 };
 
 // ── Halaman Rangkuman (Step 5) ────────────────────────────────────
-const SummaryPage = ({ data, onHome }: { data: SummaryData; onHome: () => void }) => {
+const SummaryPage = ({ data, eventTitle, onHome }: { data: SummaryData; eventTitle?: string; onHome: () => void }) => {
   const { lang } = useLang();
   const t = (k: string) => T[k]?.[lang as Lang] ?? k;
   const boxRef = useRef<HTMLDivElement>(null);
@@ -65,6 +66,7 @@ const SummaryPage = ({ data, onHome }: { data: SummaryData; onHome: () => void }
   const pLabel = data.participant === "international" ? t("intl") : t("indo");
 
   const rows = [
+    ...(eventTitle ? [{ label: t("labelEvent"), value: eventTitle }] : []),
     { label: t("labelParticipant"), value: pLabel },
     ...(data.competitionCategory ? [{ label: t("labelCompCat"), value: data.competitionCategory }] : []),
     ...(data.country ? [{ label: t("labelCountry"), value: data.country }] : []),
@@ -166,7 +168,7 @@ const Register = () => {
     return (
       <SiteShell>
         <section className="w-full min-h-screen py-24 md:py-32 px-4 flex flex-col items-center justify-center">
-          <SummaryPage data={summaryData} onHome={handleHome} />
+          <SummaryPage data={summaryData} eventTitle={eventTitle} onHome={handleHome} />
         </section>
       </SiteShell>
     );
