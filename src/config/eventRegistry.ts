@@ -223,6 +223,41 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     },
   },
 
+ //-----------------------------------------------
+  {
+    slug:                 "tiesf-2027",
+    title:                "Thailand International Engineering Science Fair",
+    subtitle:             "TIESF 2027",
+    // TODO: guidebook tidak menyebut kota/venue spesifik - isi setelah dikonfirmasi panitia.
+    location:             "Thailand (Venue TBA)",
+    dateRange:            "5-9 January 2027 (Tentative)",
+    registrationDeadline: "TBA",
+    status:               "upcoming",
+    // Sengaja FALSE - harga, venue, kontak, dan logo organizer belum ada di guidebook sumber.
+    registrationOpen:     false,
+    route:                "/events/tiesf-2027",
+    shutdown:             false,
+    // TODO: belum ada cover image Cloudinary untuk TIESF.
+    coverImage:          undefined,
+    coverImageLandscape: undefined,
+    heroGradient:         "from-[#A51931] via-[#201C34] to-[#2D2A4A]", // merah bendera di ujung, navy/biru mendominasi tengah - meniru rasio garis bendera Thailand (merah tipis, biru tebal)
+
+    // TODO: guidebook TIESF tidak mencantumkan harga registrasi sama sekali - isi setelah tersedia.
+    // Dibiarkan undefined supaya otomatis fallback ke DEFAULT_CATEGORY_PRICE_MAP di registerConfig.tsx.
+    pricing: undefined,
+
+    sheet: {
+      // TODO: belum ada deployment GAS khusus TIESF - ganti sebelum registrationOpen: true.
+      sheetUrl: "",
+      targets: {
+        "indo-online":   "indo-online",
+        "indo-offline":  "indo-offline",
+        "inter-online":  "inter-online",
+        "inter-offline": "inter-offline",
+      },
+    },
+  },
+
 ];
 
 // ── Helper — cari event by slug ───────────────────────────────────
