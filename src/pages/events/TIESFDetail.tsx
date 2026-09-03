@@ -76,7 +76,7 @@ const FlapChar = ({ char }: { char: string }) => (
 //    ulang berkala tanpa henti (mekanisme animasi utama halaman ini) ──
 const SplitFlap = ({ value, className = "" }: { value: string; className?: string }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-30px" });
+  const inView = useInView(ref, { once: false, margin: "-30px" });
   const [display, setDisplay] = useState(() => value.replace(/[^ ]/g, () => randChar()));
 
   useEffect(() => {
@@ -209,7 +209,7 @@ const CriteriaRow = ({ aspect, weight, index }: { aspect: string; weight: string
           style={{ background: `linear-gradient(90deg, ${T.red}, ${T.blue})` }}
           initial={{ width: "0%" }}
           whileInView={{ width: `${pct}%` }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 1.1, ease: "easeOut", delay: index * 0.1 }}
         />
       </div>
@@ -267,10 +267,15 @@ const TIESFDetail = () => {
   const meta = getEventMeta("tiesf-2027");
   const data = tiesf;
   const registrationOpen = !!meta?.registrationOpen;
+  const finalRegisterRef = useRef<HTMLDivElement>(null);
 
   const goRegister = () => {
     sessionStorage.setItem("eventSlug", "tiesf-2027");
     navigate("/register");
+  };
+
+  const scrollToFinalRegister = () => {
+    finalRegisterRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   return (
@@ -309,7 +314,7 @@ const TIESFDetail = () => {
             }}
             initial={{ x: 140, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           >
             <img
@@ -327,7 +332,7 @@ const TIESFDetail = () => {
               className="lg:hidden -mx-4 mb-6 relative h-52 sm:h-64 overflow-hidden"
               initial={{ opacity: 0, scale: 1.08 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
               <img
@@ -346,7 +351,7 @@ const TIESFDetail = () => {
             </div>
             <h1 className="tiesf-title font-black uppercase leading-[0.92] text-[2.15rem] sm:text-5xl md:text-7xl mb-8 break-words" style={{ color: T.ink }}>
               Thailand<br />
-              International Engineering<br />
+              Int'l Engineering<br />
               <span style={{ color: T.blue }}>Science Fair</span>
             </h1>
 
@@ -389,7 +394,7 @@ const TIESFDetail = () => {
 
             <div className="flex flex-wrap gap-3 mt-8">
               {registrationOpen ? (
-                <MagneticButton size="lg" onClick={goRegister} style={{ background: T.red, color: "#fff" }} className="hover:opacity-90 border-0 font-bold uppercase tracking-wider rounded-none">
+                <MagneticButton size="lg" onClick={scrollToFinalRegister} style={{ background: T.red, color: "#fff" }} className="hover:opacity-90 border-0 font-bold uppercase tracking-wider rounded-none">
                   Register Now <ArrowRight className="w-4 h-4 ml-1" />
                 </MagneticButton>
               ) : (
@@ -439,7 +444,7 @@ const TIESFDetail = () => {
                   className="mt-8 relative"
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
+                  viewport={{ once: false, margin: "-60px" }}
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <img
@@ -591,7 +596,7 @@ const TIESFDetail = () => {
         </section>
 
         {/* ── CTA final — krem terang, teks besar, tombol merah ───────── */}
-        <section className="py-16 md:py-24">
+        <section className="py-16 md:py-24" ref={finalRegisterRef}>
           <div className="max-w-4xl mx-auto px-4 text-center">
             <div className="flex items-center justify-center gap-2 mb-4 text-[11px] uppercase tracking-[0.25em]" style={{ color: T.soft }}>
               <LiveDot /> {registrationOpen ? "Seats Available" : "Registration Closed"}
