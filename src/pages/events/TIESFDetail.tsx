@@ -351,7 +351,7 @@ const TIESFDetail = () => {
             </div>
             <h1 className="tiesf-title font-black uppercase leading-[0.92] text-[2.15rem] sm:text-5xl md:text-7xl mb-8 break-words" style={{ color: T.ink }}>
               Thailand<br />
-              Int'l Engineering<br />
+              International Engineering<br />
               <span style={{ color: T.blue }}>Science Fair</span>
             </h1>
 
