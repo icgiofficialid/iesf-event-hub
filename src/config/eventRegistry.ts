@@ -229,7 +229,7 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     title:                "Thailand International Engineering Science Fair",
     subtitle:             "TIESF 2027",
     // TODO: guidebook tidak menyebut kota/venue spesifik - isi setelah dikonfirmasi panitia.
-    location:             "Thailand (Venue TBA)",
+    location:             "Thailand ( TBA)",
     dateRange:            "5-9 January 2027 (Tentative)",
     registrationDeadline: "TBA",
     status:               "upcoming",
