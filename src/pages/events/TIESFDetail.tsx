@@ -105,7 +105,7 @@ const SplitFlap = ({ value, className = "" }: { value: string; className?: strin
   }, [inView, value]);
 
   return (
-    <span ref={ref} className={`inline-flex ${className}`}>
+    <span ref={ref} className={`inline-flex flex-wrap ${className}`}>
       {display.split("").map((c, i) => <FlapChar key={i} char={c} />)}
     </span>
   );
@@ -122,13 +122,13 @@ const LiveDot = ({ color = T.red }: { color?: string }) => (
 );
 
 // ── Status baris hero — teks bersiklus terus seperti papan asli ────
-const CyclingStatus = ({ options }: { options: string[] }) => {
+const CyclingStatus = ({ options, className = "" }: { options: string[]; className?: string }) => {
   const [idx, setIdx] = useState(0);
   useEffect(() => {
     const iv = setInterval(() => setIdx((v) => (v + 1) % options.length), 3200);
     return () => clearInterval(iv);
   }, [options.length]);
-  return <SplitFlap value={options[idx]} className="tracking-wider" />;
+  return <SplitFlap value={options[idx]} className={`tracking-wider ${className}`} />;
 };
 
 // ── Tombol magnetik flat — mengikuti kursor, siku tajam (bukan pil) ──
@@ -220,17 +220,19 @@ const CriteriaRow = ({ aspect, weight, index }: { aspect: string; weight: string
 // ── Baris award — leaderboard, rank besar split-flap (di panel merah) ─
 const AwardRow = ({ a, index }: { a: { place: string; medal: string; extra?: string }; index: number }) => (
   <div className="flex items-center gap-4 md:gap-6 py-5" style={{ borderBottom: `1px solid ${T.lineOnBlue}` }}>
-    <SplitFlap value={String(index + 1).padStart(2, "0")} className="font-mono text-3xl md:text-4xl font-bold" />
+    <span style={{ color: T.red }}>
+      <SplitFlap value={String(index + 1).padStart(2, "0")} className="font-mono text-3xl md:text-4xl font-bold" />
+    </span>
     <div className="flex-1 min-w-0">
       <p className="font-semibold text-sm md:text-base text-white">{a.place}</p>
       <p className="text-xs text-white/60">{a.medal}</p>
     </div>
     {a.extra && (
-      <span className="font-mono text-[10px] md:text-xs px-2.5 py-1 shrink-0" style={{ border: `1px solid ${T.blue}88`, color: T.blue }}>
+      <span className="font-mono text-[10px] md:text-xs px-2.5 py-1 shrink-0" style={{ border: `1px solid ${T.red}88`, color: T.red }}>
         {a.extra}
       </span>
     )}
-    <Trophy className="w-4 h-4 shrink-0 hidden sm:block" style={{ color: T.blue }} />
+    <Trophy className="w-4 h-4 shrink-0 hidden sm:block" style={{ color: T.red }} />
   </div>
 );
 
@@ -297,7 +299,7 @@ const TIESFDetail = () => {
         {/* ── HERO — papan keberangkatan, terang krem gading ───────────── */}
         <section className="relative border-b overflow-hidden" style={{ borderColor: T.line }}>
           {/* Gambar monumen Thailand (desktop/lg+) — fade-in dari kanan luar ke kiri dalam,
-              elemen dekoratif di tepi kanan section, dibaurkan dengan mask gradasi */}
+              object-contain supaya seluruh monumen (termasuk puncaknya) selalu utuh tampil */}
           <motion.div
             className="hidden lg:block absolute top-0 right-0 h-full pointer-events-none z-0"
             style={{
@@ -313,15 +315,16 @@ const TIESFDetail = () => {
             <img
               src="https://res.cloudinary.com/dwhobhexj/image/upload/v1788333931/thailand_eji0jg.png"
               alt="Thailand monument"
-              className="w-full h-full object-cover object-top"
+              className="w-full h-full object-contain object-top"
             />
           </motion.div>
 
           <div className="max-w-6xl mx-auto px-4 pt-8 sm:pt-14 pb-10 md:pt-20 relative z-10">
             {/* Gambar monumen Thailand (mobile & tablet, di bawah lg) — banner penuh
-                lebar di atas judul, fade-in + sedikit zoom-out saat masuk viewport */}
+                lebar di atas judul, object-contain supaya utuh (tidak terpotong),
+                fade-in + sedikit zoom-out saat masuk viewport */}
             <motion.div
-              className="lg:hidden -mx-4 mb-6 relative h-44 sm:h-56 overflow-hidden"
+              className="lg:hidden -mx-4 mb-6 relative h-52 sm:h-64 overflow-hidden"
               initial={{ opacity: 0, scale: 1.08 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -330,18 +333,18 @@ const TIESFDetail = () => {
               <img
                 src="https://res.cloudinary.com/dwhobhexj/image/upload/v1788333931/thailand_eji0jg.png"
                 alt="Thailand monument"
-                className="w-full h-full object-cover object-top"
+                className="w-full h-full object-contain object-top"
               />
               <div
-                className="absolute inset-0"
-                style={{ background: `linear-gradient(to top, ${T.paper}, transparent 55%)` }}
+                className="absolute inset-x-0 bottom-0 h-16"
+                style={{ background: `linear-gradient(to top, ${T.paper}, transparent 100%)` }}
               />
             </motion.div>
 
             <div className="flex items-center gap-2 mb-6 text-[11px] uppercase tracking-[0.25em]" style={{ color: T.red }}>
               <LiveDot /> {data.labels.heroBadge}
             </div>
-            <h1 className="tiesf-title font-black uppercase leading-[0.92] text-4xl sm:text-5xl md:text-7xl mb-8" style={{ color: T.ink }}>
+            <h1 className="tiesf-title font-black uppercase leading-[0.92] text-[2.15rem] sm:text-5xl md:text-7xl mb-8 break-words" style={{ color: T.ink }}>
               Thailand<br />
               International Engineering<br />
               <span style={{ color: T.blue }}>Science Fair</span>
@@ -351,16 +354,34 @@ const TIESFDetail = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 py-6">
               {[
                 { label: "Destination", value: "THAILAND", bg: T.red, fg: "#fff" },
-                { label: "Date", value: (meta?.dateRange ?? "5-9 JAN 2027").toUpperCase().slice(0, 16), bg: T.blue, fg: "#fff" },
-                { label: "Venue", value: data.venue.toUpperCase().slice(0, 16), bg: T.blue, fg: "#fff" },
+                {
+                  label: "Date",
+                  value: (meta?.dateRange ?? "5-9 Jan 2027")
+                    .replace(/\(.*?\)/g, "")
+                    .replace(/January/gi, "JAN")
+                    .trim()
+                    .toUpperCase(),
+                  bg: T.blue, fg: "#fff",
+                },
+                {
+                  label: "Venue",
+                  value: (() => {
+                    const m = data.venue.match(/\(([^)]+)\)/);
+                    return (m ? m[1] : data.venue).toUpperCase();
+                  })(),
+                  bg: T.blue, fg: "#fff",
+                },
                 { label: "Status", value: null, bg: T.red, fg: "#fff" },
               ].map((f, i) => (
-                <div key={f.label} className="px-4 py-4 rounded-md" style={{ background: f.bg, color: f.fg }}>
-                  <p className="text-[10px] uppercase tracking-[0.2em] mb-1.5" style={{ color: "#FFFFFFAA" }}>{f.label}</p>
+                <div key={f.label} className="px-3 py-3 sm:px-4 sm:py-4 rounded-md overflow-hidden" style={{ background: f.bg, color: f.fg }}>
+                  <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] mb-1.5 truncate" style={{ color: "#FFFFFFAA" }}>{f.label}</p>
                   {f.value ? (
-                    <SplitFlap value={f.value} className="font-mono text-sm md:text-base" />
+                    <SplitFlap value={f.value} className="font-mono text-[11px] sm:text-sm md:text-base leading-tight" />
                   ) : (
-                    <CyclingStatus options={registrationOpen ? ["OPEN NOW", "BOARDING", "JOIN TODAY"] : ["CLOSED", "STAND BY"]} />
+                    <CyclingStatus
+                      className="font-mono text-[11px] sm:text-sm md:text-base leading-tight"
+                      options={registrationOpen ? ["OPEN NOW", "BOARDING", "JOIN TODAY"] : ["CLOSED", "STAND BY"]}
+                    />
                   )}
                 </div>
               ))}
@@ -408,11 +429,30 @@ const TIESFDetail = () => {
         <section className="border-b" style={{ borderColor: T.line }}>
           <div className="max-w-6xl mx-auto px-4 py-16 md:py-24">
             <div className="grid md:grid-cols-12 gap-8 md:gap-12">
-              <div className="md:col-span-3">
+              <div className="md:col-span-5">
                 <p className="font-mono text-xs uppercase tracking-[0.2em]" style={{ color: T.red }}>§ 01 — About</p>
                 <h2 className="tiesf-title font-black text-2xl md:text-3xl uppercase mt-2 leading-tight">Heritage Meets<br />Engineering</h2>
+
+                {/* ── Gambar Monumen Demokrasi Bangkok — tanpa card/background,
+                    PNG transparan langsung ditampilkan apa adanya, fade-in ── */}
+                <motion.div
+                  className="mt-8 relative"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <img
+                    src="https://res.cloudinary.com/dwhobhexj/image/upload/v1788400116/Bangkok_Thailand_pzdfll.png"
+                    alt="Democracy Monument, Bangkok"
+                    className="w-full h-auto"
+                  />
+                  <p className="font-mono text-[10px] uppercase tracking-[0.15em] mt-3" style={{ color: T.soft }}>
+                    Democracy Monument — Bangkok
+                  </p>
+                </motion.div>
               </div>
-              <div className="md:col-span-9 md:border-l md:pl-10" style={{ borderColor: T.line }}>
+              <div className="md:col-span-7 md:border-l md:pl-10" style={{ borderColor: T.line }}>
                 <p className="text-sm md:text-[15px] leading-8">
                   <span className="tiesf-title float-left text-6xl md:text-7xl font-black leading-[0.8] pr-3 pt-1" style={{ color: T.blue }}>
                     {data.about.welcome.charAt(0)}

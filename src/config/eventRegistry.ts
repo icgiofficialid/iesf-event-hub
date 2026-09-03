@@ -238,7 +238,7 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     route:                "/events/tiesf-2027",
     shutdown:             false,
     // TODO: belum ada cover image Cloudinary untuk TIESF.
-    coverImage:          undefined,
+    coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1788408807/Add_a_heading_2_lqbozr.png",
     coverImageLandscape: undefined,
     heroGradient:         "from-[#A51931] via-[#201C34] to-[#2D2A4A]", // merah bendera di ujung, navy/biru mendominasi tengah - meniru rasio garis bendera Thailand (merah tipis, biru tebal)
 
@@ -248,7 +248,7 @@ export const EVENTS_REGISTRY: EventMeta[] = [
 
     sheet: {
       // TODO: belum ada deployment GAS khusus TIESF - ganti sebelum registrationOpen: true.
-      sheetUrl: "",
+      sheetUrl: "https://script.google.com/macros/s/AKfycbyUF_9hIS2Ps1jB0Gg880yfzPSOfNOV_kjV9LqlmgHxewv7Ep1wet5xIHNjH3CmSku3/exec",
       targets: {
         "indo-online":   "indo-online",
         "indo-offline":  "indo-offline",
