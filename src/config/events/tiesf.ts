@@ -39,6 +39,7 @@ const tiesf: EventDetailData = {
   // TODO: guidebook tidak menyertakan logo organizer/mitra untuk TIESF — tambahkan setelah tersedia.
   organizers: [
     { name: "ICGI", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/Logo_ICGI_Bg_Transparant_1_rdvff1.png" },
+    { name: "NGK",  logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1789114076/ISF_1_pdv8uu.png" },
   ],
 
   labels: {
