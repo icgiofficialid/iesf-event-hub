@@ -279,7 +279,7 @@ const T: Record<string, Record<Lang, string>> = {
   catParticipant:    { en: "Participant Category",   id: "Kategori Peserta" },
   catCompetition:    { en: "Competition Category",   id: "Kategori Kompetisi" },
   teamName:          { en: "Name of Leader & Member Team", id: "Nama Ketua & Anggota Tim" },
-  teamNameNote:      { en: "Noted: Input the name of the team leader and team members with the team leader's name at the beginning, with the following format:\n\nLeader Name\nMember 1 Name\nMember 2 Name\nMember 3 Name\n\nNote: maximum 3 members + 1 team leader", id: "Catatan: Masukkan nama ketua tim dan anggota tim dengan nama ketua tim di awal, dengan format berikut:\n\nNama Ketua\nNama Anggota 1\nNama Anggota 2\n\nCatatan: maksimal 3 anggota + 1 ketua tim" },
+  teamNameNote:      { en: "Noted: Input the name of the team leader and team members with the team leader's name at the beginning, with the following format:\n\nLeader Name\nMember 1 Name\nMember 2 Name\nMember 3 Name\n\nNote: maximum 5 members + 1 team leader", id: "Catatan: Masukkan nama ketua tim dan anggota tim dengan nama ketua tim di awal, dengan format berikut:\n\nNama Ketua\nNama Anggota 1\nNama Anggota 2\nNama Anggota 3\n\nCatatan: maksimal 5 anggota + 1 ketua tim" },
   teamNamePh:        { en: "Input Name of Leader & Member Team", id: "Masukkan Nama Ketua & Anggota Tim" },
   leaderWa:          { en: "Leader WhatsApp Number", id: "No. WhatsApp Ketua" },
   leaderWaNote:      { en: "Select country code, then enter number without leading 0.", id: "Pilih kode negara, lalu masukkan nomor tanpa awalan 0." },
