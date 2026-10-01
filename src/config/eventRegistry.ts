@@ -234,7 +234,7 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     registrationDeadline: "TBA",
     status:               "upcoming",
     // Sengaja FALSE - harga, venue, kontak, dan logo organizer belum ada di guidebook sumber.
-    registrationOpen:     false,
+    registrationOpen:     true,
     route:                "/events/tiesf-2027",
     shutdown:             false,
     // TODO: belum ada cover image Cloudinary untuk TIESF.
