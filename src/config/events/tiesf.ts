@@ -1,26 +1,3 @@
-// ================================================================
-// tiesf.ts
-// Path: src/config/events/tiesf.ts
-//
-// Data konten untuk Thailand International Engineering Science Fair
-// (TIESF) 2027 — melengkapi pembuatan yang sempat terputus.
-//
-// ⚠️ CATATAN PENTING (transparansi dari guidebook sumber):
-// Guidebook TIESF yang dibagikan TIDAK mencantumkan: harga
-// registrasi per kategori, nama kota/venue spesifik di Thailand,
-// kontak resmi (email/website), maupun logo organizer/mitra.
-// Semua field itu diisi "TBA" / placeholder di bawah — WAJIB diisi
-// panitia sebelum registrationOpen di-set true (lihat eventRegistry.ts).
-//
-// Yang SUDAH pasti dari guidebook & percakapan sebelumnya:
-//  - Tim maksimal 6 orang (1 leader + 5 members) + 1 supervisor
-//    (beda dari event lain yang maks 4 orang).
-//  - 9 kategori kompetisi (8 kategori umum + 1 kategori baru
-//    "Innovation Science").
-//  - Kriteria penilaian BEDA TOTAL dari event lain: Urgency,
-//    Visibility, Relevance, Presentation (bukan Originality/
-//    Methodology/dst).
-// ================================================================
 
 import type { EventDetailData } from "@/config/eventDetailTypes";
 
@@ -39,6 +16,8 @@ const tiesf: EventDetailData = {
   // TODO: guidebook tidak menyertakan logo organizer/mitra untuk TIESF — tambahkan setelah tersedia.
   organizers: [
     { name: "ICGI", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/Logo_ICGI_Bg_Transparant_1_rdvff1.png" },
+    { name: "IYSA", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/logo_IYSA_bagus_e6uai3.png" },
+    { name: "IESF", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1780975359/IESF_Logo_rirhvv.png" },
     { name: "NGK",  logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1789114076/ISF_1_pdv8uu.png" },
   ],
 
