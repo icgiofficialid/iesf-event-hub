@@ -126,8 +126,7 @@ const borneoiesf: EventDetailData = {
     // ── Placements (semua format) ──────────────────────────────
     { place: "1st Place", medal: "Certificate & Medal", extra: "Score: 86–100" },
     { place: "2nd Place", medal: "Certificate & Medal", extra: "Score: 71–85"  },
-    { place: "3rd Place", medal: "Certificate & Medal", extra: "Score: 55–70"  },
-    { place: "4th Place", medal: "Certificate & Medal", extra: "Score: ≤54"    },
+    { place: "3rd Place", medal: "Certificate & Medal", extra: "Score: 0–70"  },
   ],
 
   scheduleOffline: [

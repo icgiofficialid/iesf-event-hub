@@ -178,7 +178,7 @@ const OrganizerCarousel = ({ lang }: { lang: "en" | "id" }) => {
             className="text-2xl md:text-3xl font-semibold text-foreground mt-2"
             style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600 }}
           >
-            {lang === "id" ? "Mitra & Penyelenggara" : "Organized By"}
+            {lang === "id" ? "Mitra & Penyelenggara" : "Our Partner"}
           </h2>
           <div className="flex justify-center mt-3">
             <div className="h-px w-12 bg-foreground/20" />
