@@ -11,7 +11,7 @@ const tiesf: EventDetailData = {
   venue:   "Thailand (Venue TBA)",
 
   // TODO: upload guidebook PDF TIESF ke Drive lalu isi link share-nya di sini.
-  guidebookUrl: "https://drive.google.com/file/d/1F-pZGNQ9WT8eyubGIGonGorewF15T_v0/view?usp=drive_link",
+  guidebookUrl: "https://drive.google.com/file/d/1GF1tJCPPqOuG-qy_yh39QIbgxu9NCL6A/view?usp=drive_link",
 
   // TODO: guidebook tidak menyertakan logo organizer/mitra untuk TIESF — tambahkan setelah tersedia.
   organizers: [
