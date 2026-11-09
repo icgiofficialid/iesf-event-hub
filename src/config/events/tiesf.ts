@@ -1,19 +1,17 @@
-
 import type { EventDetailData } from "@/config/eventDetailTypes";
 
 const tiesf: EventDetailData = {
   slug: "tiesf",
 
-  // TODO: guidebook tidak mencantumkan kontak resmi TIESF — isi setelah tersedia.
+  // Kontak resmi sesuai halaman "Contact & Consultation" guidebook.
+  // (Telepon +62 813-9905-880 & Instagram @iesfofficial.icgi tidak punya field di tipe ini.)
   email:   "iesfofficial.icgi@gmail.com",
   website: "iesfofficial.or.id",
-  // TODO: guidebook tidak menyebut kota/venue spesifik di Thailand — isi setelah dikonfirmasi panitia.
-  venue:   "Thailand (Venue TBA)",
+  venue:   "Diamond Hall, 5th Floor Zeer Rangsit, Pathum Thani, Thailand",
 
-  // TODO: upload guidebook PDF TIESF ke Drive lalu isi link share-nya di sini.
   guidebookUrl: "https://drive.google.com/file/d/1GF1tJCPPqOuG-qy_yh39QIbgxu9NCL6A/view?usp=drive_link",
 
-  // TODO: guidebook tidak menyertakan logo organizer/mitra untuk TIESF — tambahkan setelah tersedia.
+  // TODO: guidebook tidak menyertakan logo organizer/mitra siap pakai — tambahkan jika diperlukan.
   organizers: [
     { name: "ICGI", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/Logo_ICGI_Bg_Transparant_1_rdvff1.png" },
     { name: "IYSA", logo: "https://res.cloudinary.com/dwhobhexj/image/upload/v1778572483/logo_IYSA_bagus_e6uai3.png" },
@@ -24,32 +22,32 @@ const tiesf: EventDetailData = {
   labels: {
     eventBadge:     "IESF · TIESF Competition 2027",
     heroBadge:      "Competition · Thailand",
-    categoriesDesc: "Participants may register their projects under the following 9 competition categories.",
-    scheduleDesc:   "TIESF 2027 runs across a multi-day hybrid format covering judging sessions and the awarding ceremony. Exact schedule below is tentative — to be confirmed by the committee.",
+    categoriesDesc: "Participants may register their projects under the following 8 competition categories.",
+    scheduleDesc:   "TIESF 2027 takes place on 4–6 January 2027, with an offline competition at Diamond Hall, Zeer Rangsit (Pathum Thani, Thailand) and an online competition via Zoom. Times below are tentative and subject to committee confirmation.",
   },
 
   stats: [
-    { value: "9",  label: "Competition Categories" },
+    { value: "8",  label: "Competition Categories" },
     { value: "6",  label: "Max Team Members" },
-    { value: "5",  label: "Days of Innovation" },
+    { value: "3",  label: "Days of Innovation" },
   ],
 
   regSteps: [
-    "Choose your competition format (Online or Offline) — participant citizenship step is not required.",
+    "Choose your competition format (Online or Offline).",
     "Review and agree to the Terms & Conditions for your chosen format.",
-    "Fill in the Registration Form with your team's biodata, school data, supervisor info, and project details.",
-    "Complete payment for your chosen category, then upload your payment proof.",
-    "Submit your Full Paper and poster before the submission deadline. Your Letter of Acceptance (LoA) will be sent to the team leader's email.",
+    "Fill in the Registration Form with your team's biodata, school data, supervisor info, and project details. Registration deadline: 6 December 2026.",
+    "Pay the registration fee for your chosen format (per team, according to your country), then upload your payment proof. Payment deadline: 13 December 2026.",
+    "Submit your Full Paper (max. 12 pages, PDF & MS Word, using the official template) before the submission deadline on 13 December 2026. Your Letter of Acceptance (LoA) will be sent to the team leader's email.",
   ],
 
   about: {
     welcome:
-      "Thailand International Engineering Science Fair (TIESF) is an international science competition held in Thailand as a platform for students to showcase their innovations, research, and projects in the fields of science, technology, and engineering, while fostering global collaboration and the development of critical and creative thinking skills. The event follows a hybrid format with judging sessions and an Awarding Ceremony for both offline and online participants.",
+      "Thailand International Engineering Science Fair (TIESF) is an international science competition held for the first time in Thailand as a platform for students to showcase their innovations, research, and projects in the fields of science, technology, and engineering, while fostering global collaboration and the development of critical and creative thinking skills. The event runs from 4–6 January 2027 in both offline and online formats, with a series of activities including the Opening Ceremony & Judging Session, Free Time/City Tour (Tentative) & Cultural Exchange, and the Awarding Ceremony.",
     background:
-      "The competition categories in TIESF include: Mathematics, Science & Technology, Environmental, IoT & Robotics, Informatics & Artificial Intelligence, Life Sciences, Social Sciences & Humanities, Physics, Energy & Engineering, Health & Medicine, and — new to this edition — Innovation Science. Participants are students from Elementary, Secondary, and University level. Each team consists of a maximum of 6 persons (1 leader & 5 members), accompanied by 1 supervisor.",
+      "The competition categories in TIESF include: Mathematics, Science & Technology, Environmental, IoT & Robotics, Informatics & Artificial Intelligence, Life Sciences, Social Sciences & Humanities, Physics, Energy & Engineering, and Health & Medicine. Participants are students from Elementary, Secondary, and University level. Each team consists of a maximum of 6 persons (1 leader & 5 members), and each team must have 1 supervisor.",
     objectives: [
       "Providing a prestigious international stage for students to present original research, inventions, and engineering designs.",
-      "Encouraging critical thinking, creativity, and professional problem-solving through expert jury evaluations.",
+      "Encouraging critical thinking, creativity, and professional problem-solving through expert judges evaluations.",
       "Facilitating academic networking and cross-border knowledge exchange between young innovators and global experts.",
     ],
   },
@@ -109,70 +107,54 @@ const tiesf: EventDetailData = {
       description: "Covers innovations and research in the fields of health and medicine aimed at improving quality of life and healthcare services.",
       icon: "HeartPulse",
     },
-    {
-      letter: "9",
-      title:       "Innovation Science",
-      description: "New for this edition — open-ended innovations and inventions that don't fit neatly elsewhere, judged on originality and real-world problem-solving potential.",
-      icon: "Lightbulb",
-    },
   ],
 
-  // Kriteria penilaian TIESF BEDA TOTAL dari event lain (bukan
-  // Originality/Methodology/dst) — sesuai guidebook Thailand.
+  // Kriteria penilaian sesuai guidebook terbaru (draft, masih menunggu
+  // konfirmasi akhir panitia).
   judgingCriteria: [
-    { aspect: "Urgency",      weight: "25%" },
-    { aspect: "Visibility",   weight: "25%" },
-    { aspect: "Relevance",    weight: "25%" },
-    { aspect: "Presentation", weight: "25%" },
+    { aspect: "Originality & Innovation", weight: "30%" },
+    { aspect: "Methodology",              weight: "25%" },
+    { aspect: "Impact",                   weight: "20%" },
+    { aspect: "Presentation",             weight: "15%" },
+    { aspect: "Booth & Poster",           weight: "10%" },
   ],
 
-  awards: [
+  // Guidebook: sistem apresiasi berbasis passing grade; rentang skor,
+  // passing grade, & struktur pemenang kategori ditentukan di guidebook final.
+awards: [
     { place: "1st Place", medal: "Certificate & Medal", extra: "Score: 86–100" },
     { place: "2nd Place", medal: "Certificate & Medal", extra: "Score: 71–85"  },
     { place: "3rd Place", medal: "Certificate & Medal", extra: "Score: 0–70"  },
   ],
 
-  // ── Jadwal — tentative, TBA sampai dikonfirmasi panitia ─────────
+  // ── Jadwal — sesuai "Tentative Time Schedule" guidebook ─────────
   scheduleOffline: [
     {
       day: 1,
-      date:  "5 January 2027 (Tentative)",
-      title: "Opening Ceremony & Judging Session Day 1",
+      date:  "4 January 2027",
+      title: "Booth Set Up, Opening Ceremony & Judging Session",
       items: [
-        { time: "TBA", description: "Opening Ceremony for Offline Participants", location: "Thailand" },
-        { time: "TBA", description: "Offline Judging Session Day 1",             location: "Thailand" },
+        { time: "08:00 – 09:00", description: "Booth Set Up by Participant", location: "Diamond Hall, Zeer Rangsit" },
+        { time: "09:00 – 10:00", description: "Opening Ceremony",            location: "Diamond Hall, Zeer Rangsit" },
+        { time: "10:00 – 12:00", description: "Judging Session",             location: "Diamond Hall, Zeer Rangsit" },
+        { time: "12:00 – 13:00", description: "Break",                       location: "Diamond Hall, Zeer Rangsit" },
+        { time: "13:00 – 16:30", description: "Judging Session",             location: "Diamond Hall, Zeer Rangsit" },
       ],
     },
     {
       day: 2,
-      date:  "6 January 2027 (Tentative)",
-      title: "Judging Session Day 2",
+      date:  "5 January 2027 (Tentative)",
+      title: "Free Time / City Tour",
       items: [
-        { time: "TBA", description: "Offline Judging Session Day 2", location: "Thailand" },
+        { time: "TBA", description: "Free Time / City Tour (Tentative) & Cultural Exchange", location: "TBA" },
       ],
     },
     {
       day: 3,
-      date:  "7 January 2027 (Tentative)",
-      title: "Private Judging Session (Selective)",
-      items: [
-        { time: "TBA", description: "Private Judging Session for Offline Participants", location: "Thailand" },
-      ],
-    },
-    {
-      day: 4,
-      date:  "8 January 2027 (Tentative)",
+      date:  "6 January 2027",
       title: "Awarding Ceremony",
       items: [
-        { time: "TBA", description: "Awarding Ceremony for Offline Participants", location: "Thailand" },
-      ],
-    },
-    {
-      day: 5,
-      date:  "9 January 2027 (Tentative)",
-      title: "FunEdu Trip (Optional)",
-      items: [
-        { time: "TBA", description: "FunEdu Trip for Offline Participants", location: "Thailand" },
+        { time: "10:00 – Finish", description: "Awarding Ceremony", location: "Diamond Hall, Zeer Rangsit" },
       ],
     },
   ],
@@ -180,26 +162,19 @@ const tiesf: EventDetailData = {
   scheduleOnline: [
     {
       day: 1,
-      date:  "5 January 2027 (Tentative)",
-      title: "Opening Ceremony & Judging Session Day 1",
+      date:  "4 January 2027",
+      title: "Opening Ceremony & Online Judging",
       items: [
-        { time: "TBA", description: "Opening Ceremony & Online Judging Session Day 1", location: "ZOOM" },
-      ],
-    },
-    {
-      day: 2,
-      date:  "6 January 2027 (Tentative)",
-      title: "Judging Session Day 2",
-      items: [
-        { time: "TBA", description: "Online Judging Session Day 2", location: "ZOOM" },
+        { time: "09:00 – 10:00",  description: "Opening Ceremony for Online Participants", location: "Zoom" },
+        { time: "10:00 – Finish", description: "Online Judging",                           location: "Zoom" },
       ],
     },
     {
       day: 3,
-      date:  "7 January 2027 (Tentative)",
+      date:  "6 January 2027",
       title: "Awarding Ceremony",
       items: [
-        { time: "TBA", description: "Awarding Ceremony for Online Participants", location: "ZOOM" },
+        { time: "09:00 – Finish", description: "Awarding Ceremony for Online Participants", location: "Zoom" },
       ],
     },
   ],
