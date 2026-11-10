@@ -194,7 +194,7 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     dateRange:            "27–30 November 2026",
     registrationDeadline: "27 October 2026",
     status:               "upcoming",
-    registrationOpen:     true, // Set true setelah sheetUrl & cover image final
+    registrationOpen:     false, // Set true setelah sheetUrl & cover image final
     route:                "/events/borneo-iesf-2026",
     shutdown:             false,
     coverImage:          "https://res.cloudinary.com/dwhobhexj/image/upload/v1787220065/BorneoIESF-potret_szzqxe.png",
