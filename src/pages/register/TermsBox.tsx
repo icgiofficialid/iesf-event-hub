@@ -32,6 +32,7 @@ const LABELS = {
   participants: { en: "Participants",         id: "Peserta" },
   intl:    { en: "International",            id: "Internasional" },
   indo:    { en: "Indonesian",               id: "Indonesia" },
+  thai:    { en: "Thailand",                 id: "Thailand" },
   check:   { en: "I have read and agree to the", id: "Saya telah membaca dan menyetujui" },
   terms:   { en: "Terms & Conditions",       id: "Syarat & Ketentuan" },
   back:    { en: "← Back",                  id: "← Kembali" },
@@ -47,7 +48,9 @@ const TermsBox = ({
   const { lang } = useLang();
 
   const terms = competition === "offline" ? termsData.offline : termsData.online;
-  const participantLabel = participant === "international" ? LABELS.intl[lang] : LABELS.indo[lang];
+  const participantLabel =
+    participant === "international" ? LABELS.intl[lang] :
+    participant === "thailand"      ? LABELS.thai[lang] : LABELS.indo[lang];
   const competitionLabel = competition === "offline" ? LABELS.offline[lang] : LABELS.online[lang];
 
 

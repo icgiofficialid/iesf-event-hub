@@ -11,7 +11,7 @@
 //   4. Tidak perlu ubah file lain sama sekali.
 // ================================================================
 
-export type ParticipantType = "international" | "indonesian";
+export type ParticipantType = "international" | "indonesian" | "thailand";
 export type CompetitionType = "online" | "offline";
 
 // ── Per-event sheet config ────────────────────────────────────────
@@ -24,6 +24,9 @@ export interface SheetConfig {
     "indo-offline":  string;
     "inter-online":  string;
     "inter-offline": string;
+    /** Opsional — hanya diisi event yang membuka pilihan "Thailand Citizen" (mis. TIESF) */
+    "thailand-online"?:  string;
+    "thailand-offline"?: string;
   };
 }
 
@@ -65,6 +68,12 @@ export interface EventMeta {
    * pakai DEFAULT_CATEGORY_PRICE_MAP di registerConfig.tsx sebagai fallback.
    */
   pricing?: Record<string, string>;
+  /**
+   * Set true untuk menampilkan pilihan "Thailand Citizen" di Step 1 pendaftaran.
+   * Default (undefined/false) = pilihan tidak muncul, alur sama seperti sebelumnya.
+   * Kalau true, `sheet.targets` wajib punya "thailand-online" & "thailand-offline".
+   */
+  thailandCitizen?: boolean;
 }
 
 // ================================================================
@@ -229,7 +238,7 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     title:                "Thailand International Engineering Science Fair",
     subtitle:             "TIESF 2027",
     // TODO: guidebook tidak menyebut kota/venue spesifik - isi setelah dikonfirmasi panitia.
-    location:             "Thailand ( TBA)",
+    location:             "Thailand",
     dateRange:            "5-9 January 2027 (Tentative)",
     registrationDeadline: "TBA",
     status:               "upcoming",
@@ -242,9 +251,24 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     coverImageLandscape: undefined,
     heroGradient:         "from-[#A51931] via-[#201C34] to-[#2D2A4A]", // merah bendera di ujung, navy/biru mendominasi tengah - meniru rasio garis bendera Thailand (merah tipis, biru tebal)
 
+    // Pilihan "Thailand Citizen" di Step 1 — hanya aktif di event ini
+    thailandCitizen: true,
+
     // TODO: guidebook TIESF tidak mencantumkan harga registrasi sama sekali - isi setelah tersedia.
-    // Dibiarkan undefined supaya otomatis fallback ke DEFAULT_CATEGORY_PRICE_MAP di registerConfig.tsx.
-    pricing: undefined,
+    // Key di bawah = kategori otomatis untuk peserta Thailand (form tidak menampilkan dropdown-nya).
+    // Isi nilainya (mis. "THB 3.000"). Kategori lain tetap fallback ke DEFAULT_CATEGORY_PRICE_MAP.
+    pricing: {
+      "Online Competition":                                                                                                       "IDR 1.500.000",
+      "Offline Competition":                                                                                                      "IDR 3.000.000",
+
+      "Online Competition (E-Certificate Only)":                                                                                  "USD 85",
+      "Online Competition + one medal/team and Certificate for each member + shipping fee (SOUTH EAST ASIA)":                     "USD 225",
+      "Online Competition + one medal/team and Certificate for each member + shipping fee (Exclude SOUTH EAST ASIA)":             "USD 275",
+      "Offline Competition (International)":                                                                                      "USD 400",
+
+      "Online Competition (Thailand)":                                                                                            "USD 85",
+      "Offline Competition (Thailand)":                                                                                           "USD 350",
+    },
 
     sheet: {
       // TODO: belum ada deployment GAS khusus TIESF - ganti sebelum registrationOpen: true.
@@ -254,6 +278,8 @@ export const EVENTS_REGISTRY: EventMeta[] = [
         "indo-offline":  "indo-offline",
         "inter-online":  "inter-online",
         "inter-offline": "inter-offline",
+        "thailand-online":  "thailand-online",
+        "thailand-offline": "thailand-offline",
       },
     },
   },
@@ -281,9 +307,12 @@ export const getSheetConfig = (
 ): { sheetUrl: string; sheetTarget: string } | null => {
   const meta = getEventMeta(slug);
   if (!meta) return null;
-  const key = `${participant === "indonesian" ? "indo" : "inter"}-${competition}` as keyof SheetConfig["targets"];
+  const prefix = participant === "indonesian" ? "indo" : participant === "thailand" ? "thailand" : "inter";
+  const key = `${prefix}-${competition}` as keyof SheetConfig["targets"];
+  const sheetTarget = meta.sheet.targets[key];
+  if (!sheetTarget) return null; // mis. event tanpa target Thailand
   return {
-    sheetUrl:    meta.sheet.sheetUrl,
-    sheetTarget: meta.sheet.targets[key],
+    sheetUrl: meta.sheet.sheetUrl,
+    sheetTarget,
   };
 };

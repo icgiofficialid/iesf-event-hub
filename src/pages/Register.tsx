@@ -37,6 +37,7 @@ const T: Record<string, Record<Lang, string>> = {
   labelProject:    { en: "Project Title",          id: "Judul Proyek" },
   intl:            { en: "International",          id: "Internasional" },
   indo:            { en: "Indonesian",             id: "Indonesia" },
+  thai:            { en: "Thailand",               id: "Thailand" },
   online:          { en: "Online",                 id: "Online" },
   offline:         { en: "Offline",                id: "Offline" },
   backHome:        { en: "Back to Home",           id: "Kembali ke Beranda" },
@@ -63,7 +64,7 @@ const SummaryPage = ({ data, eventTitle, onHome }: { data: SummaryData; eventTit
     return () => clearTimeout(timer);
   }, []);
 
-  const pLabel = data.participant === "international" ? t("intl") : t("indo");
+  const pLabel = data.participant === "international" ? t("intl") : data.participant === "thailand" ? t("thai") : t("indo");
 
   const rows = [
     ...(eventTitle ? [{ label: t("labelEvent"), value: eventTitle }] : []),
@@ -203,7 +204,8 @@ const Register = () => {
         </div>
 
         {step === 1 && (
-          <HomeRegist participant={participant} setParticipant={setParticipant} onNext={() => setStep(2)} />
+          <HomeRegist participant={participant} setParticipant={setParticipant} onNext={() => setStep(2)}
+            showThailand={!!eventMeta?.thailandCitizen} />
         )}
         {step === 2 && participant === "indonesian" && (
           <HomeIndo competition={competition} setCompetition={setCompetition}
@@ -211,6 +213,10 @@ const Register = () => {
         )}
         {step === 2 && participant === "international" && (
           <HomeInter competition={competition} setCompetition={setCompetition}
+            onBack={() => setStep(1)} onNext={() => setStep(3)} />
+        )}
+        {step === 2 && participant === "thailand" && (
+          <HomeInter thailand competition={competition} setCompetition={setCompetition}
             onBack={() => setStep(1)} onNext={() => setStep(3)} />
         )}
         {step === 3 && renderStep3()}

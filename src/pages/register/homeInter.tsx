@@ -8,6 +8,8 @@ interface Props {
   setCompetition: (v: CompetitionType) => void;
   onBack: () => void;
   onNext: () => void;
+  /** true → label "Thailand Citizen" (pilihan online/offline tetap sama) */
+  thailand?: boolean;
 }
 
 const LABELS = {
@@ -33,14 +35,16 @@ const COMPETITION_OPTIONS = [
   },
 ];
 
-const HomeInter = ({ competition, setCompetition, onBack, onNext }: Props) => {
+const THAI_SUB = { en: "Thailand Citizen", id: "Warga Thailand" };
+
+const HomeInter = ({ competition, setCompetition, onBack, onNext, thailand = false }: Props) => {
   const { lang } = useLang();
   return (
     <div className="w-full max-w-2xl">
       <div className="text-center mb-8">
         <p className="text-sm uppercase tracking-[0.3em] text-primary mb-2">{LABELS.step[lang]}</p>
         <h2 className="text-2xl md:text-3xl font-bold text-foreground">{LABELS.title[lang]}</h2>
-        <p className="text-muted-foreground mt-2 text-sm">{LABELS.sub[lang]}</p>
+        <p className="text-muted-foreground mt-2 text-sm">{(thailand ? THAI_SUB : LABELS.sub)[lang]}</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

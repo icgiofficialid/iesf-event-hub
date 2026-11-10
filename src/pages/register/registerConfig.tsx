@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 
 export const WHATSAPP_ADMIN = "628139905880";
 
-export type ParticipantType = "international" | "indonesian";
+export type ParticipantType = "international" | "indonesian" | "thailand";
 export type CompetitionType = "online" | "offline";
 export type FormData = Record<string, string>;
 
@@ -83,10 +83,11 @@ export const submitToSheet = async (
     PROJECT_TITLE:              f("PROJECT_TITLE"),
   };
 
-  // Indo → NISN_NIM + PROVINCE + NPSN | Inter → COUNTRY
-  const extra: Record<string, string> = participant === "indonesian"
-    ? { NISN_NIM: f("NISN_NIM"), PROVINCE: f("PROVINCE"), NPSN: f("NPSN") }
-    : { COUNTRY:  f("COUNTRY") };
+  // Indo → NISN_NIM + PROVINCE + NPSN | Inter → COUNTRY | Thailand → COUNTRY (selalu "Thailand")
+  const extra: Record<string, string> =
+    participant === "indonesian" ? { NISN_NIM: f("NISN_NIM"), PROVINCE: f("PROVINCE"), NPSN: f("NPSN") }
+    : participant === "thailand" ? { COUNTRY: "Thailand" }
+    :                              { COUNTRY: f("COUNTRY") };
 
   const payload = { ...base, ...extra };
   const queryString = new URLSearchParams(payload).toString();

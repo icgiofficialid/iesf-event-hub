@@ -258,6 +258,7 @@ const T: Record<string, Record<Lang, string>> = {
   title:             { en: "Registration Form",  id: "Formulir Pendaftaran" },
   intl:              { en: "International",      id: "Internasional" },
   indo:              { en: "Indonesian",         id: "Indonesia" },
+  thai:              { en: "Thailand",           id: "Thailand" },
   online:            { en: "Online",             id: "Online" },
   offline:           { en: "Offline",            id: "Offline" },
   info1: { 
@@ -569,7 +570,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, eve
   const [submitted, setSubmitted] = useState(false);
   const [error, setError]         = useState("");
   const [errors, setErrors]       = useState<Record<string, boolean>>({});
-  const defaultCode = participant === "international" ? "other" : "+62";
+  const defaultCode = participant === "international" ? "other" : participant === "thailand" ? "+66" : "+62";
   const [leaderCode, setLeaderCode]         = useState(defaultCode);
   const [supervisorCode, setSupervisorCode] = useState(defaultCode);
   const set = (key: string) => (v: string) => {
@@ -610,14 +611,16 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, eve
       f("CATEGORY_COMPETITION") ||
       (participant === "indonesian"    && competition === "online"  ? "Online Competition" :
       participant === "indonesian"    && competition === "offline" ? "Offline Competition" :
-      participant === "international" && competition === "offline" ? "Offline Competition (International)" : "");
+      participant === "international" && competition === "offline" ? "Offline Competition (International)" :
+      participant === "thailand"      && competition === "online"  ? "Online Competition (Thailand)" :
+      participant === "thailand"      && competition === "offline" ? "Offline Competition (Thailand)" : "");
 
     const finalForm: FormData = {
       ...form,
       LEADER_WHATSAPP:            cL ? normalizePhone(cL, f("LEADER_WHATSAPP_NUM")) : f("LEADER_WHATSAPP_NUM"),
       WHATSAPP_NUMBER_SUPERVISOR: cS ? normalizePhone(cS, f("SUPERVISOR_WA_NUM")) : f("SUPERVISOR_WA_NUM"),
       PHONE_CODE:                 cL,
-      PROVINCE: participant === "international" ? f("COUNTRY") : f("PROVINCE"),
+      PROVINCE: participant === "thailand" ? "Thailand" : participant === "international" ? f("COUNTRY") : f("PROVINCE"),
       CATEGORY_COMPETITION: resolvedCatComp,
       CATEGORY_PRICE: priceMap[resolvedCatComp] ?? "",
     };
@@ -632,7 +635,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, eve
         categories:           f("CATEGORIES"),
         projectTitle:         f("PROJECT_TITLE"),
         grade:                f("GRADE"),
-        country:              participant === "international" ? f("COUNTRY") : undefined,
+        country:              participant === "thailand" ? "Thailand" : participant === "international" ? f("COUNTRY") : undefined,
         competitionCategory: resolvedCatComp || undefined,
       }), 2000);
     } catch {
@@ -648,7 +651,7 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, eve
     </div>
   );
 
-  const pLabel = participant === "international" ? t("intl") : t("indo");
+  const pLabel = participant === "international" ? t("intl") : participant === "thailand" ? t("thai") : t("indo");
   const cLabel = competition === "online" ? t("online") : t("offline");
   const YES    = t("prevCompYes");
 
@@ -760,6 +763,10 @@ const RegistrationForm = ({ participant, competition, sheetUrl, sheetTarget, eve
                 <Field label={t("province")} required fieldId="field-PROVINCE" error={errors["PROVINCE"]}>
                   <TextInput placeholder={t("provincePh")}
                     value={f("PROVINCE")} onChange={set("PROVINCE")} />
+                </Field>
+              ) : participant === "thailand" ? (
+                <Field label={t("country")}>
+                  <Input value="Thailand" disabled />
                 </Field>
               ) : (
                 <Field label={t("country")} required fieldId="field-COUNTRY" error={errors["COUNTRY"]}>
