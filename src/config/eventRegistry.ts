@@ -74,6 +74,14 @@ export interface EventMeta {
    * Kalau true, `sheet.targets` wajib punya "thailand-online" & "thailand-offline".
    */
   thailandCitizen?: boolean;
+  /**
+   * Diisi otomatis oleh lib/dashboardIcgi.ts untuk event yang dibuat di
+   * dashboard ICGI (tidak ditulis di file ini). Detail event diambil dari
+   * dashboard dan pendaftarannya memakai formulir resmi dashboard.
+   */
+  dashboardAcronym?: string;
+  /** Tahun edisi dashboard (untuk `?tahun=`); kosong = edisi yang dipin. */
+  dashboardYear?: string;
 }
 
 // ================================================================

@@ -34,7 +34,7 @@ function registryToIESFEvent(meta: EventMeta, index: number): IESFEvent {
     location:             meta.location,
     country:              meta.location.split(",").pop()?.trim() ?? "Indonesia",
     dateRange:            meta.dateRange,
-    year:                 new Date().getFullYear(),
+    year:                 Number(meta.dateRange.match(/\b(20\d{2})\b/g)?.pop() ?? "") || new Date().getFullYear(),
     registrationDeadline: meta.registrationDeadline,
     coverGradient:        meta.heroGradient ?? FALLBACK_GRADIENT,
     heroGradient:         meta.heroGradient ?? FALLBACK_GRADIENT,

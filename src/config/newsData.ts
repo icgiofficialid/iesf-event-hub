@@ -12,6 +12,8 @@ export interface NewsItem {
   content: string;
   coverImage?: string;
   tags: string[];
+  /** Berita dari Publikasi dashboard: kartunya membuka tautan aslinya di tab baru. */
+  externalUrl?: string;
 }
 
 export const newsItems: NewsItem[] = [
