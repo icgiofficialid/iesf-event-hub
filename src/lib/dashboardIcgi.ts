@@ -13,7 +13,8 @@
 //                      formulir resmi dashboard (daftar.js).
 //   - Galeri         → Dokumentasi edisi            (halaman /galery)
 //   - Liputan media  → Publikasi edisi              (/media-coverage, /news)
-//   - Kurasi         → berkas kurasi yang disiarkan (/curation)
+//   - Kurasi         → Proses Kurasi + berkas kurasi per edisi (/curation,
+//                      lib/kurasi.ts — pola halaman Curation situs IYSA)
 //
 // Hanya lembaga ICGI. Event IYSA dan IYORA tidak pernah ikut, begitu
 // pula event ICGI milik portal lain (NESF, ICC).
@@ -31,7 +32,7 @@ export const DASHBOARD_API =
 const LEMBAGA = "ICGI";
 const HOST_PORTAL = "iesfofficial.or.id";
 const BATAS_MS = 6000;
-const SEKSI = "identitas,pendaftaran,publikasi,dokumentasi,berkas_kurasi";
+const SEKSI = "identitas,pendaftaran,publikasi,dokumentasi";
 
 // ── Hasil yang dibaca halaman ─────────────────────────────────────
 export interface AlbumDashboard {
@@ -49,19 +50,14 @@ export interface LiputanDashboard {
   link: string;
   image?: string;
 }
-export interface KurasiDashboard {
-  eventSlug: string;
-  event: string;
-  title: string;
-  files: Array<{ title: string; description: string; url: string }>;
-}
 
 export const albumDashboard: AlbumDashboard[] = [];
 export const liputanDashboard: LiputanDashboard[] = [];
-export const kurasiDashboard: KurasiDashboard[] = [];
+/** Seri dashboard milik portal ini (untuk halaman Curation), urut akronim. */
+export const seriPortal: Array<{ akronim: string; nama: string }> = [];
 
 // ── Tipe API (yang dipakai saja) ──────────────────────────────────
-interface Seri { akronim: string; tahun: string; situs: string; lembaga?: string }
+interface Seri { akronim: string; nama?: string; tahun: string; situs: string; lembaga?: string }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- bentuk isi berbeda per seksi
 interface Seksi { key: string; isi: any }
 interface Tautan { id?: string; link?: string; judul?: string; gambar?: string }
@@ -151,16 +147,6 @@ function liputanDari(slug: string, event: string, publikasi: Array<{ jenis: stri
   return hasil;
 }
 
-function kurasiDari(butir: Array<{ nomor: number; butir: string; berkas: Array<{ slot?: string; nama?: string; url?: string }> }>) {
-  const files: KurasiDashboard["files"] = [];
-  for (const b of Array.isArray(butir) ? butir : []) {
-    for (const f of b.berkas ?? []) {
-      if (f.url) files.push({ title: f.slot || f.nama || `Item ${b.nomor}`, description: `Item ${b.nomor} · ${b.butir}`, url: f.url });
-    }
-  }
-  return files;
-}
-
 /** Satu edisi dari dashboard → data yang digabungkan ke situs. */
 function prosesEdisi(akronim: string, sections: Seksi[], dipin: boolean) {
   const s = (k: string) => sections.find(x => x.key === k)?.isi;
@@ -191,7 +177,6 @@ function prosesEdisi(akronim: string, sections: Seksi[], dipin: boolean) {
     meta,
     album: albumDari(id.slug, event, s("dokumentasi") ?? []),
     liputan: liputanDari(id.slug, event, s("publikasi") ?? []),
-    kurasi: kurasiDari(s("berkas_kurasi") ?? []),
     tanggal: tanggalInggris(id.selesai || id.mulai) || tahun,
   };
 }
@@ -213,6 +198,10 @@ export function muatEventDashboard(): Promise<void> {
       const milikPortal = seri.filter(x =>
         String(x.lembaga ?? LEMBAGA).toUpperCase() === LEMBAGA && hostSitus(x.situs) === HOST_PORTAL);
 
+      for (const x of milikPortal) {
+        seriPortal.push({ akronim: x.akronim.toUpperCase(), nama: String(x.nama || x.akronim).replace(/\s+20\d{2}\s*$/, "") });
+      }
+
       const per = await Promise.all(milikPortal.map(async (x) => {
         const akronim = x.akronim.toUpperCase();
         let edisi: Array<{ tahun: string; dipin: boolean }> = [{ tahun: x.tahun, dipin: true }];
@@ -230,6 +219,11 @@ export function muatEventDashboard(): Promise<void> {
         }));
       }));
 
+      // Seri yang semua edisinya disembunyikan di situs (shutdown) tidak ikut halaman Curation.
+      const tampil = new Set(per.flat().filter(h => h && !EVENTS_REGISTRY.find(e => e.slug === h.meta.slug)?.shutdown)
+        .map(h => h!.meta.dashboardAcronym));
+      for (let i = seriPortal.length - 1; i >= 0; i--) if (!tampil.has(seriPortal[i].akronim)) seriPortal.splice(i, 1);
+
       for (const h of per.flat()) {
         if (!h) continue;
         const statis = EVENTS_REGISTRY.find(e => e.slug === h.meta.slug);
@@ -237,7 +231,6 @@ export function muatEventDashboard(): Promise<void> {
         if (!statis) EVENTS_REGISTRY.push(h.meta);
         albumDashboard.push(...h.album);
         liputanDashboard.push(...h.liputan);
-        if (h.kurasi.length) kurasiDashboard.push({ eventSlug: h.meta.slug, event: h.meta.subtitle, title: h.meta.title, files: h.kurasi });
         for (const l of h.liputan) {
           const slug = `${h.meta.slug}-${l.kanal}-${l.link}`.toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 120);
           if (newsItems.some(n => n.slug === slug)) continue;
