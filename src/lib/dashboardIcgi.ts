@@ -55,6 +55,8 @@ export const albumDashboard: AlbumDashboard[] = [];
 export const liputanDashboard: LiputanDashboard[] = [];
 /** Seri dashboard milik portal ini (untuk halaman Curation), urut akronim. */
 export const seriPortal: Array<{ akronim: string; nama: string }> = [];
+/** Slug edisi → akronim seri dashboard (gelembung Proses Kurasi mengikuti halaman). */
+export const slugKeSeri: Record<string, string> = {};
 
 // ── Tipe API (yang dipakai saja) ──────────────────────────────────
 interface Seri { akronim: string; nama?: string; tahun: string; situs: string; lembaga?: string }
@@ -228,6 +230,7 @@ export function muatEventDashboard(): Promise<void> {
         if (!h) continue;
         const statis = EVENTS_REGISTRY.find(e => e.slug === h.meta.slug);
         if (statis?.shutdown) continue;
+        if (h.meta.dashboardAcronym) slugKeSeri[h.meta.slug] = h.meta.dashboardAcronym;
         if (!statis) EVENTS_REGISTRY.push(h.meta);
         albumDashboard.push(...h.album);
         liputanDashboard.push(...h.liputan);
