@@ -24,6 +24,7 @@ import { IESF_CONFIG } from "./components/chatbot/useChatbot.ts";
 import About        from "./pages/About.tsx";
 import Contact      from "./pages/Contact.tsx";
 import Curation     from "./pages/Curation.tsx";
+import CurationEdisi from "./pages/CurationEdisi";
 import Faq          from "./pages/Faq.tsx";
 import Galery       from "./pages/Galery.tsx";
 import Index        from "./pages/Index.tsx";
@@ -86,6 +87,7 @@ const App = () => (
               <Route path="/media-coverage" element={<MediaCoverage />} />
               <Route path="/galery"        element={<Galery />} />
               <Route path="/curation"      element={<Curation />} />
+              <Route path="/curation/:akronim/:tahun" element={<CurationEdisi />} />
               <Route path="/faq"           element={<Faq />} />
               <Route path="/contact"       element={<Contact />} />
               <Route path="/terms"         element={<Terms />} />
