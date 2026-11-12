@@ -12,6 +12,7 @@ import TermsBox     from "./register/TermsBox";
 import RegistrationForm, { type SummaryData } from "./register/RegistrationForm";
 import { useNavigate } from "react-router-dom";
 import { getSheetConfig, getEventMeta } from "@/config/eventRegistry";
+import FormulirDashboard from "@/components/iesf/FormulirDashboard";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLang } from "@/components/LanguageProvider";
@@ -110,7 +111,30 @@ const SummaryPage = ({ data, eventTitle, onHome }: { data: SummaryData; eventTit
 // ── Register Main ─────────────────────────────────────────────────
 type Step = 1 | 2 | 3 | 4 | 5;
 
+// ── Event dari dashboard ICGI → formulir resmi dashboard ──────────
+//    Event lama (BIESF, SIESF, …) tetap memakai alur Google Sheet di bawah.
+const RegisterDashboard = ({ akronim, title, subtitle }: { akronim: string; title: string; subtitle: string }) => (
+  <SiteShell>
+    <section className="container min-h-screen py-24 md:py-32 flex flex-col items-center gap-8">
+      <div className="text-center space-y-2">
+        <p className="text-sm font-semibold text-primary">{subtitle}</p>
+        <h1 className="text-3xl md:text-4xl font-bold text-foreground">{title} Registration</h1>
+      </div>
+      <FormulirDashboard akronim={akronim} />
+    </section>
+  </SiteShell>
+);
+
 const Register = () => {
+  const slug = sessionStorage.getItem("eventSlug");
+  const meta = slug ? getEventMeta(slug) : undefined;
+  if (meta?.dashboardAcronym) {
+    return <RegisterDashboard akronim={meta.dashboardAcronym} title={meta.title} subtitle={meta.subtitle} />;
+  }
+  return <RegisterLegacy />;
+};
+
+const RegisterLegacy = () => {
   const navigate = useNavigate();
   const { lang } = useLang();
   const t = (k: string) => T[k]?.[lang as Lang] ?? k;

@@ -20,7 +20,11 @@ const NewsCard = ({ item, index }: { item: NewsItem; index: number }) => {
       <motion.article
         whileHover={{ y: -6 }}
         transition={{ duration: 0.25 }}
-        onClick={() => navigate(`/news/${item.slug}`)}
+        onClick={() =>
+          item.externalUrl
+            ? window.open(item.externalUrl, "_blank", "noopener,noreferrer")
+            : navigate(`/news/${item.slug}`)
+        }
         className="tech-shell rounded-2xl overflow-hidden cursor-pointer group h-full flex flex-col"
       >
         {/* Cover */}

@@ -46,6 +46,8 @@ import BIESFDetail       from "./pages/events/BIESFDetail";
 import SIESFDetail       from "./pages/events/SIESFDetail";
 import BorneoIESFDetail  from "./pages/events/BorneoIESFDetail";
 import TIESFDetail       from "./pages/events/TIESFDetail";
+// Event yang dibuat di dashboard ICGI — detail dari API dashboard (lib/dashboardIcgi.ts)
+import DashboardEventDetail from "./pages/events/DashboardEventDetail";
 // import ICSEDetail from "./pages/events/ICSEDetail";  // ← contoh event baru
 
 const queryClient = new QueryClient();
@@ -74,6 +76,8 @@ const App = () => (
               <Route path="/events/siesf-2026" element={<SIESFDetail />} />
               <Route path="/events/borneo-iesf-2026" element={<BorneoIESFDetail />} />
               <Route path="/events/tiesf-2027" element={<TIESFDetail />} />
+              {/* Event dari dashboard ICGI — route spesifik di atas tetap menang */}
+              <Route path="/events/:slug" element={<DashboardEventDetail />} />
               {/* <Route path="/events/icse-2026" element={<ICSEDetail />} /> */}
 
               {/* Existing pages */}
