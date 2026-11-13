@@ -267,7 +267,7 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     // Isi nilainya (mis. "THB 3.000"). Kategori lain tetap fallback ke DEFAULT_CATEGORY_PRICE_MAP.
     pricing: {
       "Online Competition":                                                                                                       "IDR 1.500.000",
-      "Offline Competition":                                                                                                      "IDR 3.000.000",
+      "Offline Competition":                                                                                                      "IDR 6.000.000",
 
       "Online Competition (E-Certificate Only)":                                                                                  "USD 85",
       "Online Competition + one medal/team and Certificate for each member + shipping fee (SOUTH EAST ASIA)":                     "USD 225",
