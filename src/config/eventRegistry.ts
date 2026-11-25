@@ -171,8 +171,8 @@ export const EVENTS_REGISTRY: EventMeta[] = [
     location:             "Semarang, Indonesia",
     dateRange:            "TBA, 2026",
     registrationDeadline: "TBA",
-    status:               "upcoming",
-    registrationOpen:     true, // Set true setelah tanggal & sheetUrl final
+    status:               "past",
+    registrationOpen:     false, // Set true setelah tanggal & sheetUrl final
     route:                "/events/siesf-2026",
     shutdown:             false,
     // TODO: isi dengan URL Cloudinary cover image SIESF (portrait & landscape)
